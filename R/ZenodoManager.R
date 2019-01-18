@@ -60,20 +60,44 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositions
     getDepositions = function(){
       zenReq <- ZenodoRequest$new(private$url, "GET", "deposit/depositions", 
-                                  private$access_token, logger = self$loggerType)
+                                  access_token = private$access_token, logger = self$loggerType)
       zenReq$execute()
-      records <- lapply(zenReq$getResponse(), ZenodoRecord$new)
-      return(records)
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        out <- lapply(zenReq$getResponse(), ZenodoRecord$new)
+        self$INFO("Successfuly fetched list of depositions")
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while fetching depositions: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
+      }
+      return(out)
     },
     
     #depositRecord
     depositRecord = function(record){
-      zenReq <- ZenodoRequest$new(private$url, "POST", "deposit/depositions",
-                                  private$access_token, data = record,
+      data <- record
+      type <- ifelse(is.null(record$id), "POST", "PUT")
+      request <- ifelse(is.null(record$id), "deposit/depositions", 
+                        sprintf("deposit/depositions/%s", record$id))
+      zenReq <- ZenodoRequest$new(private$url, type, request, data = data,
+                                  access_token = private$access_token,
                                   logger = self$loggerType)
       zenReq$execute()
-      record <- ZenodoRecord$new(obj = zenReq$getResponse())
-      return(record)
+      out <- NULL
+      if(zenReq$getStatus() %in% c(200,201)){
+        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+        self$INFO("Successful record deposition")
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while depositing record: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
+      }
+      return(out)
     },
     
     #createRecord
