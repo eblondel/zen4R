@@ -6,8 +6,25 @@
 #' @format \code{\link{R6Class}} object.
 #' @section Methods:
 #' \describe{
-#'  \item{\code{new()}}{
-#'    This method is used to instantiate an ZenodoManager
+#'  \item{\code{new(url, access_token, logger)}}{
+#'    This method is used to instantiate an ZenodoManager. By default,
+#'    the url is set to "https://zenodo.org/api". The access_token is
+#'    mandatory in order to use Zenodo API. The logger can be either
+#'    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
+#'    http calls logs)
+#'  }
+#'  \item{\code{getDepositions()}}{
+#'    Get the list of Zenodo records deposited in your Zenodo workspace
+#'  }
+#'  \item{\code{depositRecord(record)}}{
+#'    A method to deposit a Zenodo record. The record should be an object
+#'    of class \code{ZenodoRecord}. The method returns the deposited record
+#'    of class \code{ZenodoRecord}.
+#'  }
+#'  \item{\code{createEmptyRecord()}}{
+#'    Creates an empty record in the Zenodo deposit. Returns the record
+#'    newly created in Zenodo, as an object of class \code{ZenodoRecord}
+#'    with an assigned identifier.
 #'  }
 #' }
 #' @note Main user class to be used with \pkg{zen4R}
@@ -45,7 +62,23 @@ ZenodoManager <-  R6Class("ZenodoManager",
       zenReq <- ZenodoRequest$new(private$url, "GET", "deposit/depositions", 
                                   private$access_token, logger = self$loggerType)
       zenReq$execute()
-      return(zenReq)
+      records <- lapply(zenReq$getResponse(), ZenodoRecord$new)
+      return(records)
+    },
+    
+    #depositRecord
+    depositRecord = function(record){
+      zenReq <- ZenodoRequest$new(private$url, "POST", "deposit/depositions",
+                                  private$access_token, data = record,
+                                  logger = self$loggerType)
+      zenReq$execute()
+      record <- ZenodoRecord$new(obj = zenReq$getResponse())
+      return(record)
+    },
+    
+    #createRecord
+    createEmptyRecord = function(){
+      return(self$depositRecord(ZenodoRecord$new()))
     }
   )
 )

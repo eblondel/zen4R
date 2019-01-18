@@ -44,6 +44,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     type = NA,
     request = NA,
     requestHeaders = NA,
+    data = NA,
     status = NA,
     response = NA,
     exception = NA,
@@ -67,17 +68,61 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       response <- list(request = request, requestHeaders = headers(r),
                        status = status_code(r), response = responseContent)
       return(response)
+    },
+    
+    #POST
+    #---------------------------------------------------------------    
+    POST = function(url, request, data){
+      req <- paste(url, request, sep="/")
+      req <- paste0(req, "?access_token=", private$access_token)
+      
+      if(is(data, "ZenodoRecord")){
+        data <- as.list(data)
+        data[[".__enclos_env__"]] <- NULL
+        data[["initialize"]] <- NULL
+        data[["clone"]] <- NULL
+        if(!data[["submitted"]]) data[["submitted"]] <- NULL
+        if(length(data[["metadata"]])==0) data[["metadata"]] <- NULL
+        if(length(data[["links"]])==0) data[["links"]] <- NULL
+        if(length(data[["files"]])==0) data[["files"]] <- NULL
+        data <- data[!sapply(data, is.null)]
+        if(length(data)==0) data <- "{}"
+      }
+      
+      #headers
+      headers <- c("Content-Type" = "application/json")
+      
+      #send request
+      if(self$verbose.debug){
+        r <- with_verbose(httr::POST(
+          url = req,
+          add_headers(headers),    
+          body = data
+        ))
+      }else{
+        r <- httr::POST(
+          url = req,
+          add_headers(headers),    
+          body = data
+        )
+      }
+      
+      responseContent <- content(r, type = "application/json", encoding = "UTF-8")
+      response <- list(request = data, requestHeaders = headers(r),
+                       status = status_code(r), response = responseContent)
+      return(response)
     }
     
   ),
   #public methods
   public = list(
     #initialize
-    initialize = function(url, type, request, access_token, logger = NULL, ...) {
+    initialize = function(url, type, request, data, access_token, logger = NULL, ...) {
       super$initialize(logger = logger)
       private$url = url
       private$type = type
       private$request = request
+      private$data = data
       private$access_token = access_token
      
     },
@@ -87,7 +132,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       req <- switch(private$type,
                     "GET" = private$GET(private$url, private$request),
-                    "POST" = NULL
+                    "POST" = private$POST(private$url, private$request, private$data)
       )
       
       private$request <- req$request
