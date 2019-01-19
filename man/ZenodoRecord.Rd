@@ -20,6 +20,53 @@ ZenodoRecord
  \item{\code{new()}}{
    This method is used to instantiate a Zenodo Record
  }
+ \item{\code{setUploadType(uploadType)}}{
+   Set the upload type (mandatory). Value should be among the following: 'publication',
+   'poster','presentation','dataset','image','video', or 'software'
+ }
+ \item{\code{setPublicationType(publicationType)}}{
+   Set the publication type (mandatory if upload type is 'publication'). Value should be
+   among the following: 'book','section','conferencepaper','article','patent','preprint',
+   'report','softwaredocumentation','thesis','technicalnote','workingpaper', or 'other'
+ }
+ \item{\code{setImageType(imageType)}}{
+   Set the image type (mandatory if image type is 'image'). Value should be among the 
+   following: 'figure','plot','drawing','diagram','photo', or 'other'
+ }
+ \item{\code{setPublicationDate(publicationDate)}}{
+   Set the publication date, as object of class \code{Date}
+ }
+ \item{\code{setTitle(title)}}{
+   Set title
+ }
+ \item{\code{setDescription(description)}}{
+   Set description
+ }
+ \item{\code{setAccessRight(accessRight)}}{
+   Set the access right. Value should be among the following: 'open','embargoed',
+   'restricted','closed'
+ }
+ \item{\code{addCreator(firsname, lastname, affiliation, orcid, gnd)}}{
+   Add a creator for the record.
+ }
+ \item{\code{removeCreator(by,property)}}{
+   Removes a creator by a property. The \code{by} parameter should be the name
+   of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
+   'orcid' or 'gnd'). Returns \code{TRUE} if some creator was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeCreatorByName(name)}}{
+   Removes a creator by name. Returns \code{TRUE} if some creator was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeCreatorByAffiliation(affiliation)}}{
+   Removes a creator by affiliation. Returns \code{TRUE} if some creator was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeCreatorByORCID(orcid)}}{
+   Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
+   \code{FALSE} otherwise.
+ }
 }
 }
 

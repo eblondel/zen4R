@@ -9,6 +9,53 @@
 #'  \item{\code{new()}}{
 #'    This method is used to instantiate a Zenodo Record
 #'  }
+#'  \item{\code{setUploadType(uploadType)}}{
+#'    Set the upload type (mandatory). Value should be among the following: 'publication',
+#'    'poster','presentation','dataset','image','video', or 'software'
+#'  }
+#'  \item{\code{setPublicationType(publicationType)}}{
+#'    Set the publication type (mandatory if upload type is 'publication'). Value should be
+#'    among the following: 'book','section','conferencepaper','article','patent','preprint',
+#'    'report','softwaredocumentation','thesis','technicalnote','workingpaper', or 'other'
+#'  }
+#'  \item{\code{setImageType(imageType)}}{
+#'    Set the image type (mandatory if image type is 'image'). Value should be among the 
+#'    following: 'figure','plot','drawing','diagram','photo', or 'other'
+#'  }
+#'  \item{\code{setPublicationDate(publicationDate)}}{
+#'    Set the publication date, as object of class \code{Date}
+#'  }
+#'  \item{\code{setTitle(title)}}{
+#'    Set title
+#'  }
+#'  \item{\code{setDescription(description)}}{
+#'    Set description
+#'  }
+#'  \item{\code{setAccessRight(accessRight)}}{
+#'    Set the access right. Value should be among the following: 'open','embargoed',
+#'    'restricted','closed'
+#'  }
+#'  \item{\code{addCreator(firsname, lastname, affiliation, orcid, gnd)}}{
+#'    Add a creator for the record.
+#'  }
+#'  \item{\code{removeCreator(by,property)}}{
+#'    Removes a creator by a property. The \code{by} parameter should be the name
+#'    of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
+#'    'orcid' or 'gnd'). Returns \code{TRUE} if some creator was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeCreatorByName(name)}}{
+#'    Removes a creator by name. Returns \code{TRUE} if some creator was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeCreatorByAffiliation(affiliation)}}{
+#'    Removes a creator by affiliation. Returns \code{TRUE} if some creator was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeCreatorByORCID(orcid)}}{
+#'    Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -124,6 +171,44 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         stop(errorMsg)
       }
       self$metadata$access_right <- accessRight
+    },
+    
+    #addCreator
+    addCreator = function(firstname, lastname, affiliation, orcid = NULL, gnd = NULL){
+      creator <- list(name = paste(lastname, firstname, sep=", "),
+                      affiliation = affiliation)
+      if(!is.null(orcid)) creator <- c(creator, orcid = orcid)
+      if(!is.null(gnd)) creator <- c(creator, gnd = gnd)
+      if(is.null(self$metadata$creators)) self$metadata$creators <- list()
+      self$metadata$creators[[length(self$metadata$creators)+1]] <- creator
+    },
+    
+    #removeCreator
+    removeCreator = function(by,property){
+      removed <- FALSE
+      for(i in 1:length(self$metadata$creators)){
+        creator <- self$metadata$creators[[i]]
+        if(creator[[by]]==property){
+          self$metadata$creators[[i]] <- NULL
+          removed <- TRUE 
+        }
+      }
+      return(removed)
+    },
+    
+    #removeCreatorByName
+    removeCreatorByName = function(name){
+      return(self$removeCreator(by = "Name", name))
+    },
+
+    #removeCreatorByAffiliation
+    removeCreatorByAffiliation = function(affiliation){
+      return(self$removeCreator(by = "affiliation", affiliation))
+    },
+    
+    #removeCreatorByORCID
+    removeCreatorByORCID = function(orcid){
+      return(self$removeCreator(by = "orcid", orcid))
     }
     
     #TODO missing metadata setter methods
