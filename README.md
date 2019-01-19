@@ -31,6 +31,7 @@ myrec$setTitle("My publication title")
 myrec$setDescription("A description of my publication")
 myrec$setUploadType("publication")
 myrec$setPublicationType("article")
+myrec$addCreator(firstname = "John", lastname = "Doe", affiliation = "Independent")
 ```
 
 * Update my record on Zenodo deposit
@@ -38,3 +39,8 @@ myrec$setPublicationType("article")
 ```r
 zenodo$depositRecord(myrec)
 ```
+
+There is no need to create an empty record with the function ``$createEmptyRecord()``
+first on Zenodo and then fill it. You can create a record with ``ZenodoRecord$new()``,
+fill it and then deposit it directly using the function ``$depositRecord(record)``.
+
