@@ -27,8 +27,10 @@ Main user class to be used with \pkg{zen4R}
    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
    http calls logs)
  }
- \item{\code{getLicenses()}}{
-   Get the list of licenses
+ \item{\code{getLicenses(pretty)}}{
+   Get the list of licenses. By default the argument \code{pretty} is set to 
+   \code{TRUE} which will returns the list of licenses as \code{data.frame}.
+   Set \code{pretty = FALSE} to get the raw list of licenses.
  }
  \item{\code{getLicenseById(id)}}{
    Get license by Id

@@ -13,8 +13,10 @@
 #'    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
 #'    http calls logs)
 #'  }
-#'  \item{\code{getLicenses()}}{
-#'    Get the list of licenses
+#'  \item{\code{getLicenses(pretty)}}{
+#'    Get the list of licenses. By default the argument \code{pretty} is set to 
+#'    \code{TRUE} which will returns the list of licenses as \code{data.frame}.
+#'    Set \code{pretty = FALSE} to get the raw list of licenses.
 #'  }
 #'  \item{\code{getLicenseById(id)}}{
 #'    Get license by Id
@@ -64,13 +66,25 @@ ZenodoManager <-  R6Class("ZenodoManager",
     },
     
     #getLicenses
-    getLicenses = function(){
+    getLicenses = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=*:*&size=1000",
                                   access_token= private$access_token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
         out <- out$hits$hits
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = x$metadata
+            rec$`$schema` <- NULL
+            rec$is_generic <- NULL
+            rec$suggest <- NULL
+            rec <- as.data.frame(rec)
+            rec <- rec[,c("id", "title", "url", "domain_content", "domain_data", "domain_software", "family", 
+                          "maintainer", "od_conformance", "osd_conformance", "status")]
+            return(rec)
+          }))
+        }
         self$INFO("Successfully fetched list of licenses")
       }else{
         self$ERROR(sprintf("Error while fetching licenses: %s", out$message))
