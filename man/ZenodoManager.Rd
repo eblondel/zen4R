@@ -27,6 +27,12 @@ Main user class to be used with \pkg{zen4R}
    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
    http calls logs)
  }
+ \item{\code{getLicenses()}}{
+   Get the list of licenses
+ }
+ \item{\code{getLicenseById(id)}}{
+   Get license by Id
+ }
  \item{\code{getDepositions()}}{
    Get the list of Zenodo records deposited in your Zenodo workspace
  }

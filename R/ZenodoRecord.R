@@ -56,11 +56,17 @@
 #'    Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
 #'    \code{FALSE} otherwise.
 #'  }
+#'  \item{\code{setLicense(licenseId)}}{
+#'    Set license. The license should be set with the Zenodo id of the license. If not
+#'    recognized by Zenodo, the function will return an error. The list of licenses can
+#'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
 #' 
 ZenodoRecord <-  R6Class("ZenodoRecord",
+  inherit = zen4RLogger,
   private = list(
     fromList = function(obj){
       self$conceptdoi = obj$conceptdoi
@@ -97,7 +103,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     submitted = FALSE,
     title = NULL,
     
-    initialize = function(obj = NULL){
+    initialize = function(obj = NULL, logger = "INFO"){
+      super$initialize(logger = logger)
       if(!is.null(obj)) private$fromList(obj)
     },
     
@@ -209,6 +216,18 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #removeCreatorByORCID
     removeCreatorByORCID = function(orcid){
       return(self$removeCreator(by = "orcid", orcid))
+    },
+    
+    #setLicense
+    setLicense = function(licenseId){
+      zen <- ZenodoManager$new()
+      zen_license <- zen$getLicenseById(licenseId)
+      if(!is.null(zen_license$status)){
+        errorMsg <- sprintf("License with id '%s' doesn't exist in Zenodo", licenseId)
+        self$ERROR(errorMsg)
+        stop(errorMsg)
+      }
+      self$metadata$license <- licenseId
     }
     
     #TODO missing metadata setter methods

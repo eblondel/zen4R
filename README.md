@@ -32,6 +32,7 @@ myrec$setDescription("A description of my publication")
 myrec$setUploadType("publication")
 myrec$setPublicationType("article")
 myrec$addCreator(firstname = "John", lastname = "Doe", affiliation = "Independent")
+myrec$setLicense("mit")
 ```
 
 * Update my record on Zenodo deposit

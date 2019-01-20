@@ -13,6 +13,12 @@
 #'    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
 #'    http calls logs)
 #'  }
+#'  \item{\code{getLicenses()}}{
+#'    Get the list of licenses
+#'  }
+#'  \item{\code{getLicenseById(id)}}{
+#'    Get license by Id
+#'  }
 #'  \item{\code{getDepositions()}}{
 #'    Get the list of Zenodo records deposited in your Zenodo workspace
 #'  }
@@ -51,10 +57,39 @@ ZenodoManager <-  R6Class("ZenodoManager",
     WARN = function(text){self$logger("WARN", text)},
     ERROR = function(text){self$logger("ERROR", text)},
     
-    initialize = function(url = "https://zenodo.org/api", access_token, logger = NULL){
+    initialize = function(url = "https://zenodo.org/api", access_token = NULL, logger = NULL){
       super$initialize(logger = logger)
       private$url = url
       private$access_token <- access_token
+    },
+    
+    #getLicenses
+    getLicenses = function(){
+      zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=*:*&size=1000",
+                                  access_token= private$access_token, logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        out <- out$hits$hits
+        self$INFO("Successfully fetched list of licenses")
+      }else{
+        self$ERROR(sprintf("Error while fetching licenses: %s", out$message))
+      }
+      return(out)
+    },
+    
+    #getLicenseById
+    getLicenseById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("licenses/%s",id),
+                                  access_token= private$access_token, logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successfully fetched license '%s'",id))
+      }else{
+        self$ERROR(sprintf("Error while fetching license '%s': %s", id, out$message))
+      }
+      return(out)
     },
     
     #getDepositions

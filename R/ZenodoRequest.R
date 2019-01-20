@@ -66,6 +66,9 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         if(length(data[["files"]])==0) data[["files"]] <- NULL
         if(length(data[["metadata"]])==0) data[["metadata"]] <- NULL
         data[["links"]] <- NULL
+        data[["verbose.info"]] <- NULL
+        data[["verbose.debug"]] <- NULL
+        data[["loggerType"]] <- NULL
         data <- data[!sapply(data, is.null)]
       }else if(is(data, "list")){
         meta <- data$metadata

@@ -67,6 +67,11 @@ ZenodoRecord
    Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
    \code{FALSE} otherwise.
  }
+ \item{\code{setLicense(licenseId)}}{
+   Set license. The license should be set with the Zenodo id of the license. If not
+   recognized by Zenodo, the function will return an error. The list of licenses can
+   fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
+ }
 }
 }
 
