@@ -25,6 +25,9 @@
 #'  \item{\code{setPublicationDate(publicationDate)}}{
 #'    Set the publication date, as object of class \code{Date}
 #'  }
+#'  \item{\code{setEmbargoDate(embargoDate)}}{
+#'    Set the embargo date, as object of class \code{Date}
+#'  }
 #'  \item{\code{setTitle(title)}}{
 #'    Set title
 #'  }
@@ -34,6 +37,9 @@
 #'  \item{\code{setAccessRight(accessRight)}}{
 #'    Set the access right. Value should be among the following: 'open','embargoed',
 #'    'restricted','closed'
+#'  }
+#'  \item{\code{setAccessConditions(accessConditions)}}{
+#'    Set access conditions.
 #'  }
 #'  \item{\code{addCreator(firsname, lastname, affiliation, orcid, gnd)}}{
 #'    Add a creator for the record.
@@ -60,6 +66,9 @@
 #'    Set license. The license should be set with the Zenodo id of the license. If not
 #'    recognized by Zenodo, the function will return an error. The list of licenses can
 #'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
+#'  }
+#'  \item{\code{setDOI(doi)}}{
+#'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
 #'  }
 #' }
 #' 
@@ -158,6 +167,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$publication_date <- as(publicationDate, "character")
     },
     
+    #setEmbargoDate
+    setEmbargoDate = function(embargoDate){
+      if(!is(embargoDate,"Date")){
+        stop("The embargo date should be a 'Date' object")
+      }
+      self$metadata$embargo_date <- as(publicationDate, "character")
+    },
+    
     #setTitle
     setTitle = function(title){
       self$metadata$title <- title
@@ -178,6 +195,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         stop(errorMsg)
       }
       self$metadata$access_right <- accessRight
+    },
+    
+    #setAccessConditions
+    setAccessConditions = function(accessConditions){
+      self$metadata$access_conditions <- accessConditions
     },
     
     #addCreator
@@ -228,6 +250,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         stop(errorMsg)
       }
       self$metadata$license <- licenseId
+    },
+    
+    #setDOI
+    setDOI = function(doi){
+      self$metadata$doi
     }
     
     #TODO missing metadata setter methods

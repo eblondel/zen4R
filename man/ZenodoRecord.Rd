@@ -36,6 +36,9 @@ ZenodoRecord
  \item{\code{setPublicationDate(publicationDate)}}{
    Set the publication date, as object of class \code{Date}
  }
+ \item{\code{setEmbargoDate(embargoDate)}}{
+   Set the embargo date, as object of class \code{Date}
+ }
  \item{\code{setTitle(title)}}{
    Set title
  }
@@ -45,6 +48,9 @@ ZenodoRecord
  \item{\code{setAccessRight(accessRight)}}{
    Set the access right. Value should be among the following: 'open','embargoed',
    'restricted','closed'
+ }
+ \item{\code{setAccessConditions(accessConditions)}}{
+   Set access conditions.
  }
  \item{\code{addCreator(firsname, lastname, affiliation, orcid, gnd)}}{
    Add a creator for the record.
@@ -71,6 +77,9 @@ ZenodoRecord
    Set license. The license should be set with the Zenodo id of the license. If not
    recognized by Zenodo, the function will return an error. The list of licenses can
    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
+ }
+ \item{\code{setDOI(doi)}}{
+   Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
  }
 }
 }
