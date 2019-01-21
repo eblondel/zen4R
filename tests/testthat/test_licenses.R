@@ -3,7 +3,7 @@
 #
 # Description: Unit tests for Zenodo licenses operations
 #=======================
-require(geosapi, quietly = TRUE)
+require(zen4R, quietly = TRUE)
 require(testthat)
 
 context("licenses")

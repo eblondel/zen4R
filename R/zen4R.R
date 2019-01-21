@@ -9,7 +9,8 @@
 #' @import jsonlite
 #' 
 #' @title Interface to Zenodo REST API
-#' @description Provides an Interface to Zenodo REST API
+#' @description Provides an Interface to Zenodo REST API, including management 
+#' of record depositions, attribution of DOIs by Zenodo and upload of files.
 #'
 #' @details
 #'  \tabular{ll}{
