@@ -1,0 +1,32 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: R
+sudo: required
+cache: packages
+
+services:
+  - docker
+
+r:
+  - oldrel
+  - release
+  - devel
+
+r_packages:
+  - R6
+  - httr
+  - jsonlite
+  - testthat
+  - covr
+
+r_check_args: --as-cran
+
+after_script:
+ - ./travis-tool.sh dump_logs
+ 
+after_success:
+ - Rscript -e 'library(covr); codecov()'
+
+notifications:
+  email:
+    on_success: change
+    on_failure: change
