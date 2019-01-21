@@ -173,8 +173,31 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       response <- list(request = data, requestHeaders = headers(r),
                        status = status_code(r), response = responseContent)
       return(response)
-    }
+    },
     
+    #DELETE
+    #---------------------------------------------------------------    
+    DELETE = function(url, request, data){
+      req <- paste(url, request, data, sep="/")
+      #headers
+      headers <- c("Authorization" = paste("Bearer",private$access_token))
+      if(self$verbose.debug){
+        r <- with_verbose(httr::DELETE(
+          url = req,
+          add_headers(headers)
+        ))
+      }else{
+        r <- httr::DELETE(
+          url = req,
+          add_headers(headers)
+        )
+      }
+      responseContent <- content(r, type = "application/json", encoding = "UTF-8")
+      response <- list(request = data, requestHeaders = headers(r),
+                       status = status_code(r), response = responseContent)
+      return(response)
+    }
+      
   ),
   #public methods
   public = list(
@@ -195,9 +218,10 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     execute = function(){
       
       req <- switch(private$type,
-                    "GET" = private$GET(private$url, private$request),
-                    "POST" = private$POST(private$url, private$request, private$data, private$file),
-                    "PUT" = private$PUT(private$url, private$request, private$data)
+        "GET" = private$GET(private$url, private$request),
+        "POST" = private$POST(private$url, private$request, private$data, private$file),
+        "PUT" = private$PUT(private$url, private$request, private$data),
+        "DELETE" = private$DELETE(private$url, private$request, private$data)
       )
       
       private$request <- req$request

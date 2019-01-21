@@ -40,6 +40,9 @@
 #'  \item{\code{uploadFile(path, recordId)}}{
 #'    Uploads a file for a given Zenodo deposited record
 #'  }
+#'  \item{\code{deleteFile(recordId, fileId)}}{
+#'    Deletes a file for a given Zenodo deposited record
+#'  }
 #' }
 #' @note Main user class to be used with \pkg{zen4R}
 #' 
@@ -181,7 +184,6 @@ ZenodoManager <-  R6Class("ZenodoManager",
     uploadFile = function(path, recordId){
       fileparts <- strsplit(path,"/")
       filename <- fileparts[[length(fileparts)]]
-      print(filename)
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/files", recordId), 
                                   data = filename, file = upload_file(path),
                                   access_token = private$access_token,
@@ -193,7 +195,23 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(sprintf("Successful uploaded file to record '%s'", recordId))
       }else{
         out <- zenReq$getResponse()
-        self$ERROR(sprintf("Error while uploadind file to record '%s': %s", recordId, out$message))
+        self$ERROR(sprintf("Error while uploading file to record '%s': %s", recordId, out$message))
+      }
+      return(out)
+    },
+    
+    #deleteFile
+    deleteFile = function(recordId, fileId){
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("deposit/depositions/%s/files", recordId), 
+                                  data = fileId, access_token = private$access_token,
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- FALSE
+      if(zenReq$getStatus() == 204){
+        out <- TRUE
+        self$INFO(sprintf("Successful deleted file from record '%s'", recordId))
+      }else{
+        self$ERROR(sprintf("Error while deleting file from record '%s': %s", recordId, out$message))
       }
       return(out)
     }

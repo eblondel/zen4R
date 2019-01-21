@@ -54,6 +54,9 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{uploadFile(path, recordId)}}{
    Uploads a file for a given Zenodo deposited record
  }
+ \item{\code{deleteFile(recordId, fileId)}}{
+   Deletes a file for a given Zenodo deposited record
+ }
 }
 }
 
