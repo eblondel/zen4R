@@ -56,3 +56,18 @@ zenodo$uploadFile("path_to_my_file", myrec$id) #upload a file
 myrec_files <- zenodo$getFiles(myrec$id) #list files for the deposited record
 ```
 
+* Publish a deposited record straigh online on Zenodo
+
+Once the deposited record is fine for its publication online on Zenodo, you can publish it:
+
+```r
+zenodo$publishRecord(myrec$id)
+```
+
+The method ``depositRecord`` handles a shortcut to publish directly the record specifying ``publish = TRUE`` (default is ``FALSE``):
+
+```r
+zenodo$depositRecord(myrec, publish = TRUE)
+```
+
+This shortcut is to use with cautious, as this will publish straight online your record on Zenodo.

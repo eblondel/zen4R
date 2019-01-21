@@ -38,10 +38,12 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getDepositions()}}{
    Get the list of Zenodo records deposited in your Zenodo workspace
  }
- \item{\code{depositRecord(record)}}{
+ \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object
    of class \code{ZenodoRecord}. The method returns the deposited record
-   of class \code{ZenodoRecord}.
+   of class \code{ZenodoRecord}. The parameter \code{publish} (default value
+   is \code{FALSE}) can be set to \code{TRUE} (to use CAUTIOUSLY, only if you
+   want to publish your record)
  }
  \item{\code{deleteRecord(recordId)}}{
    Deletes a Zenodo record based on its identifier.
@@ -50,6 +52,9 @@ Main user class to be used with \pkg{zen4R}
    Creates an empty record in the Zenodo deposit. Returns the record
    newly created in Zenodo, as an object of class \code{ZenodoRecord}
    with an assigned identifier.
+ }
+ \item{\code{publishRecord(recordId)}}{
+   Publishes a deposited record online.
  }
  \item{\code{getFiles(recordId)}}{
    Get the list of uploaded files for a deposited record

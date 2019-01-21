@@ -8,7 +8,7 @@
 #'
 #' @section Methods:
 #' \describe{
-#'  \item{\code{new(url, type, request, data, files, access_token, logger)}}{
+#'  \item{\code{new(url, type, request, data, file, access_token, logger)}}{
 #'    This method is used to instantiate a object for doing an Zenodo request
 #'  }
 #'  \item{\code{getRequest()}}{
@@ -125,14 +125,14 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         r <- with_verbose(httr::POST(
           url = req,
           add_headers(headers),
-          encode = ifelse(is.null(files),"json", "multipart"),
+          encode = ifelse(is.null(file),"json", "multipart"),
           body = data
         ))
       }else{
         r <- httr::POST(
           url = req,
           add_headers(headers),
-          encode = ifelse(is.null(files),"json", "multipart"),
+          encode = ifelse(is.null(file),"json", "multipart"),
           body = data
         )
       }
