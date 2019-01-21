@@ -45,3 +45,9 @@ There is no need to create an empty record with the function ``$createEmptyRecor
 first on Zenodo and then fill it. You can create a record with ``ZenodoRecord$new()``,
 fill it and then deposit it directly using the function ``$depositRecord(record)``.
 
+* Upload a file
+
+```r
+zenodo$uploadFile("path_to_my_file", myrec$id) #upload a file
+myrec_files <- zenodo$getFiles(myrec$id) #list files for the deposited record
+```
