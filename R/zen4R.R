@@ -4,6 +4,7 @@
 #' @docType package
 #' 
 #' @importFrom R6 R6Class
+#' @import methods
 #' @import httr
 #' @import jsonlite
 #' 
