@@ -1,5 +1,9 @@
 # zen4R
 
+[![Build Status](https://travis-ci.org/eblondel/zen4R.svg?branch=master)](https://travis-ci.org/eblondel/zen4R)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/zen4R)](https://cran.r-project.org/package=zen4R)
+[![Github_Status_Badge](https://img.shields.io/badge/Github-0.1-blue.svg)](https://github.com/eblondel/zen4R)
+
 R Interface to Zenodo REST API
 
 ## How to
@@ -51,3 +55,4 @@ fill it and then deposit it directly using the function ``$depositRecord(record)
 zenodo$uploadFile("path_to_my_file", myrec$id) #upload a file
 myrec_files <- zenodo$getFiles(myrec$id) #list files for the deposited record
 ```
+
