@@ -20,9 +20,8 @@ Abstract class used internally by \pkg{zen4R}
 \section{Methods}{
 
 \describe{
- \item{\code{new(op, type, url, request, user, pwd, namedParams, attrs, 
-                 contentType, mimeType, logger)}}{
-   This method is used to instantiate a object for doing an OWS request
+ \item{\code{new(url, type, request, data, files, access_token, logger)}}{
+   This method is used to instantiate a object for doing an Zenodo request
  }
  \item{\code{getRequest()}}{
    Get the request payload

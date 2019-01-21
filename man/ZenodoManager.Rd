@@ -48,6 +48,12 @@ Main user class to be used with \pkg{zen4R}
    newly created in Zenodo, as an object of class \code{ZenodoRecord}
    with an assigned identifier.
  }
+ \item{\code{getFiles(recordId)}}{
+   Get the list of uploaded files for a deposited record
+ }
+ \item{\code{uploadFile(path, recordId)}}{
+   Uploads a file for a given Zenodo deposited record
+ }
 }
 }
 

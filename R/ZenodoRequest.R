@@ -8,9 +8,8 @@
 #'
 #' @section Methods:
 #' \describe{
-#'  \item{\code{new(op, type, url, request, user, pwd, namedParams, attrs, 
-#'                  contentType, mimeType, logger)}}{
-#'    This method is used to instantiate a object for doing an OWS request
+#'  \item{\code{new(url, type, request, data, files, access_token, logger)}}{
+#'    This method is used to instantiate a object for doing an Zenodo request
 #'  }
 #'  \item{\code{getRequest()}}{
 #'    Get the request payload
@@ -45,6 +44,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     request = NA,
     requestHeaders = NA,
     data = NA,
+    file = NULL,
     status = NA,
     response = NA,
     exception = NA,
@@ -77,7 +77,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       }
       
       if(is.null(data$id)){
-        data <- "{}"
+        data <- "{}" 
       }else{
         data <- as(toJSON(data, pretty=T, auto_unbox=T), "character")
       }
@@ -106,26 +106,33 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     
     #POST
     #---------------------------------------------------------------    
-    POST = function(url, request, data){
+    POST = function(url, request, data, file = NULL){
       req <- paste(url, request, sep="/")
-      
-      data <- private$prepareData(data)
+      if(!is.null(file)){
+        contentType <- "multipart/form-data"
+        data <- list(file = file, filename = data)
+      }else{
+        contentType <- "application/json"
+        data <- private$prepareData(data)
+      }
       
       #headers
-      headers <- c("Content-Type" = "application/json",
+      headers <- c("Content-Type" = contentType,
                    "Authorization" = paste("Bearer",private$access_token))
       
       #send request
       if(self$verbose.debug){
         r <- with_verbose(httr::POST(
           url = req,
-          add_headers(headers),    
+          add_headers(headers),
+          encode = ifelse(is.null(files),"json", "multipart"),
           body = data
         ))
       }else{
         r <- httr::POST(
           url = req,
-          add_headers(headers),    
+          add_headers(headers),
+          encode = ifelse(is.null(files),"json", "multipart"),
           body = data
         )
       }
@@ -172,12 +179,14 @@ ZenodoRequest <- R6Class("ZenodoRequest",
   #public methods
   public = list(
     #initialize
-    initialize = function(url, type, request, data = NULL, access_token, logger = NULL, ...) {
+    initialize = function(url, type, request, data = NULL, file = NULL,
+                          access_token, logger = NULL, ...) {
       super$initialize(logger = logger)
       private$url = url
       private$type = type
       private$request = request
       private$data = data
+      private$file = file
       private$access_token = access_token
      
     },
@@ -187,7 +196,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       req <- switch(private$type,
                     "GET" = private$GET(private$url, private$request),
-                    "POST" = private$POST(private$url, private$request, private$data),
+                    "POST" = private$POST(private$url, private$request, private$data, private$file),
                     "PUT" = private$PUT(private$url, private$request, private$data)
       )
       
