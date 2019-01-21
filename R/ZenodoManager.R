@@ -25,9 +25,12 @@
 #'    Get the list of Zenodo records deposited in your Zenodo workspace
 #'  }
 #'  \item{\code{depositRecord(record)}}{
-#'    A method to deposit a Zenodo record. The record should be an object
+#'    A method to deposit/update a Zenodo record. The record should be an object
 #'    of class \code{ZenodoRecord}. The method returns the deposited record
 #'    of class \code{ZenodoRecord}.
+#'  }
+#'  \item{\code{deleteRecord(recordId)}}{
+#'    Deletes a Zenodo record based on its identifier.
 #'  }
 #'  \item{\code{createEmptyRecord()}}{
 #'    Creates an empty record in the Zenodo deposit. Returns the record
@@ -154,6 +157,22 @@ ZenodoManager <-  R6Class("ZenodoManager",
         for(error in out$errors){
           self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
         }
+      }
+      return(out)
+    },
+    
+    #deleteRecord
+    deleteRecord = function(recordId){
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", "deposit/depositions", 
+                                  data = recordId, access_token = private$access_token,
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- FALSE
+      if(zenReq$getStatus() == 204){
+        out <- TRUE
+        self$INFO(sprintf("Successful deleted file from record '%s'", recordId))
+      }else{
+        self$ERROR(sprintf("Error while deleting file from record '%s': %s", recordId, out$message))
       }
       return(out)
     },

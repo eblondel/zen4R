@@ -39,9 +39,12 @@ Main user class to be used with \pkg{zen4R}
    Get the list of Zenodo records deposited in your Zenodo workspace
  }
  \item{\code{depositRecord(record)}}{
-   A method to deposit a Zenodo record. The record should be an object
+   A method to deposit/update a Zenodo record. The record should be an object
    of class \code{ZenodoRecord}. The method returns the deposited record
    of class \code{ZenodoRecord}.
+ }
+ \item{\code{deleteRecord(recordId)}}{
+   Deletes a Zenodo record based on its identifier.
  }
  \item{\code{createEmptyRecord()}}{
    Creates an empty record in the Zenodo deposit. Returns the record
