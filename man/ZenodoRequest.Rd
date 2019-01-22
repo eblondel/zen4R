@@ -20,7 +20,7 @@ Abstract class used internally by \pkg{zen4R}
 \section{Methods}{
 
 \describe{
- \item{\code{new(url, type, request, data, files, access_token, logger)}}{
+ \item{\code{new(url, type, request, data, file, access_token, logger)}}{
    This method is used to instantiate a object for doing an Zenodo request
  }
  \item{\code{getRequest()}}{
