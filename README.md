@@ -43,12 +43,16 @@ myrec$setLicense("mit")
 * Update my record on Zenodo deposit
 
 ```r
-zenodo$depositRecord(myrec)
+myrec <- zenodo$depositRecord(myrec)
 ```
 
 There is no need to create an empty record with the function ``$createEmptyRecord()``
 first on Zenodo and then fill it. You can create a record with ``ZenodoRecord$new()``,
 fill it and then deposit it directly using the function ``$depositRecord(record)``.
+
+In order to apply methods to upload a file or delete a record, you need to get the result of the function ``depositRecord`` (see example above) since after the deposition Zenodo returns the record that contains now an internal ``id`` required to identify and apply further actions. This id can be inspected with ``myrec$id``.
+
+Instead, if you don't get the output of ``depositRecord`` and try to upload files or publish the record based on the the local record you handle (built upon ``ZenodoRecord$new()``), this wil not work. Because it is a local record, the ``id`` of the record will still be ``NULL`` and Zenodo will be unable to identify which record on Zenodo needs to be handled.  
 
 * Upload a file
 
