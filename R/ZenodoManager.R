@@ -21,6 +21,9 @@
 #'  \item{\code{getLicenseById(id)}}{
 #'    Get license by Id
 #'  }
+#'  \item{\code{getCommunities()}}{
+#'    Get the list of communities.
+#'  }
 #'  \item{\code{getDepositions()}}{
 #'    Get the list of Zenodo records deposited in your Zenodo workspace
 #'  }
@@ -87,7 +90,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
 
     #getLicenses
     getLicenses = function(pretty = TRUE){
-      zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=*:*&size=1000",
+      zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=&size=1000",
                                   access_token= private$access_token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -122,6 +125,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(sprintf("Successfuly fetched license '%s'",id))
       }else{
         self$ERROR(sprintf("Error while fetching license '%s': %s", id, out$message))
+      }
+      return(out)
+    },
+    
+    #Communities
+    #------------------------------------------------------------------------------------------
+    
+    #getCommunities
+    getCommunities = function(pretty = TRUE){
+      zenReq <- ZenodoRequest$new(private$url, "GET", "communities?q=&size=1000",
+                                  access_token= private$access_token, logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        out <- out$hits$hits
+        self$INFO("Successfuly fetched list of communities")
+      }else{
+        self$ERROR(sprintf("Error while fetching communities: %s", out$message))
       }
       return(out)
     },
