@@ -70,6 +70,20 @@
 #'  \item{\code{setDOI(doi)}}{
 #'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
 #'  }
+#'  \item{\code{setKeywords(keywords)}}{
+#'    Set a vector of character strings as keywords
+#'  }
+#'  \item{\code{addKeyword(keyword)}}{
+#'    Adds a keyword to the record metadata. Return \code{TRUE} if added, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removedKeyword(keyword)}}{
+#'    Removes a keyword from the record metadata. Return \code{TRUE} if removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{setNotes(notes)}}{
+#'    Set notes. HTML is not allowed
+#'  }
 #'  \item{\code{setCommunities(communities)}}{
 #'    Set a vector of character strings identifying communities
 #'  }
@@ -268,13 +282,51 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$doi
     },
     
+    #setKeywords
+    setKeywords = function(keywords){
+      if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
+      for(keyword in keywords){
+        self$addKeyword(keyword)
+      }
+    },
+    
+    #addKeyword
+    addKeyword = function(keyword){
+      added <- FALSE
+      if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
+      if(!(keyword %in% self$metadata$keywords)){
+        self$metadata$keywords[[length(self$metadata$keywords)+1]] <- keyword
+        added <- TRUE
+      }
+      return(added)
+    },
+    
+    #removeKeyword
+    removeKeyword = function(keyword){
+      removed <- FALSE
+      if(!is.null(self$metadata$keywords)){
+        for(i in 1:length(self$metadata$keywords)){
+          kwd <- self$metadata$keywords[[i]]
+          if(kwd == keyword){
+            self$metadata$keywords[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
+    },
+    
+    #setNotes
+    setNotes = function(notes){
+      self$metadata$notes <- notes
+    },
+    
     #setCommunities
     setCommunities = function(communities){
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       for(community in communities){
-        if(!(community %in% self$metadata$communities)){
-          self$metadata$communities[[length(self$metadata$communities)+1]] <- list(identifier = community)
-        }
+        self$addCommunity(community)
       }
     },
     

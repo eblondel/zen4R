@@ -81,6 +81,20 @@ ZenodoRecord
  \item{\code{setDOI(doi)}}{
    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
  }
+ \item{\code{setKeywords(keywords)}}{
+   Set a vector of character strings as keywords
+ }
+ \item{\code{addKeyword(keyword)}}{
+   Adds a keyword to the record metadata. Return \code{TRUE} if added, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removedKeyword(keyword)}}{
+   Removes a keyword from the record metadata. Return \code{TRUE} if removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{setNotes(notes)}}{
+   Set notes. HTML is not allowed
+ }
  \item{\code{setCommunities(communities)}}{
    Set a vector of character strings identifying communities
  }

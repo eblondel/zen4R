@@ -38,6 +38,8 @@ myrec$setUploadType("publication")
 myrec$setPublicationType("article")
 myrec$addCreator(firstname = "John", lastname = "Doe", affiliation = "Independent")
 myrec$setLicense("mit")
+myrec$addCommunity("ecfunded")
+myrec$setKeywords(c("R","package","software"))
 ```
 
 * Update my record on Zenodo deposit
