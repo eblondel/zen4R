@@ -195,7 +195,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #createRecord
     createEmptyRecord = function(){
-      return(self$depositRecord(ZenodoRecord$new()))
+      return(self$depositRecord(NULL))
     },
     
     #publisRecord

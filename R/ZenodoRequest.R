@@ -76,11 +76,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         data <- list(metadata = meta)
       }
       
-      if(is.null(data$id)){
-        data <- "{}" 
-      }else{
-        data <- as(toJSON(data, pretty=T, auto_unbox=T), "character")
-      }
+      data <- as(toJSON(data, pretty=T, auto_unbox=T), "character")
       
       return(data)
     },
