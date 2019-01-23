@@ -100,7 +100,9 @@ ZenodoRecord
  }
  \item{\code{addCommunity(community)}}{
    Adds a community to the record metadata. Return \code{TRUE} if added, 
-   \code{FALSE} otherwise.
+   \code{FALSE} otherwise. The community should be set with the Zenodo id of the community. If not
+   recognized by Zenodo, the function will return an error. The list of communities can
+   fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}.
  }
  \item{\code{removedCommunity(community)}}{
    Removes a community from the record metadata. Return \code{TRUE} if removed, 

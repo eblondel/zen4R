@@ -89,7 +89,9 @@
 #'  }
 #'  \item{\code{addCommunity(community)}}{
 #'    Adds a community to the record metadata. Return \code{TRUE} if added, 
-#'    \code{FALSE} otherwise.
+#'    \code{FALSE} otherwise. The community should be set with the Zenodo id of the community. If not
+#'    recognized by Zenodo, the function will return an error. The list of communities can
+#'    fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}.
 #'  }
 #'  \item{\code{removedCommunity(community)}}{
 #'    Removes a community from the record metadata. Return \code{TRUE} if removed, 
@@ -333,8 +335,15 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #addCommunity
     addCommunity = function(community){
       added <- FALSE
+      zen <- ZenodoManager$new()
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       if(!(community %in% self$metadata$communities)){
+        zen_community <- zen$getCommunityById(community)
+        if(!is.null(zen_community$status)){
+          errorMsg <- sprintf("Community with id '%s' doesn't exist in Zenodo", community)
+          self$ERROR(errorMsg)
+          stop(errorMsg)
+        }
         self$metadata$communities[[length(self$metadata$communities)+1]] <- list(identifier = community)
         added <- TRUE
       }

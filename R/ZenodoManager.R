@@ -24,6 +24,9 @@
 #'  \item{\code{getCommunities()}}{
 #'    Get the list of communities.
 #'  }
+#'  \item{\code{getCommunityById(id)}}{
+#'    Get community by Id
+#'  }
 #'  \item{\code{getDepositions()}}{
 #'    Get the list of Zenodo records deposited in your Zenodo workspace
 #'  }
@@ -143,6 +146,20 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO("Successfuly fetched list of communities")
       }else{
         self$ERROR(sprintf("Error while fetching communities: %s", out$message))
+      }
+      return(out)
+    },
+    
+    #getCommunityById
+    getCommunityById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities/%s",id),
+                                  access_token= private$access_token, logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successfuly fetched community '%s'",id))
+      }else{
+        self$ERROR(sprintf("Error while fetching community '%s': %s", id, out$message))
       }
       return(out)
     },
