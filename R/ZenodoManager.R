@@ -82,6 +82,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       private$access_token <- access_token
     },
     
+    #Licenses
+    #------------------------------------------------------------------------------------------
+
     #getLicenses
     getLicenses = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=*:*&size=1000",
@@ -122,6 +125,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       }
       return(out)
     },
+    
+    #Depositions
+    #------------------------------------------------------------------------------------------
     
     #getDepositions
     getDepositions = function(){

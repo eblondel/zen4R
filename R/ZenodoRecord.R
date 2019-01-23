@@ -70,6 +70,17 @@
 #'  \item{\code{setDOI(doi)}}{
 #'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
 #'  }
+#'  \item{\code{setCommunities(communities)}}{
+#'    Set a vector of character strings identifying communities
+#'  }
+#'  \item{\code{addCommunity(community)}}{
+#'    Adds a community to the record metadata. Return \code{TRUE} if added, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removedCommunity(community)}}{
+#'    Removes a community from the record metadata. Return \code{TRUE} if removed, 
+#'    \code{FALSE} otherwise.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -255,6 +266,43 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #setDOI
     setDOI = function(doi){
       self$metadata$doi
+    },
+    
+    #setCommunities
+    setCommunities = function(communities){
+      if(is.null(self$metadata$communities)) self$metadata$communities <- list()
+      for(community in communities){
+        if(!(community %in% self$metadata$communities)){
+          self$metadata$communities[[length(self$metadata$communities)+1]] <- list(identifier = community)
+        }
+      }
+    },
+    
+    #addCommunity
+    addCommunity = function(community){
+      added <- FALSE
+      if(is.null(self$metadata$communities)) self$metadata$communities <- list()
+      if(!(community %in% self$metadata$communities)){
+        self$metadata$communities[[length(self$metadata$communities)+1]] <- list(identifier = community)
+        added <- TRUE
+      }
+      return(added)
+    },
+    
+    #removeCommunity
+    removeCommunity = function(community){
+      removed <- FALSE
+      if(!is.null(self$metadata$communities)){
+        for(i in 1:length(self$metadata$communities)){
+          com <- self$metadata$communities[[i]]
+          if(com == community){
+            self$metadata$communities[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
     }
     
     #TODO missing metadata setter methods

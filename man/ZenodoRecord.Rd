@@ -81,6 +81,17 @@ ZenodoRecord
  \item{\code{setDOI(doi)}}{
    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
  }
+ \item{\code{setCommunities(communities)}}{
+   Set a vector of character strings identifying communities
+ }
+ \item{\code{addCommunity(community)}}{
+   Adds a community to the record metadata. Return \code{TRUE} if added, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removedCommunity(community)}}{
+   Removes a community from the record metadata. Return \code{TRUE} if removed, 
+   \code{FALSE} otherwise.
+ }
 }
 }
 
