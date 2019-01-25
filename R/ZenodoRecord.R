@@ -70,6 +70,12 @@
 #'  \item{\code{setDOI(doi)}}{
 #'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
 #'  }
+#'  \item{\code{setVersion(version)}}{
+#'    Set the version.
+#'  }
+#'  \item{\code{setLanguage(language)}}{
+#'    Set the language ISO 639-2 or 639-3 code.
+#'  }
 #'  \item{\code{setKeywords(keywords)}}{
 #'    Set a vector of character strings as keywords
 #'  }
@@ -79,6 +85,22 @@
 #'  }
 #'  \item{\code{removedKeyword(keyword)}}{
 #'    Removes a keyword from the record metadata. Return \code{TRUE} if removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{addSubject(term, identifier)}}{
+#'    Add a Subject for the record.
+#'  }
+#'  \item{\code{removeSubject(by,property)}}{
+#'    Removes a subject by a property. The \code{by} parameter should be the name
+#'    of the subject property ('term' or 'identifier'). Returns \code{TRUE} if some 
+#'    subject was removed, \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeSubjectByTerm(term)}}{
+#'    Removes a subject by term. Returns \code{TRUE} if some subject was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeSubjectByIdentifier(identifier)}}{
+#'    Removes a subject by identifier. Returns \code{TRUE} if some subject was removed, 
 #'    \code{FALSE} otherwise.
 #'  }
 #'  \item{\code{setNotes(notes)}}{
@@ -284,6 +306,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$doi
     },
     
+    #setVersion
+    setVersion = function(version){
+      self$metadata$version <- version
+    },
+    
+    #setLanguage
+    setLanguage = function(language){
+      self$metadata$language <- language
+    },
+    
     #setKeywords
     setKeywords = function(keywords){
       if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
@@ -317,6 +349,36 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }
       }
       return(removed)
+    },
+    
+    #addSubject
+    addSubject = function(term, identifier){
+      subject <- list(term = term, identifier = identifier)
+      if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
+      self$metadata$subjects[[length(self$metadata$subjects)+1]] <- subject
+    },
+    
+    #removeSubject
+    removeSubject = function(by, property){
+      removed <- FALSE
+      for(i in 1:length(self$metadata$subjects)){
+        subject <- self$metadata$subjects[[i]]
+        if(subject[[by]]==property){
+          self$metadata$subjects[[i]] <- NULL
+          removed <- TRUE 
+        }
+      }
+      return(removed)
+    },
+    
+    #removeSubjectByTerm
+    removeSubjectByTerm = function(term){
+      return(self$removeSubject(by = "term", property = term))
+    },
+    
+    #removeSubjectByIdentifier
+    removeSubjectByIdentifier = function(identifier){
+      return(self$removeSubject(by = "identifier", property = identifier))
     },
     
     #setNotes

@@ -81,6 +81,12 @@ ZenodoRecord
  \item{\code{setDOI(doi)}}{
    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
  }
+ \item{\code{setVersion(version)}}{
+   Set the version.
+ }
+ \item{\code{setLanguage(language)}}{
+   Set the language ISO 639-2 or 639-3 code.
+ }
  \item{\code{setKeywords(keywords)}}{
    Set a vector of character strings as keywords
  }
@@ -90,6 +96,22 @@ ZenodoRecord
  }
  \item{\code{removedKeyword(keyword)}}{
    Removes a keyword from the record metadata. Return \code{TRUE} if removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{addSubject(term, identifier)}}{
+   Add a Subject for the record.
+ }
+ \item{\code{removeSubject(by,property)}}{
+   Removes a subject by a property. The \code{by} parameter should be the name
+   of the subject property ('term' or 'identifier'). Returns \code{TRUE} if some 
+   subject was removed, \code{FALSE} otherwise.
+ }
+ \item{\code{removeSubjectByTerm(term)}}{
+   Removes a subject by term. Returns \code{TRUE} if some subject was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeSubjectByIdentifier(identifier)}}{
+   Removes a subject by identifier. Returns \code{TRUE} if some subject was removed, 
    \code{FALSE} otherwise.
  }
  \item{\code{setNotes(notes)}}{
