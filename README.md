@@ -20,7 +20,7 @@ require(zen4R)
 * Connect to Zenodo
 
 ```r
-zenodo <- ZenodoManager$new(access_token = <your_token>, logger = "DEBUG")
+zenodo <- ZenodoManager$new(token = <your_token>, logger = "DEBUG")
 ```
 
 * Create an empty Zenodo record on Zenodo deposit

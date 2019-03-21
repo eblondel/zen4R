@@ -20,9 +20,9 @@ Main user class to be used with \pkg{zen4R}
 \section{Methods}{
 
 \describe{
- \item{\code{new(url, access_token, logger)}}{
+ \item{\code{new(url, token, logger)}}{
    This method is used to instantiate an ZenodoManager. By default,
-   the url is set to "https://zenodo.org/api". The access_token is
+   the url is set to "https://zenodo.org/api". The token is
    mandatory in order to use Zenodo API. The logger can be either
    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
    http calls logs)

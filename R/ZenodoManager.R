@@ -6,9 +6,9 @@
 #' @format \code{\link{R6Class}} object.
 #' @section Methods:
 #' \describe{
-#'  \item{\code{new(url, access_token, logger)}}{
+#'  \item{\code{new(url, token, logger)}}{
 #'    This method is used to instantiate an ZenodoManager. By default,
-#'    the url is set to "https://zenodo.org/api". The access_token is
+#'    the url is set to "https://zenodo.org/api". The token is
 #'    mandatory in order to use Zenodo API. The logger can be either
 #'    NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
 #'    http calls logs)
@@ -66,7 +66,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
   inherit = zen4RLogger,
   private = list(
     url = "https://zenodo.org/api",
-    access_token = NULL
+    token = NULL
   ),
   public = list(
     #logger
@@ -82,10 +82,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
     WARN = function(text){self$logger("WARN", text)},
     ERROR = function(text){self$logger("ERROR", text)},
     
-    initialize = function(url = "https://zenodo.org/api", access_token = NULL, logger = NULL){
+    initialize = function(url = "https://zenodo.org/api", token = NULL, logger = NULL){
       super$initialize(logger = logger)
       private$url = url
-      private$access_token <- access_token
+      private$token <- token
     },
     
     #Licenses
@@ -94,7 +94,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getLicenses
     getLicenses = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=&size=1000",
-                                  access_token= private$access_token, logger = self$loggerType)
+                                  token= private$token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
@@ -121,7 +121,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getLicenseById
     getLicenseById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("licenses/%s",id),
-                                  access_token= private$access_token, logger = self$loggerType)
+                                  token= private$token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
@@ -138,7 +138,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getCommunities
     getCommunities = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "communities?q=&size=1000",
-                                  access_token= private$access_token, logger = self$loggerType)
+                                  token= private$token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
@@ -153,7 +153,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getCommunityById
     getCommunityById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities/%s",id),
-                                  access_token= private$access_token, logger = self$loggerType)
+                                  token= private$token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
@@ -170,7 +170,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositions
     getDepositions = function(){
       zenReq <- ZenodoRequest$new(private$url, "GET", "deposit/depositions", 
-                                  access_token = private$access_token, logger = self$loggerType)
+                                  token = private$token, logger = self$loggerType)
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() == 200){
@@ -193,7 +193,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       request <- ifelse(is.null(record$id), "deposit/depositions", 
                         sprintf("deposit/depositions/%s", record$id))
       zenReq <- ZenodoRequest$new(private$url, type, request, data = data,
-                                  access_token = private$access_token, 
+                                  token = private$token, 
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -218,7 +218,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #deleteRecord
     deleteRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "DELETE", "deposit/depositions", 
-                                  data = recordId, access_token = private$access_token,
+                                  data = recordId, token = private$token,
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
@@ -239,7 +239,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #publisRecord
     publishRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/publish",recordId),
-                                  access_token = private$access_token,
+                                  token = private$token,
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -256,7 +256,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getFiles
     getFiles = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions/%s/files", recordId), 
-                                  access_token = private$access_token,
+                                  token = private$token,
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -276,7 +276,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       filename <- fileparts[[length(fileparts)]]
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/files", recordId), 
                                   data = filename, file = upload_file(path),
-                                  access_token = private$access_token,
+                                  token = private$token,
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -293,7 +293,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #deleteFile
     deleteFile = function(recordId, fileId){
       zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("deposit/depositions/%s/files", recordId), 
-                                  data = fileId, access_token = private$access_token,
+                                  data = fileId, token = private$token,
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
