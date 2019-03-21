@@ -76,6 +76,15 @@
 #'  \item{\code{setLanguage(language)}}{
 #'    Set the language ISO 639-2 or 639-3 code.
 #'  }
+#'  \item{\code{addRelatedIdentifier(relation, identifier)}}{
+#'    Adds a related identifier with a given relation. Relation can be one of among
+#'    following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, isNewVersionOf,
+#'    isPreviousVersionOf, isPartOf, hasPart, compiles, isCompiledBy, isIdenticalTo, 
+#'    isAlternateIdentifier
+#'  }
+#'  \item{code{removeRelatedIdentifier(relation, identifier)}}{
+#'    Remove a related identifier
+#'  }
 #'  \item{\code{setKeywords(keywords)}}{
 #'    Set a vector of character strings as keywords
 #'  }
@@ -314,6 +323,53 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #setLanguage
     setLanguage = function(language){
       self$metadata$language <- language
+    },
+    
+    #addRelatedIdentifier
+    addRelatedIdentifier = function(relation, identifier){
+      allowedRelations <- c("isCitedBy", "cites", "isSupplementTo",
+                            "isSupplementedBy", "isNewVersionOf", "isPreviousVersionOf", 
+                            "isPartOf", "hasPart", "compiles", "isCompiledBy", "isIdenticalTo",
+                            "isAlternateIdentifier")
+      if(!(relation %in% allowedRelations)){
+        stop(sprint("Relation '%s' incorrect. Use a value among the following [%s]", 
+                    relation, paste(allowedRelations, collapse=",")))
+      }
+      added <- FALSE
+      if(is.null(self$metadata$related_identifiers)) self$metadata$related_identifiers <- list()
+      if(!(relation %in% sapply(self$metadata$related_identifiers, function(x){x$relation})) &
+         !(identifier %in% sapply(self$metadata$related_identifiers, function(x){x$identifier}))){
+        self$metadata$related_identifiers[[length(self$metadata$related_identifiers)+1]] <- list(
+          relation = relation,
+          identifier = identifier
+        )
+        added <- TRUE
+      }
+      return(added)
+    },
+    
+    #removeRelatedIdentifier
+    removeRelatedIdentifier = function(relation, identifier){
+      allowedRelations <- c("isCitedBy", "cites", "isSupplementTo",
+                            "isSupplementedBy", "isNewVersionOf", "isPreviousVersionOf", 
+                            "isPartOf", "hasPart", "compiles", "isCompiledBy", "isIdenticalTo",
+                            "isAlternateIdentifier")
+      if(!(relation %in% allowedRelations)){
+        stop(sprint("Relation '%s' incorrect. Use a value among the following [%s]", 
+                    relation, paste(allowedRelations, collapse=",")))
+      }
+      removed <- FALSE
+      if(!is.null(self$metadata$related_identifiers)){
+        for(i in 1:length(self$metadata$related_identifiers)){
+          related_id <- self$metadata$related_identifiers[[i]]
+          if(related_id$relation == relation & related_id$identifier == identifier){
+            self$metadata$related_identifiers[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
     },
     
     #setKeywords

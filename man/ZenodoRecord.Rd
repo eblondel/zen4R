@@ -87,6 +87,15 @@ ZenodoRecord
  \item{\code{setLanguage(language)}}{
    Set the language ISO 639-2 or 639-3 code.
  }
+ \item{\code{addRelatedIdentifier(relation, identifier)}}{
+   Adds a related identifier with a given relation. Relation can be one of among
+   following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, isNewVersionOf,
+   isPreviousVersionOf, isPartOf, hasPart, compiles, isCompiledBy, isIdenticalTo, 
+   isAlternateIdentifier
+ }
+ \item{code{removeRelatedIdentifier(relation, identifier)}}{
+   Remove a related identifier
+ }
  \item{\code{setKeywords(keywords)}}{
    Set a vector of character strings as keywords
  }
