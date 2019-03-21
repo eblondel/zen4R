@@ -8,7 +8,7 @@
 #'
 #' @section Methods:
 #' \describe{
-#'  \item{\code{new(url, type, request, data, file, access_token, logger)}}{
+#'  \item{\code{new(url, type, request, data, file, token, logger)}}{
 #'    This method is used to instantiate a object for doing an Zenodo request
 #'  }
 #'  \item{\code{getRequest()}}{
@@ -49,7 +49,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     response = NA,
     exception = NA,
     result = NA,
-    access_token = NULL,
+    token = NULL,
     
     #prepareData
     #---------------------------------------------------------------    
@@ -86,7 +86,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     GET = function(url, request){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
-      headers <- c("Authorization" = paste("Bearer",private$access_token))
+      headers <- c("Authorization" = paste("Bearer",private$token))
       
       r <- NULL
       if(self$verbose.debug){
@@ -114,7 +114,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       #headers
       headers <- c("Content-Type" = contentType,
-                   "Authorization" = paste("Bearer",private$access_token))
+                   "Authorization" = paste("Bearer",private$token))
       
       #send request
       if(self$verbose.debug){
@@ -148,7 +148,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       #headers
       headers <- c("Content-Type" = "application/json",
-                   "Authorization" = paste("Bearer",private$access_token))
+                   "Authorization" = paste("Bearer",private$token))
       
       #send request
       if(self$verbose.debug){
@@ -176,7 +176,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     DELETE = function(url, request, data){
       req <- paste(url, request, data, sep="/")
       #headers
-      headers <- c("Authorization" = paste("Bearer",private$access_token))
+      headers <- c("Authorization" = paste("Bearer",private$token))
       if(self$verbose.debug){
         r <- with_verbose(httr::DELETE(
           url = req,
@@ -199,14 +199,14 @@ ZenodoRequest <- R6Class("ZenodoRequest",
   public = list(
     #initialize
     initialize = function(url, type, request, data = NULL, file = NULL,
-                          access_token, logger = NULL, ...) {
+                          token, logger = NULL, ...) {
       super$initialize(logger = logger)
       private$url = url
       private$type = type
       private$request = request
       private$data = data
       private$file = file
-      private$access_token = access_token
+      private$token = token
      
     },
     
