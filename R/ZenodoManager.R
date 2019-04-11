@@ -137,7 +137,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #getCommunities
     getCommunities = function(pretty = TRUE){
-      zenReq <- ZenodoRequest$new(private$url, "GET", "communities?q=&size=1000",
+      zenReq <- ZenodoRequest$new(private$url, "GET", "communities?q=&size=10000",
                                   token= private$token, logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
