@@ -40,6 +40,9 @@
 #'  \item{\code{deleteRecord(recordId)}}{
 #'    Deletes a Zenodo record based on its identifier.
 #'  }
+#'  \item{\code{deleteRecords()}}{
+#'    Deletes all Zenodo deposited (unpublished) records.
+#'  }
 #'  \item{\code{createEmptyRecord()}}{
 #'    Creates an empty record in the Zenodo deposit. Returns the record
 #'    newly created in Zenodo, as an object of class \code{ZenodoRecord}
@@ -224,11 +227,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
       out <- FALSE
       if(zenReq$getStatus() == 204){
         out <- TRUE
-        self$INFO(sprintf("Successful deleted file from record '%s'", recordId))
+        self$INFO(sprintf("Successful deleted record '%s'", recordId))
       }else{
-        self$ERROR(sprintf("Error while deleting file from record '%s': %s", recordId, out$message))
+        self$ERROR(sprintf("Error while deleting record '%s': %s", recordId, out$message))
       }
       return(out)
+    },
+    
+    #deleteRecords
+    deleteRecords = function(){
+      records <- self$getDepositions()
+      records <- records[sapply(records, function(x){!x$submitted})]
+      record_ids <- sapply(records, function(x){x$id})
+      deleted <- all(sapply(record_ids, self$deleteRecord))
+      if(deleted){
+        self$INFO("Successful deleted records")
+      }else{
+        self$ERROR("Error while deleting records")
+      }
     },
     
     #createRecord

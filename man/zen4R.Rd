@@ -15,7 +15,7 @@ of record depositions, attribution of DOIs by Zenodo and upload of files.
    Package: \tab zen4R\cr
    Type: \tab Package\cr
    Version: \tab 0.1\cr
-   Date: \tab 2019-04-02\cr
+   Date: \tab 2019-04-11\cr
    License: \tab MIT\cr
    LazyLoad: \tab yes\cr
  }

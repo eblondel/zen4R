@@ -54,6 +54,9 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{deleteRecord(recordId)}}{
    Deletes a Zenodo record based on its identifier.
  }
+ \item{\code{deleteRecords()}}{
+   Deletes all Zenodo deposited (unpublished) records.
+ }
  \item{\code{createEmptyRecord()}}{
    Creates an empty record in the Zenodo deposit. Returns the record
    newly created in Zenodo, as an object of class \code{ZenodoRecord}
