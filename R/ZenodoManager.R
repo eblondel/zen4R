@@ -229,6 +229,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         out <- TRUE
         self$INFO(sprintf("Successful deleted record '%s'", recordId))
       }else{
+        out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while deleting record '%s': %s", recordId, out$message))
       }
       return(out)
@@ -238,13 +239,16 @@ ZenodoManager <-  R6Class("ZenodoManager",
     deleteRecords = function(){
       records <- self$getDepositions()
       records <- records[sapply(records, function(x){!x$submitted})]
-      record_ids <- sapply(records, function(x){x$id})
-      deleted <- all(sapply(record_ids, self$deleteRecord))
-      if(deleted){
-        self$INFO("Successful deleted records")
-      }else{
-        self$ERROR("Error while deleting records")
+      while(length(records)>0){
+        record_ids <- sapply(records, function(x){x$id})
+        deleted <- all(sapply(record_ids, self$deleteRecord))
+        if(!deleted){
+          self$ERROR("Error while deleting records")
+        }
+        records <- self$getDepositions()
+        records <- records[sapply(records, function(x){!x$submitted})]
       }
+      self$INFO("Successful deleted records")
     },
     
     #createRecord
@@ -317,6 +321,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         out <- TRUE
         self$INFO(sprintf("Successful deleted file from record '%s'", recordId))
       }else{
+        out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while deleting file from record '%s': %s", recordId, out$message))
       }
       return(out)
