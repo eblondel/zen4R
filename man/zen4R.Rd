@@ -4,7 +4,6 @@
 \name{zen4R}
 \alias{zen4R}
 \alias{zen4R-package}
-\alias{zen4R-package}
 \title{Interface to Zenodo REST API}
 \description{
 Provides an Interface to Zenodo REST API, including management 
@@ -15,7 +14,7 @@ of record depositions, attribution of DOIs by Zenodo and upload of files.
    Package: \tab zen4R\cr
    Type: \tab Package\cr
    Version: \tab 0.1\cr
-   Date: \tab 2019-04-11\cr
+   Date: \tab 2019-05-28\cr
    License: \tab MIT\cr
    LazyLoad: \tab yes\cr
  }

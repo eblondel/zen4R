@@ -9,6 +9,12 @@
 #'  \item{\code{new()}}{
 #'    This method is used to instantiate a Zenodo Record
 #'  }
+#'  \item{\code{prereserveDOI(prereserve)}}{
+#'    Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
+#'    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI
+#'    assuming the record created doesn't yet handle a DOI. To avoid prereserving a DOI 
+#'    call \code{$prereserveDOI(FALSE)} on your record.
+#'  }
 #'  \item{\code{setUploadType(uploadType)}}{
 #'    Set the upload type (mandatory). Value should be among the following: 'publication',
 #'    'poster','presentation','dataset','image','video', or 'software'
@@ -69,6 +75,7 @@
 #'  }
 #'  \item{\code{setDOI(doi)}}{
 #'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+#'    This method will call the method \code{$prereserveDOI(FALSE)}.
 #'  }
 #'  \item{\code{setVersion(version)}}{
 #'    Set the version.
@@ -172,7 +179,22 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     initialize = function(obj = NULL, logger = "INFO"){
       super$initialize(logger = logger)
+      self$prereserveDOI(TRUE)
       if(!is.null(obj)) private$fromList(obj)
+    },
+    
+    #setPrereserveDOI
+    prereserveDOI = function(prereserve){
+      if(!is(prereserve,"logical")){
+        stop("The argument should be 'logical' (TRUE/FALSE)")
+      }
+      self$metadata$prereserve_doi <- prereserve
+    },
+ 
+    #setDOI
+    setDOI = function(doi){
+      self$metadata$doi
+      self$prereserveDOI(FALSE)
     },
     
     #setUploadType
@@ -308,11 +330,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         stop(errorMsg)
       }
       self$metadata$license <- licenseId
-    },
-    
-    #setDOI
-    setDOI = function(doi){
-      self$metadata$doi
     },
     
     #setVersion

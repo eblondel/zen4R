@@ -20,6 +20,12 @@ ZenodoRecord
  \item{\code{new()}}{
    This method is used to instantiate a Zenodo Record
  }
+ \item{\code{prereserveDOI(prereserve)}}{
+   Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
+   prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI
+   assuming the record created doesn't yet handle a DOI. To avoid prereserving a DOI 
+   call \code{$prereserveDOI(FALSE)} on your record.
+ }
  \item{\code{setUploadType(uploadType)}}{
    Set the upload type (mandatory). Value should be among the following: 'publication',
    'poster','presentation','dataset','image','video', or 'software'
@@ -80,6 +86,7 @@ ZenodoRecord
  }
  \item{\code{setDOI(doi)}}{
    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+   This method will call the method \code{$prereserveDOI(FALSE)}.
  }
  \item{\code{setVersion(version)}}{
    Set the version.
