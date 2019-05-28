@@ -193,7 +193,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
  
     #setDOI
     setDOI = function(doi){
-      self$metadata$doi
+      self$metadata$doi <- doi
       self$prereserveDOI(FALSE)
     },
     
