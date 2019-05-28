@@ -79,6 +79,58 @@ Main user class to be used with \pkg{zen4R}
 }
 }
 
+\examples{
+\dontrun{
+  ZENODO <- ZenodoManager$new(
+     url = "https://sandbox.zenodo.org/api",
+     token = "<your_token>",
+     logger = "INFO"
+  )
+  
+  #create (deposit) an empty record
+  newRec <- ZENODO$createEmptyRecord()
+  
+  #create and fill a local (not yet deposited) record
+  myrec <- ZenodoRecord$new()
+  myrec$setTitle("my R package")
+  myrec$setDescription("A description of my R package")
+  myrec$setUploadType("software")
+  myrec$addCreator(
+    firstname = "John", lastname = "Doe",
+    affiliation = "Independent", orcid = "0000-0000-0000-0000"
+   )
+  myrec$setLicense("mit")
+  myrec$setAccessRight("open")
+  myrec$setDOI("mydoi") #use this method if your DOI has been assigned elsewhere, outside Zenodo
+  myrec$addCommunity("ecfunded")
+  
+  #deposit the record 
+  myrec <- ZENODO$depositRecord(myrec)
+  
+  #publish a record (with caution!!)
+  #this method will PUBLISH the deposition done earlier
+  ZENODO$publishRecord(myrec$id)
+  #With even more caution the publication can be done with a shortcut argument at deposit time
+  ZENODO$depositRecord(myrec, publish = TRUE)
+  
+  #delete a record (by id)
+  #this methods only works for unpublished deposits 
+  (if a record is published, it cannot be deleted anymore!)
+  ZENODO$deleteRecord(myrec$id)
+  
+  #HOW TO UPLOAD FILES to a deposit
+  
+  #upload a file
+  ZENODO$uploadFile("path/to/your/file", myrec$id)
+  
+  #list files
+  zen_files <- ZENODO$getFiles(myrec$id)
+  
+  #delete a file?
+  ZENODO$deleteFile(myrec$id, zen_files[[1]]$id)
+}
+
+}
 \author{
 Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 }
