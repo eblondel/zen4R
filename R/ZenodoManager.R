@@ -21,8 +21,10 @@
 #'  \item{\code{getLicenseById(id)}}{
 #'    Get license by Id
 #'  }
-#'  \item{\code{getCommunities()}}{
-#'    Get the list of communities.
+#'  \item{\code{getCommunities(pretty)}}{
+#'    Get the list of communities. By default the argument \code{pretty} is set to 
+#'    \code{TRUE} which will returns the list of communities as \code{data.frame}.
+#'    Set \code{pretty = FALSE} to get the raw list of communities.
 #'  }
 #'  \item{\code{getCommunityById(id)}}{
 #'    Get community by Id
@@ -146,6 +148,21 @@ ZenodoManager <-  R6Class("ZenodoManager",
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
         out <- out$hits$hits
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = data.frame(
+              id = x$id,
+              title = x$title,
+              description = x$description,
+              curation_policy = x$curation_policy,
+              url = x$links$html,
+              created = x$created,
+              updated = x$updated,
+              stringsAsFactors = FALSE
+            )
+            return(rec)
+          }))
+        }
         self$INFO("Successfuly fetched list of communities")
       }else{
         self$ERROR(sprintf("Error while fetching communities: %s", out$message))

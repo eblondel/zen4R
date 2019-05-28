@@ -35,8 +35,10 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getLicenseById(id)}}{
    Get license by Id
  }
- \item{\code{getCommunities()}}{
-   Get the list of communities.
+ \item{\code{getCommunities(pretty)}}{
+   Get the list of communities. By default the argument \code{pretty} is set to 
+   \code{TRUE} which will returns the list of communities as \code{data.frame}.
+   Set \code{pretty = FALSE} to get the raw list of communities.
  }
  \item{\code{getCommunityById(id)}}{
    Get community by Id
