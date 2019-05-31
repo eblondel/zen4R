@@ -1,14 +1,15 @@
 Package: zen4R
 Version: 0.1
-Date: 2019-05-28
-Title: Interface to Zenodo REST API
+Date: 2019-05-31
+Title: Interface to 'Zenodo' REST API
 Authors@R: c(person("Emmanuel", "Blondel", role = c("aut", "cre"), email = "emmanuel.blondel1@gmail.com", comment = c(ORCID = "0000-0002-5870-5762")))
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
 Imports: R6, httr, jsonlite
 Suggests: testthat
-Description: Provides an Interface to Zenodo REST API, including management 
- of depositions, attribution of DOIs by Zenodo and upload of files.
+Description: Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
+  including management of depositions, attribution of DOIs by 'Zenodo' and 
+  upload of files.
 License: MIT + file LICENSE
 URL: https://github.com/eblondel/zen4R
 BugReports: https://github.com/eblondel/zen4R/issues

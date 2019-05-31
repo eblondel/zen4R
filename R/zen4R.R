@@ -8,16 +8,17 @@
 #' @import httr
 #' @import jsonlite
 #' 
-#' @title Interface to Zenodo REST API
-#' @description Provides an Interface to Zenodo REST API, including management 
-#' of record depositions, attribution of DOIs by Zenodo and upload of files.
+#' @title Interface to 'Zenodo' REST API
+#' @description Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
+#'   including management of depositions, attribution of DOIs by 'Zenodo' and 
+#'   upload of files.
 #'
 #' @details
 #'  \tabular{ll}{
 #'    Package: \tab zen4R\cr
 #'    Type: \tab Package\cr
 #'    Version: \tab 0.1\cr
-#'    Date: \tab 2019-05-28\cr
+#'    Date: \tab 2019-05-31\cr
 #'    License: \tab MIT\cr
 #'    LazyLoad: \tab yes\cr
 #'  }
