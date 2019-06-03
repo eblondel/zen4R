@@ -115,7 +115,7 @@ Main user class to be used with \pkg{zen4R}
   
   #delete a record (by id)
   #this methods only works for unpublished deposits 
-  (if a record is published, it cannot be deleted anymore!)
+  #(if a record is published, it cannot be deleted anymore!)
   ZENODO$deleteRecord(myrec$id)
   
   #HOW TO UPLOAD FILES to a deposit
