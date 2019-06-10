@@ -43,8 +43,10 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getCommunityById(id)}}{
    Get community by Id
  }
- \item{\code{getDepositions()}}{
-   Get the list of Zenodo records deposited in your Zenodo workspace
+ \item{\code{getDepositions(size)}}{
+   Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
+   the list of depositions will be returned by page with a size of 10 results per
+   page (default size of the Zenodo API).
  }
  \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object

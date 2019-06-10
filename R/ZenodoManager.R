@@ -29,8 +29,10 @@
 #'  \item{\code{getCommunityById(id)}}{
 #'    Get community by Id
 #'  }
-#'  \item{\code{getDepositions()}}{
-#'    Get the list of Zenodo records deposited in your Zenodo workspace
+#'  \item{\code{getDepositions(size)}}{
+#'    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
+#'    the list of depositions will be returned by page with a size of 10 results per
+#'    page (default size of the Zenodo API).
 #'  }
 #'  \item{\code{depositRecord(record, publish)}}{
 #'    A method to deposit/update a Zenodo record. The record should be an object
@@ -240,14 +242,27 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #------------------------------------------------------------------------------------------
     
     #getDepositions
-    getDepositions = function(){
-      zenReq <- ZenodoRequest$new(private$url, "GET", "deposit/depositions", 
+    getDepositions = function(size = 10){
+      page <- 1
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?size=%s&page=%s", size, page), 
                                   token = private$token, logger = self$loggerType)
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() == 200){
-        out <- lapply(zenReq$getResponse(), ZenodoRecord$new)
-        self$INFO("Successfuly fetched list of depositions")
+        resp <- zenReq$getResponse()
+        hasRecords <- length(resp)>0
+        while(hasRecords){
+          out <- c(out, lapply(resp, ZenodoRecord$new))
+          self$INFO("Successfuly fetched list of depositions - page %s")
+          #next
+          page <- page+1
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?size=%s&page=%s", size, page), 
+                                      token = private$token, logger = self$loggerType)
+          zenReq$execute()
+          resp <- zenReq$getResponse()
+          hasRecords <- length(resp)>0
+        }
+        self$INFO("Successfuly fetched list of depositions!")
       }else{
         out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while fetching depositions: %s", out$message))
