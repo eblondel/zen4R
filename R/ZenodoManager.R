@@ -308,14 +308,17 @@ ZenodoManager <-  R6Class("ZenodoManager",
     deleteRecords = function(){
       records <- self$getDepositions()
       records <- records[sapply(records, function(x){!x$submitted})]
-      while(length(records)>0){
+      hasDraftRecords <- length(records)>0
+      while(hasDraftRecords){
         record_ids <- sapply(records, function(x){x$id})
-        deleted <- all(sapply(record_ids, self$deleteRecord))
+        deleted.all <- sapply(record_ids, self$deleteRecord)
+        deleted.all <- deleted.all[is.na(deleted.all)]
+        deleted <- all(deleted.all)
         if(!deleted){
           self$ERROR("Error while deleting records")
         }
-        records <- self$getDepositions()
-        records <- records[sapply(records, function(x){!x$submitted})]
+        records <- records[sapply(self$getDepositions(), function(x){!x$submitted})]
+        hasDraftRecords <- length(records) > 0
       }
       self$INFO("Successful deleted records")
     },
