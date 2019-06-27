@@ -77,6 +77,11 @@
 #'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
 #'    This method will call the method \code{$prereserveDOI(FALSE)}.
 #'  }
+#'  \item{\code{getConceptDOI()}}{
+#'    Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
+#'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
+#'    on the prereserved DOI of the first record version.
+#'  }
 #'  \item{\code{setVersion(version)}}{
 #'    Set the version.
 #'  }
@@ -195,6 +200,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     setDOI = function(doi){
       self$metadata$doi <- doi
       self$prereserveDOI(FALSE)
+    },
+    
+    #getConceptDOI
+    getConceptDOI = function(){
+      conceptdoi <- self$conceptdoi
+      if(is.null(conceptdoi)){
+        doi <- self$metadata$prereserve_doi
+        if(!is.null(doi)) conceptdoi <- doi$recid-1
+      }
+      return(conceptdoi)
     },
     
     #setUploadType
