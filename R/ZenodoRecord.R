@@ -207,7 +207,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       conceptdoi <- self$conceptdoi
       if(is.null(conceptdoi)){
         doi <- self$metadata$prereserve_doi
-        if(!is.null(doi)) conceptdoi <- doi$recid-1
+        if(!is.null(doi)) {
+          doi_parts <- unlist(strsplit(doi$doi, "zenodo."))
+          conceptdoi <- paste0(doi_parts[1], "zenodo.", as.integer(doi_parts[2])-1)
+        }
       }
       return(conceptdoi)
     },
