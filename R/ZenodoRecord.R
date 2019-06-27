@@ -218,7 +218,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #setUploadType
     setUploadType = function(uploadType){
       uploadTypeValues <- c("publication","poster","presentation",
-                            "dataset","image","video","software")
+                            "dataset","image","video","software","other")
       if(!(uploadType %in% uploadTypeValues)){
         errorMsg <- sprintf("The upload type should be among the values [%s]",
                             paste(uploadTypeValues, collapse=","))
