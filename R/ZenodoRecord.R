@@ -97,6 +97,17 @@
 #'  \item{code{removeRelatedIdentifier(relation, identifier)}}{
 #'    Remove a related identifier
 #'  }
+#'  \item{\code{setReferences(references)}}{
+#'    Set a vector of character strings as references
+#'  }
+#'  \item{\code{addReference(reference)}}{
+#'    Adds a reference to the record metadata. Return \code{TRUE} if added, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removedReference(reference)}}{
+#'    Removes a reference from the record metadata. Return \code{TRUE} if removed, 
+#'    \code{FALSE} otherwise.
+#'  }
 #'  \item{\code{setKeywords(keywords)}}{
 #'    Set a vector of character strings as keywords
 #'  }
@@ -399,6 +410,41 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           related_id <- self$metadata$related_identifiers[[i]]
           if(related_id$relation == relation & related_id$identifier == identifier){
             self$metadata$related_identifiers[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
+    },
+    
+    #setReferences
+    setReferences = function(references){
+      if(is.null(self$metadata$references)) self$metadata$references <- list()
+      for(reference in references){
+        self$addReference(reference)
+      }
+    },
+    
+    #addReference
+    addReference = function(reference){
+      added <- FALSE
+      if(is.null(self$metadata$references)) self$metadata$references <- list()
+      if(!(reference %in% self$metadata$references)){
+        self$metadata$references[[length(self$metadata$references)+1]] <- reference
+        added <- TRUE
+      }
+      return(added)
+    },
+    
+    #removeReference
+    removeReference = function(reference){
+      removed <- FALSE
+      if(!is.null(self$metadata$references)){
+        for(i in 1:length(self$metadata$references)){
+          ref <- self$metadata$references[[i]]
+          if(ref == reference){
+            self$metadata$references[[i]] <- NULL
             removed <- TRUE
             break;
           }

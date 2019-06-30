@@ -108,6 +108,17 @@ ZenodoRecord
  \item{code{removeRelatedIdentifier(relation, identifier)}}{
    Remove a related identifier
  }
+ \item{\code{setReferences(references)}}{
+   Set a vector of character strings as references
+ }
+ \item{\code{addReference(reference)}}{
+   Adds a reference to the record metadata. Return \code{TRUE} if added, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removedReference(reference)}}{
+   Removes a reference from the record metadata. Return \code{TRUE} if removed, 
+   \code{FALSE} otherwise.
+ }
  \item{\code{setKeywords(keywords)}}{
    Set a vector of character strings as keywords
  }
