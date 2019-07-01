@@ -40,7 +40,11 @@ test_that("create and deposit record",{
   myrec$setConferenceSession("I")
   myrec$setConferenceSessionPart("1")
   myrec$setConferenceUrl("http://www.google.com")
-  
+  myrec$setImprintPublisher("The Publisher")
+  myrec$setImprintISBN("isbn")
+  myrec$setImprintPlace("location")
+  myrec$setPartofTitle("Book title")
+  myrec$setPartofPages("1-30")
   
   expect_equal(myrec$metadata$title, "My publication title")
   expect_equal(myrec$metadata$description, "A description of my publication")

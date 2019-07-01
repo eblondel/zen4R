@@ -199,6 +199,21 @@
 #'  \item{\code{setConferenceSessionPart(part)}}{
 #'    Set conference session part, object of class \code{\link{character}}.
 #'  }
+#'  \item{\code{setImprintPublisher(publisher)}}{
+#'    Set imprint publisher, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setImprintISBN(isbn)}}{
+#'    Set imprint ISBN, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setImprintPlace(place)}}{
+#'    Set imprint place, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setPartofTitle(title)}}{
+#'    Set the book title in case of a chapter, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setPartofPages(pages)}}{
+#'    Set the page numbers of book, object of class \code{\link{character}}.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -709,6 +724,31 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #setConferenceSessionPart
     setConferenceSessionPart = function(part){
       self$metadata$conference_session_part <- part
+    },
+    
+    #setImprintPublisher
+    setImprintPublisher = function(publisher){
+      self$metadata$imprint_publisher <- publisher
+    },
+    
+    #setImprintISBN
+    setImprintISBN = function(isbn){
+      self$metadata$imprint_isbn <- isbn
+    },
+    
+    #setImprintPlace
+    setImprintPlace = function(place){
+      self$metadata$imprint_place <- place
+    },
+    
+    #setPartofTitle
+    setPartofTitle = function(title){
+      self$metadata$partof_title <- title
+    },
+    
+    #setPartofPages
+    setPartofPages = function(pages){
+      self$metadata$partof_pages <- pages
     }
     
   )

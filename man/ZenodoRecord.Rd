@@ -210,6 +210,21 @@ ZenodoRecord
  \item{\code{setConferenceSessionPart(part)}}{
    Set conference session part, object of class \code{\link{character}}.
  }
+ \item{\code{setImprintPublisher(publisher)}}{
+   Set imprint publisher, object of class \code{\link{character}}.
+ }
+ \item{\code{setImprintISBN(isbn)}}{
+   Set imprint ISBN, object of class \code{\link{character}}.
+ }
+ \item{\code{setImprintPlace(place)}}{
+   Set imprint place, object of class \code{\link{character}}.
+ }
+ \item{\code{setPartofTitle(title)}}{
+   Set the book title in case of a chapter, object of class \code{\link{character}}.
+ }
+ \item{\code{setPartofPages(pages)}}{
+   Set the page numbers of book, object of class \code{\link{character}}.
+ }
 }
 }
 
