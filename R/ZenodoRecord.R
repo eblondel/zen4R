@@ -164,6 +164,18 @@
 #'    Removes a grant from the record metadata. Return \code{TRUE} if removed, 
 #'    \code{FALSE} otherwise.
 #'  }
+#'  \item{\code{setJournalTitle(title)}}{
+#'    Set Journal title, if deposition is a published article.
+#'  }
+#'  \item{\code{setJournalVolume(volume)}}{
+#'    Set Journal volume, if deposition is a published article.
+#'  }
+#'  \item{\code{setJournalIssue(issue)}}{
+#'    Set Journal issue, if deposition is a published article.
+#'  }
+#'  \item{\code{setJournalPages(pages)}}{
+#'    Set Journal pages, if deposition is a published article.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -619,6 +631,26 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }
       }
       return(removed)
+    },
+    
+    #setJournalTitle
+    setJournalTitle = function(title){
+      self$metadata$journal_title <- title
+    },
+    
+    #setJournalVolume
+    setJournalVolume = function(volume){
+      self$metadata$journal_volume <- volume
+    },
+    
+    #setJournalIssue
+    setJournalIssue = function(issue){
+      self$metadata$journal_issue <- issue
+    },
+    
+    #setJournalPages
+    setJournalPages = function(pages){
+      self$metadata$journal_pages <- pages
     }
     
   )

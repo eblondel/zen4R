@@ -29,6 +29,10 @@ test_that("create and deposit record",{
   myrec$addReference("Author et al., 2019. Title")
   myrec$addReference("Fulano et al., 2018. Título")
   myrec$addGrant("675680")
+  myrec$setJournalTitle("Journal title")
+  myrec$setJournalVolume("1")
+  myrec$setJournalIssue("Issue 1")
+  myrec$setJournalPages("19")
   
   
   expect_equal(myrec$metadata$title, "My publication title")
