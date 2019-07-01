@@ -33,6 +33,13 @@ test_that("create and deposit record",{
   myrec$setJournalVolume("1")
   myrec$setJournalIssue("Issue 1")
   myrec$setJournalPages("19")
+  myrec$setConferenceTitle("Roots Rock Reggae International Conference")
+  myrec$setConferenceAcronym("RRR-IC-VIBES")
+  myrec$setConferenceDates("June 2019")
+  myrec$setConferencePlace("Kingston, Jamaica")
+  myrec$setConferenceSession("I")
+  myrec$setConferenceSessionPart("1")
+  myrec$setConferenceUrl("http://www.google.com")
   
   
   expect_equal(myrec$metadata$title, "My publication title")

@@ -165,16 +165,39 @@
 #'    \code{FALSE} otherwise.
 #'  }
 #'  \item{\code{setJournalTitle(title)}}{
-#'    Set Journal title, if deposition is a published article.
+#'    Set Journal title, object of class \code{\link{character}}, if deposition is a published article.
 #'  }
 #'  \item{\code{setJournalVolume(volume)}}{
-#'    Set Journal volume, if deposition is a published article.
+#'    Set Journal volume, object of class \code{\link{character}}, if deposition is a published article.
 #'  }
 #'  \item{\code{setJournalIssue(issue)}}{
-#'    Set Journal issue, if deposition is a published article.
+#'    Set Journal issue, object of class \code{\link{character}}, if deposition is a published article.
 #'  }
 #'  \item{\code{setJournalPages(pages)}}{
-#'    Set Journal pages, if deposition is a published article.
+#'    Set Journal pages, object of class \code{\link{character}}, if deposition is a published article.
+#'  }
+#'  \item{\code{setConferenceTitle(title)}}{
+#'   Set Conference title, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setConferenceAcronym(acronym)}}{
+#'    Set conference acronym, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setConferenceDates(dates)}}{
+#'    Set conference dates, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setConferencePlace(place)}}{
+#'    Set conference place, object of class \code{\link{character}}, in the format city, country 
+#'    (e.g. Kingston, Jamaica). Conference title or acronym must also be specified if this field 
+#'    is specified.
+#'  }
+#'  \item{\code{setConferenceUrl(url)}}{
+#'    Set conference url, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setConferenceSession(session)}}{
+#'    Set conference session, object of class \code{\link{character}}.
+#'  }
+#'  \item{\code{setConferenceSessionPart(part)}}{
+#'    Set conference session part, object of class \code{\link{character}}.
 #'  }
 #' }
 #' 
@@ -651,6 +674,41 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #setJournalPages
     setJournalPages = function(pages){
       self$metadata$journal_pages <- pages
+    },
+    
+    #setConferenceTitle
+    setConferenceTitle = function(title){
+      self$metadata$conference_title <- title
+    },
+    
+    #setConferenceAcronym
+    setConferenceAcronym = function(acronym){
+      self$metadata$conference_acronym <- acronym
+    },
+    
+    #setConferenceDates
+    setConferenceDates = function(dates){
+      self$metadata$conference_dates <- dates
+    },
+    
+    #setConferencePlace
+    setConferencePlace = function(place){
+      self$metadata$conference_place <- place
+    },
+    
+    #setConferenceUrl
+    setConferenceUrl = function(url){
+      self$metadata$conference_url <- url
+    },
+    
+    #setConferenceSession
+    setConferenceSession = function(session){
+      self$metadata$conference_session <- session
+    },
+    
+    #setConferenceSessionPart
+    setConferenceSessionPart = function(part){
+      self$metadata$conference_session_part <- part
     }
     
   )
