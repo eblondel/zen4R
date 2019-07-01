@@ -79,6 +79,39 @@ ZenodoRecord
    Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
    \code{FALSE} otherwise.
  }
+ \item{\code{removeCreatorByGND(gnd)}}{
+   Removes a creator by GND. Returns \code{TRUE} if some creator was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{addContributor(firsname, lastname, type, affiliation, orcid, gnd)}}{
+   Add a contributor for the record. Firstname, lastname, and type are mandatory.
+   The type should be an object of class \code{character} among values: ContactPerson, 
+   DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
+   Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
+   RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other. 
+ }
+ \item{\code{removeContributor(by,property)}}{
+   Removes a contributor by a property. The \code{by} parameter should be the name
+   of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
+   'orcid' or 'gnd'). Returns \code{TRUE} if some contributor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeContributorByName(name)}}{
+   Removes a contributor by name. Returns \code{TRUE} if some contributor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeContributorByAffiliation(affiliation)}}{
+   Removes a contributor by affiliation. Returns \code{TRUE} if some contributor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeContributorByORCID(orcid)}}{
+   Removes a contributor by ORCID. Returns \code{TRUE} if some contributor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeContributorByGND(gnd)}}{
+   Removes a contributor by GND. Returns \code{TRUE} if some contributor was removed, 
+   \code{FALSE} otherwise.
+ }
  \item{\code{setLicense(licenseId)}}{
    Set license. The license should be set with the Zenodo id of the license. If not
    recognized by Zenodo, the function will return an error. The list of licenses can

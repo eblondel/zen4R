@@ -45,6 +45,8 @@ test_that("create and deposit record",{
   myrec$setImprintPlace("location")
   myrec$setPartofTitle("Book title")
   myrec$setPartofPages("1-30")
+  myrec$addContributor(firstname = "Peter", lastname = "Lead", type = "WorkPackageLeader")
+  myrec$addContributor(firstname = "Frank", "Super", type = "Supervisor")
   
   expect_equal(myrec$metadata$title, "My publication title")
   expect_equal(myrec$metadata$description, "A description of my publication")

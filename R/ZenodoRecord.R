@@ -68,6 +68,39 @@
 #'    Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
 #'    \code{FALSE} otherwise.
 #'  }
+#'  \item{\code{removeCreatorByGND(gnd)}}{
+#'    Removes a creator by GND. Returns \code{TRUE} if some creator was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{addContributor(firsname, lastname, type, affiliation, orcid, gnd)}}{
+#'    Add a contributor for the record. Firstname, lastname, and type are mandatory.
+#'    The type should be an object of class \code{character} among values: ContactPerson, 
+#'    DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
+#'    Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
+#'    RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other. 
+#'  }
+#'  \item{\code{removeContributor(by,property)}}{
+#'    Removes a contributor by a property. The \code{by} parameter should be the name
+#'    of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
+#'    'orcid' or 'gnd'). Returns \code{TRUE} if some contributor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeContributorByName(name)}}{
+#'    Removes a contributor by name. Returns \code{TRUE} if some contributor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeContributorByAffiliation(affiliation)}}{
+#'    Removes a contributor by affiliation. Returns \code{TRUE} if some contributor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeContributorByORCID(orcid)}}{
+#'    Removes a contributor by ORCID. Returns \code{TRUE} if some contributor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeContributorByGND(gnd)}}{
+#'    Removes a contributor by GND. Returns \code{TRUE} if some contributor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
 #'  \item{\code{setLicense(licenseId)}}{
 #'    Set license. The license should be set with the Zenodo id of the license. If not
 #'    recognized by Zenodo, the function will return an error. The list of licenses can
@@ -375,9 +408,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #addCreator
-    addCreator = function(firstname, lastname, affiliation, orcid = NULL, gnd = NULL){
-      creator <- list(name = paste(lastname, firstname, sep=", "),
-                      affiliation = affiliation)
+    addCreator = function(firstname, lastname, affiliation = NULL, orcid = NULL, gnd = NULL){
+      creator <- list(name = paste(lastname, firstname, sep=", "))
+      if(!is.null(affiliation)) creator <- c(creator, affiliation = affiliation)
       if(!is.null(orcid)) creator <- c(creator, orcid = orcid)
       if(!is.null(gnd)) creator <- c(creator, gnd = gnd)
       if(is.null(self$metadata$creators)) self$metadata$creators <- list()
@@ -399,7 +432,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #removeCreatorByName
     removeCreatorByName = function(name){
-      return(self$removeCreator(by = "Name", name))
+      return(self$removeCreator(by = "name", name))
     },
 
     #removeCreatorByAffiliation
@@ -410,6 +443,62 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #removeCreatorByORCID
     removeCreatorByORCID = function(orcid){
       return(self$removeCreator(by = "orcid", orcid))
+    },
+    
+    #removeCreatorByGND
+    removeCreatorByGND = function(gnd){
+      return(self$removeCreator(by = "gnd", gnd))
+    },
+    
+    #addContributor
+    addContributor = function(firstname, lastname, type, affiliation = NULL, orcid = NULL, gnd = NULL){
+      allowedTypes <- c("ContactPerson", "DataCollector", "DataCurator", "DataManager","Distributor",
+                        "Editor", "Funder", "HostingInstitution", "Producer", "ProjectLeader", "ProjectManager",
+                        "ProjectMember", "RegistrationAgency", "RegistrationAuthority", "RelatedPerson",
+                        "Researcher", "ResearchGroup", "RightsHolder","Supervisor", "Sponsor", "WorkPackageLeader", "Other")
+      if(!(type %in% allowedTypes)){
+        stop(sprintf("The contributor type should be one value among values [%s]",
+                      paste(allowedTypes, collapse=",")))
+      }
+      contributor <- list(name = paste(lastname, firstname, sep=", "), type = type)
+      if(!is.null(affiliation)) contributor <- c(contributor, affiliation = affiliation)
+      if(!is.null(orcid)) contributor <- c(contributor, orcid = orcid)
+      if(!is.null(gnd)) contributor <- c(contributor, gnd = gnd)
+      if(is.null(self$metadata$contributors)) self$metadata$contributors <- list()
+      self$metadata$contributors[[length(self$metadata$contributors)+1]] <- contributor
+    },
+    
+    #removeContributor
+    removeContributor = function(by,property){
+      removed <- FALSE
+      for(i in 1:length(self$metadata$contributors)){
+        contributor <- self$metadata$contributors[[i]]
+        if(contributor[[by]]==property){
+          self$metadata$contributors[[i]] <- NULL
+          removed <- TRUE 
+        }
+      }
+      return(removed)
+    },
+    
+    #removeContributorByName
+    removeContributorByName = function(name){
+      return(self$removeContributor(by = "name", name))
+    },
+    
+    #removeContributorByAffiliation
+    removeContributorByAffiliation = function(affiliation){
+      return(self$removeContributor(by = "affiliation", affiliation))
+    },
+    
+    #removeContributorByORCID
+    removeContributorByORCID = function(orcid){
+      return(self$removeContributor(by = "orcid", orcid))
+    },
+    
+    #removeContributorByGND
+    removeContributorByGND = function(gnd){
+      return(self$removeContributor(by = "gnd", gnd))
     },
     
     #setLicense
