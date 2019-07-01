@@ -151,6 +151,19 @@
 #'    Removes a community from the record metadata. Return \code{TRUE} if removed, 
 #'    \code{FALSE} otherwise.
 #'  }
+#'  \item{\code{setGrants(grants)}}{
+#'    Set a vector of character strings identifying grants
+#'  }
+#'  \item{\code{addGrant(grant)}}{
+#'    Adds a grant to the record metadata. Return \code{TRUE} if added, 
+#'    \code{FALSE} otherwise. The grant should be set with the id of the grant. If not
+#'    recognized by Zenodo, the function will return an warning only. The list of grants can
+#'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
+#'  }
+#'  \item{\code{removeGrant(grant)}}{
+#'    Removes a grant from the record metadata. Return \code{TRUE} if removed, 
+#'    \code{FALSE} otherwise.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -538,7 +551,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       if(!(community %in% self$metadata$communities)){
         zen_community <- zen$getCommunityById(community)
-        if(!is.null(zen_community$status)){
+        if(is.null(zen_community)){
           errorMsg <- sprintf("Community with id '%s' doesn't exist in Zenodo", community)
           self$ERROR(errorMsg)
           stop(errorMsg)
@@ -563,9 +576,50 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }
       }
       return(removed)
-    }
+    },
     
-    #TODO missing metadata setter methods
+    #setGrants
+    setGrants = function(grants){
+      if(is.null(self$metadata$grants)) self$metadata$grants <- list()
+      for(grant in grants){
+        self$addGrant(grant)
+      }
+    },
+    
+    #addGrant
+    addGrant = function(grant){
+      added <- FALSE
+      zen <- ZenodoManager$new()
+      if(is.null(self$metadata$grants)) self$metadata$grants <- list()
+      if(!(grant %in% self$metadata$grants)){
+        if(regexpr("::", grant)>0){
+          zen_grant <- zen$getGrantById(grant)
+          if(is.null(zen_grant)){
+            warnMsg <- sprintf("Grant with id '%s' doesn't exist in Zenodo", grant)
+            self$WARN(warnMsg)
+          }
+        }
+        self$metadata$grants[[length(self$metadata$grants)+1]] <- list(id = grant)
+        added <- TRUE
+      }
+      return(added)
+    },
+    
+    #removeGrant
+    removeGrant = function(grant){
+      removed <- FALSE
+      if(!is.null(self$metadata$grants)){
+        for(i in 1:length(self$metadata$grants)){
+          grt <- self$metadata$grants[[i]]
+          if(grt == grant){
+            self$metadata$grants[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
+    }
     
   )
 )

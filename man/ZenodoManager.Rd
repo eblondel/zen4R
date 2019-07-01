@@ -43,6 +43,22 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getCommunityById(id)}}{
    Get community by Id
  }
+ \item{\code{getGrants(pretty)}}{
+   Get the list of grants. By default the argument \code{pretty} is set to 
+   \code{TRUE} which will returns the list of grants as \code{data.frame}.
+   Set \code{pretty = FALSE} to get the raw list of grants.
+ }
+ \item{\code{getGrantById(id)}}{
+   Get grant by Id
+ }
+ \item{\code{getFunders(pretty)}}{
+   Get the list of funders. By default the argument \code{pretty} is set to 
+   \code{TRUE} which will returns the list of funders as \code{data.frame}.
+   Set \code{pretty = FALSE} to get the raw list of funders.
+ }
+ \item{\code{getFunderById(id)}}{
+   Get funder by Id
+ }
  \item{\code{getDepositions(size)}}{
    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
    the list of depositions will be returned by page with a size of 10 results per

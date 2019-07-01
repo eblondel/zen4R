@@ -162,6 +162,19 @@ ZenodoRecord
    Removes a community from the record metadata. Return \code{TRUE} if removed, 
    \code{FALSE} otherwise.
  }
+ \item{\code{setGrants(grants)}}{
+   Set a vector of character strings identifying grants
+ }
+ \item{\code{addGrant(grant)}}{
+   Adds a grant to the record metadata. Return \code{TRUE} if added, 
+   \code{FALSE} otherwise. The grant should be set with the id of the grant. If not
+   recognized by Zenodo, the function will return an warning only. The list of grants can
+   fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
+ }
+ \item{\code{removeGrant(grant)}}{
+   Removes a grant from the record metadata. Return \code{TRUE} if removed, 
+   \code{FALSE} otherwise.
+ }
 }
 }
 

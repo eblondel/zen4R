@@ -29,6 +29,22 @@
 #'  \item{\code{getCommunityById(id)}}{
 #'    Get community by Id
 #'  }
+#'  \item{\code{getGrants(pretty)}}{
+#'    Get the list of grants. By default the argument \code{pretty} is set to 
+#'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
+#'    Set \code{pretty = FALSE} to get the raw list of grants.
+#'  }
+#'  \item{\code{getGrantById(id)}}{
+#'    Get grant by Id
+#'  }
+#'  \item{\code{getFunders(pretty)}}{
+#'    Get the list of funders. By default the argument \code{pretty} is set to 
+#'    \code{TRUE} which will returns the list of funders as \code{data.frame}.
+#'    Set \code{pretty = FALSE} to get the raw list of funders.
+#'  }
+#'  \item{\code{getFunderById(id)}}{
+#'    Get funder by Id
+#'  }
 #'  \item{\code{getDepositions(size)}}{
 #'    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
 #'    the list of depositions will be returned by page with a size of 10 results per
@@ -234,6 +250,181 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(sprintf("Successfuly fetched community '%s'",id))
       }else{
         self$ERROR(sprintf("Error while fetching community '%s': %s", id, out$message))
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #Grants
+    #------------------------------------------------------------------------------------------
+    
+    #getGrants
+    getGrants = function(pretty = TRUE, size = 1000){
+      
+      page <- 1
+      lastPage <- FALSE
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants?size=%s&page=%s", size, page), 
+                                  token = private$token, logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        grants <- resp$hits$hits
+        hasGrants <- length(grants)>0
+        while(hasGrants){
+          out <- c(out, grants)
+          if(!is.null(grants)){
+            self$INFO(sprintf("Successfuly fetched list of grants - page %s", page))
+            page <- page+1  #next
+          }else{
+            lastPage <- TRUE
+          }
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants?size=%s&page=%s", size, page), 
+                                      token = private$token, logger = self$loggerType)
+          zenReq$execute()
+          if(zenReq$getStatus() == 200){
+            resp <- zenReq$getResponse()
+            grants <- resp$hits$hits
+            hasGrants <- length(grants)>0
+          }else{
+            self$WARN("Maximum allowed size for list of grants - page %s - attempt to decrease size")
+            size <- size-1
+            hasGrants <- TRUE
+            grants <- NULL
+          }
+          if(lastPage) break;
+        }
+        self$INFO("Successfuly fetched list of grants!")
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while fetching grants: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
+      }
+      
+      if(pretty){
+        out = do.call("rbind", lapply(out,function(x){
+          rec = data.frame(
+            id = x$metadata$internal_id,
+            code = x$metadata$code,
+            title = x$metadata$title,
+            startdate = x$metadata$startdate,
+            enddate = x$metadata$enddate,
+            url = x$metadata$url,
+            created = x$created,
+            updated = x$updated,
+            funder_country = x$metadata$funder$country,
+            funder_doi = x$metadata$funder$doi,
+            funder_name = x$metadata$funder$name,
+            funder_type = x$metadata$funder$type,
+            funder_subtype = x$metadata$funder$subtype,
+            funder_parent_country = x$metadata$funder$parent$country,
+            funder_parent_doi = x$metadata$funder$parent$doi,
+            funder_parent_name = x$metadata$funder$parent$name,
+            funder_parent_type = x$metadata$funder$parent$type,
+            funder_parent_subtype = x$metadata$funder$parent$subtype,
+            stringsAsFactors = FALSE
+          )
+          return(rec)
+        }))
+      }
+      return(out)
+    },
+    
+    #getGrantById
+    getGrantById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/%s",id),
+                                  token= private$token, logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successfuly fetched grant '%s'",id))
+      }else{
+        self$ERROR(sprintf("Error while fetching grant '%s': %s", id, out$message))
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #Funders
+    #------------------------------------------------------------------------------------------
+    
+    #getFunders
+    getFunders = function(pretty = TRUE, size = 1000){
+      
+      page <- 1
+      lastPage <- FALSE
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders?size=%s&page=%s", size, page), 
+                                  token = private$token, logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        funders <- resp$hits$hits
+        hasFunders <- length(funders)>0
+        while(hasFunders){
+          out <- c(out, funders)
+          if(!is.null(funders)){
+            self$INFO(sprintf("Successfuly fetched list of funders - page %s", page))
+            page <- page+1  #next
+          }else{
+            lastPage <- TRUE
+          }
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders?size=%s&page=%s", size, page), 
+                                      token = private$token, logger = self$loggerType)
+          zenReq$execute()
+          if(zenReq$getStatus() == 200){
+            resp <- zenReq$getResponse()
+            funders <- resp$hits$hits
+            hasFunders <- length(funders)>0
+          }else{
+            self$WARN("Maximum allowed size for list of funders - page %s - attempt to decrease size")
+            size <- size-1
+            hasFunders <- TRUE
+            funders <- NULL
+          }
+          if(lastPage) break;
+        }
+        self$INFO("Successfuly fetched list of funders!")
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while fetching funders: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
+      }
+      
+      if(pretty){
+        out = do.call("rbind", lapply(out,function(x){
+          rec = data.frame(
+            id = x$metadata$doi,
+            doi = x$metadata$doi,
+            country = x$metadata$country,
+            name = x$metadata$name,
+            type = x$metadata$type,
+            subtype = x$metadata$subtype,
+            created = x$created,
+            updated = x$updated,
+            stringsAsFactors = FALSE
+          )
+          return(rec)
+        }))
+      }
+      return(out)
+    },
+    
+    #getFunderById
+    getFunderById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/%s",id),
+                                  token= private$token, logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successfuly fetched funder '%s'",id))
+      }else{
+        self$ERROR(sprintf("Error while fetching funder '%s': %s", id, out$message))
+        out <- NULL
       }
       return(out)
     },
@@ -253,7 +444,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         hasRecords <- length(resp)>0
         while(hasRecords){
           out <- c(out, lapply(resp, ZenodoRecord$new))
-          self$INFO("Successfuly fetched list of depositions - page %s")
+          self$INFO(sprintf("Successfuly fetched list of depositions - page %s", page))
           #next
           page <- page+1
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?size=%s&page=%s", size, page), 
