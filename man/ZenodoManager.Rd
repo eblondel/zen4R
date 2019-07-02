@@ -59,10 +59,13 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getFunderById(id)}}{
    Get funder by Id
  }
- \item{\code{getDepositions(size)}}{
+ \item{\code{getDepositions(q, size)}}{
    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
    the list of depositions will be returned by page with a size of 10 results per
-   page (default size of the Zenodo API).
+   page (default size of the Zenodo API). The parameter \code{q} allows to specify
+   an ElasticSearch-compliant query to filter depositions (default query is empty 
+   to retrieve all records). Examples of ElasticSearch queries for Zenodo can be
+   found at \link{http://help.zenodo.org/guides/search/}.
  }
  \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object
@@ -74,8 +77,11 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{deleteRecord(recordId)}}{
    Deletes a Zenodo record based on its identifier.
  }
- \item{\code{deleteRecords()}}{
-   Deletes all Zenodo deposited (unpublished) records.
+ \item{\code{deleteRecords(q)}}{
+   Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
+   to specify an ElasticSearch-compliant query to filter depositions (default query 
+   is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo 
+   can be found at \link{http://help.zenodo.org/guides/search/}. 
  }
  \item{\code{createEmptyRecord()}}{
    Creates an empty record in the Zenodo deposit. Returns the record
