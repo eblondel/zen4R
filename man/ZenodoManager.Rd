@@ -65,7 +65,7 @@ Main user class to be used with \pkg{zen4R}
    page (default size of the Zenodo API). The parameter \code{q} allows to specify
    an ElasticSearch-compliant query to filter depositions (default query is empty 
    to retrieve all records). Examples of ElasticSearch queries for Zenodo can be
-   found at \link{http://help.zenodo.org/guides/search/}.
+   found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
  }
  \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object
@@ -81,7 +81,7 @@ Main user class to be used with \pkg{zen4R}
    Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
    to specify an ElasticSearch-compliant query to filter depositions (default query 
    is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo 
-   can be found at \link{http://help.zenodo.org/guides/search/}. 
+   can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}. 
  }
  \item{\code{createEmptyRecord()}}{
    Creates an empty record in the Zenodo deposit. Returns the record
