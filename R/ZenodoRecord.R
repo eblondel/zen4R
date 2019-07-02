@@ -247,6 +247,34 @@
 #'  \item{\code{setPartofPages(pages)}}{
 #'    Set the page numbers of book, object of class \code{\link{character}}.
 #'  }
+#'  \item{\code{setThesisUniversity(university)}}{
+#'    Set the thesis university, object of class \code{\link{character}}
+#'  }
+#'  \item{\code{addThesisSupervisor(firsname, lastname, affiliation, orcid, gnd)}}{
+#'    Add a thesis supervisor for the record.
+#'  }
+#'  \item{\code{removeThesisSupervisor(by,property)}}{
+#'    Removes a thesi supervisor by a property. The \code{by} parameter should be the name
+#'    of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
+#'    'orcid' or 'gnd'). Returns \code{TRUE} if some thesis supervisor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeThesisSupervisorByName(name)}}{
+#'    Removes a thesis supervisor by name. Returns \code{TRUE} if some thesis supervisor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeThesisSupervisorByAffiliation(affiliation)}}{
+#'    Removes a thesis supervisor by affiliation. Returns \code{TRUE} if some thesis supervisor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeThesisSupervisorByORCID(orcid)}}{
+#'    Removes a thesis supervisor by ORCID. Returns \code{TRUE} if some thesis supervisor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
+#'  \item{\code{removeThesisSupervisorByGND(gnd)}}{
+#'    Removes a thesis supervisor by GND. Returns \code{TRUE} if some thesis supervisor was removed, 
+#'    \code{FALSE} otherwise.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -838,6 +866,54 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #setPartofPages
     setPartofPages = function(pages){
       self$metadata$partof_pages <- pages
+    },
+    
+    #setThesisUniversity
+    setThesisUniversity = function(university){
+      self$metadata_thesis_university <- university
+    },
+    
+    #addThesisSupervisor
+    addThesisSupervisor = function(firstname, lastname, affiliation = NULL, orcid = NULL, gnd = NULL){
+      supervisor <- list(name = paste(lastname, firstname, sep=", "))
+      if(!is.null(affiliation)) supervisor <- c(supervisor, affiliation = affiliation)
+      if(!is.null(orcid)) supervisor <- c(supervisor, orcid = orcid)
+      if(!is.null(gnd)) supervisor <- c(supervisor, gnd = gnd)
+      if(is.null(self$metadata$thesis_supervisors)) self$metadata$thesis_supervisors <- list()
+      self$metadata$thesis_supervisors[[length(self$metadata$thesis_supervisors)+1]] <- supervisor
+    },
+    
+    #removeThesisSupervisor
+    removeThesisSupervisor = function(by,property){
+      removed <- FALSE
+      for(i in 1:length(self$metadata$thesis_supervisors)){
+        supervisor <- self$metadata$thesis_supervisors[[i]]
+        if(supervisor[[by]]==property){
+          self$metadata$thesis_supervisors[[i]] <- NULL
+          removed <- TRUE 
+        }
+      }
+      return(removed)
+    },
+    
+    #removeThesisSupervisorByName
+    removeThesisSupervisorByName = function(name){
+      return(self$removeThesisSupervisor(by = "name", name))
+    },
+    
+    #removeThesisSupervisorByAffiliation
+    removeThesisSupervisorByAffiliation = function(affiliation){
+      return(self$removeThesisSupervisor(by = "affiliation", affiliation))
+    },
+    
+    #removeThesisSupervisorByORCID
+    removeThesisSupervisorByORCID = function(orcid){
+      return(self$removeThesisSupervisor(by = "orcid", orcid))
+    },
+    
+    #removeThesisSupervisorByGND
+    removeThesisSupervisorByGND = function(gnd){
+      return(self$removeThesisSupervisor(by = "gnd", gnd))
     }
     
   )

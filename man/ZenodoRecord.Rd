@@ -258,6 +258,34 @@ ZenodoRecord
  \item{\code{setPartofPages(pages)}}{
    Set the page numbers of book, object of class \code{\link{character}}.
  }
+ \item{\code{setThesisUniversity(university)}}{
+   Set the thesis university, object of class \code{\link{character}}
+ }
+ \item{\code{addThesisSupervisor(firsname, lastname, affiliation, orcid, gnd)}}{
+   Add a thesis supervisor for the record.
+ }
+ \item{\code{removeThesisSupervisor(by,property)}}{
+   Removes a thesi supervisor by a property. The \code{by} parameter should be the name
+   of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
+   'orcid' or 'gnd'). Returns \code{TRUE} if some thesis supervisor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeThesisSupervisorByName(name)}}{
+   Removes a thesis supervisor by name. Returns \code{TRUE} if some thesis supervisor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeThesisSupervisorByAffiliation(affiliation)}}{
+   Removes a thesis supervisor by affiliation. Returns \code{TRUE} if some thesis supervisor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeThesisSupervisorByORCID(orcid)}}{
+   Removes a thesis supervisor by ORCID. Returns \code{TRUE} if some thesis supervisor was removed, 
+   \code{FALSE} otherwise.
+ }
+ \item{\code{removeThesisSupervisorByGND(gnd)}}{
+   Removes a thesis supervisor by GND. Returns \code{TRUE} if some thesis supervisor was removed, 
+   \code{FALSE} otherwise.
+ }
 }
 }
 
