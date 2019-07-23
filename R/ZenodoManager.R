@@ -479,7 +479,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByConceptDOI
     getDepositionByConceptDOI = function(conceptdoi){
       query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
-      result <- self$getDepositions(q = query)
+      result <- self$getDepositions(q = query, size = 1)
       if(length(result)>0){
         result <- result[[1]]
         self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!", conceptdoi))
@@ -493,7 +493,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByDOI
     getDepositionByDOI = function(doi){
       query <- sprintf("doi:%s", gsub("/", "//", doi))
-      result <- self$getDepositions(q = query)
+      result <- self$getDepositions(q = query, size = 1)
       if(length(result)>0){
         result <- result[[1]]
         self$INFO(sprintf("Successfuly fetched record for DOI '%s'!",doi))
@@ -551,7 +551,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     },
     
     #deleteRecords
-    deleteRecords = function(q = ""){
+    deleteRecords = function(q = "", size = 10){
       records <- self$getDepositions(q = q, size = size)
       records <- records[sapply(records, function(x){!x$submitted})]
       hasDraftRecords <- length(records)>0
