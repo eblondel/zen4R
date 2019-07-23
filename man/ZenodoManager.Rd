@@ -67,6 +67,12 @@ Main user class to be used with \pkg{zen4R}
    to retrieve all records). Examples of ElasticSearch queries for Zenodo can be
    found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
  }
+ \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
+   Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
+ }
+ \item{\code{getDepositionByDOI(doi)}}{
+   Get a Zenodo deposition record by DOI.
+ }
  \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object
    of class \code{ZenodoRecord}. The method returns the deposited record

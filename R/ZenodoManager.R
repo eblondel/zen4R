@@ -53,6 +53,12 @@
 #'    to retrieve all records). Examples of ElasticSearch queries for Zenodo can be
 #'    found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
 #'  }
+#'  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
+#'    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
+#'  }
+#'  \item{\code{getDepositionByDOI(doi)}}{
+#'    Get a Zenodo deposition record by DOI.
+#'  }
 #'  \item{\code{depositRecord(record, publish)}}{
 #'    A method to deposit/update a Zenodo record. The record should be an object
 #'    of class \code{ZenodoRecord}. The method returns the deposited record
@@ -468,6 +474,34 @@ ZenodoManager <-  R6Class("ZenodoManager",
         }
       }
       return(out)
+    },
+    
+    #getDepositionByConceptDOI
+    getDepositionByConceptDOI = function(conceptdoi){
+      query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
+      result <- self$getDepositions(q = query)
+      if(length(result)>0){
+        result <- result[[1]]
+        self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!",doi))
+      }else{
+        result <- NULL
+        self$WARN(sprintf("No record for concept DOI '%s'!",doi))
+      }
+      return(result)
+    },
+    
+    #getDepositionByDOI
+    getDepositionByDOI = function(doi){
+      query <- sprintf("doi:%s", gsub("/", "//", doi))
+      result <- self$getDepositions(q = query)
+      if(length(result)>0){
+        result <- result[[1]]
+        self$INFO(sprintf("Successfuly fetched record for DOI '%s'!",doi))
+      }else{
+        result <- NULL
+        self$WARN(sprintf("No record for DOI '%s'!",doi))
+      }
+      return(result)
     },
     
     #depositRecord
