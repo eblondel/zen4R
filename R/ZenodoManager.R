@@ -482,10 +482,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getDepositions(q = query)
       if(length(result)>0){
         result <- result[[1]]
-        self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!",doi))
+        self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!", conceptdoi))
       }else{
         result <- NULL
-        self$WARN(sprintf("No record for concept DOI '%s'!",doi))
+        self$WARN(sprintf("No record for concept DOI '%s'!", conceptdoi))
       }
       return(result)
     },
