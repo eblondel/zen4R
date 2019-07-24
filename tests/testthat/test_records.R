@@ -72,7 +72,7 @@ test_that("create and deposit record",{
 
 test_that("create, deposit and publish record",{
   myrec <- ZenodoRecord$new()
-  myrec$setTitle("My publication title")
+  myrec$setTitle(paste("My publication title -", Sys.Date()))
   myrec$setDescription("A description of my publication")
   myrec$setUploadType("publication")
   myrec$setPublicationType("article")
@@ -83,7 +83,7 @@ test_that("create, deposit and publish record",{
   myrec$addReference("Author et al., 2019. Title")
   myrec$addReference("Fulano et al., 2018. Título")
   
-  expect_equal(myrec$metadata$title, "My publication title")
+  expect_true(startsWith(myrec$metadata$title, "My publication title"))
   expect_equal(myrec$metadata$description, "A description of my publication")
   expect_equal(myrec$metadata$upload_type, "publication")
   expect_equal(myrec$metadata$publication_type, "article")
@@ -105,5 +105,37 @@ test_that("create, deposit and publish record",{
   
   #delete record
   deleted <- ZENODO$deleteRecord(deposit$id)
-  expect_true(deleted)
+  expect_false(deleted)
+})
+
+test_that("get by concept DOI",{
+  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.349738")
+  expect_is(rec, "ZenodoRecord")
+  expect_equal(rec$conceptdoi, "10.5072/zenodo.349738")
+  expect_equal(rec$metadata$title, "My publication title - 2019-07-24")
+})
+
+test_that("get by record DOI",{
+  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.349739")
+  expect_is(rec, "ZenodoRecord")
+  expect_equal(rec$conceptdoi, "10.5072/zenodo.349738")
+  expect_equal(rec$metadata$title, "My publication title - 2019-07-24")
+})
+
+test_that("versioning",{
+  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.349738")
+  rec$setTitle(paste("My publication title -", Sys.time()))
+  rec$setPublicationDate(Sys.Date())
+  write.csv(data.frame(title = rec$metadata$title, stringsAsFactors = FALSE), row.names = FALSE, "publication.csv")
+  rec_version <- ZENODO$depositRecordVersion(rec, files = "publication.csv", publish = TRUE)
+  unlink("publication.csv")
+})
+
+test_that("versions & DOIs",{
+  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.349738")
+  expect_equal(rec$getConceptDOI(), "10.5072/zenodo.349738")
+  expect_equal(rec$getFirstDOI(), "10.5072/zenodo.349739")
+  expect_equal(rec$getLastDOI(), "10.5072/zenodo.349743")
+  versions <- rec$getVersions()
+  expect_is(versions, "data.frame")
 })

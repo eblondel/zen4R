@@ -375,10 +375,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     getVersions = function(){
       locale <- Sys.getlocale("LC_TIME")
       Sys.setlocale("LC_TIME", "us_US")
-      html <- read_html(record$links$latest_html)
+      html <- read_html(self$links$latest_html)
       html_versions <- html_nodes(html, "table")[3]
       versions <- data.frame(
-        version = as.Date(sapply(html_nodes(html_versions, "tr"), function(x){
+        date = as.Date(sapply(html_nodes(html_versions, "tr"), function(x){
           html_date <- html_text(html_nodes(x, "small")[2])
           date <- as.Date(strptime(html_date, format="%b %d, %Y"))
           return(date)
