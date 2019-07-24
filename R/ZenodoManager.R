@@ -66,6 +66,10 @@
 #'    is \code{FALSE}) can be set to \code{TRUE} (to use CAUTIOUSLY, only if you
 #'    want to publish your record)
 #'  }
+#'  \item{\code{depositRecordVersion(record, publish)}}{
+#'    A method to deposit a new version for a published record. For details about
+#'    the behavior of this function, see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
+#'  }
 #'  \item{\code{deleteRecord(recordId)}}{
 #'    Deletes a Zenodo record based on its identifier.
 #'  }
@@ -479,7 +483,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByConceptDOI
     getDepositionByConceptDOI = function(conceptdoi){
       query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
-      result <- self$getDepositions(q = query, size = 1)
+      result <- self$getDepositions(q = query)
       if(length(result)>0){
         result <- result[[1]]
         self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!", conceptdoi))
@@ -493,7 +497,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByDOI
     getDepositionByDOI = function(doi){
       query <- sprintf("doi:%s", gsub("/", "//", doi))
-      result <- self$getDepositions(q = query, size = 1)
+      result <- self$getDepositions(q = query)
       if(length(result)>0){
         result <- result[[1]]
         self$INFO(sprintf("Successfuly fetched record for DOI '%s'!",doi))
@@ -528,6 +532,63 @@ ZenodoManager <-  R6Class("ZenodoManager",
       
       if(publish){
         out <- self$publishRecord(record$id)
+      }
+      
+      return(out)
+    },
+    
+    #depositRecordVersion
+    depositRecordVersion = function(record, delete_latest_files = TRUE, files = list(), publish = FALSE){
+      type <- "POST"
+      if(is.null(record$conceptrecid)){
+        stop("The record concept id cannot be null for creating a new version")
+      }
+      if(is.null(record$conceptdoi)){
+        stop("Concept DOI is null: a new version can only be added to a published record")
+      }
+      
+      #id of the last record
+      record_id <- unlist(strsplit(record$links$latest,"records/"))[[2]] 
+      
+      self$INFO(sprintf("Creating new version for record '%s' (concept DOI: '%s')", record_id, record$getConceptDOI()))
+      request <- sprintf("deposit/depositions/%s/actions/newversion", record_id)
+      zenReq <- ZenodoRequest$new(private$url, type, request, data = NULL,
+                                  token = private$token, logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      out_id <- NULL
+      if(zenReq$getStatus() %in% c(200,201)){
+        out <- zenReq$getResponse()
+        out_id <- unlist(strsplit(out$links$latest_draft,"depositions/"))[[2]]
+        out <- ZenodoRecord$new(obj = out)
+        self$INFO(sprintf("Successful new version record created for concept DOI '%s'", record$getConceptDOI()))
+        record$metadata$doi <- NULL
+        record$doi <- NULL
+        record$prereserveDOI(TRUE)
+        out <- self$depositRecord(record)
+        
+        if(delete_latest_files){
+          self$INFO("Deleting files copied from latest record")
+          invisible(lapply(out$files, function(x){ self$deleteFile(out$id, x$id)}))
+        }
+        if(length(files)>0){
+          self$INFO("Upload files to new version")
+          for(f in files){
+            self$INFO(sprintf("Upload file '%s' to new version", f))
+            self$uploadFile(f, out$id)
+          }
+        }
+        
+        if(publish){
+          out <- self$publishRecord(record$id)
+        }
+        
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while creating new version: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
       }
       
       return(out)

@@ -126,6 +126,15 @@ ZenodoRecord
    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
    on the prereserved DOI of the first record version.
  }
+ \item{\code{getFirstDOI()}}{
+   Get DOI of the first record version.
+ }
+ \item{\code{getLastDOI()}}{
+   Get DOI of the latest record version.
+ }
+ \item{\code{getVersions()}}{
+   Get a \code{data.frame} listing record versions with publication date and DOI.
+ }
  \item{\code{setVersion(version)}}{
    Set the version.
  }

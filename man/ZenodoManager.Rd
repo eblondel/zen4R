@@ -80,6 +80,10 @@ Main user class to be used with \pkg{zen4R}
    is \code{FALSE}) can be set to \code{TRUE} (to use CAUTIOUSLY, only if you
    want to publish your record)
  }
+ \item{\code{depositRecordVersion(record, publish)}}{
+   A method to deposit a new version for a published record. For details about
+   the behavior of this function, see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
+ }
  \item{\code{deleteRecord(recordId)}}{
    Deletes a Zenodo record based on its identifier.
  }

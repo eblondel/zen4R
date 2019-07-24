@@ -115,6 +115,15 @@
 #'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
 #'    on the prereserved DOI of the first record version.
 #'  }
+#'  \item{\code{getFirstDOI()}}{
+#'    Get DOI of the first record version.
+#'  }
+#'  \item{\code{getLastDOI()}}{
+#'    Get DOI of the latest record version.
+#'  }
+#'  \item{\code{getVersions()}}{
+#'    Get a \code{data.frame} listing record versions with publication date and DOI.
+#'  }
 #'  \item{\code{setVersion(version)}}{
 #'    Set the version.
 #'  }
@@ -348,6 +357,39 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }
       }
       return(conceptdoi)
+    },
+    
+    #getFirstDOI
+    getFirstDOI = function(){
+      versions <- self$getVersions()
+      return(versions[1,"doi"])
+    },
+    
+    #getLastDOI
+    getLastDOI = function(){
+      versions <- self$getVersions()
+      return(versions[nrow(versions),"doi"])
+    },
+    
+    #getVersions
+    getVersions = function(){
+      locale <- Sys.getlocale("LC_TIME")
+      Sys.setlocale("LC_TIME", "us_US")
+      html <- read_html(record$links$latest_html)
+      html_versions <- html_nodes(html, "table")[3]
+      versions <- data.frame(
+        version = as.Date(sapply(html_nodes(html_versions, "tr"), function(x){
+          html_date <- html_text(html_nodes(x, "small")[2])
+          date <- as.Date(strptime(html_date, format="%b %d, %Y"))
+          return(date)
+        }), origin = "1970-01-01"),
+        doi = sapply(html_nodes(html_versions, "tr"), function(x){html_text(html_nodes(x, "small")[1])}),
+        stringsAsFactors = FALSE
+      )
+      versions <- versions[rev(row.names(versions)),]
+      row.names(versions) <- 1:nrow(versions)
+      Sys.setlocale("LC_TIME", locale)
+      return(versions)
     },
     
     #setUploadType
