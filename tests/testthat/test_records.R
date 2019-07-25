@@ -72,7 +72,7 @@ test_that("create and deposit record",{
 
 test_that("create, deposit and publish record",{
   myrec <- ZenodoRecord$new()
-  myrec$setTitle(paste("My publication title -", Sys.Date()))
+  myrec$setTitle(paste("My publication title -", Sys.time()))
   myrec$setDescription("A description of my publication")
   myrec$setUploadType("publication")
   myrec$setPublicationType("article")
