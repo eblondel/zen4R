@@ -90,6 +90,10 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{deleteRecord(recordId)}}{
    Deletes a Zenodo record based on its identifier.
  }
+ \item{\code{deleteRecordByDOI(doi)}}{
+   Deletes a Zenodo record based on its DOI. This DOI is necessarily a pre-reserved DOI corresponding to a draft record,
+    and not a published DOI, as Zenodo does not allow to delete a record already published.
+ }
  \item{\code{deleteRecords(q)}}{
    Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
    to specify an ElasticSearch-compliant query to filter depositions (default query 

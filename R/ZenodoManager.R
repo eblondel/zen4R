@@ -76,6 +76,10 @@
 #'  \item{\code{deleteRecord(recordId)}}{
 #'    Deletes a Zenodo record based on its identifier.
 #'  }
+#'  \item{\code{deleteRecordByDOI(doi)}}{
+#'    Deletes a Zenodo record based on its DOI. This DOI is necessarily a pre-reserved DOI corresponding to a draft record,
+#'     and not a published DOI, as Zenodo does not allow to delete a record already published.
+#'  }
 #'  \item{\code{deleteRecords(q)}}{
 #'    Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
 #'    to specify an ElasticSearch-compliant query to filter depositions (default query 
@@ -654,6 +658,17 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$ERROR(sprintf("Error while deleting record '%s': %s", recordId, out$message))
       }
       return(out)
+    },
+    
+    #deleteRecordByDOI
+    deleteRecordByDOI = function(doi){
+      self$INFO(sprintf("Deleting record with DOI '%s'", doi))
+      deleted <- FALSE
+      rec <- self$getDepositionByDOI(doi)
+      if(!is.null(rec)){
+        deleted <- self$deleteRecord(rec$id)
+      }
+      return(deleted)
     },
     
     #deleteRecords
