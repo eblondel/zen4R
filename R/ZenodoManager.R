@@ -486,10 +486,22 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getDepositions(q = query)
       if(length(result)>0){
         result <- result[[1]]
-        self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!", conceptdoi))
+        if(result$conceptdoi == conceptdoi){
+          self$INFO(sprintf("Successfuly fetched record for concept DOI '%s'!", conceptdoi))
+        }else{
+          result <- NULL
+        }
       }else{
         result <- NULL
-        self$WARN(sprintf("No record for concept DOI '%s'!", conceptdoi))
+      }
+      if(is.null(result)) self$WARN(sprintf("No record for concept DOI '%s'!", conceptdoi))
+      if(is.null(result)){
+        #try to get record by id
+        if( regexpr("zenodo", conceptdoi)>0){
+          recid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
+          self$INFO(sprintf("Try to get deposition by Zenodo specific record id '%s'", recid))
+          result <- self$getDepositionById(recid)
+        }
       }
       return(result)
     },
@@ -500,11 +512,41 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getDepositions(q = query)
       if(length(result)>0){
         result <- result[[1]]
-        self$INFO(sprintf("Successfuly fetched record for DOI '%s'!",doi))
+        if(result$doi == doi){
+          self$INFO(sprintf("Successfuly fetched record for DOI '%s'!",doi))
+        }else{
+          result <- NULL
+        }
       }else{
         result <- NULL
-        self$WARN(sprintf("No record for DOI '%s'!",doi))
       }
+      if(is.null(result)) self$WARN(sprintf("No record for DOI '%s'!",doi))
+      if(is.null(result)){
+        #try to get record by id
+        if( regexpr("zenodo", doi)>0){
+          recid <- unlist(strsplit(doi, "zenodo."))[2]
+          self$INFO(sprintf("Try to get deposition by Zenodo specific record id '%s'", recid))
+          result <- self$getDepositionById(recid)
+        }
+      }
+      return(result)
+    },
+    
+    #getDepositionbyId
+    getDepositionById = function(recid){
+      query <- sprintf("recid:%s", recid)
+      result <- self$getDepositions(q = query)
+      if(length(result)>0){
+        result <- result[[1]]
+        if(result$id == recid){
+          self$INFO(sprintf("Successfuly fetched record for id '%s'!",recid))
+        }else{
+          result <- NULL
+        }
+      }else{
+        result <- NULL
+      }
+      if(is.null(result)) self$WARN(sprintf("No record for id '%s'!",recid))
       return(result)
     },
     

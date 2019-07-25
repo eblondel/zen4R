@@ -138,4 +138,14 @@ test_that("versions & DOIs",{
   expect_equal(rec$getLastDOI(), "10.5072/zenodo.349743")
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
+  
+  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.349743")
+  expect_equal(rec$getFirstDOI(), "10.5072/zenodo.349739")
+  expect_equal(rec$getLastDOI(), "10.5072/zenodo.349743")
+  expect_equal(rec$getConceptDOI(), "10.5072/zenodo.349738")
+  versions <- rec$getVersions()
+  expect_is(versions, "data.frame")
+  
+  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.349741")
+  expect_null(rec)
 })
