@@ -73,6 +73,9 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getDepositionByDOI(doi)}}{
    Get a Zenodo deposition record by DOI.
  }
+ \item{\code{getDepositionById(recid)}}{
+   Get a Zenodo deposition record by its Zenodo specific record id.
+ }
  \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object
    of class \code{ZenodoRecord}. The method returns the deposited record
