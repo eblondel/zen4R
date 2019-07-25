@@ -470,7 +470,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           self$INFO(sprintf("Successfuly fetched list of depositions - page %s", page))
           #next
           page <- page+1
-          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?size=%s&page=%s", size, page), 
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page), 
                                       token = private$token, logger = self$loggerType)
           zenReq$execute()
           resp <- zenReq$getResponse()
@@ -730,7 +730,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #uploadFile
     uploadFile = function(path, recordId){
       fileparts <- strsplit(path,"/")
-      filename <- fileparts[[length(fileparts)]]
+      filename <- unlist(fileparts)[length(fileparts)]
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/files", recordId), 
                                   data = filename, file = upload_file(path),
                                   token = private$token,
