@@ -295,6 +295,42 @@ ZenodoRecord
    Removes a thesis supervisor by GND. Returns \code{TRUE} if some thesis supervisor was removed, 
    \code{FALSE} otherwise.
  }
+ \item{\code{exportAs(format, filename)}}{
+   Export metadata in a format supported by Zenodo. Supported formats are: BibTeX, CSL, DataCite, 
+   DublinCore, DCAT, JSON, JSON-LD, GeoJSON, MARCXML. The exported will be named with the specified
+   filename followed by the format name.
+ }
+ \item{\code{exportAsBibTeX(filename)}}{
+   Export metadata as BibTeX (BIB) file
+ }
+ \item{\code{exportAsCSL(filename)}}{
+   Export metadata as CSL (JSON) file
+ }
+ \item{\code{exportAsDataCite(filename)}}{
+   Export metadata as DataCite (XML) file
+ }
+ \item{\code{exportAsDublinCore(filename)}}{
+   Export metadata as Dublin Core file
+ }
+ \item{\code{exportAsDCAT(filename)}}{
+   Export metadata as DCAT (RDF) file
+ }
+ \item{\code{exportAsJSON(filename)}}{
+   Export metadata as JSON file
+ }
+ \item{\code{exportAsJSONLD(filename)}}{
+   Export metadata as JSON-LD (JSON) file
+ }
+ \item{\code{exportAsGeoJSON(filename)}}{
+   Export metadata as GeoJSON (JSON) file
+ }
+ \item{\code{exportAsMARCXML{filename}}}{
+   Export metadata as MARCXML (XML) file
+ }
+ \item{\code{exportAsAllFormats(filename)}}{
+   Export metadata as all Zenodo supported metadata formats. THis function will
+   create one file per Zenodo metadata formats.
+ }
 }
 }
 

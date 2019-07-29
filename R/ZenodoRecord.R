@@ -284,6 +284,42 @@
 #'    Removes a thesis supervisor by GND. Returns \code{TRUE} if some thesis supervisor was removed, 
 #'    \code{FALSE} otherwise.
 #'  }
+#'  \item{\code{exportAs(format, filename)}}{
+#'    Export metadata in a format supported by Zenodo. Supported formats are: BibTeX, CSL, DataCite, 
+#'    DublinCore, DCAT, JSON, JSON-LD, GeoJSON, MARCXML. The exported will be named with the specified
+#'    filename followed by the format name.
+#'  }
+#'  \item{\code{exportAsBibTeX(filename)}}{
+#'    Export metadata as BibTeX (BIB) file
+#'  }
+#'  \item{\code{exportAsCSL(filename)}}{
+#'    Export metadata as CSL (JSON) file
+#'  }
+#'  \item{\code{exportAsDataCite(filename)}}{
+#'    Export metadata as DataCite (XML) file
+#'  }
+#'  \item{\code{exportAsDublinCore(filename)}}{
+#'    Export metadata as Dublin Core file
+#'  }
+#'  \item{\code{exportAsDCAT(filename)}}{
+#'    Export metadata as DCAT (RDF) file
+#'  }
+#'  \item{\code{exportAsJSON(filename)}}{
+#'    Export metadata as JSON file
+#'  }
+#'  \item{\code{exportAsJSONLD(filename)}}{
+#'    Export metadata as JSON-LD (JSON) file
+#'  }
+#'  \item{\code{exportAsGeoJSON(filename)}}{
+#'    Export metadata as GeoJSON (JSON) file
+#'  }
+#'  \item{\code{exportAsMARCXML{filename}}}{
+#'    Export metadata as MARCXML (XML) file
+#'  }
+#'  \item{\code{exportAsAllFormats(filename)}}{
+#'    Export metadata as all Zenodo supported metadata formats. THis function will
+#'    create one file per Zenodo metadata formats.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -956,6 +992,106 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #removeThesisSupervisorByGND
     removeThesisSupervisorByGND = function(gnd){
       return(self$removeThesisSupervisor(by = "gnd", gnd))
+    },
+    
+    #exportAs
+    exportAs = function(format, filename){
+      formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
+      zenodo_url <- self$links$record_html
+      if(is.null(zenodo_url)){
+        stop("Ups, this record seems a draft, can't export metadata until it is published!")
+      }
+      metadata_export_url <- switch(format,
+        "BibTeX" = paste0(zenodo_url,"/export/hx"),
+        "CSL" =  paste0(zenodo_url,"/export/csl"),
+        "DataCite" =  paste0(zenodo_url,"/export/dcite4"),
+        "DublinCore" =  paste0(zenodo_url,"/export/xd"),
+        "DCAT" =  paste0(zenodo_url,"/export/dcat"),
+        "JSON" =  paste0(zenodo_url,"/export/json"),
+        "JSON-LD" =  paste0(zenodo_url,"/export/schemaorg_jsonld"),
+        "GeoJSON" =  paste0(zenodo_url,"/export/geojson"),
+        "MARCXML" =  paste0(zenodo_url,"/export/xm"),
+        NULL
+      )
+      if(is.null(metadata_export_url)){
+        stop(sprintf("Unknown Zenodo metadata format '%s'. Supported formats are [%s]", format, paste(formats, collapse=",")))
+      }
+      
+      fileext <- switch(format,
+        "BibTeX" = "bib",
+        "CSL" = "json",
+        "DataCite" ="xml",
+        "DublinCore" = "xml",
+        "DCAT" = "rdf",
+        "JSON" = "json",
+        "JSON-LD" = "json",
+        "GeoJSON" = "json",
+        "MARCXML" = "xml"           
+      )
+      
+      html <- read_html(metadata_export_url)
+      reference <- html_nodes(html, "pre")
+      reference <- reference[1]
+      reference <- gsub("<pre.*\">","",reference)
+      reference <- gsub("</pre>","",reference)
+      if(fileext %in% c("xml", "rdf")){
+        reference <- gsub("&lt;", "<", reference)
+        reference <- gsub("&gt;", ">", reference)
+      }
+    
+      destfile <- paste(paste0(filename, "_", format), fileext, sep = ".")
+      writeChar(reference, destfile, eos = NULL)
+    },
+    
+    #exportAsBibTeX
+    exportAsBibTeX = function(filename){
+      self$exportAs("BibTeX", filename)
+    },
+    
+    #exportAsCSL
+    exportAsCSL = function(filename){
+      self$exportAs("CSL", filename)
+    },
+    
+    #exportAsDataCite
+    exportAsDataCite = function(filename){
+      self$exportAs("DataCite", filename)
+    },
+    
+    #exportAsDublinCore
+    exportAsDublinCore = function(filename){
+      self$exportAs("DublinCore", filename)
+    },
+    
+    #exportAsDCAT
+    exportAsDCAT = function(filename){
+      self$exportAs("DCAT", filename)
+    },
+    
+    #exportAsJSON
+    exportAsJSON = function(filename){
+      self$exportAs("JSON", filename)
+    },
+    
+    #exportAsJSONLD
+    exportAsJSONLD = function(filename){
+      self$exportAs("JSON-LD", filename)
+    },
+    
+    #exportAsGeoJSON
+    exportAsGeoJSON = function(filename){
+      self$exportAs("GeoJSON", filename)
+    },
+    
+    #exportAsMARCXML
+    exportAsMARCXML = function(filename){
+      self$exportAs("MARCXML", filename)
+    },
+    
+    #exportAsAllFormats
+    exportAsAllFormats = function(filename){
+      formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
+      invisible(lapply(formats, self$exportAs, filename))
     }
     
   )
