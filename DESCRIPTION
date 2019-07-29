@@ -4,8 +4,7 @@ Date: 2019-07-29
 Title: Interface to 'Zenodo' REST API
 Authors@R: c(
   person("Emmanuel", "Blondel", role = c("aut", "cre"), email = "emmanuel.blondel1@gmail.com", comment = c(ORCID = "0000-0002-5870-5762")),
-  person("Julien", "Barde", role = c("ctb"), email = "julien.barde@ird.fr", comment = c(ORCID = "0000-0002-3519-6141"))
-)
+  person("Julien", "Barde", role = c("ctb"), email = "julien.barde@ird.fr", comment = c(ORCID = "0000-0002-3519-6141")))
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
 Imports: R6, httr, jsonlite, rvest
