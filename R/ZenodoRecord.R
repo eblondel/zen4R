@@ -411,7 +411,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     getVersions = function(){
       locale <- Sys.getlocale("LC_TIME")
       Sys.setlocale("LC_TIME", "us_US")
-      html <- read_html(self$links$latest_html)
+      html <- xml2::read_html(self$links$latest_html)
       html_versions <- html_nodes(html, "table")[3]
       versions <- data.frame(
         date = as.Date(sapply(html_nodes(html_versions, "tr"), function(x){
@@ -1029,7 +1029,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         "MARCXML" = "xml"           
       )
       
-      html <- read_html(metadata_export_url)
+      html <- xml2::read_html(metadata_export_url)
       reference <- html_nodes(html, "pre")
       reference <- reference[1]
       reference <- gsub("<pre.*\">","",reference)
