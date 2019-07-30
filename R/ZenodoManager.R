@@ -45,13 +45,14 @@
 #'  \item{\code{getFunderById(id)}}{
 #'    Get funder by Id
 #'  }
-#'  \item{\code{getDepositions(q, size)}}{
+#'  \item{\code{getDepositions(q, size, all_versions)}}{
 #'    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
 #'    the list of depositions will be returned by page with a size of 10 results per
 #'    page (default size of the Zenodo API). The parameter \code{q} allows to specify
 #'    an ElasticSearch-compliant query to filter depositions (default query is empty 
-#'    to retrieve all records). Examples of ElasticSearch queries for Zenodo can be
-#'    found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+#'    to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
+#'    to get all versions of records as part of the depositions list. Examples of 
+#'    ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
 #'  }
 #'  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
 #'    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
@@ -456,9 +457,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #------------------------------------------------------------------------------------------
     
     #getDepositions
-    getDepositions = function(q = "", size = 10){
+    getDepositions = function(q = "", size = 10, all_versions = FALSE){
       page <- 1
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page), 
+      req <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
+      if(all_versions) req <- paste0(req, "&all_versions=1")
+      zenReq <- ZenodoRequest$new(private$url, "GET", req, 
                                   token = private$token, logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -470,7 +473,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
           self$INFO(sprintf("Successfuly fetched list of depositions - page %s", page))
           #next
           page <- page+1
-          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page), 
+          nextreq <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
+          if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
+          zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
                                       token = private$token, logger = self$loggerType)
           zenReq$execute()
           resp <- zenReq$getResponse()
@@ -516,7 +521,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByDOI
     getDepositionByDOI = function(doi){
       query <- sprintf("doi:%s", gsub("/", "//", doi))
-      result <- self$getDepositions(q = query)
+      result <- self$getDepositions(q = query, all_versions = TRUE)
       if(length(result)>0){
         result <- result[[1]]
         if(result$doi == doi){
@@ -542,7 +547,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionbyId
     getDepositionById = function(recid){
       query <- sprintf("recid:%s", recid)
-      result <- self$getDepositions(q = query)
+      result <- self$getDepositions(q = query, all_versions = TRUE)
       if(length(result)>0){
         result <- result[[1]]
         if(result$id == recid){

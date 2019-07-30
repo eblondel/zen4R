@@ -147,5 +147,5 @@ test_that("versions & DOIs",{
   expect_is(versions, "data.frame")
   
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.349741")
-  expect_null(rec)
+  expect_is(rec, "ZenodoRecord")
 })
