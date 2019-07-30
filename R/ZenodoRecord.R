@@ -419,6 +419,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           date <- as.Date(strptime(html_date, format="%b %d, %Y"))
           return(date)
         }), origin = "1970-01-01"),
+        version = sapply(html_nodes(html_versions, "tr"), function(x){
+          v <- html_text(html_nodes(x, "a")[1])
+          v <- substr(v, 9, nchar(v)-1)
+          return(v)
+        }),
         doi = sapply(html_nodes(html_versions, "tr"), function(x){html_text(html_nodes(x, "small")[1])}),
         stringsAsFactors = FALSE
       )
