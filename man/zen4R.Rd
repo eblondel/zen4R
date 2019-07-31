@@ -15,7 +15,7 @@ Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API,
    Package: \tab zen4R\cr
    Type: \tab Package\cr
    Version: \tab 0.2\cr
-   Date: \tab 2019-07-29\cr
+   Date: \tab 2019-07-31\cr
    License: \tab MIT\cr
    LazyLoad: \tab yes\cr
  }
