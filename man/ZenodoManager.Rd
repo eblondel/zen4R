@@ -106,6 +106,10 @@ Main user class to be used with \pkg{zen4R}
    newly created in Zenodo, as an object of class \code{ZenodoRecord}
    with an assigned identifier.
  }
+ \item{\code{editRecord(recordId)}}{
+   Unlocks a record already submitted. This is required to edit metadata of a Zenodo
+   record already published.
+ }
  \item{\code{publishRecord(recordId)}}{
    Publishes a deposited record online.
  }

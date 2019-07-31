@@ -92,6 +92,10 @@
 #'    newly created in Zenodo, as an object of class \code{ZenodoRecord}
 #'    with an assigned identifier.
 #'  }
+#'  \item{\code{editRecord(recordId)}}{
+#'    Unlocks a record already submitted. This is required to edit metadata of a Zenodo
+#'    record already published.
+#'  }
 #'  \item{\code{publishRecord(recordId)}}{
 #'    Publishes a deposited record online.
 #'  }
@@ -696,6 +700,23 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #createRecord
     createEmptyRecord = function(){
       return(self$depositRecord(NULL))
+    },
+    
+    #editRecord
+    editRecord = function(recordId){
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/edit", recordId),
+                                  token = private$token,
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 201){
+        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+        self$INFO(sprintf("Successful unlocked record '%s' for edition", recordId))
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while unlocking record '%s' for edition: %s", recordId, out$message))
+      }
+      return(out)
     },
     
     #publisRecord
