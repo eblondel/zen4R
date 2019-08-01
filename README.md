@@ -13,6 +13,10 @@ Please check the [online documentation](https://github.com/eblondel/zen4R/wiki) 
 
 ## Sponsors
 
+Many thanks to the following organizations that have provided fundings for strenghtening the ``zen4R`` package:
+
+<a href="https://en.ird.fr/"><img src="https://en.ird.fr/var/ird/storage/images/media/ird-sites-d-unites-de-recherche/dial/images/logos/logo_ird_2016_longueur_uk/4030160-1-eng-GB/logo_ird_2016_longueur_uk.png" height="40"/></a>
+
 For geometa sponsoring/funding new developments, enhancements, support requests, please contact me by [e-mail](mailto:emmanuel.blondel1@gmail.com)
 
 ## Citation
