@@ -96,6 +96,9 @@
 #'    Unlocks a record already submitted. This is required to edit metadata of a Zenodo
 #'    record already published.
 #'  }
+#'  \item{\code{discardChanges(recordId)}}{
+#'    Discards changes operated on a record.
+#'  }
 #'  \item{\code{publishRecord(recordId)}}{
 #'    Publishes a deposited record online.
 #'  }
@@ -715,6 +718,23 @@ ZenodoManager <-  R6Class("ZenodoManager",
       }else{
         out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while unlocking record '%s' for edition: %s", recordId, out$message))
+      }
+      return(out)
+    },
+    
+    #discardChanges
+    discardChanges = function(recordId){
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/discard", recordId),
+                                  token = private$token,
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 201){
+        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+        self$INFO(sprintf("Successful discarded changes for record '%s' for edition", recordId))
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while discarding record '%s' changes: %s", recordId, out$message))
       }
       return(out)
     },

@@ -110,6 +110,9 @@ Main user class to be used with \pkg{zen4R}
    Unlocks a record already submitted. This is required to edit metadata of a Zenodo
    record already published.
  }
+ \item{\code{discardChanges(recordId)}}{
+   Discards changes operated on a record.
+ }
  \item{\code{publishRecord(recordId)}}{
    Publishes a deposited record online.
  }
