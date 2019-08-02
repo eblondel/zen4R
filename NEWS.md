@@ -14,6 +14,8 @@
 * [#17](https://github.com/eblondel/zen4R/issues/17) Methods for 'grants' metadata elements + list supported grants/funders
 * [#18](https://github.com/eblondel/zen4R/issues/18) Method for 'contributor' metadata elements
 * [#20](https://github.com/eblondel/zen4R/issues/20) Enable methods to get deposition by DOI / concept DOI
+* [#21](https://github.com/eblondel/zen4R/issues/21) Support edit operation for already submitted records
+* [#22](https://github.com/eblondel/zen4R/issues/22) Add method to discard record changes
 
 **Improvements**
 
