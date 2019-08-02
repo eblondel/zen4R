@@ -19,7 +19,7 @@
 
 **Improvements**
 
-* [#19] Enable query 'q' Elasticsearch parameter in getDepositions / deleteRecords
+* [#19](https://github.com/eblondel/zen4R/issues/19) Enable query 'q' Elasticsearch parameter in getDepositions / deleteRecords
 
 **Corrections**
 
