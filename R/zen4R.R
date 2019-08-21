@@ -19,8 +19,8 @@
 #'  \tabular{ll}{
 #'    Package: \tab zen4R\cr
 #'    Type: \tab Package\cr
-#'    Version: \tab 0.2\cr
-#'    Date: \tab 2019-08-02\cr
+#'    Version: \tab 0.3\cr
+#'    Date: \tab 2019-08-21\cr
 #'    License: \tab MIT\cr
 #'    LazyLoad: \tab yes\cr
 #'  }
