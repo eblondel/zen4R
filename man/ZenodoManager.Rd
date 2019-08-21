@@ -59,14 +59,16 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getFunderById(id)}}{
    Get funder by Id
  }
- \item{\code{getDepositions(q, size, all_versions)}}{
+ \item{\code{getDepositions(q, size, all_versions, exact)}}{
    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
    the list of depositions will be returned by page with a size of 10 results per
    page (default size of the Zenodo API). The parameter \code{q} allows to specify
    an ElasticSearch-compliant query to filter depositions (default query is empty 
    to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
-   to get all versions of records as part of the depositions list. Examples of 
-   ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+   to get all versions of records as part of the depositions list. The argument \code{exact}
+   specifies that an exact matching is wished, in which case paginated search will be
+   disabled (only the first search page will be returned).
+   Examples of ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
  }
  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
@@ -124,6 +126,26 @@ Main user class to be used with \pkg{zen4R}
  }
  \item{\code{deleteFile(recordId, fileId)}}{
    Deletes a file for a given Zenodo deposited record
+ }
+ \item{\code{getRecords(q, size, all_versions, exact)}}{
+   Get the list of Zenodo records. By defaut the list of records will be returned by
+    page with a size of 10 results per page (default size of the Zenodo API). The parameter 
+    \code{q} allows to specify an ElasticSearch-compliant query to filter depositions 
+    (default query is empty to retrieve all records). The argument \code{all_versions}, 
+    if set to TRUE allows to get all versions of records as part of the depositions list. 
+    The argument \code{exact} specifies that an exact matching is wished, in which case 
+    paginated search will be disabled (only the first search page will be returned).
+    Examples of 
+   ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+ }
+ \item{\code{getRecordByConceptDOI(conceptdoi)}}{
+   Get a Zenodo published record by concept DOI (generic DOI common to all record versions)
+ }
+ \item{\code{getRecordByDOI(doi)}}{
+   Get a Zenodo published record by DOI.
+ }
+ \item{\code{getRecordById(recid)}}{
+   Get a Zenodo published record by its Zenodo specific record id.
  }
 }
 }

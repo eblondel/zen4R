@@ -45,14 +45,16 @@
 #'  \item{\code{getFunderById(id)}}{
 #'    Get funder by Id
 #'  }
-#'  \item{\code{getDepositions(q, size, all_versions)}}{
+#'  \item{\code{getDepositions(q, size, all_versions, exact)}}{
 #'    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
 #'    the list of depositions will be returned by page with a size of 10 results per
 #'    page (default size of the Zenodo API). The parameter \code{q} allows to specify
 #'    an ElasticSearch-compliant query to filter depositions (default query is empty 
 #'    to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
-#'    to get all versions of records as part of the depositions list. Examples of 
-#'    ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+#'    to get all versions of records as part of the depositions list. The argument \code{exact}
+#'    specifies that an exact matching is wished, in which case paginated search will be
+#'    disabled (only the first search page will be returned).
+#'    Examples of ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
 #'  }
 #'  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
 #'    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
@@ -110,6 +112,26 @@
 #'  }
 #'  \item{\code{deleteFile(recordId, fileId)}}{
 #'    Deletes a file for a given Zenodo deposited record
+#'  }
+#'  \item{\code{getRecords(q, size, all_versions, exact)}}{
+#'    Get the list of Zenodo records. By defaut the list of records will be returned by
+#'     page with a size of 10 results per page (default size of the Zenodo API). The parameter 
+#'     \code{q} allows to specify an ElasticSearch-compliant query to filter depositions 
+#'     (default query is empty to retrieve all records). The argument \code{all_versions}, 
+#'     if set to TRUE allows to get all versions of records as part of the depositions list. 
+#'     The argument \code{exact} specifies that an exact matching is wished, in which case 
+#'     paginated search will be disabled (only the first search page will be returned).
+#'     Examples of 
+#'    ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+#'  }
+#'  \item{\code{getRecordByConceptDOI(conceptdoi)}}{
+#'    Get a Zenodo published record by concept DOI (generic DOI common to all record versions)
+#'  }
+#'  \item{\code{getRecordByDOI(doi)}}{
+#'    Get a Zenodo published record by DOI.
+#'  }
+#'  \item{\code{getRecordById(recid)}}{
+#'    Get a Zenodo published record by its Zenodo specific record id.
 #'  }
 #' }
 #' 
@@ -464,7 +486,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #------------------------------------------------------------------------------------------
     
     #getDepositions
-    getDepositions = function(q = "", size = 10, all_versions = FALSE){
+    getDepositions = function(q = "", size = 10, all_versions = FALSE, exact = TRUE){
       page <- 1
       req <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
@@ -478,15 +500,20 @@ ZenodoManager <-  R6Class("ZenodoManager",
         while(hasRecords){
           out <- c(out, lapply(resp, ZenodoRecord$new))
           self$INFO(sprintf("Successfuly fetched list of depositions - page %s", page))
-          #next
-          page <- page+1
-          nextreq <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
-          if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
-          zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
-                                      token = private$token, logger = self$loggerType)
-          zenReq$execute()
-          resp <- zenReq$getResponse()
-          hasRecords <- length(resp)>0
+          
+          if(exact){
+            hasRecords <- FALSE
+          }else{
+            #next
+            page <- page+1
+            nextreq <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
+            if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
+            zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
+                                        token = private$token, logger = self$loggerType)
+            zenReq$execute()
+            resp <- zenReq$getResponse()
+            hasRecords <- length(resp)>0
+          }
         }
         self$INFO("Successfuly fetched list of depositions!")
       }else{
@@ -502,7 +529,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByConceptDOI
     getDepositionByConceptDOI = function(conceptdoi){
       query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
-      result <- self$getDepositions(q = query)
+      result <- self$getDepositions(q = query, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
         if(result$conceptdoi == conceptdoi){
@@ -528,7 +555,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionByDOI
     getDepositionByDOI = function(doi){
       query <- sprintf("doi:%s", gsub("/", "//", doi))
-      result <- self$getDepositions(q = query, all_versions = TRUE)
+      result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
         if(result$doi == doi){
@@ -554,7 +581,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getDepositionbyId
     getDepositionById = function(recid){
       query <- sprintf("recid:%s", recid)
-      result <- self$getDepositions(q = query, all_versions = TRUE)
+      result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
         if(result$id == recid){
@@ -808,6 +835,122 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$ERROR(sprintf("Error while deleting file from record '%s': %s", recordId, out$message))
       }
       return(out)
+    },
+    
+    
+    #Records
+    #------------------------------------------------------------------------------------------
+    
+    #getRecords
+    getRecords = function(q = "", size = 10, all_versions = FALSE, exact = FALSE){
+      page <- 1
+      req <- sprintf("records?q=%s&size=%s&page=%s", q, size, page)
+      if(all_versions) req <- paste0(req, "&all_versions=1")
+      zenReq <- ZenodoRequest$new(private$url, "GET", req, 
+                                  token = private$token, logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        hasRecords <- length(resp)>0
+        while(hasRecords){
+          out <- c(out, lapply(resp, ZenodoRecord$new))
+          self$INFO(sprintf("Successfuly fetched list of published records - page %s", page))
+          
+          if(exact){
+            hasRecords <- FALSE
+          }else{
+            #next
+            page <- page+1
+            nextreq <- sprintf("records?q=%s&size=%s&page=%s", q, size, page)
+            if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
+            zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
+                                        token = private$token, logger = self$loggerType)
+            zenReq$execute()
+            resp <- zenReq$getResponse()
+            hasRecords <- length(resp)>0
+          }
+        }
+        self$INFO("Successfuly fetched list of published records!")
+      }else{
+        out <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while fetching published records: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
+      }
+      return(out)
+    },
+    
+    #getRecordByConceptDOI
+    getRecordByConceptDOI = function(conceptdoi){
+      query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
+      result <- self$getRecords(q = query, exact = TRUE)
+      if(length(result)>0){
+        result <- result[[1]]
+        if(result$conceptdoi == conceptdoi){
+          self$INFO(sprintf("Successfuly fetched published record for concept DOI '%s'!", conceptdoi))
+        }else{
+          result <- NULL
+        }
+      }else{
+        result <- NULL
+      }
+      if(is.null(result)) self$WARN(sprintf("No published record for concept DOI '%s'!", conceptdoi))
+      if(is.null(result)){
+        #try to get record by id
+        if( regexpr("zenodo", conceptdoi)>0){
+          recid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
+          self$INFO(sprintf("Try to get published record by Zenodo specific record id '%s'", recid))
+          result <- self$getRecordById(recid)
+        }
+      }
+      return(result)
+    },
+    
+    #getRecordByDOI
+    getRecordByDOI = function(doi){
+      query <- sprintf("doi:%s", gsub("/", "//", doi))
+      result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(length(result)>0){
+        result <- result[[1]]
+        if(result$doi == doi){
+          self$INFO(sprintf("Successfuly fetched record for DOI '%s'!",doi))
+        }else{
+          result <- NULL
+        }
+      }else{
+        result <- NULL
+      }
+      if(is.null(result)) self$WARN(sprintf("No record for DOI '%s'!",doi))
+      if(is.null(result)){
+        #try to get record by id
+        if( regexpr("zenodo", doi)>0){
+          recid <- unlist(strsplit(doi, "zenodo."))[2]
+          self$INFO(sprintf("Try to get deposition by Zenodo specific record id '%s'", recid))
+          result <- self$getRecordById(recid)
+        }
+      }
+      return(result)
+    },
+    
+    #getRecordById
+    getRecordById = function(recid){
+      query <- sprintf("recid:%s", recid)
+      result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(length(result)>0){
+        result <- result[[1]]
+        if(result$id == recid){
+          self$INFO(sprintf("Successfuly fetched record for id '%s'!",recid))
+        }else{
+          result <- NULL
+        }
+      }else{
+        result <- NULL
+      }
+      if(is.null(result)) self$WARN(sprintf("No record for id '%s'!",recid))
+      return(result)
     }
+    
   )
 )
