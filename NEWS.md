@@ -1,3 +1,13 @@
+## **_0.3_**
+
+**New features**
+
+* [#23](https://github.com/eblondel/zen4R/issues/23) Methods to search published records (other than own depositions)
+
+**Corrections**
+
+* [#24](https://github.com/eblondel/zen4R/issues/24) Exact search/matching with concept DOI doesn't work
+
 ## **_0.2_**
 
 **New features**
