@@ -645,7 +645,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                             "isPartOf", "hasPart", "compiles", "isCompiledBy", "isIdenticalTo",
                             "isAlternateIdentifier")
       if(!(relation %in% allowedRelations)){
-        stop(sprint("Relation '%s' incorrect. Use a value among the following [%s]", 
+        stop(sprintf("Relation '%s' incorrect. Use a value among the following [%s]", 
                     relation, paste(allowedRelations, collapse=",")))
       }
       added <- FALSE
