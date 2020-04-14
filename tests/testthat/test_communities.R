@@ -22,5 +22,5 @@ test_that("community is retrieved by id",{
   zenodo <- ZenodoManager$new(logger = "INFO")
   zen_community <- zenodo$getCommunityById("fisheries")
   expect_equal(zen_community$id, "fisheries")
-  expect_equal(zen_license$title, "Fisheries and aquaculture")
+  expect_equal(zen_community$title, "Fisheries and aquaculture")
 })
