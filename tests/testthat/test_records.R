@@ -78,6 +78,8 @@ test_that("create, deposit and publish record",{
   myrec$setUploadType("publication")
   myrec$setPublicationType("article")
   myrec$addCreator(firstname = "John", lastname = "Doe", affiliation = "Independent")
+  myrec$addCreator(name = "Doe2, John2", affiliation = "Independent")
+  expect_equal(myrec$metadata$creators[[1]], )
   myrec$setLicense("mit")
   myrec$addCommunity("ecfunded")
   myrec$setKeywords(c("R","package","software"))

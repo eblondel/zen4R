@@ -47,8 +47,11 @@
 #'  \item{\code{setAccessConditions(accessConditions)}}{
 #'    Set access conditions.
 #'  }
-#'  \item{\code{addCreator(firsname, lastname, affiliation, orcid, gnd)}}{
-#'    Add a creator for the record.
+#'  \item{\code{addCreator(firsname, lastname, name, affiliation, orcid, gnd)}}{
+#'    Add a creator for the record. One approach is to use the \code{firstname} and
+#'    \code{lastname} arguments, that by default will be concatenated for Zenodo as
+#'    \code{lastname, firstname}. For more flexibility over this, the \code{name}
+#'    argument can be directly used.
 #'  }
 #'  \item{\code{removeCreator(by,property)}}{
 #'    Removes a creator by a property. The \code{by} parameter should be the name
@@ -519,8 +522,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #addCreator
-    addCreator = function(firstname, lastname, affiliation = NULL, orcid = NULL, gnd = NULL){
-      creator <- list(name = paste(lastname, firstname, sep=", "))
+    addCreator = function(firstname, lastname, name = paste(lastname, firstname, sep = ", "),
+                          affiliation = NULL, orcid = NULL, gnd = NULL){
+      creator <- list(name = name)
       if(!is.null(affiliation)) creator <- c(creator, affiliation = affiliation)
       if(!is.null(orcid)) creator <- c(creator, orcid = orcid)
       if(!is.null(gnd)) creator <- c(creator, gnd = gnd)

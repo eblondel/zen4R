@@ -58,8 +58,11 @@ ZenodoRecord
  \item{\code{setAccessConditions(accessConditions)}}{
    Set access conditions.
  }
- \item{\code{addCreator(firsname, lastname, affiliation, orcid, gnd)}}{
-   Add a creator for the record.
+ \item{\code{addCreator(firsname, lastname, name, affiliation, orcid, gnd)}}{
+   Add a creator for the record. One approach is to use the \code{firstname} and
+   \code{lastname} arguments, that by default will be concatenated for Zenodo as
+   \code{lastname, firstname}. For more flexibility over this, the \code{name}
+   argument can be directly used.
  }
  \item{\code{removeCreator(by,property)}}{
    Removes a creator by a property. The \code{by} parameter should be the name
