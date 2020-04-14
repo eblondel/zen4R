@@ -799,7 +799,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       added <- FALSE
       zen <- ZenodoManager$new()
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
-      if(!(community %in% self$metadata$communities)){
+      if(!(community %in% sapply(self$metadata$communities, function(x){x$identifier}))){
         zen_community <- zen$getCommunityById(community)
         if(is.null(zen_community)){
           errorMsg <- sprintf("Community with id '%s' doesn't exist in Zenodo", community)
