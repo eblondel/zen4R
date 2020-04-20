@@ -79,6 +79,9 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getDepositionById(recid)}}{
    Get a Zenodo deposition record by its Zenodo specific record id.
  }
+ \item{\code{getDepositionByConceptId(conceptrecid)}}{
+   Get a Zenodo deposition record by its Zenodo concept id.
+ }
  \item{\code{depositRecord(record, publish)}}{
    A method to deposit/update a Zenodo record. The record should be an object
    of class \code{ZenodoRecord}. The method returns the deposited record
@@ -146,6 +149,9 @@ Main user class to be used with \pkg{zen4R}
  }
  \item{\code{getRecordById(recid)}}{
    Get a Zenodo published record by its Zenodo specific record id.
+ }
+ \item{\code{getRecordByConceptId(conceptrecid)}}{
+   Get a Zenodo published record by its Zenodo concept id.
  }
 }
 }
