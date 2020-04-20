@@ -65,6 +65,9 @@
 #'  \item{\code{getDepositionById(recid)}}{
 #'    Get a Zenodo deposition record by its Zenodo specific record id.
 #'  }
+#'  \item{\code{getDepositionByConceptId(conceptrecid)}}{
+#'    Get a Zenodo deposition record by its Zenodo concept id.
+#'  }
 #'  \item{\code{depositRecord(record, publish)}}{
 #'    A method to deposit/update a Zenodo record. The record should be an object
 #'    of class \code{ZenodoRecord}. The method returns the deposited record
@@ -132,6 +135,9 @@
 #'  }
 #'  \item{\code{getRecordById(recid)}}{
 #'    Get a Zenodo published record by its Zenodo specific record id.
+#'  }
+#'  \item{\code{getRecordByConceptId(conceptrecid)}}{
+#'    Get a Zenodo published record by its Zenodo concept id.
 #'  }
 #' }
 #' 
@@ -544,9 +550,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(is.null(result)){
         #try to get record by id
         if( regexpr("zenodo", conceptdoi)>0){
-          recid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
-          self$INFO(sprintf("Try to get deposition by Zenodo specific record id '%s'", recid))
-          result <- self$getDepositionById(recid)
+          conceptrecid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
+          self$INFO(sprintf("Try to get deposition by Zenodo specific record id '%s'", conceptrecid))
+          result <- self$getDepositionByConceptId(conceptrecid)
         }
       }
       return(result)
@@ -593,6 +599,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
         result <- NULL
       }
       if(is.null(result)) self$WARN(sprintf("No record for id '%s'!",recid))
+      return(result)
+    },
+    
+    #getDepositionbyConceptId
+    getDepositionByConceptId = function(conceptrecid){
+      query <- sprintf("conceptrecid:%s", conceptrecid)
+      result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
+      if(length(result)>0){
+        result <- result[[1]]
+        if(result$conceptrecid == conceptrecid){
+          self$INFO(sprintf("Successfuly fetched record for concept id '%s'!",conceptrecid))
+        }else{
+          result <- NULL
+        }
+      }else{
+        result <- NULL
+      }
+      if(is.null(result)) self$WARN(sprintf("No record for concept id '%s'!",conceptrecid))
       return(result)
     },
     
@@ -693,8 +717,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
         out <- TRUE
         self$INFO(sprintf("Successful deleted record '%s'", recordId))
       }else{
-        out <- zenReq$getResponse()
-        self$ERROR(sprintf("Error while deleting record '%s': %s", recordId, out$message))
+        resp <- zenReq$getResponse()
+        self$ERROR(sprintf("Error while deleting record '%s': %s", recordId, resp$message))
       }
       return(out)
     },
@@ -884,8 +908,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #getRecordByConceptDOI
     getRecordByConceptDOI = function(conceptdoi){
+      if(regexpr("zenodo", conceptdoi) < 0){
+        stop(sprintf("DOI '%s' doesn not seem to be a Zenodo DOI", conceptdoi))
+      }
       query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
-      result <- self$getRecords(q = query, exact = TRUE)
+      result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
         if(result$conceptdoi == conceptdoi){
@@ -900,9 +927,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(is.null(result)){
         #try to get record by id
         if( regexpr("zenodo", conceptdoi)>0){
-          recid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
-          self$INFO(sprintf("Try to get published record by Zenodo specific record id '%s'", recid))
-          result <- self$getRecordById(recid)
+          conceptrecid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
+          self$INFO(sprintf("Try to get published record by Zenodo concept record id '%s'", conceptrecid))
+          result <- self$getRecordByConceptId(conceptrecid)
         }
       }
       return(result)
@@ -910,6 +937,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #getRecordByDOI
     getRecordByDOI = function(doi){
+      if(regexpr("zenodo", doi) < 0){
+        stop(sprintf("DOI '%s' doesn not seem to be a Zenodo DOI", doi))
+      }
       query <- sprintf("doi:%s", gsub("/", "//", doi))
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
@@ -949,6 +979,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
         result <- NULL
       }
       if(is.null(result)) self$WARN(sprintf("No record for id '%s'!",recid))
+      return(result)
+    },
+    
+    #getRecordByConceptId
+    getRecordByConceptId = function(conceptrecid){
+      query <- sprintf("conceptrecid:%s", recid)
+      result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(length(result)>0){
+        result <- result[[1]]
+        if(result$conceptrecid == conceptrecid){
+          self$INFO(sprintf("Successfuly fetched record for concept id '%s'!",conceptrecid))
+        }else{
+          result <- NULL
+        }
+      }else{
+        result <- NULL
+      }
+      if(is.null(result)) self$WARN(sprintf("No record for concept id '%s'!",conceptrecid))
       return(result)
     }
     
