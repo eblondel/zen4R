@@ -20,7 +20,7 @@
 #'    Package: \tab zen4R\cr
 #'    Type: \tab Package\cr
 #'    Version: \tab 0.3-1\cr
-#'    Date: \tab 2020-04-14\cr
+#'    Date: \tab 2020-04-22\cr
 #'    License: \tab MIT\cr
 #'    LazyLoad: \tab yes\cr
 #'  }
