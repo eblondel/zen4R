@@ -4,9 +4,8 @@
 \name{zen4RLogger}
 \alias{zen4RLogger}
 \title{zen4RLogger}
-\format{\code{\link{R6Class}} object.}
-\usage{
-zen4RLogger
+\format{
+\code{\link{R6Class}} object.
 }
 \value{
 Object of \code{\link{R6Class}} for modelling a simple logger

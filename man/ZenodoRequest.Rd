@@ -4,9 +4,8 @@
 \name{ZenodoRequest}
 \alias{ZenodoRequest}
 \title{ZenodoRequest}
-\format{\code{\link{R6Class}} object.}
-\usage{
-ZenodoRequest
+\format{
+\code{\link{R6Class}} object.
 }
 \value{
 Object of \code{\link{R6Class}} for modelling a generic Zenodo request

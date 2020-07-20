@@ -4,9 +4,8 @@
 \name{ZenodoManager}
 \alias{ZenodoManager}
 \title{ZenodoManager}
-\format{\code{\link{R6Class}} object.}
-\usage{
-ZenodoManager
+\format{
+\code{\link{R6Class}} object.
 }
 \value{
 Object of \code{\link{R6Class}} for modelling an ZenodoManager
