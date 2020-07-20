@@ -415,19 +415,24 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       locale <- Sys.getlocale("LC_TIME")
       Sys.setlocale("LC_TIME", "us_US")
       html <- xml2::read_html(self$links$latest_html)
-      html_versions <- html_nodes(html, "table")[3]
+      html_versions <- xml2::xml_find_all(html, ".//table")[3]
       versions <- data.frame(
-        date = as.Date(sapply(html_nodes(html_versions, "tr"), function(x){
-          html_date <- html_text(html_nodes(x, "small")[2])
+        date = as.Date(sapply(xml2::xml_find_all(html_versions, ".//tr"), function(x){
+          xml_version <- xml2::read_xml(as.character(x))
+          html_date <- xml2::xml_text(xml2::xml_find_all(xml_version, ".//small")[2])
           date <- as.Date(strptime(html_date, format="%b %d, %Y"))
           return(date)
         }), origin = "1970-01-01"),
-        version = sapply(html_nodes(html_versions, "tr"), function(x){
-          v <- html_text(html_nodes(x, "a")[1])
+        version = sapply(xml2::xml_find_all(html_versions, ".//tr"), function(x){
+          xml_version <- xml2::read_xml(as.character(x))
+          v <- xml2::xml_text(xml2::xml_find_all(xml_version, "//a")[1])
           v <- substr(v, 9, nchar(v)-1)
           return(v)
         }),
-        doi = sapply(html_nodes(html_versions, "tr"), function(x){html_text(html_nodes(x, "small")[1])}),
+        doi = sapply(xml2::xml_find_all(html_versions, ".//tr"), function(x){
+          xml_version <- xml2::read_xml(as.character(x))
+          xml2::xml_text(xml2::xml_find_all(xml_version, ".//small")[1])
+        }),
         stringsAsFactors = FALSE
       )
       versions <- versions[rev(row.names(versions)),]
@@ -1039,7 +1044,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       )
       
       html <- xml2::read_html(metadata_export_url)
-      reference <- html_nodes(html, "pre")
+      reference <- xml2::xml_find_all(html, ".//pre")
       reference <- reference[1]
       reference <- gsub("<pre.*\">","",reference)
       reference <- gsub("</pre>","",reference)
