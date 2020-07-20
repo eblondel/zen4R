@@ -984,7 +984,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #getRecordByConceptId
     getRecordByConceptId = function(conceptrecid){
-      query <- sprintf("conceptrecid:%s", recid)
+      query <- sprintf("conceptrecid:%s", conceptrecid)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
