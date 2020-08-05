@@ -8,6 +8,7 @@
 #' @import httr
 #' @import jsonlite
 #' @import xml2
+#' @import keyring
 #' 
 #' @title Interface to 'Zenodo' REST API
 #' @description Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
