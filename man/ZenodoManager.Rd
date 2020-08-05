@@ -20,11 +20,15 @@ Main user class to be used with \pkg{zen4R}
 
 \describe{
  \item{\code{new(url, token, logger)}}{
-   This method is used to instantiate an ZenodoManager. By default,
-   the url is set to "https://zenodo.org/api". The token is
-   mandatory in order to use Zenodo API. The logger can be either
-   NULL, "INFO" (with minimum logs), or "DEBUG" (for complete curl 
-   http calls logs)
+   This method is used to instantiate the \code{ZenodoManager}. By default,
+   the url is set to "https://zenodo.org/api". For tests, the Zenodo sandbox API 
+   URL can be used: https://sandbox.zenodo.org/api .
+   
+   The token is mandatory in order to use Zenodo API deposit actions. By default, 
+   \pkg{zen4R} will first try to get it from environment variable 'ZENODO_PAT'.
+   
+   The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
+   (for complete curl http calls logs)
  }
  \item{\code{getLicenses(pretty)}}{
    Get the list of licenses. By default the argument \code{pretty} is set to 
