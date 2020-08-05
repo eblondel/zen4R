@@ -5,6 +5,10 @@ cache: packages
 
 services:
   - docker
+  
+apt_packages:
+  - libxml2-dev
+  - libsodium-dev
 
 r:
   - oldrel
