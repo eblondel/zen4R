@@ -323,6 +323,23 @@
 #'    Export metadata as all Zenodo supported metadata formats. THis function will
 #'    create one file per Zenodo metadata formats.
 #'  }
+#'  \item{\code{listFiles(pretty)}}{
+#'    List files attached to the record. By default \code{pretty} is TRUE and the output
+#'    will be a \code{data.frame}, otherwise a \code{list} will be returned.
+#'  }
+#'  \item{\code{downloadFiles(path, parallel, parallel_handler, cl, ...)}}{
+#'    Download files attached to the record. The \code{path} can be specified as target
+#'    download directory (by default it will be the current working directory).
+#'    
+#'    The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
+#'    the files download. If set to \code{TRUE}, files will be downloaded in parallel
+#'    using default \code{mclapply} interface from \pkg{parallel} package. To use a different
+#'    parallel handler (such as eg \code{parLapply} or \code{parSapply}), specify its function
+#'    in \code{parallel_handler} argument. For cluster-based parallel download, this is the 
+#'    way to proceed. In that case, the cluster should be created earlier by the user with 
+#'    \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
+#'    will be stopped automatically.
+#'  }
 #' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
@@ -1106,6 +1123,68 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     exportAsAllFormats = function(filename){
       formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
       invisible(lapply(formats, self$exportAs, filename))
+    },
+    
+    #listFiles
+    listFiles = function(pretty = TRUE){
+      if(!pretty) return(self$files)
+      outdf <- do.call("rbind", lapply(self$files, function(x){
+        return(
+          data.frame(
+            id = x$id,
+            checksum = x$checksum,
+            filename = x$filename,
+            download = x$links$download,
+            self = x$links$self,
+            stringsAsFactors = FALSE
+          )
+        )
+      }))
+      return(outdf)
+    },
+    
+    #downloadFiles
+    downloadFiles = function(path = ".", parallel = FALSE, parallel_handler = NULL, cl = NULL, ...){
+      if(length(self$files)==0){
+        self$WARN(sprintf("No files to download for record '%s' (doi: '%s')",
+                          self$id, self$doi))
+      }else{
+        files_summary <- sprintf("Download %s file%s from record '%s' (doi: '%s') - total size: %s",
+                                length(self$files), ifelse(length(self$files)>1,"s",""), self$id, 
+                                self$doi, sum(sapply(self$files, function(x){x$filesize})))
+        
+        download_file <- function(file){
+          cat(sprintf("Downloading file '%s' from record '%s' (doi: '%s') - size: %s\n", 
+                            file$filename, self$id, self$doi, file$filesize))
+          download.file(url = file$links$download, destfile = file.path(path, file$filename))
+          cat(sprintf("File '%s' successfully downloaded at '%s'\n",
+                            file$filename, file.path(path, file$filename)))
+        }
+        
+        if(parallel){
+          self$INFO("Download in parallel mode")
+          if(is.null(parallel_handler)){
+            self$INFO("Using default parallel 'mclapply' handler")
+            self$INFO(files_summary)
+            invisible(mclapply(self$files, download_file, ...))
+          }else{
+            self$INFO("Using cluster-based parallel handler")
+            if(is.null(cl)){
+              errMsg <- "No cluster object defined as 'cl' argument. Aborting file download..."
+              self$ERROR(errMsg)
+              stop(errMsg)
+            }
+            self$INFO(files_summary)
+            invisible(parallel_handler(cl, self$files, download_file, ...))
+            try(stopCluster(cl))
+          }
+        }else{
+          self$INFO("Download in sequential mode")
+          self$INFO(files_summary) 
+          invisible(lapply(self$files, download_file))
+        }
+        self$INFO("End of download")
+      }
     }
     
   )

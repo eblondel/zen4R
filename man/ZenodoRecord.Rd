@@ -333,6 +333,23 @@ ZenodoRecord
    Export metadata as all Zenodo supported metadata formats. THis function will
    create one file per Zenodo metadata formats.
  }
+ \item{\code{listFiles(pretty)}}{
+   List files attached to the record. By default \code{pretty} is TRUE and the output
+   will be a \code{data.frame}, otherwise a \code{list} will be returned.
+ }
+ \item{\code{downloadFiles(path, parallel, parallel_handler, cl, ...)}}{
+   Download files attached to the record. The \code{path} can be specified as target
+   download directory (by default it will be the current working directory).
+   
+   The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
+   the files download. If set to \code{TRUE}, files will be downloaded in parallel
+   using default \code{mclapply} interface from \pkg{parallel} package. To use a different
+   parallel handler (such as eg \code{parLapply} or \code{parSapply}), specify its function
+   in \code{parallel_handler} argument. For cluster-based parallel download, this is the 
+   way to proceed. In that case, the cluster should be created earlier by the user with 
+   \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
+   will be stopped automatically.
+ }
 }
 }
 

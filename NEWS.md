@@ -1,3 +1,13 @@
+## **_0.4_**
+
+* [#26](https://github.com/eblondel/zen4R/issues/26) addCreator: allow to specify name, rather than firstname and lastname
+* [#27](https://github.com/eblondel/zen4R/issues/27) Fix bugs in addCommunity 
+* [#28](https://github.com/eblondel/zen4R/issues/28) Fix search by concept DOI
+* [#30](https://github.com/eblondel/zen4R/issues/30) simple way to supply token from envvar with ``zenodo_pat()``
+* [#31]https://github.com/eblondel/zen4R/issues/31) Methods to list/download files from Zenodo record
+* [#32](https://github.com/eblondel/zen4R/issues/32) Remove dependency with rvest package (not stricly needed)
+* [#33](https://github.com/eblondel/zen4R/issues/33) Secure API token with 'keyring'
+
 ## **_0.3_**
 
 **New features**
