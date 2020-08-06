@@ -349,6 +349,10 @@ ZenodoRecord
    way to proceed. In that case, the cluster should be created earlier by the user with 
    \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
    will be stopped automatically.
+   
+   Additional arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
+   can be added (eg. \code{mc.cores} for \code{mclapply})
+   
  }
 }
 }
