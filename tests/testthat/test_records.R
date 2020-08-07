@@ -125,6 +125,30 @@ test_that("get by record DOI",{
   expect_equal(rec$metadata$title, "My publication title - 2020-04-14 21:53:08")
 })
 
+test_that("list & downloading files",{
+  zenodo <- ZenodoManager$new(logger = "INFO")
+  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+  expect_is(rec$listFiles(pretty = FALSE), "list")
+  files <- rec$listFiles(pretty = TRUE)
+  expect_is(files, "data.frame")
+  expect_equal(nrow(files), length(rec$files))
+  
+  dir.create("download_zenodo")
+  rec$downloadFiles(path = "download_zenodo")
+  downloaded_files <- list.files("download_zenodo")
+  expect_equal(length(downloaded_files), length(rec$files))
+  unlink("download_zenodo", recursive = T)
+  
+})
+
+test_that("list & downloading files - using wrapper",{
+  dir.create("download_zenodo")
+  download_zenodo(path = "download_zenodo", "10.5281/zenodo.3378733")
+  downloaded_files <- list.files("download_zenodo")
+  expect_equal(length(downloaded_files), length(rec$files))
+  unlink("download_zenodo", recursive = T)
+})
+
 test_that("versioning",{
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
   rec$setTitle(paste("My publication title -", Sys.time()))
@@ -151,4 +175,9 @@ test_that("versions & DOIs",{
   
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.527226")
   expect_is(rec, "ZenodoRecord")
+})
+
+test_that("versions & DOIS - using wrapper",{
+  df <- get_versions("10.5281/zenodo.2547036")
+  expect_is(df, "data.frame")
 })
