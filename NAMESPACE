@@ -3,6 +3,7 @@
 export(ZenodoManager)
 export(ZenodoRecord)
 export(ZenodoRequest)
+export(download_zenodo)
 export(zen4RLogger)
 import(httr)
 import(jsonlite)
