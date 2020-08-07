@@ -1,7 +1,8 @@
 #' @name download_zenodo
 #' @aliases download_zenodo
 #' @title download_zenodo
-#' @description \code{download_zenodo} allows to execute a workflow
+#' @description \code{download_zenodo} allows to download archives attached to a Zenodo
+#' record, identified by its DOI or concept DOI.
 #'
 #' @usage download_zenodo("10.5281/zenodo.2547036")
 #'                 
