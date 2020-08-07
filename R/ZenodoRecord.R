@@ -1157,12 +1157,24 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                                 length(self$files), ifelse(length(self$files)>1,"s",""), self$id, 
                                 self$doi, sum(sapply(self$files, function(x){x$filesize})))
         
+        #download_file util
         download_file <- function(file){
-          cat(sprintf("Downloading file '%s' from record '%s' (doi: '%s') - size: %s\n", 
+          cat(sprintf("[zen4R][INFO] Downloading file '%s' from record '%s' (doi: '%s') - size: %s\n", 
                             file$filename, self$id, self$doi, file$filesize))
-          download.file(url = file$links$download, destfile = file.path(path, file$filename))
-          cat(sprintf("File '%s' successfully downloaded at '%s'\n",
-                            file$filename, file.path(path, file$filename)))
+          target_file <-file.path(path, file$filename)
+          download.file(url = file$links$download, destfile = target_file)
+          
+          #check md5sum
+          target_file_md5sum <- tools::md5sum(target_file)
+          if(target_file_md5sum==file$checksum){
+            cat(sprintf("[zen4R][INFO] File '%s' successfully downloaded at '%s' and its integrity verified (md5sum: %s)\n",
+                        file$filename, tools::file_path_as_absolute(target_file), file$checksum))
+          }else{
+            warnMsg <- sprintf("[zen4R][WARN] Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md4sum (%s)\n", 
+                               target_file_md5sum, tools::file_path_as_absolute(target_file), file$checksum)
+            cat(warnMsg)
+            warning(warnMsg)
+          }
         }
         
         if(parallel){
