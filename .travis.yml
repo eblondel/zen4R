@@ -2,6 +2,7 @@
 language: R
 sudo: required
 cache: packages
+warnings_are_errors: false
 
 services:
   - docker
