@@ -224,6 +224,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       super$initialize(logger = logger)
       private$keyring_service = paste0("zen4R@", url)
       private$url = url
+      if(is.null(token)) token <- ""
       keyring::key_set_with_value(private$keyring_service, username = "zen4R", password = token)
     },
     
