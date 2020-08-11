@@ -4,7 +4,7 @@
 \alias{download_zenodo}
 \title{download_zenodo}
 \usage{
-download_zenodo("10.5281/zenodo.2547036")
+download_zenodo(doi, path = ".", logger = NULL, ...)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
@@ -20,4 +20,10 @@ download_zenodo("10.5281/zenodo.2547036")
 \description{
 \code{download_zenodo} allows to download archives attached to a Zenodo
 record, identified by its DOI or concept DOI.
+}
+\examples{
+\dontrun{
+download_zenodo("10.5281/zenodo.2547036")
+}
+                
 }

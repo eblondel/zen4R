@@ -4,7 +4,10 @@
 #' @description \code{download_zenodo} allows to download archives attached to a Zenodo
 #' record, identified by its DOI or concept DOI.
 #'
-#' @usage download_zenodo("10.5281/zenodo.2547036")
+#' @examples 
+#' \dontrun{
+#' download_zenodo("10.5281/zenodo.2547036")
+#' }
 #'                 
 #' @param doi a Zenodo DOI or concept DOI
 #' @param path the target directory where to download files
