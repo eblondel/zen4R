@@ -1170,7 +1170,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
             cat(sprintf("[zen4R][INFO] File '%s' successfully downloaded at '%s' and its integrity verified (md5sum: %s)\n",
                         file$filename, tools::file_path_as_absolute(target_file), file$checksum))
           }else{
-            warnMsg <- sprintf("[zen4R][WARN] Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md4sum (%s)\n", 
+            warnMsg <- sprintf("[zen4R][WARN] Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md5sum (%s)\n", 
                                target_file_md5sum, tools::file_path_as_absolute(target_file), file$checksum)
             cat(warnMsg)
             warning(warnMsg)
