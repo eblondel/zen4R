@@ -15,7 +15,7 @@ download_zenodo("10.5281/zenodo.2547036")
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}
 
 \item{...}{any other arguments for parallel downloading (more information at
-\link{ZenodoManager}, \code{downloadFiles()} documentation)}
+\link{ZenodoRecord}, \code{downloadFiles()} documentation)}
 }
 \description{
 \code{download_zenodo} allows to download archives attached to a Zenodo

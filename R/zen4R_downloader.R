@@ -11,7 +11,7 @@
 #' @param logger a logger to print messages. The logger can be either NULL, 
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
 #' @param ... any other arguments for parallel downloading (more information at
-#'\link{ZenodoManager}, \code{downloadFiles()} documentation)
+#'\link{ZenodoRecord}, \code{downloadFiles()} documentation)
 #' 
 #' @export
 #' 
