@@ -4,7 +4,7 @@
 \alias{download_zenodo}
 \title{download_zenodo}
 \usage{
-download_zenodo(doi, path = ".", logger = NULL, ...)
+download_zenodo(doi, path = ".", logger = NULL, quiet = FALSE, ...)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
@@ -13,6 +13,9 @@ download_zenodo(doi, path = ".", logger = NULL, ...)
 
 \item{logger}{a logger to print messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}
+
+\item{quiet}{Logical (\code{FALSE} by default).
+Do you want to suppress informative messages (not warnings)?}
 
 \item{...}{any other arguments for parallel downloading (more information at
 \link{ZenodoRecord}, \code{downloadFiles()} documentation)}

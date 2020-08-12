@@ -13,12 +13,14 @@
 #' @param path the target directory where to download files
 #' @param logger a logger to print messages. The logger can be either NULL, 
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
+#' @param quiet Logical (\code{FALSE} by default).
+#' Do you want to suppress informative messages (not warnings)?
 #' @param ... any other arguments for parallel downloading (more information at
 #'\link{ZenodoRecord}, \code{downloadFiles()} documentation)
 #' 
 #' @export
 #' 
-download_zenodo = function(doi, path = ".", logger = NULL, ...){
+download_zenodo = function(doi, path = ".", logger = NULL, quiet = FALSE, ...){
   
   zenodo <- ZenodoManager$new(logger = logger)
   rec <- zenodo$getRecordByDOI(doi)
@@ -30,5 +32,5 @@ download_zenodo = function(doi, path = ".", logger = NULL, ...){
     }
   }
   #download
-  rec$downloadFiles(path = path, ...)
+  rec$downloadFiles(path = path, quiet = quiet, ...)
 }

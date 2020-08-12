@@ -340,6 +340,9 @@
 #'    \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
 #'    will be stopped automatically.
 #'    
+#'    The logical argument \code{quiet} (default is \code{FALSE}) can be set to 
+#'    suppress informative messages (not warnings).
+#'    
 #'    Additional arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
 #'    can be added (eg. \code{mc.cores} for \code{mclapply})
 #'    
@@ -1148,7 +1151,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #downloadFiles
-    downloadFiles = function(path = ".", parallel = FALSE, parallel_handler = NULL, cl = NULL, ...){
+    downloadFiles = function(path = ".", parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, ...){
       if(length(self$files)==0){
         self$WARN(sprintf("No files to download for record '%s' (doi: '%s')",
                           self$id, self$doi))
@@ -1159,17 +1162,18 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         
         #download_file util
         download_file <- function(file){
-          cat(sprintf("[zen4R][INFO] Downloading file '%s' from record '%s' (doi: '%s') - size: %s\n", 
+          if (!quiet) cat(sprintf("[zen4R][INFO] Downloading file '%s' from record '%s' (doi: '%s') - size: %s\n", 
                             file$filename, self$id, self$doi, file$filesize))
           target_file <-file.path(path, file$filename)
-          download.file(url = file$links$download, destfile = target_file)
+          download.file(url = file$links$download, destfile = target_file, 
+                        quiet = quiet)
         }          
         #check_integrity util
         check_integrity <- function(file){
           target_file <-file.path(path, file$filename)
           target_file_md5sum <- tools::md5sum(target_file)
           if(target_file_md5sum==file$checksum){
-            cat(sprintf("[zen4R][INFO] File '%s' successfully downloaded at '%s' and its integrity verified (md5sum: %s)\n",
+            if (!quiet) cat(sprintf("[zen4R][INFO] File '%s' successfully downloaded at '%s' and its integrity verified (md5sum: %s)\n",
                         file$filename, tools::file_path_as_absolute(target_file), file$checksum))
           }else{
             warnMsg <- sprintf("[zen4R][WARN] Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md5sum (%s)\n", 
@@ -1181,30 +1185,30 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
 
         
         if(parallel){
-          self$INFO("Download in parallel mode")
+          if (!quiet) self$INFO("Download in parallel mode")
           if(is.null(parallel_handler)){
-            self$INFO("Using default parallel 'mclapply' handler")
-            self$INFO(files_summary)
+            if (!quiet) self$INFO("Using default parallel 'mclapply' handler")
+            if (!quiet) self$INFO(files_summary)
             invisible(mclapply(self$files, download_file, ...))
           }else{
-            self$INFO("Using cluster-based parallel handler")
+            if (!quiet) self$INFO("Using cluster-based parallel handler")
             if(is.null(cl)){
               errMsg <- "No cluster object defined as 'cl' argument. Aborting file download..."
               self$ERROR(errMsg)
               stop(errMsg)
             }
-            self$INFO(files_summary)
+            if (!quiet) self$INFO(files_summary)
             invisible(parallel_handler(cl, self$files, download_file, ...))
             try(stopCluster(cl))
           }
         }else{
-          self$INFO("Download in sequential mode")
-          self$INFO(files_summary) 
+          if (!quiet) self$INFO("Download in sequential mode")
+          if (!quiet) self$INFO(files_summary) 
           invisible(lapply(self$files, download_file))
         }
-        self$INFO("Verifying file integrity...")
+        if (!quiet) self$INFO("Verifying file integrity...")
         invisible(lapply(self$files, check_integrity))
-        self$INFO("End of download")
+        if (!quiet) self$INFO("End of download")
       }
     }
     

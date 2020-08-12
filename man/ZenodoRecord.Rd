@@ -350,6 +350,9 @@ ZenodoRecord
    \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
    will be stopped automatically.
    
+   The logical argument \code{quiet} (default is \code{FALSE}) can be set to 
+   suppress informative messages (not warnings).
+   
    Additional arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
    can be added (eg. \code{mc.cores} for \code{mclapply})
    
