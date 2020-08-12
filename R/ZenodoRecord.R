@@ -1176,6 +1176,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
             warning(warnMsg)
           }
         }
+
         
         if(parallel){
           self$INFO("Download in parallel mode")
