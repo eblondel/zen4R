@@ -1163,8 +1163,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                             file$filename, self$id, self$doi, file$filesize))
           target_file <-file.path(path, file$filename)
           download.file(url = file$links$download, destfile = target_file)
-          
-          #check md5sum
+        }          
+        #check_integrity util
+        check_integrity <- function(file){
+          target_file <-file.path(path, file$filename)
           target_file_md5sum <- tools::md5sum(target_file)
           if(target_file_md5sum==file$checksum){
             cat(sprintf("[zen4R][INFO] File '%s' successfully downloaded at '%s' and its integrity verified (md5sum: %s)\n",
@@ -1200,6 +1202,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           self$INFO(files_summary) 
           invisible(lapply(self$files, download_file))
         }
+        self$INFO("Verifying file integrity...")
+        invisible(lapply(self$files, check_integrity))
         self$INFO("End of download")
       }
     }
