@@ -1156,7 +1156,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         self$WARN(sprintf("No files to download for record '%s' (doi: '%s')",
                           self$id, self$doi))
       }else{
-        files_summary <- sprintf("Download %s file%s from record '%s' (doi: '%s') - total size: %s",
+        files_summary <- sprintf("Will download %s file%s from record '%s' (doi: '%s') - total size: %s",
                                 length(self$files), ifelse(length(self$files)>1,"s",""), self$id, 
                                 self$doi, sum(sapply(self$files, function(x){x$filesize})))
         
