@@ -4,7 +4,7 @@
 \alias{download_zenodo}
 \title{download_zenodo}
 \usage{
-download_zenodo("10.5281/zenodo.2547036")
+download_zenodo(doi, path = ".", logger = NULL, quiet = FALSE, ...)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
@@ -14,10 +14,19 @@ download_zenodo("10.5281/zenodo.2547036")
 \item{logger}{a logger to print messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}
 
+\item{quiet}{Logical (\code{FALSE} by default).
+Do you want to suppress informative messages (not warnings)?}
+
 \item{...}{any other arguments for parallel downloading (more information at
-\link{ZenodoManager}, \code{downloadFiles()} documentation)}
+\link{ZenodoRecord}, \code{downloadFiles()} documentation)}
 }
 \description{
 \code{download_zenodo} allows to download archives attached to a Zenodo
 record, identified by its DOI or concept DOI.
+}
+\examples{
+\dontrun{
+download_zenodo("10.5281/zenodo.2547036")
+}
+                
 }

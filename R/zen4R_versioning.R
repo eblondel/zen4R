@@ -3,7 +3,10 @@
 #' @title get_versions
 #' @description \code{get_versions} allows to execute a workflow
 #'
-#' @usage get_versions("10.5281/zenodo.2547036")
+#' @examples 
+#' \dontrun{
+#' get_versions("10.5281/zenodo.2547036")
+#' }
 #'                 
 #' @param doi a Zenodo DOI or concept DOI
 #' @param logger a logger to print messages. The logger can be either NULL, 
