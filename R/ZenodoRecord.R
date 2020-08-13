@@ -1173,8 +1173,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           target_file <-file.path(path, file$filename)
           target_file_md5sum <- tools::md5sum(target_file)
           if(target_file_md5sum==file$checksum){
-            if (!quiet) cat(sprintf("[zen4R][INFO] File '%s' successfully downloaded at '%s' and its integrity verified (md5sum: %s)\n",
-                        file$filename, tools::file_path_as_absolute(target_file), file$checksum))
+            if (!quiet) cat(sprintf("[zen4R][INFO] File '%s': integrity verified (md5sum: %s)\n",
+                        file$filename, file$checksum))
           }else{
             warnMsg <- sprintf("[zen4R][WARN] Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md5sum (%s)\n", 
                                target_file_md5sum, tools::file_path_as_absolute(target_file), file$checksum)
@@ -1206,6 +1206,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           if (!quiet) self$INFO(files_summary) 
           invisible(lapply(self$files, download_file))
         }
+        if (!quiet) cat(sprintf("[zen4R][INFO] File%s downloaded at '%s'.\n",
+                                ifelse(length(self$files)>1,"s",""), tools::file_path_as_absolute(path)))
         if (!quiet) self$INFO("Verifying file integrity...")
         invisible(lapply(self$files, check_integrity))
         if (!quiet) self$INFO("End of download")
