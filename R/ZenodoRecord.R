@@ -1162,7 +1162,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           cat(sprintf("[zen4R][INFO] Downloading file '%s' from record '%s' (doi: '%s') - size: %s\n", 
                             file$filename, self$id, self$doi, file$filesize))
           target_file <-file.path(path, file$filename)
-          download.file(url = file$links$download, destfile = target_file)
+          download.file(url = file$links$download, destfile = target_file, mode = "wb")
           
           #check md5sum
           target_file_md5sum <- tools::md5sum(target_file)
