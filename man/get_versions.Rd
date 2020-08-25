@@ -4,7 +4,7 @@
 \alias{get_versions}
 \title{get_versions}
 \usage{
-get_versions("10.5281/zenodo.2547036")
+get_versions(doi, logger = NULL)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
@@ -18,4 +18,10 @@ including date, version number and version-specific DOI.
 }
 \description{
 \code{get_versions} allows to execute a workflow
+}
+\examples{
+\dontrun{
+get_versions("10.5281/zenodo.2547036")
+}
+                
 }
