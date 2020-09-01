@@ -6,7 +6,14 @@
 #'
 #' @examples 
 #' \dontrun{
-#' download_zenodo("10.5281/zenodo.2547036")
+#'  #simple download (sequential)   
+#'  download_zenodo("10.5281/zenodo.2547036")
+#'  
+#'  #download files as parallel using a cluster approach (for both Unix/Win systems)
+#'  download_zenodo("10.5281/zenodo.2547036", parallel = TRUE, parallel_handler = parLapply, cl = makeCluster(2))
+#'  
+#'  #download files as parallel using mclapply (for Unix systems)
+#'  download_zenodo("10.5281/zenodo.2547036", parallel = TRUE, parallel_handler = mclapply, mc.cores = 2)
 #' }
 #'                 
 #' @param doi a Zenodo DOI or concept DOI

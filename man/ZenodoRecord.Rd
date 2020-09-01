@@ -342,13 +342,13 @@ ZenodoRecord
    download directory (by default it will be the current working directory).
    
    The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
-   the files download. If set to \code{TRUE}, files will be downloaded in parallel
-   using default \code{mclapply} interface from \pkg{parallel} package. To use a different
-   parallel handler (such as eg \code{parLapply} or \code{parSapply}), specify its function
+   the files download. If set to \code{TRUE}, files will be downloaded in parallel.
+   using the chosen \code{parallel_handler}, eg \code{mclapply} interface from \pkg{parallel} package. 
+   To use a different parallel handler (such as eg \code{parLapply} or \code{parSapply}), specify its function
    in \code{parallel_handler} argument. For cluster-based parallel download, this is the 
    way to proceed. In that case, the cluster should be created earlier by the user with 
    \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
-   will be stopped automatically.
+   will be stopped automatically. See examples in \code{download_zenodo} utility function.
    
    The logical argument \code{quiet} (default is \code{FALSE}) can be set to 
    suppress informative messages (not warnings).
