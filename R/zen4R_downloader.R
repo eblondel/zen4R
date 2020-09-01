@@ -60,11 +60,6 @@ download_zenodo = function(doi, path = ".", logger = NULL, quiet = FALSE, ...){
 #' 
 #' @keywords internal
 #'
-#' @examples
-#' human_filesize(7845691)
-#' v <- c(12345, 456987745621258)
-#' human_filesize(v)
-#'
 human_filesize <- function(x) {
   assert_that(is.numeric(x))
   assert_that(all(x %% 1 == 0 & x >= 0))
