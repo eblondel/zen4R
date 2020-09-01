@@ -18,7 +18,7 @@
 #' 
 get_versions = function(doi, logger = NULL){
   
-  zenodo <- ZenodoManager$new(logger = logger)
+  zenodo <- suppressWarnings(ZenodoManager$new(logger = logger))
   rec <- zenodo$getRecordByDOI(doi)
   if(is.null(rec)){
     #try to get it as concept DOI
