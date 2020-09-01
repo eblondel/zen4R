@@ -58,7 +58,7 @@
 #'    to get all versions of records as part of the depositions list. The argument \code{exact}
 #'    specifies that an exact matching is wished, in which case paginated search will be
 #'    disabled (only the first search page will be returned).
-#'    Examples of ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+#'    Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
 #'  }
 #'  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
 #'    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
