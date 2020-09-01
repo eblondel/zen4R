@@ -570,7 +570,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
         if( regexpr("zenodo", conceptdoi)>0){
           conceptrecid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
           self$INFO(sprintf("Try to get deposition by Zenodo specific record id '%s'", conceptrecid))
-          result <- self$getDepositionByConceptId(conceptrecid)
+          conceptrec <- self$getDepositionByConceptId(conceptrecid)
+          last_doi <- tail(conceptrec$getVersions(),1L)$doi
+          result <- self$getDepositionByDOI(last_doi)
         }
       }
       return(result)
@@ -950,7 +952,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
         if( regexpr("zenodo", conceptdoi)>0){
           conceptrecid <- unlist(strsplit(conceptdoi, "zenodo."))[2]
           self$INFO(sprintf("Try to get published record by Zenodo concept record id '%s'", conceptrecid))
-          result <- self$getRecordByConceptId(conceptrecid)
+          conceptrec <- self$getRecordByConceptId(conceptrecid)
+          last_doi <- tail(conceptrec$getVersions(),1L)$doi
+          result <- self$getRecordByDOI(last_doi)
         }
       }
       return(result)
