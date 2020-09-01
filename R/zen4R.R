@@ -11,6 +11,8 @@
 #' @import keyring
 #' @importFrom tools file_path_as_absolute
 #' @importFrom tools md5sum
+#' @importFrom assertthat assert_that
+#' @importFrom dplyr %>%
 #' @importFrom parallel mclapply
 #' 
 #' @title Interface to 'Zenodo' REST API
