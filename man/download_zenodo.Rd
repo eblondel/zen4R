@@ -11,7 +11,7 @@ download_zenodo(doi, path = ".", logger = NULL, quiet = FALSE, ...)
 
 \item{path}{the target directory where to download files}
 
-\item{logger}{a logger to print messages. The logger can be either NULL, 
+\item{logger}{a logger to print Zenodo API-related messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}
 
 \item{quiet}{Logical (\code{FALSE} by default).

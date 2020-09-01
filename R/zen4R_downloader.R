@@ -18,7 +18,7 @@
 #'                 
 #' @param doi a Zenodo DOI or concept DOI
 #' @param path the target directory where to download files
-#' @param logger a logger to print messages. The logger can be either NULL, 
+#' @param logger a logger to print Zenodo API-related messages. The logger can be either NULL, 
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
 #' @param quiet Logical (\code{FALSE} by default).
 #' Do you want to suppress informative messages (not warnings)?
