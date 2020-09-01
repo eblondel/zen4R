@@ -22,7 +22,7 @@
 #' 
 download_zenodo = function(doi, path = ".", logger = NULL, quiet = FALSE, ...){
   
-  zenodo <- ZenodoManager$new(logger = logger)
+  zenodo <- suppressWarnings(ZenodoManager$new(logger = logger))
   rec <- zenodo$getRecordByDOI(doi)
   if(is.null(rec)){
     #try to get it as concept DOI
