@@ -1162,7 +1162,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         
         #download_file util
         download_file <- function(file){
-          file$filename <- gsub("/", "_", file$filename)
+          file$filename <- substring(file$filename, regexpr("/", file$filename)+1, nchar(file$filename))
           if (!quiet) cat(sprintf("[zen4R][INFO] Downloading file '%s' - size: %s\n", 
                             file$filename, human_filesize(file$filesize)))
           target_file <-file.path(path, file$filename)
@@ -1171,7 +1171,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }          
         #check_integrity util
         check_integrity <- function(file){
-          file$filename <- gsub("/", "_", file$filename)
+          file$filename <- substring(file$filename, regexpr("/", file$filename)+1, nchar(file$filename))
           target_file <-file.path(path, file$filename)
           #check md5sum
           target_file_md5sum <- tools::md5sum(target_file)
