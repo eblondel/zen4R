@@ -71,7 +71,7 @@ Main user class to be used with \pkg{zen4R}
    to get all versions of records as part of the depositions list. The argument \code{exact}
    specifies that an exact matching is wished, in which case paginated search will be
    disabled (only the first search page will be returned).
-   Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+   Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
  }
  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
@@ -107,7 +107,7 @@ Main user class to be used with \pkg{zen4R}
    Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
    to specify an ElasticSearch-compliant query to filter depositions (default query 
    is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo 
-   can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}. 
+   can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}. 
  }
  \item{\code{createEmptyRecord()}}{
    Creates an empty record in the Zenodo deposit. Returns the record
@@ -142,7 +142,7 @@ Main user class to be used with \pkg{zen4R}
     The argument \code{exact} specifies that an exact matching is wished, in which case 
     paginated search will be disabled (only the first search page will be returned).
     Examples of 
-   ElasticSearch queries for Zenodo can be found at \href{http://help.zenodo.org/guides/search/}{http://help.zenodo.org/guides/search/}.
+   ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
  }
  \item{\code{getRecordByConceptDOI(conceptdoi)}}{
    Get a Zenodo published record by concept DOI (generic DOI common to all record versions)
