@@ -1158,13 +1158,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }else{
         files_summary <- sprintf("Will download %s file%s from record '%s' (doi: '%s') - total size: %s",
                                 length(self$files), ifelse(length(self$files)>1,"s",""), self$id, self$doi, 
-                                sum(sapply(self$files, function(x){x$filesize})) %>% human_filesize())
+                                human_filesize(sum(sapply(self$files, function(x){x$filesize}))))
         
         #download_file util
         download_file <- function(file){
           file$filename <- gsub("/", "_", file$filename)
           if (!quiet) cat(sprintf("[zen4R][INFO] Downloading file '%s' - size: %s\n", 
-                            file$filename, file$filesize %>% human_filesize()))
+                            file$filename, human_filesize(file$filesize)))
           target_file <-file.path(path, file$filename)
           download.file(url = file$links$download, destfile = target_file, 
                         quiet = quiet, mode = "wb")

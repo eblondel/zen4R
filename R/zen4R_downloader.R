@@ -63,12 +63,7 @@ download_zenodo = function(doi, path = ".", logger = NULL, quiet = FALSE, ...){
 #' @keywords internal
 #'
 human_filesize <- function(x) {
-  assert_that(is.numeric(x))
-  assert_that(all(x %% 1 == 0 & x >= 0))
-  magnitude <-
-    log(x, base = 1024) %>%
-    floor %>%
-    pmin(8)
+  magnitude <- pmin(floor(log(x, base = 1024)), 8)
   unit <- factor(magnitude,
                  levels = 0:8,
                  labels = c(
@@ -82,6 +77,6 @@ human_filesize <- function(x) {
                    "ZiB",
                    "YiB")
   )
-  size <- (x / 1024^magnitude) %>% round(1)
+  size <- round(x / 1024^magnitude, 1)
   return(paste(size, unit))
 }
