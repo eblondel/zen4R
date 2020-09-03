@@ -1,3 +1,9 @@
+## **_0.4-1_**
+
+**Improvements**
+
+*[#41](https://github.com/eblondel/zen4R/issues/41) Make ZenodoManager raise an error if token is invalid
+
 ## **_0.4_**
 
 **New features**
