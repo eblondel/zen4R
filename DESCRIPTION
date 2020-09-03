@@ -10,8 +10,8 @@ Authors@R: c(
   person("Floris", "Vanderhaeghe", role = c("ctb"), comment = c(ORCID = "0000-0002-6378-6229")))
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
-Imports: R6, httr, jsonlite, xml2, keyring, tools, parallel
-Suggests: testthat
+Imports: R6, httr, jsonlite, xml2, keyring, tools
+Suggests: testthat, parallel
 Description: Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
   including management of depositions, attribution of DOIs by 'Zenodo' and 
   upload of files.

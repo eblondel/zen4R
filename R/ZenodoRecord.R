@@ -1196,10 +1196,15 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           }
           if(!is.null(parallel_handler)){
             if(!is.null(cl)){
+              if (!requireNamespace("parallel", quietly = TRUE)) {
+                errMsg <- "Package \"parallel\" needed for cluster-based parallel handler. Please install it."
+                self$ERROR(errMsg)
+                stop(errMsg)
+              }
               if (!quiet) self$INFO("Using cluster-based parallel handler (cluster 'cl' argument specified)")
               if (!quiet) self$INFO(files_summary)
               invisible(parallel_handler(cl, self$files, download_file, ...))
-              try(stopCluster(cl))
+              try(parallel::stopCluster(cl))
             }else{
               if (!quiet) self$INFO("Using non cluster-based (no cluster 'cl' argument specified)")
               if (!quiet) self$INFO(files_summary)
