@@ -11,7 +11,6 @@
 #' @import keyring
 #' @importFrom tools file_path_as_absolute
 #' @importFrom tools md5sum
-#' @importFrom parallel mclapply
 #' 
 #' @title Interface to 'Zenodo' REST API
 #' @description Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
