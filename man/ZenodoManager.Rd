@@ -30,6 +30,9 @@ Main user class to be used with \pkg{zen4R}
    The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
    (for complete curl http calls logs)
  }
+ \item{\code{getToken()}}{
+   Get Zenodo user token.
+ }
  \item{\code{getLicenses(pretty)}}{
    Get the list of licenses. By default the argument \code{pretty} is set to 
    \code{TRUE} which will returns the list of licenses as \code{data.frame}.

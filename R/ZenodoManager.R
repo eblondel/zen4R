@@ -17,6 +17,9 @@
 #'    The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
 #'    (for complete curl http calls logs)
 #'  }
+#'  \item{\code{getToken()}}{
+#'    Get Zenodo user token.
+#'  }
 #'  \item{\code{getLicenses(pretty)}}{
 #'    Get the list of licenses. By default the argument \code{pretty} is set to 
 #'    \code{TRUE} which will returns the list of licenses as \code{data.frame}.
@@ -226,6 +229,21 @@ ZenodoManager <-  R6Class("ZenodoManager",
       private$url = url
       if(is.null(token)) token <- ""
       keyring::key_set_with_value(private$keyring_service, username = "zen4R", password = token)
+      if(nzchar(token)){
+        zenodo_manager <- self
+        zenodo_manager$loggerType <- NULL 
+        deps <- zenodo_manager$getDepositions(size = 1)
+        if(!is.null(deps$status)) if(deps$status == 401){
+          errMsg <- "Cannot connect to your Zenodo deposit: Invalid token"
+          self$ERROR(errMsg)
+          stop(errMsg)
+        }
+      }
+    },
+    
+    #getToken
+    getToken = function(){
+      suppressWarnings(keyring::key_get(private$keyring_service, username = "zen4R"))
     },
     
     #Licenses
@@ -234,7 +252,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getLicenses
     getLicenses = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=&size=1000",
-                                  token= keyring::key_get(private$keyring_service, username = "zen4R"), 
+                                  token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -262,7 +280,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getLicenseById
     getLicenseById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("licenses/%s",id),
-                                  token= keyring::key_get(private$keyring_service, username = "zen4R"), 
+                                  token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -280,7 +298,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getCommunities
     getCommunities = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "communities?q=&size=10000",
-                                  token= keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -311,7 +329,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getCommunityById
     getCommunityById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities/%s",id),
-                                  token= keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -333,7 +351,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       page <- 1
       lastPage <- FALSE
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants?size=%s&page=%s", size, page), 
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -350,7 +368,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
             lastPage <- TRUE
           }
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants?size=%s&page=%s", size, page), 
-                                      token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                      token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
           if(zenReq$getStatus() == 200){
@@ -406,7 +424,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getGrantById
     getGrantById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/%s",id),
-                                  token= keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -428,7 +446,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       page <- 1
       lastPage <- FALSE
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders?size=%s&page=%s", size, page), 
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -445,7 +463,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
             lastPage <- TRUE
           }
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders?size=%s&page=%s", size, page), 
-                                      token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                      token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
           if(zenReq$getStatus() == 200){
@@ -491,7 +509,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getFunderById
     getFunderById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/%s",id),
-                                  token= keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
@@ -513,7 +531,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       req <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -532,7 +550,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
             nextreq <- sprintf("deposit/depositions?q=%s&size=%s&page=%s", q, size, page)
             if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
             zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
-                                        token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                        token = self$getToken(),
                                         logger = self$loggerType)
             zenReq$execute()
             resp <- zenReq$getResponse()
@@ -647,7 +665,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       request <- ifelse(is.null(record$id), "deposit/depositions", 
                         sprintf("deposit/depositions/%s", record$id))
       zenReq <- ZenodoRequest$new(private$url, type, request, data = data,
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"), 
+                                  token = self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -685,7 +703,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       self$INFO(sprintf("Creating new version for record '%s' (concept DOI: '%s')", record_id, record$getConceptDOI()))
       request <- sprintf("deposit/depositions/%s/actions/newversion", record_id)
       zenReq <- ZenodoRequest$new(private$url, type, request, data = NULL,
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -730,7 +748,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #deleteRecord
     deleteRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "DELETE", "deposit/depositions", 
-                                  data = recordId, token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  data = recordId, token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
@@ -780,7 +798,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #editRecord
     editRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/edit", recordId),
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -797,7 +815,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #discardChanges
     discardChanges = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/discard", recordId),
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -814,7 +832,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #publisRecord
     publishRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/publish",recordId),
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -831,7 +849,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #getFiles
     getFiles = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions/%s/files", recordId), 
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -851,7 +869,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       filename <- unlist(fileparts)[length(fileparts)]
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/files", recordId), 
                                   data = filename, file = upload_file(path),
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -868,7 +886,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #deleteFile
     deleteFile = function(recordId, fileId){
       zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("deposit/depositions/%s/files", recordId), 
-                                  data = fileId, token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  data = fileId, token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
@@ -892,7 +910,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       req <- sprintf("records?q=%s&size=%s&page=%s", q, size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
-                                  token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
@@ -911,7 +929,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
             nextreq <- sprintf("records?q=%s&size=%s&page=%s", q, size, page)
             if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
             zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
-                                        token = keyring::key_get(private$keyring_service, username = "zen4R"),
+                                        token = self$getToken(),
                                         logger = self$loggerType)
             zenReq$execute()
             resp <- zenReq$getResponse()
