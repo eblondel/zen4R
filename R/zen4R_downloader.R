@@ -9,6 +9,7 @@
 #'  #simple download (sequential)   
 #'  download_zenodo("10.5281/zenodo.2547036")
 #'  
+#'  library(parallel)
 #'  #download files as parallel using a cluster approach (for both Unix/Win systems)
 #'  download_zenodo("10.5281/zenodo.2547036", 
 #'    parallel = TRUE, parallel_handler = parLapply, cl = makeCluster(2))
