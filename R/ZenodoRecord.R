@@ -440,20 +440,22 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       Sys.setlocale("LC_TIME", "us_US")
       html <- xml2::read_html(self$links$latest_html)
       html_versions <- xml2::xml_find_all(html, ".//table")[3]
+      elems <- xml2::xml_find_all(html_versions, ".//tr")
+      elems <- elems[sapply(elems, function(x){regexpr("concept", x)<0})]
       versions <- data.frame(
-        date = as.Date(sapply(xml2::xml_find_all(html_versions, ".//tr"), function(x){
+        date = as.Date(sapply(elems, function(x){
           xml_version <- xml2::read_xml(as.character(x))
           html_date <- xml2::xml_text(xml2::xml_find_all(xml_version, ".//small")[2])
           date <- as.Date(strptime(html_date, format="%b %d, %Y"))
           return(date)
         }), origin = "1970-01-01"),
-        version = sapply(xml2::xml_find_all(html_versions, ".//tr"), function(x){
+        version = sapply(elems, function(x){
           xml_version <- xml2::read_xml(as.character(x))
           v <- xml2::xml_text(xml2::xml_find_all(xml_version, "//a")[1])
           v <- substr(v, 9, nchar(v)-1)
           return(v)
         }),
-        doi = sapply(xml2::xml_find_all(html_versions, ".//tr"), function(x){
+        doi = sapply(elems, function(x){
           xml_version <- xml2::read_xml(as.character(x))
           xml2::xml_text(xml2::xml_find_all(xml_version, ".//small")[1])
         }),
