@@ -225,11 +225,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), logger = NULL){
       super$initialize(logger = logger)
-      private$keyring_service = paste0("zen4R@", url)
       private$url = url
-      if(is.null(token)) token <- ""
-      keyring::key_set_with_value(private$keyring_service, username = "zen4R", password = token)
-      if(nzchar(token)){
+      if(!is.null(token)) if(nzchar(token)){
+        private$keyring_service = paste0("zen4R@", url)
+        keyring::key_set_with_value(private$keyring_service, username = "zen4R", password = token)
         deps <- self$getDepositions(size = 1, quiet = TRUE)
         if(!is.null(deps$status)) {
           if(deps$status == 401){
@@ -240,12 +239,18 @@ ZenodoManager <-  R6Class("ZenodoManager",
         }else{
           self$INFO("Successfully connected to Zenodo with user token")
         }
+      }else{
+        self$INFO("Successfully connected to Zenodo as anonymous user")
       }
     },
     
     #getToken
     getToken = function(){
-      suppressWarnings(keyring::key_get(private$keyring_service, username = "zen4R"))
+      token <- NULL
+      if(!is.null(private$keyring_service)){
+        token <- suppressWarnings(keyring::key_get(private$keyring_service, username = "zen4R"))
+      }
+      return(token)
     },
     
     #Licenses
