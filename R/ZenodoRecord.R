@@ -681,8 +681,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
       added <- FALSE
       if(is.null(self$metadata$related_identifiers)) self$metadata$related_identifiers <- list()
-      if(!(relation %in% sapply(self$metadata$related_identifiers, function(x){x$relation})) &
-         !(identifier %in% sapply(self$metadata$related_identifiers, function(x){x$identifier}))){
+      ids_df <- data.frame(relation = character(0), identifier = character(0), stringsAsFactors = FALSE)
+      if(length(self$metadata$related_identifiers)>0){
+        ids_df <- do.call("rbind", lapply(self$metadata$related_identifiers, function(x){
+          data.frame(relation = x$relation, identifier = x$identifier, stringsAsFactors = FALSE)
+        }))
+      }
+      if(nrow(ids_df[ids_df$relation == relation & ids_df$identifier == identifier,])==0){
         self$metadata$related_identifiers[[length(self$metadata$related_identifiers)+1]] <- list(
           relation = relation,
           identifier = identifier
