@@ -337,9 +337,12 @@ ZenodoRecord
    List files attached to the record. By default \code{pretty} is TRUE and the output
    will be a \code{data.frame}, otherwise a \code{list} will be returned.
  }
- \item{\code{downloadFiles(path, parallel, parallel_handler, cl, ...)}}{
+ \item{\code{downloadFiles(path, files, parallel, parallel_handler, cl, ...)}}{
    Download files attached to the record. The \code{path} can be specified as target
-   download directory (by default it will be the current working directory).
+   download directory (by default it will be the current working directory). 
+   
+   Download can be restrained to one more file which names can be provided as vector 
+   using the \code{files} argument. By default, all files are downloaded.
    
    The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
    the files download. If set to \code{TRUE}, files will be downloaded in parallel.

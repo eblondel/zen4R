@@ -4,12 +4,21 @@
 \alias{download_zenodo}
 \title{download_zenodo}
 \usage{
-download_zenodo(doi, path = ".", logger = NULL, quiet = FALSE, ...)
+download_zenodo(
+  doi,
+  path = ".",
+  files = list(),
+  logger = NULL,
+  quiet = FALSE,
+  ...
+)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
 
 \item{path}{the target directory where to download files}
+
+\item{files}{subset of filenames to restrain to download. If ignored, all files will be downloaded.}
 
 \item{logger}{a logger to print Zenodo API-related messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}

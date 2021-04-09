@@ -21,6 +21,7 @@
 #'                 
 #' @param doi a Zenodo DOI or concept DOI
 #' @param path the target directory where to download files
+#' @param files subset of filenames to restrain to download. If ignored, all files will be downloaded.
 #' @param logger a logger to print Zenodo API-related messages. The logger can be either NULL, 
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
 #' @param quiet Logical (\code{FALSE} by default).
@@ -30,7 +31,7 @@
 #' 
 #' @export
 #' 
-download_zenodo = function(doi, path = ".", logger = NULL, quiet = FALSE, ...){
+download_zenodo = function(doi, path = ".", files = list(), logger = NULL, quiet = FALSE, ...){
   
   zenodo <- suppressWarnings(ZenodoManager$new(logger = logger))
   rec <- zenodo$getRecordByDOI(doi)
@@ -42,7 +43,7 @@ download_zenodo = function(doi, path = ".", logger = NULL, quiet = FALSE, ...){
     }
   }
   #download
-  rec$downloadFiles(path = path, quiet = quiet, ...)
+  rec$downloadFiles(path = path, files = files, quiet = quiet, ...)
 }
 
 #' Human-readable binary file size

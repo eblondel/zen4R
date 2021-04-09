@@ -327,9 +327,12 @@
 #'    List files attached to the record. By default \code{pretty} is TRUE and the output
 #'    will be a \code{data.frame}, otherwise a \code{list} will be returned.
 #'  }
-#'  \item{\code{downloadFiles(path, parallel, parallel_handler, cl, ...)}}{
+#'  \item{\code{downloadFiles(path, files, parallel, parallel_handler, cl, ...)}}{
 #'    Download files attached to the record. The \code{path} can be specified as target
-#'    download directory (by default it will be the current working directory).
+#'    download directory (by default it will be the current working directory). 
+#'    
+#'    Download can be restrained to one more file which names can be provided as vector 
+#'    using the \code{files} argument. By default, all files are downloaded.
 #'    
 #'    The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
 #'    the files download. If set to \code{TRUE}, files will be downloaded in parallel.
@@ -1158,14 +1161,30 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #downloadFiles
-    downloadFiles = function(path = ".", parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, ...){
+    downloadFiles = function(path = ".", files = list(),
+                             parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, ...){
       if(length(self$files)==0){
         self$WARN(sprintf("No files to download for record '%s' (doi: '%s')",
                           self$id, self$doi))
       }else{
+        files.list <- self$files
+        if(length(files)>0) files.list <- files.list[sapply(files.list, function(x){x$filename %in% files})]
+        if(length(files.list)==0){
+          errMsg <- sprintf("No files available in record '%s' (doi: '%s') for file names [%s]",
+                            self$id, self$doi, paste0(files, collapse=","))
+          self$ERROR(errMsg)
+          stop(errMsg)
+        }
+        for(file in files){
+          if(!file %in% sapply(files.list, function(x){x$filename})){
+            self$WARN(sprintf("No files available in record '%s' (doi: '%s') for file name '%s': ",
+                              self$id, self$doi, file))
+          }
+        }
+        
         files_summary <- sprintf("Will download %s file%s from record '%s' (doi: '%s') - total size: %s",
-                                length(self$files), ifelse(length(self$files)>1,"s",""), self$id, self$doi, 
-                                human_filesize(sum(sapply(self$files, function(x){x$filesize}))))
+                                length(files.list), ifelse(length(files.list)>1,"s",""), self$id, self$doi, 
+                                human_filesize(sum(sapply(files.list, function(x){x$filesize}))))
         
         #download_file util
         download_file <- function(file){
@@ -1192,7 +1211,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
             warning(warnMsg)
           }
         }
-
         
         if(parallel){
           if (!quiet) self$INFO("Download in parallel mode")
@@ -1210,23 +1228,23 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
               }
               if (!quiet) self$INFO("Using cluster-based parallel handler (cluster 'cl' argument specified)")
               if (!quiet) self$INFO(files_summary)
-              invisible(parallel_handler(cl, self$files, download_file, ...))
+              invisible(parallel_handler(cl, files.list, download_file, ...))
               try(parallel::stopCluster(cl))
             }else{
               if (!quiet) self$INFO("Using non cluster-based (no cluster 'cl' argument specified)")
               if (!quiet) self$INFO(files_summary)
-              invisible(parallel_handler(self$files, download_file, ...))
+              invisible(parallel_handler(files.list, download_file, ...))
             }
           }
         }else{
           if (!quiet) self$INFO("Download in sequential mode")
           if (!quiet) self$INFO(files_summary) 
-          invisible(lapply(self$files, download_file))
+          invisible(lapply(files.list, download_file))
         }
         if (!quiet) cat(sprintf("[zen4R][INFO] File%s downloaded at '%s'.\n",
-                                ifelse(length(self$files)>1,"s",""), tools::file_path_as_absolute(path)))
+                                ifelse(length(files.list)>1,"s",""), tools::file_path_as_absolute(path)))
         if (!quiet) self$INFO("Verifying file integrity...")
-        invisible(lapply(self$files, check_integrity))
+        invisible(lapply(files.list, check_integrity))
         if (!quiet) self$INFO("End of download")
       }
     }
