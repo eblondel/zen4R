@@ -23,7 +23,7 @@ test_that("create and deposit record",{
   myrec$setUploadType("publication")
   myrec$setPublicationType("article")
   myrec$addCreator(firstname = "John", lastname = "Doe", affiliation = "Independent")
-  myrec$setLicense("mit")
+  myrec$setLicense("MIT")
   expect_true(myrec$addCommunity("ecfunded"))
   expect_false(myrec$addCommunity("ecfunded"))
   myrec$setKeywords(c("R","package","software"))
