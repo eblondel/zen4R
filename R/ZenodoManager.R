@@ -117,7 +117,7 @@
 #'  \item{\code{getFiles(recordId)}}{
 #'    Get the list of uploaded files for a deposited record
 #'  }
-#'  \item{\code{uploadFile(path, recordId)}}{
+#'  \item{\code{uploadFile(path, record, recordId)}}{
 #'    Uploads a file for a given Zenodo deposited record
 #'  }
 #'  \item{\code{deleteFile(recordId, fileId)}}{
@@ -190,7 +190,7 @@
 #'   #HOW TO UPLOAD FILES to a deposit
 #'   
 #'   #upload a file
-#'   ZENODO$uploadFile("path/to/your/file", myrec$id)
+#'   ZENODO$uploadFile("path/to/your/file", record = myrec)
 #'   
 #'   #list files
 #'   zen_files <- ZENODO$getFiles(myrec$id)
@@ -734,7 +734,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           self$INFO("Upload files to new version")
           for(f in files){
             self$INFO(sprintf("Upload file '%s' to new version", f))
-            self$uploadFile(f, out$id)
+            self$uploadFile(f, record = out)
           }
         }
         
@@ -872,10 +872,19 @@ ZenodoManager <-  R6Class("ZenodoManager",
     },
     
     #uploadFile
-    uploadFile = function(path, recordId){
+    uploadFile = function(path, record = NULL, recordId = NULL){
+      newapi = TRUE
+      if(!is.null(recordId)){
+        self$WARN("'recordId' argument is deprecated, please consider using 'record' argument giving an object of class 'ZenodoRecord'")
+        self$WARN("'recordId' is used, cannot determine new API record bucket, switch to old upload API...")
+        newapi <- FALSE
+      }
+      if(!is.null(record)) recordId <- record$id
       fileparts <- strsplit(path,"/")
       filename <- unlist(fileparts)[length(fileparts)]
-      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/files", recordId), 
+      method <- ifelse(newapi, "PUT", "POST")
+      method_url <- ifelse(newapi, sprintf("%s/%s", unlist(strsplit(record$links$bucket, "api/"))[2], filename), sprintf("deposit/depositions/%s/files", recordId))
+      zenReq <- ZenodoRequest$new(private$url, method, method_url, 
                                   data = filename, file = upload_file(path),
                                   token = self$getToken(),
                                   logger = self$loggerType)

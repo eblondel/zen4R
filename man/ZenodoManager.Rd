@@ -130,7 +130,7 @@ Main user class to be used with \pkg{zen4R}
  \item{\code{getFiles(recordId)}}{
    Get the list of uploaded files for a deposited record
  }
- \item{\code{uploadFile(path, recordId)}}{
+ \item{\code{uploadFile(path, record, recordId)}}{
    Uploads a file for a given Zenodo deposited record
  }
  \item{\code{deleteFile(recordId, fileId)}}{
@@ -204,7 +204,7 @@ Main user class to be used with \pkg{zen4R}
   #HOW TO UPLOAD FILES to a deposit
   
   #upload a file
-  ZENODO$uploadFile("path/to/your/file", myrec$id)
+  ZENODO$uploadFile("path/to/your/file", record = myrec)
   
   #list files
   zen_files <- ZENODO$getFiles(myrec$id)

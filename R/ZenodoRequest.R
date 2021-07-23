@@ -147,7 +147,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       data <- private$prepareData(data)
       
       #headers
-      headers <- c("Content-Type" = "application/json",
+      headers <- c("Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
                    "Authorization" = paste("Bearer",private$token))
       
       #send request
