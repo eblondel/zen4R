@@ -206,6 +206,7 @@
 ZenodoManager <-  R6Class("ZenodoManager",
   inherit = zen4RLogger,
   private = list(
+    keyring_backend = keyring::backend_env$new(),
     keyring_service = NULL,
     url = "https://zenodo.org/api"
   ),
@@ -228,7 +229,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       private$url = url
       if(!is.null(token)) if(nzchar(token)){
         private$keyring_service = paste0("zen4R@", url)
-        keyring::key_set_with_value(private$keyring_service, username = "zen4R", password = token)
+        private$keyring_backend$set_with_value(private$keyring_service, username = "zen4R", password = token)
         deps <- self$getDepositions(size = 1, quiet = TRUE)
         if(!is.null(deps$status)) {
           if(deps$status == 401){
@@ -248,7 +249,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getToken = function(){
       token <- NULL
       if(!is.null(private$keyring_service)){
-        token <- suppressWarnings(keyring::key_get(private$keyring_service, username = "zen4R"))
+        token <- suppressWarnings(private$keyring_backend$get(private$keyring_service, username = "zen4R"))
       }
       return(token)
     },

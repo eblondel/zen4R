@@ -1,6 +1,6 @@
 Package: zen4R
 Version: 0.4-3
-Date: 2021-07-23
+Date: 2021-09-07
 Title: Interface to 'Zenodo' REST API
 Authors@R: c(
   person("Emmanuel", "Blondel", role = c("aut", "cre"), email = "emmanuel.blondel1@gmail.com", comment = c(ORCID = "0000-0002-5870-5762")),
