@@ -64,7 +64,7 @@ test_that("create and deposit record",{
   expect_is(deposit, "ZenodoRecord")
   
   #add files
-  ZENODO$uploadFile("README.md", recordId = deposit$id)
+  ZENODO$uploadFile("README.md", record = deposit)
   
   #delete record
   deleted <- ZENODO$deleteRecord(deposit$id)
@@ -101,7 +101,7 @@ test_that("create, deposit and publish record",{
   expect_is(deposit, "ZenodoRecord")
   
   #add files
-  ZENODO$uploadFile("README.md", recordId = deposit$id)
+  ZENODO$uploadFile("README.md", record = deposit)
   
   #publish record
   deposit <- ZENODO$publishRecord(deposit$id)
@@ -140,6 +140,7 @@ test_that("list & downloading files",{
 })
 
 test_that("list & downloading files - using wrapper",{
+  zenodo <- ZenodoManager$new(logger = "INFO")
   rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
   dir.create("download_zenodo")
   download_zenodo(path = "download_zenodo", "10.5281/zenodo.3378733")
