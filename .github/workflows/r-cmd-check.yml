@@ -21,6 +21,8 @@ jobs:
       #R Set-up
       - name: Set up R ${{ matrix.config.r }}
         uses: r-lib/actions/setup-r@v1
+        env:
+          ZENODO_SANDBOX_SECRET: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
         with:
           r-version: ${{ matrix.config.r }}
       #Install dependencies
@@ -29,7 +31,5 @@ jobs:
       #Check R Package
       - name: Check R package
         uses: r-lib/actions/check-r-package@check-r-package
-        env:
-          ZENODO_SANDBOX_SECRET: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
         with:
           artifact-name: ${{ matrix.config.os }}_r-${{ matrix.config.r }}-results
