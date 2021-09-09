@@ -9,9 +9,12 @@ zenodo_logger <- "DEBUG"
 ZENODO <- try(ZenodoManager$new(url = zenodo_url, token = zenodo_token, logger = zenodo_logger))
 
 if(is(ZENODO, "ZenodoManager")){
-  cat(sprintf("Zenodo sandbox '%s' configured with token. Running integration tests...\n", zenodo_url))
-  cat(sprintf("Zenodo sandbox token = %s", ZENODO$getToken()))
-  test_check("zen4R")
+  if(!ZENODO$anonymous){
+    cat(sprintf("Zenodo sandbox '%s' configured with user token. Running integration tests...\n", zenodo_url))
+    test_check("zen4R")
+  }else{
+    cat("Zenodo sandbox '%s' not configured with user token. Skipping integration tests...\n")
+  }
 }else{
   cat("Zenodo sandbox '%s' not configured. Skipping integration tests...\n")
 }

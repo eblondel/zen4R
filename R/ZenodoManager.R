@@ -212,6 +212,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
   ),
   public = list(
     #logger
+    anonymous = FALSE,
     verbose.info = FALSE,
     verbose.debug = FALSE,
     loggerType = NULL,
@@ -242,6 +243,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         }
       }else{
         self$INFO("Successfully connected to Zenodo as anonymous user")
+        self$anonymous <- TRUE
       }
     },
     
