@@ -64,7 +64,7 @@ test_that("create and deposit record",{
   expect_is(deposit, "ZenodoRecord")
   
   #add files
-  ZENODO$uploadFile("README.md", deposit$id)
+  ZENODO$uploadFile("README.md", recordId = deposit$id)
   
   #delete record
   deleted <- ZENODO$deleteRecord(deposit$id)
@@ -101,7 +101,7 @@ test_that("create, deposit and publish record",{
   expect_is(deposit, "ZenodoRecord")
   
   #add files
-  ZENODO$uploadFile("README.md", deposit$id)
+  ZENODO$uploadFile("README.md", recordId = deposit$id)
   
   #publish record
   deposit <- ZENODO$publishRecord(deposit$id)
@@ -115,14 +115,12 @@ test_that("get by concept DOI",{
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
   expect_is(rec, "ZenodoRecord")
   expect_equal(rec$conceptdoi, "10.5072/zenodo.523362")
-  expect_equal(rec$metadata$title, sprintf("My publication title - 2020-04-14 21:53:08"))
 })
 
 test_that("get by record DOI",{
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.523363")
   expect_is(rec, "ZenodoRecord")
   expect_equal(rec$conceptdoi, "10.5072/zenodo.523362")
-  expect_equal(rec$metadata$title, "My publication title - 2020-04-14 21:53:08")
 })
 
 test_that("list & downloading files",{
@@ -142,6 +140,7 @@ test_that("list & downloading files",{
 })
 
 test_that("list & downloading files - using wrapper",{
+  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
   dir.create("download_zenodo")
   download_zenodo(path = "download_zenodo", "10.5281/zenodo.3378733")
   downloaded_files <- list.files("download_zenodo")
