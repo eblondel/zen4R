@@ -4,7 +4,7 @@ library(zen4R)
 
 #test environment
 zenodo_url <- "https://sandbox.zenodo.org/api"
-zenodo_token <- "m9OjWbtoB7pWqHzbUbGXX4WtFqB4XezKgMsNp1ppegMwc9SVIUjgKEG8Vx1z"
+zenodo_token <- Sys.getenv("ZENODO_SANDBOX_TOKEN")
 zenodo_logger <- "DEBUG"
 ZENODO <- try(ZenodoManager$new(url = zenodo_url, token = zenodo_token, logger = zenodo_logger))
 
