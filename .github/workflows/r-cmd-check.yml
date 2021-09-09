@@ -16,8 +16,6 @@ jobs:
       matrix:
         config:
           - {os: ubuntu-20.04,   r: '4.0.5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-    env:
-      ZENODO_SANDBOX_SECRET: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       #R Set-up
@@ -31,5 +29,7 @@ jobs:
       #Check R Package
       - name: Check R package
         uses: r-lib/actions/check-r-package@check-r-package
+        env:
+          ZENODO_SANDBOX_SECRET: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
         with:
           artifact-name: ${{ matrix.config.os }}_r-${{ matrix.config.r }}-results
