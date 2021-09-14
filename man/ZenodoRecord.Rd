@@ -135,7 +135,7 @@ ZenodoRecord
    Get DOI of the latest record version.
  }
  \item{\code{getVersions()}}{
-   Get a \code{data.frame} listing record versions with publication date and DOI.
+   Get a \code{data.frame} listing record versions with creation/publication date, version (ordering number) and DOI.
  }
  \item{\code{setVersion(version)}}{
    Set the version.

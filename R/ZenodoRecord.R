@@ -125,7 +125,7 @@
 #'    Get DOI of the latest record version.
 #'  }
 #'  \item{\code{getVersions()}}{
-#'    Get a \code{data.frame} listing record versions with publication date and DOI.
+#'    Get a \code{data.frame} listing record versions with creation/publication date, version (ordering number) and DOI.
 #'  }
 #'  \item{\code{setVersion(version)}}{
 #'    Set the version.
@@ -373,6 +373,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$state = obj$state
       self$submitted = obj$submitted
       self$title = obj$title
+      self$version = obj$version
     }
   ),
   public = list(
@@ -391,6 +392,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     state = NULL,
     submitted = FALSE,
     title = NULL,
+    version = NULL,
     
     initialize = function(obj = NULL, logger = "INFO"){
       super$initialize(logger = logger)
@@ -441,32 +443,26 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     getVersions = function(){
       locale <- Sys.getlocale("LC_TIME")
       Sys.setlocale("LC_TIME", "us_US")
-      html <- xml2::read_html(self$links$latest_html)
-      html_versions <- xml2::xml_find_all(html, ".//table")[3]
-      elems <- xml2::xml_find_all(html_versions, ".//tr")
-      elems <- elems[sapply(elems, function(x){regexpr("concept", x)<0})]
-      versions <- data.frame(
-        date = as.Date(sapply(elems, function(x){
-          xml_version <- xml2::read_xml(as.character(x))
-          html_date <- xml2::xml_text(xml2::xml_find_all(xml_version, ".//small")[2])
-          date <- as.Date(strptime(html_date, format="%b %d, %Y"))
-          return(date)
-        }), origin = "1970-01-01"),
-        version = sapply(elems, function(x){
-          xml_version <- xml2::read_xml(as.character(x))
-          v <- xml2::xml_text(xml2::xml_find_all(xml_version, "//a")[1])
-          v <- substr(v, 9, nchar(v)-1)
-          return(v)
-        }),
-        doi = sapply(elems, function(x){
-          xml_version <- xml2::read_xml(as.character(x))
-          xml2::xml_text(xml2::xml_find_all(xml_version, ".//small")[1])
-        }),
-        stringsAsFactors = FALSE
-      )
-      versions <- versions[rev(row.names(versions)),]
+      
+      zenodo_url <- paste0(unlist(strsplit(self$links$latest_html, "/record"))[1],"/api")
+      zenodo <- ZenodoManager$new(url = zenodo_url, logger = "INFO")
+      
+      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$conceptrecid), all_versions = T)
+      
+      versions <- do.call("rbind", lapply(records, function(version){
+        return(data.frame(
+          created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
+          date = as.Date(version$metadata$publication_date),
+          version = 0L,
+          doi = version$doi,
+          stringsAsFactors = FALSE
+        ))
+      }))
+      versions <- versions[order(versions$created),]
       row.names(versions) <- 1:nrow(versions)
+      versions$version <- 1:nrow(versions)
       Sys.setlocale("LC_TIME", locale)
+      
       return(versions)
     },
     
