@@ -233,6 +233,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
       super$initialize(logger = logger)
       private$url = url
       if(!is.null(token)) if(nzchar(token)){
+        if(!keyring_backend %in% names(keyring:::known_backends)){
+          errMsg <- sprintf("Backend '%s' is not a known keyring backend!", keyring_backend)
+          self$ERROR(errMsg)
+          stop(errMsg)
+        }
         private$keyring_backend <- keyring:::known_backends[[keyring_backend]]$new()
         private$keyring_service = paste0("zen4R@", url)
         private$keyring_backend$set_with_value(private$keyring_service, username = "zen4R", password = token)
