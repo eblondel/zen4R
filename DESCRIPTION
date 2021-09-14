@@ -1,5 +1,5 @@
 Package: zen4R
-Version: 0.4-3
+Version: 0.5
 Date: 2021-09-14
 Title: Interface to 'Zenodo' REST API
 Authors@R: c(
