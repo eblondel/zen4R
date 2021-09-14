@@ -1,10 +1,28 @@
-## **_0.4-2_**
+## **_0.5_**
+
+**New features**
+
+* [#50](https://github.com/eblondel/zen4R/issues/50) Allow to download record files subset
+* [#53](https://github.com/eblondel/zen4R/issues/53) Support upload of large files via new Zenodo upload API
+* [#56](https://github.com/eblondel/zen4R/issues/56) Consolidate deposit versioning & getVersions function
+
 
 **Improvements**
 
 * [#42](https://github.com/eblondel/zen4R/issues/42) Use parallel package as suggests
 * [#45](https://github.com/eblondel/zen4R/issues/45) Make ZenodoManager anonymous (token-less) calls keyring-free
 * [#46](https://github.com/eblondel/zen4R/issues/46) Upgrade record getVersions to fit Zenodo html changes
+* [#54](https://github.com/eblondel/zen4R/issues/54) Improve keyring backend use: keyring 'env' backend by default, changeable by user
+
+**Bug fixes**
+
+* [#47](https://github.com/eblondel/zen4R/issues/47) Fix record `addRelatedIdentifier` method
+* [#54](https://github.com/eblondel/zen4R/issues/54) Folowwing keyring >= 1.2.0 - system password requested for Unix systems
+
+**Documentation**
+
+* [#48](https://github.com/eblondel/zen4R/issues/48) Document download features in wiki + refine package description
+* [#49](https://github.com/eblondel/zen4R/issues/49) Add information on installation for Linux/OSX to documentation
 
 ## **_0.4-1_**
 
