@@ -6,9 +6,9 @@
 * [#53](https://github.com/eblondel/zen4R/issues/53) Support upload of large files via new Zenodo upload API
 * [#56](https://github.com/eblondel/zen4R/issues/56) Consolidate deposit versioning & getVersions function
 
-
 **Improvements**
 
+* Set-up of Github actions CI for testing `zen4R` package
 * [#42](https://github.com/eblondel/zen4R/issues/42) Use parallel package as suggests
 * [#45](https://github.com/eblondel/zen4R/issues/45) Make ZenodoManager anonymous (token-less) calls keyring-free
 * [#46](https://github.com/eblondel/zen4R/issues/46) Upgrade record getVersions to fit Zenodo html changes
