@@ -6,13 +6,16 @@
 #' @format \code{\link{R6Class}} object.
 #' @section Methods:
 #' \describe{
-#'  \item{\code{new(url, token, logger)}}{
+#'  \item{\code{new(url, token, logger, keyring_backend)}}{
 #'    This method is used to instantiate the \code{ZenodoManager}. By default,
 #'    the url is set to "https://zenodo.org/api". For tests, the Zenodo sandbox API 
 #'    URL can be used: https://sandbox.zenodo.org/api .
 #'    
 #'    The token is mandatory in order to use Zenodo API deposit actions. By default, 
 #'    \pkg{zen4R} will first try to get it from environment variable 'ZENODO_PAT'.
+#'    
+#'    The \code{keyring_backend} can be set to use a different backend for storing 
+#'    the Zenodo token with \pkg{keyring} (Default value is 'env').
 #'    
 #'    The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
 #'    (for complete curl http calls logs)
@@ -206,7 +209,7 @@
 ZenodoManager <-  R6Class("ZenodoManager",
   inherit = zen4RLogger,
   private = list(
-    keyring_backend = keyring::backend_env$new(),
+    keyring_backend = NULL,
     keyring_service = NULL,
     url = "https://zenodo.org/api"
   ),
@@ -225,10 +228,12 @@ ZenodoManager <-  R6Class("ZenodoManager",
     WARN = function(text){self$logger("WARN", text)},
     ERROR = function(text){self$logger("ERROR", text)},
     
-    initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), logger = NULL){
+    initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), logger = NULL,
+                          keyring_backend = 'env'){
       super$initialize(logger = logger)
       private$url = url
       if(!is.null(token)) if(nzchar(token)){
+        private$keyring_backend <- keyring:::known_backends[[keyring_backend]]$new()
         private$keyring_service = paste0("zen4R@", url)
         private$keyring_backend$set_with_value(private$keyring_service, username = "zen4R", password = token)
         deps <- self$getDepositions(size = 1, quiet = TRUE)
