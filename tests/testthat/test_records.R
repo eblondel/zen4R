@@ -64,7 +64,9 @@ test_that("create and deposit record",{
   expect_is(deposit, "ZenodoRecord")
   
   #add files
+  writeLines("This is a dummy file for testing zen4R", "README.md")
   ZENODO$uploadFile("README.md", record = deposit)
+  unlink("README.md")
   
   #delete record
   deleted <- ZENODO$deleteRecord(deposit$id)
@@ -101,7 +103,9 @@ test_that("create, deposit and publish record",{
   expect_is(deposit, "ZenodoRecord")
   
   #add files
+  writeLines("This is a dummy file for testing zen4R", "README.md")
   ZENODO$uploadFile("README.md", record = deposit)
+  unlink("README.md")
   
   #publish record
   deposit <- ZENODO$publishRecord(deposit$id)
@@ -173,7 +177,7 @@ test_that("versions & DOIs",{
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
   
-  rec <- ZENODO$getDepositionByDOI(rec$doi)
+  rec <- ZENODO$getDepositionByDOI(rec$getLastDOI())
   expect_is(rec, "ZenodoRecord")
 })
 
