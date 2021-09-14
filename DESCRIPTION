@@ -14,7 +14,7 @@ Imports: R6, httr, jsonlite, xml2, keyring, tools
 Suggests: testthat, parallel
 Description: Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
   including management of depositions, attribution of DOIs by 'Zenodo' and 
-  upload of files.
+  upload and download of files.
 License: MIT + file LICENSE
 URL: https://github.com/eblondel/zen4R
 BugReports: https://github.com/eblondel/zen4R/issues

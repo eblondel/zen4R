@@ -7,8 +7,8 @@
 \title{Interface to 'Zenodo' REST API}
 \description{
 Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
-  including management of depositions, attribution of DOIs by 'Zenodo' and 
-  upload of files.
+  including management of depositions, attribution of DOIs by 'Zenodo', 
+  upload and download of files.
 }
 \details{
 \tabular{ll}{
