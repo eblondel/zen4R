@@ -153,27 +153,27 @@ test_that("versioning",{
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
   rec$setTitle(paste("My publication title -", Sys.time()))
   rec$setPublicationDate(Sys.Date())
-  write.csv(data.frame(title = rec$metadata$title, stringsAsFactors = FALSE), row.names = FALSE, "publication.csv")
-  rec_version <- ZENODO$depositRecordVersion(rec, files = "publication.csv", publish = TRUE)
-  unlink("publication.csv")
+  publication_filename <- paste0("publication_", format(Sys.time(), "%Y%m%d%H%M%S"), ".csv")
+  write.csv(data.frame(title = rec$metadata$title, stringsAsFactors = FALSE), row.names = FALSE, publication_filename)
+  rec_version <- ZENODO$depositRecordVersion(rec, files = publication_filename, publish = TRUE)
+  unlink(publication_filename)
 })
 
 test_that("versions & DOIs",{
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
   expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
-  expect_equal(rec$getLastDOI(), "10.5072/zenodo.527226")
+  expect_equal(rec$getLastDOI(), rec$doi)
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
   
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.523363")
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
-  expect_equal(rec$getLastDOI(), "10.5072/zenodo.527226")
   expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
   
-  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.527226")
+  rec <- ZENODO$getDepositionByDOI(rec$doi)
   expect_is(rec, "ZenodoRecord")
 })
 

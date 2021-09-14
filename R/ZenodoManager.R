@@ -727,8 +727,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(zenReq$getStatus() %in% c(200,201)){
         out <- zenReq$getResponse()
         out_id <- unlist(strsplit(out$links$latest_draft,"depositions/"))[[2]]
-        out <- ZenodoRecord$new(obj = out)
+        out <-  ZENODO$getDepositionById(out_id)
         self$INFO(sprintf("Successful new version record created for concept DOI '%s'", record$getConceptDOI()))
+        record$id <- out$id
         record$metadata$doi <- NULL
         record$doi <- NULL
         record$prereserveDOI(TRUE)
