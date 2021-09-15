@@ -21,5 +21,5 @@ For zen4R sponsoring/funding new developments, enhancements, support requests, p
 
 ## Citation
 
-We thank in advance people that use ``zen4R`` for citing it in their work / publication(s). For this, please use the citation provided at this link [![DOI](https://zenodo.org/badge/DOI//10.5281/zenodo.2547036.svg)](https://doi.org//10.5281/zenodo.2547036)
+We thank in advance people that use ``zen4R`` for citing it in their work / publication(s). For this, please use the citation provided at this link [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2547036.svg)](https://doi.org/10.5281/zenodo.2547036)
 
