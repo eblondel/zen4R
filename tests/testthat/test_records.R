@@ -14,6 +14,7 @@ test_that("create empty record - with pre-reserved DOI",{
   expect_is(newRec$metadata$prereserve_doi, "list")
   expect_true(nchar(newRec$metadata$prereserve_doi$doi)>0)
   expect_true(newRec$metadata$prereserve_doi$recid>0)
+  Sys.sleep(5)
 })
 
 test_that("create and deposit record",{
@@ -62,15 +63,18 @@ test_that("create and deposit record",{
   #deposit
   deposit = ZENODO$depositRecord(myrec)
   expect_is(deposit, "ZenodoRecord")
+  Sys.sleep(5)
   
   #add files
   writeLines("This is a dummy file for testing zen4R", "README.md")
   ZENODO$uploadFile("README.md", record = deposit)
   unlink("README.md")
+  Sys.sleep(5)
   
   #delete record
   deleted <- ZENODO$deleteRecord(deposit$id)
   expect_true(deleted)
+  Sys.sleep(5)
 })
 
 test_that("create, deposit and publish record",{
@@ -106,25 +110,30 @@ test_that("create, deposit and publish record",{
   writeLines("This is a dummy file for testing zen4R", "README.md")
   ZENODO$uploadFile("README.md", record = deposit)
   unlink("README.md")
+  Sys.sleep(5)
   
   #publish record
   deposit <- ZENODO$publishRecord(deposit$id)
+  Sys.sleep(5)
   
   #delete record
   deleted <- ZENODO$deleteRecord(deposit$id)
   expect_false(deleted)
+  Sys.sleep(5)
 })
 
 test_that("get by concept DOI",{
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
   expect_is(rec, "ZenodoRecord")
   expect_equal(rec$conceptdoi, "10.5072/zenodo.523362")
+  Sys.sleep(5)
 })
 
 test_that("get by record DOI",{
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.523363")
   expect_is(rec, "ZenodoRecord")
   expect_equal(rec$conceptdoi, "10.5072/zenodo.523362")
+  Sys.sleep(5)
 })
 
 test_that("list & downloading files",{
@@ -134,12 +143,14 @@ test_that("list & downloading files",{
   files <- rec$listFiles(pretty = TRUE)
   expect_is(files, "data.frame")
   expect_equal(nrow(files), length(rec$files))
+  Sys.sleep(5)
   
   dir.create("download_zenodo")
   rec$downloadFiles(path = "download_zenodo")
   downloaded_files <- list.files("download_zenodo")
   expect_equal(length(downloaded_files), length(rec$files))
   unlink("download_zenodo", recursive = T)
+  Sys.sleep(5)
   
 })
 
@@ -151,6 +162,7 @@ test_that("list & downloading files - using wrapper",{
   downloaded_files <- list.files("download_zenodo")
   expect_equal(length(downloaded_files), length(rec$files))
   unlink("download_zenodo", recursive = T)
+  Sys.sleep(5)
 })
 
 test_that("versioning",{
@@ -169,18 +181,22 @@ test_that("versions & DOIs",{
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
+  Sys.sleep(5)
   
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.523363")
   expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
+  Sys.sleep(5)
   
   rec <- ZENODO$getDepositionByDOI(rec$getLastDOI())
   expect_is(rec, "ZenodoRecord")
+  Sys.sleep(5)
 })
 
 test_that("versions & DOIS - using wrapper",{
   df <- get_versions("10.5281/zenodo.2547036")
   expect_is(df, "data.frame")
+  Sys.sleep(5)
 })

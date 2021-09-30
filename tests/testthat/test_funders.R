@@ -11,13 +11,16 @@ context("funders")
 test_that("funders are retrieved",{
   zenodo <- ZenodoManager$new(logger = "INFO")
   zen_funders_df <- zenodo$getFunders()
+  Sys.sleep(2)
   expect_is(zen_funders_df, "data.frame")
   zen_funders_raw <- zenodo$getFunders(pretty = FALSE)
   expect_is(zen_funders_raw, "list")
+  Sys.sleep(2)
 })
 
 test_that("funder is retrieved by id",{
   zenodo <- ZenodoManager$new(logger = "INFO")
   zen_funder <- zenodo$getFunderById("10.13039/100000863")
   expect_equal(zen_funder$metadata$doi, "10.13039/100000863")
+  Sys.sleep(2)
 })

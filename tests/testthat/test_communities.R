@@ -12,8 +12,10 @@ test_that("communities are retrieved",{
   zenodo <- ZenodoManager$new(logger = "INFO")
   zen_communities_df <- zenodo$getCommunities()
   expect_is(zen_communities_df, "data.frame")
+  Sys.sleep(2)
   zen_communities_raw <- zenodo$getCommunities(pretty = FALSE)
   expect_is(zen_communities_raw, "list")
+  Sys.sleep(2)
 })
 
 test_that("community is retrieved by id",{
@@ -21,4 +23,5 @@ test_that("community is retrieved by id",{
   zen_community <- zenodo$getCommunityById("fisheries")
   expect_equal(zen_community$id, "fisheries")
   expect_equal(zen_community$title, "Fisheries and aquaculture")
+  Sys.sleep(2)
 })

@@ -21,4 +21,5 @@ test_that("grant is retrieved by id",{
   zenodo <- ZenodoManager$new(logger = "INFO")
   zen_grant <- zenodo$getGrantById("10.13039/100000002::5R01DK049482-03")
   expect_equal(zen_grant$metadata$internal_id, "10.13039/100000002::5R01DK049482-03")
+  Sys.sleep(2)
 })
