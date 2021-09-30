@@ -177,15 +177,21 @@ test_that("versioning",{
 
 test_that("versions & DOIs",{
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
+  Sys.sleep(5)
   expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
+  Sys.sleep(5)
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
+  Sys.sleep(5)
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
   Sys.sleep(5)
   
   rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.523363")
+  Sys.sleep(5)
   expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
+  Sys.sleep(5)
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
+  Sys.sleep(5)
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
   Sys.sleep(5)
