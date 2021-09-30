@@ -1,3 +1,10 @@
+
+## **_0.5-1_**
+
+**Bug fixes**
+
+* [#57](https://github.com/eblondel/zen4R/issues/57) Fix code cleaning in getDepositionById
+
 ## **_0.5_**
 
 **New features**
