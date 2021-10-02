@@ -445,7 +445,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       Sys.setlocale("LC_TIME", "us_US")
       
       zenodo_url <- paste0(unlist(strsplit(self$links$latest_html, "/record"))[1],"/api")
-      zenodo <- ZenodoManager$new(url = zenodo_url, logger = "INFO")
+      zenodo <- ZenodoManager$new(url = zenodo_url)
       
       records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$conceptrecid), all_versions = T)
       
