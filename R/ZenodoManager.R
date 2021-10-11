@@ -594,11 +594,12 @@ ZenodoManager <-  R6Class("ZenodoManager",
       query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
       result <- self$getDepositions(q = query, exact = TRUE)
       if(length(result)>0){
-        result <- result[[1]]
-        if(result$conceptdoi == conceptdoi){
-          self$INFO(sprintf("Successfully fetched record for concept DOI '%s'!", conceptdoi))
-        }else{
+        dois <- vapply(result, function(i) i$doi, character(1))
+        if (!conceptdoi %in% dois){
           result <- NULL
+        }else{
+          result <- result[[which(dois == conceptdoi)[1]]]
+          self$INFO(sprintf("Successfully fetched record for concept DOI '%s'!", conceptdoi))
         }
       }else{
         result <- NULL
