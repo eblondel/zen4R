@@ -899,7 +899,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(!is.null(record)) recordId <- record$id
       fileparts <- strsplit(path,"/")
       filename <- unlist(fileparts)[length(fileparts)]
-      method <- ifelse(newapi, "PUT", "POST")
+      method <- if(newapi) "PUT" else "POST"
       if(!"bucket" %in% names(record$links)){
         self$WARN(sprintf("No bucket link for record id = %s. Revert to old file upload API", recordId))
         newapi <- FALSE
