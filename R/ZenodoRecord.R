@@ -444,23 +444,34 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       locale <- Sys.getlocale("LC_TIME")
       Sys.setlocale("LC_TIME", "us_US")
       
-      zenodo_url <- paste0(unlist(strsplit(self$links$latest_html, "/record"))[1],"/api")
+      record_type <- if(self$state == "done") "record" else if(self$state == "unsubmitted") "deposit"
+      ref_link <- if(record_type == "record") "latest_html" else if(record_type == "deposit") "latest_draft_html"
+      zenodo_url <- paste0(unlist(strsplit(self$links[[ref_link]], paste0("/", record_type)))[1],"/api")
       zenodo <- ZenodoManager$new(url = zenodo_url)
       
       records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$conceptrecid), all_versions = T)
       
-      versions <- do.call("rbind", lapply(records, function(version){
-        return(data.frame(
-          created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
-          date = as.Date(version$metadata$publication_date),
-          version = 0L,
-          doi = version$doi,
-          stringsAsFactors = FALSE
-        ))
-      }))
-      versions <- versions[order(versions$created),]
-      row.names(versions) <- 1:nrow(versions)
-      versions$version <- 1:nrow(versions)
+      versions <- data.frame(
+        created = character(0),
+        date = character(0),
+        version = character(0),
+        doi = character(0),
+        stringsAsFactors = FALSE
+      )
+      if(length(records)>0){
+        versions = do.call("rbind", lapply(records, function(version){
+          return(data.frame(
+            created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
+            date = as.Date(version$metadata$publication_date),
+            version = 0L,
+            doi = version$doi,
+            stringsAsFactors = FALSE
+          ))
+        }))
+        versions <- versions[order(versions$created),]
+        row.names(versions) <- 1:nrow(versions)
+        versions$version <- 1:nrow(versions)
+      }
       Sys.setlocale("LC_TIME", locale)
       
       return(versions)
