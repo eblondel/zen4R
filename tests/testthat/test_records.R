@@ -47,6 +47,21 @@ test_that("create and deposit record",{
   myrec$setImprintPlace("location")
   myrec$setPartofTitle("Book title")
   myrec$setPartofPages("1-30")
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#41-how-to-install-zen4r-in-r"))
+  expect_false(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#41-how-to-install-zen4r-in-r"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#42-connect-to-zenodo-rest-api"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#43-query-zenodo-deposited-records"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#44-manage-zenodo-record-depositions"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#45-manage-zenodo-record-deposition-files"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#46-export-zenodo-record-metadata"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#47-browse-zenodo-controlled-vocabularies"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#48-query-zenodo-published-records"))
+  expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#49-download-files-from-zenodo-records"))
+  expect_true(myrec$addRelatedIdentifier("isPartOf", "https://github.com/eblondel/zen4R/wiki#user_guide"))
+  expect_false(myrec$addRelatedIdentifier("isPartOf", "https://github.com/eblondel/zen4R/wiki#user_guide"))
+  for(i in 1:10){
+    expect_true(myrec$addRelatedIdentifier("hasPart", paste("http://chapter", i)))
+  }
   myrec$addContributor(firstname = "Peter", lastname = "Lead", type = "WorkPackageLeader")
   myrec$addContributor(firstname = "Frank", "Super", type = "Supervisor")
   
