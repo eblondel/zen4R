@@ -15,7 +15,7 @@ Please check the [online documentation](https://github.com/eblondel/zen4R/wiki) 
 
 Many thanks to the following organizations that have provided fundings for strenghtening the ``zen4R`` package:
 
-<a href="https://en.ird.fr/"><img src="https://en-dial.ird.fr/var/ird/storage/images/media/ird-sites-d-unites-de-recherche/dial/images/logos/logo_ird_2016_longueur_uk/4030160-1-eng-GB/logo_ird_2016_longueur_uk.png" height=100 width=300/></a>
+<a href="https://en.ird.fr/"><img src="https://en.ird.fr/sites/ird_fr/files/2019-08/logo_IRD_2016_BLOC_UK_COUL.png" height=200 width=200/></a>
 
 For zen4R sponsoring/funding new developments, enhancements, support requests, please contact me by [e-mail](mailto:eblondel.pro@gmail.com)
 
