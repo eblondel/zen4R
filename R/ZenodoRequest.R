@@ -62,7 +62,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
             data[[prop]] <- NULL
           }
         }
-        if(!data[["submitted"]]) data[["submitted"]] <- NULL
+        if(!is.null(data[["submitted"]])) if(!data[["submitted"]]) data[["submitted"]] <- NULL
         if(length(data[["files"]])==0) data[["files"]] <- NULL
         if(length(data[["metadata"]])==0) data[["metadata"]] <- NULL
         data[["links"]] <- NULL
