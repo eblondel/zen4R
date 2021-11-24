@@ -913,10 +913,21 @@ ZenodoManager <-  R6Class("ZenodoManager",
       method <- if(newapi) "PUT"  else "POST"
       if(newapi) self$INFO(sprintf("Using new file upload API with bucket: %s", record$links$bucket))
       method_url <- if(newapi) sprintf("%s/%s", unlist(strsplit(record$links$bucket, "api/"))[2], URLencode(filename)) else sprintf("deposit/depositions/%s/files", recordId)
-      zenReq <- ZenodoRequest$new(private$url, method, method_url, 
-                                  data = filename, file = upload_file(path),
-                                  token = self$getToken(),
-                                  logger = self$loggerType)
+      zenReq <- if(newapi){
+        ZenodoRequest$new(
+          private$url, method, method_url, 
+          data = upload_file(path),
+          token = self$getToken(),
+          logger = self$loggerType
+        )
+      }else{
+        ZenodoRequest$new(
+          private$url, method, method_url, 
+          data = filename, file = upload_file(path),
+          token = self$getToken(),
+          logger = self$loggerType
+        )
+      }
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() == 201){

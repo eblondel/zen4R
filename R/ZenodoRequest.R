@@ -144,7 +144,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     PUT = function(url, request, data){
       req <- paste(url, request, sep="/")
       
-      data <- private$prepareData(data)
+      if(regexpr("api/files", req)<0) data <- private$prepareData(data)
       
       #headers
       headers <- c("Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
