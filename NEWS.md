@@ -1,3 +1,9 @@
+## **_0.5-3_**
+
+**Enhancements**
+
+* [#65](https://github.com/eblondel/zen4R/issues/65) Better handling of record versions
+
 
 ## **_0.5-2_**
 
