@@ -463,14 +463,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           return(data.frame(
             created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
             date = as.Date(version$metadata$publication_date),
-            version = 0L,
+            version = if(!is.null(version$metadata$version)) version$metadata$version else NA,
             doi = version$doi,
             stringsAsFactors = FALSE
           ))
         }))
         versions <- versions[order(versions$created),]
         row.names(versions) <- 1:nrow(versions)
-        versions$version <- 1:nrow(versions)
+        if(all(is.na(versions$version))) versions$version <- 1:nrow(versions)
       }
       Sys.setlocale("LC_TIME", locale)
       
