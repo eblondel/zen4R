@@ -3,6 +3,7 @@
 **Enhancements**
 
 * [#65](https://github.com/eblondel/zen4R/issues/65) Better handling of record versions
+* [#67](https://github.com/eblondel/zen4R/issues/67) Rate limit for deleting files
 
 
 ## **_0.5-2_**
