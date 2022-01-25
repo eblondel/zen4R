@@ -752,7 +752,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
         
         if(delete_latest_files){
           self$INFO("Deleting files copied from latest record")
-          invisible(lapply(out$files, function(x){ self$deleteFile(out$id, x$id)}))
+          invisible(lapply(out$files, function(x){ 
+            self$deleteFile(out$id, x$id)
+            Sys.sleep(0.6)
+          }))
         }
         if(length(files)>0){
           self$INFO("Upload files to new version")
