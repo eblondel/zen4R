@@ -20,5 +20,4 @@ URL: https://github.com/eblondel/zen4R
 BugReports: https://github.com/eblondel/zen4R/issues
 LazyLoad: yes
 RoxygenNote: 7.1.1
-Roxygen: list(r6 = FALSE)
 Encoding: UTF-8

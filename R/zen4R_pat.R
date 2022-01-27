@@ -1,10 +1,6 @@
-#' Retrieve Zenodo personal access token.
-#'
-#' A zenodo personal access token
-#' Looks in env var `ZENODO_PAT`
-#'
-#' @keywords internal
-#' @noRd
+#' zenodo_pat
+#' @description Get Zenodo personal access token, looking in env var `ZENODO_PAT`
+#' @param quiet Hide log message, default is \code{TRUE}
 zenodo_pat <- function(quiet = TRUE) {
   pat <- Sys.getenv("ZENODO_PAT")
   

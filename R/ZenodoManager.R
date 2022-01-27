@@ -4,152 +4,6 @@
 #' @keywords zenodo manager
 #' @return Object of \code{\link{R6Class}} for modelling an ZenodoManager
 #' @format \code{\link{R6Class}} object.
-#' @section Methods:
-#' \describe{
-#'  \item{\code{new(url, token, logger, keyring_backend)}}{
-#'    This method is used to instantiate the \code{ZenodoManager}. By default,
-#'    the url is set to "https://zenodo.org/api". For tests, the Zenodo sandbox API 
-#'    URL can be used: https://sandbox.zenodo.org/api .
-#'    
-#'    The token is mandatory in order to use Zenodo API deposit actions. By default, 
-#'    \pkg{zen4R} will first try to get it from environment variable 'ZENODO_PAT'.
-#'    
-#'    The \code{keyring_backend} can be set to use a different backend for storing 
-#'    the Zenodo token with \pkg{keyring} (Default value is 'env').
-#'    
-#'    The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
-#'    (for complete curl http calls logs)
-#'  }
-#'  \item{\code{getToken()}}{
-#'    Get Zenodo user token.
-#'  }
-#'  \item{\code{getLicenses(pretty)}}{
-#'    Get the list of licenses. By default the argument \code{pretty} is set to 
-#'    \code{TRUE} which will returns the list of licenses as \code{data.frame}.
-#'    Set \code{pretty = FALSE} to get the raw list of licenses.
-#'  }
-#'  \item{\code{getLicenseById(id)}}{
-#'    Get license by Id
-#'  }
-#'  \item{\code{getCommunities(pretty)}}{
-#'    Get the list of communities. By default the argument \code{pretty} is set to 
-#'    \code{TRUE} which will returns the list of communities as \code{data.frame}.
-#'    Set \code{pretty = FALSE} to get the raw list of communities.
-#'  }
-#'  \item{\code{getCommunityById(id)}}{
-#'    Get community by Id
-#'  }
-#'  \item{\code{getGrants(pretty)}}{
-#'    Get the list of grants. By default the argument \code{pretty} is set to 
-#'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
-#'    Set \code{pretty = FALSE} to get the raw list of grants.
-#'  }
-#'  \item{\code{getGrantById(id)}}{
-#'    Get grant by Id
-#'  }
-#'  \item{\code{getFunders(pretty)}}{
-#'    Get the list of funders. By default the argument \code{pretty} is set to 
-#'    \code{TRUE} which will returns the list of funders as \code{data.frame}.
-#'    Set \code{pretty = FALSE} to get the raw list of funders.
-#'  }
-#'  \item{\code{getFunderById(id)}}{
-#'    Get funder by Id
-#'  }
-#'  \item{\code{getDepositions(q, size, all_versions, exact, quiet)}}{
-#'    Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
-#'    the list of depositions will be returned by page with a size of 10 results per
-#'    page (default size of the Zenodo API). The parameter \code{q} allows to specify
-#'    an ElasticSearch-compliant query to filter depositions (default query is empty 
-#'    to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
-#'    to get all versions of records as part of the depositions list. The argument \code{exact}
-#'    specifies that an exact matching is wished, in which case paginated search will be
-#'    disabled (only the first search page will be returned).
-#'    Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
-#'  }
-#'  \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
-#'    Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
-#'  }
-#'  \item{\code{getDepositionByDOI(doi)}}{
-#'    Get a Zenodo deposition record by DOI.
-#'  }
-#'  \item{\code{getDepositionById(recid)}}{
-#'    Get a Zenodo deposition record by its Zenodo specific record id.
-#'  }
-#'  \item{\code{getDepositionByConceptId(conceptrecid)}}{
-#'    Get a Zenodo deposition record by its Zenodo concept id.
-#'  }
-#'  \item{\code{depositRecord(record, publish)}}{
-#'    A method to deposit/update a Zenodo record. The record should be an object
-#'    of class \code{ZenodoRecord}. The method returns the deposited record
-#'    of class \code{ZenodoRecord}. The parameter \code{publish} (default value
-#'    is \code{FALSE}) can be set to \code{TRUE} (to use CAUTIOUSLY, only if you
-#'    want to publish your record)
-#'  }
-#'  \item{\code{depositRecordVersion(record, publish)}}{
-#'    A method to deposit a new version for a published record. For details about
-#'    the behavior of this function, see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
-#'  }
-#'  \item{\code{deleteRecord(recordId)}}{
-#'    Deletes a Zenodo record based on its identifier.
-#'  }
-#'  \item{\code{deleteRecordByDOI(doi)}}{
-#'    Deletes a Zenodo record based on its DOI. This DOI is necessarily a pre-reserved DOI corresponding to a draft record,
-#'     and not a published DOI, as Zenodo does not allow to delete a record already published.
-#'  }
-#'  \item{\code{deleteRecords(q)}}{
-#'    Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
-#'    to specify an ElasticSearch-compliant query to filter depositions (default query 
-#'    is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo 
-#'    can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}. 
-#'  }
-#'  \item{\code{createEmptyRecord()}}{
-#'    Creates an empty record in the Zenodo deposit. Returns the record
-#'    newly created in Zenodo, as an object of class \code{ZenodoRecord}
-#'    with an assigned identifier.
-#'  }
-#'  \item{\code{editRecord(recordId)}}{
-#'    Unlocks a record already submitted. This is required to edit metadata of a Zenodo
-#'    record already published.
-#'  }
-#'  \item{\code{discardChanges(recordId)}}{
-#'    Discards changes operated on a record.
-#'  }
-#'  \item{\code{publishRecord(recordId)}}{
-#'    Publishes a deposited record online.
-#'  }
-#'  \item{\code{getFiles(recordId)}}{
-#'    Get the list of uploaded files for a deposited record
-#'  }
-#'  \item{\code{uploadFile(path, record, recordId)}}{
-#'    Uploads a file for a given Zenodo deposited record
-#'  }
-#'  \item{\code{deleteFile(recordId, fileId)}}{
-#'    Deletes a file for a given Zenodo deposited record
-#'  }
-#'  \item{\code{getRecords(q, size, all_versions, exact)}}{
-#'    Get the list of Zenodo records. By defaut the list of records will be returned by
-#'     page with a size of 10 results per page (default size of the Zenodo API). The parameter 
-#'     \code{q} allows to specify an ElasticSearch-compliant query to filter depositions 
-#'     (default query is empty to retrieve all records). The argument \code{all_versions}, 
-#'     if set to TRUE allows to get all versions of records as part of the depositions list. 
-#'     The argument \code{exact} specifies that an exact matching is wished, in which case 
-#'     paginated search will be disabled (only the first search page will be returned).
-#'     Examples of 
-#'    ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
-#'  }
-#'  \item{\code{getRecordByConceptDOI(conceptdoi)}}{
-#'    Get a Zenodo published record by concept DOI (generic DOI common to all record versions)
-#'  }
-#'  \item{\code{getRecordByDOI(doi)}}{
-#'    Get a Zenodo published record by DOI.
-#'  }
-#'  \item{\code{getRecordById(recid)}}{
-#'    Get a Zenodo published record by its Zenodo specific record id.
-#'  }
-#'  \item{\code{getRecordByConceptId(conceptrecid)}}{
-#'    Get a Zenodo published record by its Zenodo concept id.
-#'  }
-#' }
 #' 
 #' @examples
 #' \dontrun{
@@ -211,23 +65,22 @@ ZenodoManager <-  R6Class("ZenodoManager",
   private = list(
     keyring_backend = NULL,
     keyring_service = NULL,
-    url = "https://zenodo.org/api"
+    url = "https://zenodo.org/api",
+    verbose.info = FALSE
   ),
   public = list(
-    #logger
-    anonymous = FALSE,
-    verbose.info = FALSE,
-    verbose.debug = FALSE,
-    loggerType = NULL,
-    logger = function(type, text){
-      if(self$verbose.info){
-        cat(sprintf("[zen4R][%s] %s - %s \n", type, self$getClassName(), text))
-      }
-    },
-    INFO = function(text){self$logger("INFO", text)},
-    WARN = function(text){self$logger("WARN", text)},
-    ERROR = function(text){self$logger("ERROR", text)},
     
+    #' @field anonymous Zenodo manager anonymous status, \code{TRUE} when no token is specified
+    anonymous = FALSE,
+    
+    #' @description initializes the Zenodo Manager
+    #' @param url Zenodo API URL. By default, the url is set to "https://zenodo.org/api". For tests, 
+    #'   the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api 
+    #' @param token the user token. By default an attempt will be made to retrieve token using \link{zenodo_pat}
+    #' @param logger logger type. The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
+    #'    (for complete curl http calls logs)
+    #' @param keyring_backend The \pkg{keyring} backend used to store user token. The \code{keyring_backend} 
+    #' can be set to use a different backend for storing the Zenodo token with \pkg{keyring} (Default value is 'env').
     initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), logger = NULL,
                           keyring_backend = 'env'){
       super$initialize(logger = logger)
@@ -257,7 +110,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
       }
     },
     
-    #getToken
+    #' @description Get user token
+    #' @return the token, object of class \code{character}
     getToken = function(){
       token <- NULL
       if(!is.null(private$keyring_service)){
@@ -269,7 +123,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Licenses
     #------------------------------------------------------------------------------------------
 
-    #getLicenses
+    #' @description Get Licenses supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of licenses as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of licenses.
+    #' @return list of licenses as \code{data.frame} or \code{list}
     getLicenses = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "licenses?q=&size=1000",
                                   token= self$getToken(), 
@@ -297,7 +155,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getLicenseById
+    #' @description Get license by Id.
+    #' @param id license id
+    #' @return the license
     getLicenseById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("licenses/%s",id),
                                   token= self$getToken(), 
@@ -315,7 +175,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Communities
     #------------------------------------------------------------------------------------------
     
-    #getCommunities
+    #' @description Get Communities supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of communities as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of communities
+    #' @return list of communities as \code{data.frame} or \code{list}
     getCommunities = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "communities?q=&size=10000",
                                   token= self$getToken(),
@@ -346,7 +210,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getCommunityById
+    #' @description Get community by Id.
+    #' @param id community id
+    #' @return the community
     getCommunityById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities/%s",id),
                                   token= self$getToken(),
@@ -365,7 +231,12 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Grants
     #------------------------------------------------------------------------------------------
     
-    #getGrants
+    #' @description Get Grants supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of grants
+    #' @param size number of grants to be returned. By default equal to 1000.
+    #' @return list of grants as \code{data.frame} or \code{list}
     getGrants = function(pretty = TRUE, size = 1000){
       
       page <- 1
@@ -441,7 +312,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getGrantById
+    #' @description Get grant by Id.
+    #' @param id grant id
+    #' @return the grant
     getGrantById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/%s",id),
                                   token= self$getToken(),
@@ -460,7 +333,12 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Funders
     #------------------------------------------------------------------------------------------
     
-    #getFunders
+    #' @description Get Funders supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of funders as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of grants
+    #' @param size number of funders to be returned. By default equal to 1000.
+    #' @return list of funders as \code{data.frame} or \code{list}
     getFunders = function(pretty = TRUE, size = 1000){
       
       page <- 1
@@ -526,7 +404,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getFunderById
+    #' @description Get funder by Id.
+    #' @param id funder id
+    #' @return the funder
     getFunderById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/%s",id),
                                   token= self$getToken(),
@@ -545,7 +425,21 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Depositions
     #------------------------------------------------------------------------------------------
     
-    #getDepositions
+    #' @description Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
+    #'    the list of depositions will be returned by page with a size of 10 results per
+    #'    page (default size of the Zenodo API). The parameter \code{q} allows to specify
+    #'    an ElasticSearch-compliant query to filter depositions (default query is empty 
+    #'    to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
+    #'    to get all versions of records as part of the depositions list. The argument \code{exact}
+    #'    specifies that an exact matching is wished, in which case paginated search will be
+    #'    disabled (only the first search page will be returned).
+    #'    Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
+    #' @param q Elastic-Search-compliant query, as object of class \code{character}. Default is ""
+    #' @param size number of depositions to be retrieved per request (paginated). Default is 10
+    #' @param all_versions object of class \code{logical} indicating if all versions of deposits have to be retrieved. Default is \code{FALSE}
+    #' @param exact object of class \code{logical} indicating if exact matching has to be applied. Default is \code{TRUE}
+    #' @param quiet object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}
+    #' @return a list of \code{ZenodoRecord}
     getDepositions = function(q = "", size = 10, all_versions = FALSE, exact = TRUE,
                               quiet = FALSE){
       page <- 1
@@ -589,7 +483,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getDepositionByConceptDOI
+    #' @description Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions).
+    #' @param conceptdoi the concept DOI, object of class \code{character}
+    #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionByConceptDOI = function(conceptdoi){
       query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
       result <- self$getDepositions(q = query, exact = TRUE)
@@ -627,7 +523,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #getDepositionByDOI
+    #' @description Get a Zenodo deposition record by DOI.
+    #' @param doi the DOI, object of class \code{character}
+    #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionByDOI = function(doi){
       query <- sprintf("doi:%s", gsub("/", "//", doi))
       result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
@@ -653,7 +551,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #getDepositionbyId
+    #' @description Get a Zenodo deposition record by ID.
+    #' @param recid the record ID, object of class \code{character}
+    #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionById = function(recid){
       query <- sprintf("recid:%s", recid)
       result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
@@ -671,7 +571,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #getDepositionbyConceptId
+    #' @description Get a Zenodo deposition record by concept ID.
+    #' @param conceptrecid the record concept ID, object of class \code{character}
+    #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionByConceptId = function(conceptrecid){
       query <- sprintf("conceptrecid:%s", conceptrecid)
       result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
@@ -689,7 +591,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #depositRecord
+    #' @description Deposits a record on Zenodo.
+    #' @param record the record to deposit, object of class \code{ZenodoRecord}
+    #' @param publish object of class \code{logical} indicating if record has to be published (default \code{FALSE}). 
+    #'   Can be set to \code{TRUE} (to use CAUTIOUSLY, only if you want to publish your record)
+    #' @return \code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
     depositRecord = function(record, publish = FALSE){
       data <- record
       type <- ifelse(is.null(record$id), "POST", "PUT")
@@ -718,7 +624,13 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #depositRecordVersion
+    #' @description Deposits a record version on Zenodo. For details about the behavior of this function, 
+    #'   see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
+    #' @param record the record version to deposit, object of class \code{ZenodoRecord}
+    #' @param delete_latest_files object of class \code{logical} indicating if latest files have to be deleted. Default is \code{TRUE}
+    #' @param files a list of files to be uploaded with the new record version
+    #' @param publish object of class \code{logical} indicating if record has to be published (default \code{FALSE})
+    #' @return \code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
     depositRecordVersion = function(record, delete_latest_files = TRUE, files = list(), publish = FALSE){
       type <- "POST"
       if(is.null(record$conceptrecid)){
@@ -780,7 +692,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #deleteRecord
+    #' @description Deletes a record given its ID
+    #' @param recordId the ID of the record to be deleted
+    #' @return \code{TRUE} if deleted, \code{FALSE} otherwise
     deleteRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "DELETE", "deposit/depositions", 
                                   data = recordId, token = self$getToken(),
@@ -797,7 +711,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #deleteRecordByDOI
+    #' @description Deletes a record by DOI
+    #' @param doi the DOI of the record to be deleted
+    #' @return \code{TRUE} if deleted, \code{FALSE} otherwise
     deleteRecordByDOI = function(doi){
       self$INFO(sprintf("Deleting record with DOI '%s'", doi))
       deleted <- FALSE
@@ -808,7 +724,13 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(deleted)
     },
     
-    #deleteRecords
+    #' @description Deletes all Zenodo deposited (unpublished) records. 
+    #'   The parameter \code{q} allows to specify an ElasticSearch-compliant query to filter depositions (default query 
+    #'    is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo  can be found at 
+    #'    \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}. 
+    #' @param q an ElasticSearch compliant query, object of class \code{character}
+    #' @param size number of records to be passed to \code{$getDepositions} method
+    #' @return \code{TRUE} if all records have been deleted, \code{FALSE} otherwise
     deleteRecords = function(q = "", size = 10){
       records <- self$getDepositions(q = q, size = size)
       records <- records[sapply(records, function(x){!x$submitted})]
@@ -825,12 +747,17 @@ ZenodoManager <-  R6Class("ZenodoManager",
       self$INFO("Successful deleted records")
     },
     
-    #createRecord
+    #' @description Creates an empty record in the Zenodo deposit. Returns the record
+    #'    newly created in Zenodo, as an object of class \code{ZenodoRecord} with an 
+    #'    assigned identifier.
+    #' @return an object of class \code{ZenodoRecord}
     createEmptyRecord = function(){
       return(self$depositRecord(NULL))
     },
     
-    #editRecord
+    #' @description Unlocks a record already submitted. Required to edit metadata of a Zenodo record already published.
+    #' @param recordId the ID of the record to unlock and set in editing mode.
+    #' @return an object of class \code{ZenodoRecord}
     editRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/edit", recordId),
                                   token = self$getToken(),
@@ -847,7 +774,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #discardChanges
+    #' @description Discards changes on a Zenodo record.
+    #' @param recordId the ID of the record for which changes have to be discarded.
+    #' @return an object of class \code{ZenodoRecord}
     discardChanges = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/discard", recordId),
                                   token = self$getToken(),
@@ -864,7 +793,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #publisRecord
+    #' @description Publishes a Zenodo record.
+    #' @param recordId the ID of the record to be published.
+    #' @return an object of class \code{ZenodoRecord}
     publishRecord = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/publish",recordId),
                                   token = self$getToken(),
@@ -881,7 +812,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getFiles
+    #' @description Get list of files attached to a Zenodo record.
+    #' @param recordId the ID of the record.
+    #' @return list of files
     getFiles = function(recordId){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions/%s/files", recordId), 
                                   token = self$getToken(),
@@ -898,7 +831,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #uploadFile
+    #' @description Uploads a file to a Zenodo record
+    #' @param path Local path of the file
+    #' @param record object of class \code{ZenodoRecord}
+    #' @param recordId ID of the record. Deprecated, use \code{record} instead to take advantage of the new Zenodo bucket upload API.
     uploadFile = function(path, record = NULL, recordId = NULL){
       newapi = TRUE
       if(!is.null(recordId)){
@@ -943,7 +879,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #deleteFile
+    #' @description Deletes a file for a record
+    #' @param recordId ID of the record
+    #' @param fileId ID of the file to delete
     deleteFile = function(recordId, fileId){
       zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("deposit/depositions/%s/files", recordId), 
                                   data = fileId, token = self$getToken(),
@@ -964,7 +902,20 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Records
     #------------------------------------------------------------------------------------------
     
-    #getRecords
+    #' @description Get the list of Zenodo records. By defaut the list of records will be returned by
+    #'     page with a size of 10 results per page (default size of the Zenodo API). The parameter 
+    #'     \code{q} allows to specify an ElasticSearch-compliant query to filter depositions 
+    #'     (default query is empty to retrieve all records). The argument \code{all_versions}, 
+    #'     if set to TRUE allows to get all versions of records as part of the depositions list. 
+    #'     The argument \code{exact} specifies that an exact matching is wished, in which case 
+    #'     paginated search will be disabled (only the first search page will be returned).
+    #'     Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
+    #' @param q Elastic-Search-compliant query, as object of class \code{character}. Default is ""
+    #' @param size number of records to be retrieved per request (paginated). Default is 10
+    #' @param all_versions object of class \code{logical} indicating if all versions of records have to be retrieved. Default is \code{FALSE}
+    #' @param exact object of class \code{logical} indicating if exact matching has to be applied. Default is \code{TRUE}
+    #' @param quiet object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}
+    #' @return a list of \code{ZenodoRecord}
     getRecords = function(q = "", size = 10, all_versions = FALSE, exact = FALSE){
       page <- 1
       req <- sprintf("records?q=%s&size=%s&page=%s", q, size, page)
@@ -1007,7 +958,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #getRecordByConceptDOI
+    #' @description Get Record by concept DOI
+    #' @param conceptdoi the concept DOI
+    #' @return a object of class \code{ZenodoRecord}
     getRecordByConceptDOI = function(conceptdoi){
       if(regexpr("zenodo", conceptdoi) < 0){
         stop(sprintf("DOI '%s' doesn not seem to be a Zenodo DOI", conceptdoi))
@@ -1038,7 +991,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #getRecordByDOI
+    #' @description Get Record by DOI
+    #' @param doi the DOI
+    #' @return a object of class \code{ZenodoRecord}
     getRecordByDOI = function(doi){
       if(regexpr("zenodo", doi) < 0){
         stop(sprintf("DOI '%s' doesn not seem to be a Zenodo DOI", doi))
@@ -1067,7 +1022,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #getRecordById
+    #' @description Get Record by ID
+    #' @param recid the record ID
+    #' @return a object of class \code{ZenodoRecord}
     getRecordById = function(recid){
       query <- sprintf("recid:%s", recid)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
@@ -1085,7 +1042,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(result)
     },
     
-    #getRecordByConceptId
+    #' @description Get Record by concept ID
+    #' @param conceptrecid the concept ID
+    #' @return a object of class \code{ZenodoRecord}
     getRecordByConceptId = function(conceptrecid){
       query <- sprintf("conceptrecid:%s", conceptrecid)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)

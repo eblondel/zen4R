@@ -12,159 +12,12 @@ Object of \code{\link{R6Class}} for modelling an ZenodoManager
 }
 \description{
 ZenodoManager
+
+ZenodoManager
 }
 \note{
 Main user class to be used with \pkg{zen4R}
 }
-\section{Methods}{
-
-\describe{
- \item{\code{new(url, token, logger, keyring_backend)}}{
-   This method is used to instantiate the \code{ZenodoManager}. By default,
-   the url is set to "https://zenodo.org/api". For tests, the Zenodo sandbox API 
-   URL can be used: https://sandbox.zenodo.org/api .
-   
-   The token is mandatory in order to use Zenodo API deposit actions. By default, 
-   \pkg{zen4R} will first try to get it from environment variable 'ZENODO_PAT'.
-   
-   The \code{keyring_backend} can be set to use a different backend for storing 
-   the Zenodo token with \pkg{keyring} (Default value is 'env').
-   
-   The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
-   (for complete curl http calls logs)
- }
- \item{\code{getToken()}}{
-   Get Zenodo user token.
- }
- \item{\code{getLicenses(pretty)}}{
-   Get the list of licenses. By default the argument \code{pretty} is set to 
-   \code{TRUE} which will returns the list of licenses as \code{data.frame}.
-   Set \code{pretty = FALSE} to get the raw list of licenses.
- }
- \item{\code{getLicenseById(id)}}{
-   Get license by Id
- }
- \item{\code{getCommunities(pretty)}}{
-   Get the list of communities. By default the argument \code{pretty} is set to 
-   \code{TRUE} which will returns the list of communities as \code{data.frame}.
-   Set \code{pretty = FALSE} to get the raw list of communities.
- }
- \item{\code{getCommunityById(id)}}{
-   Get community by Id
- }
- \item{\code{getGrants(pretty)}}{
-   Get the list of grants. By default the argument \code{pretty} is set to 
-   \code{TRUE} which will returns the list of grants as \code{data.frame}.
-   Set \code{pretty = FALSE} to get the raw list of grants.
- }
- \item{\code{getGrantById(id)}}{
-   Get grant by Id
- }
- \item{\code{getFunders(pretty)}}{
-   Get the list of funders. By default the argument \code{pretty} is set to 
-   \code{TRUE} which will returns the list of funders as \code{data.frame}.
-   Set \code{pretty = FALSE} to get the raw list of funders.
- }
- \item{\code{getFunderById(id)}}{
-   Get funder by Id
- }
- \item{\code{getDepositions(q, size, all_versions, exact, quiet)}}{
-   Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
-   the list of depositions will be returned by page with a size of 10 results per
-   page (default size of the Zenodo API). The parameter \code{q} allows to specify
-   an ElasticSearch-compliant query to filter depositions (default query is empty 
-   to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
-   to get all versions of records as part of the depositions list. The argument \code{exact}
-   specifies that an exact matching is wished, in which case paginated search will be
-   disabled (only the first search page will be returned).
-   Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
- }
- \item{\code{getDepositionByConceptDOI(conceptdoi)}}{
-   Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions)
- }
- \item{\code{getDepositionByDOI(doi)}}{
-   Get a Zenodo deposition record by DOI.
- }
- \item{\code{getDepositionById(recid)}}{
-   Get a Zenodo deposition record by its Zenodo specific record id.
- }
- \item{\code{getDepositionByConceptId(conceptrecid)}}{
-   Get a Zenodo deposition record by its Zenodo concept id.
- }
- \item{\code{depositRecord(record, publish)}}{
-   A method to deposit/update a Zenodo record. The record should be an object
-   of class \code{ZenodoRecord}. The method returns the deposited record
-   of class \code{ZenodoRecord}. The parameter \code{publish} (default value
-   is \code{FALSE}) can be set to \code{TRUE} (to use CAUTIOUSLY, only if you
-   want to publish your record)
- }
- \item{\code{depositRecordVersion(record, publish)}}{
-   A method to deposit a new version for a published record. For details about
-   the behavior of this function, see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
- }
- \item{\code{deleteRecord(recordId)}}{
-   Deletes a Zenodo record based on its identifier.
- }
- \item{\code{deleteRecordByDOI(doi)}}{
-   Deletes a Zenodo record based on its DOI. This DOI is necessarily a pre-reserved DOI corresponding to a draft record,
-    and not a published DOI, as Zenodo does not allow to delete a record already published.
- }
- \item{\code{deleteRecords(q)}}{
-   Deletes all Zenodo deposited (unpublished) records. The parameter \code{q} allows 
-   to specify an ElasticSearch-compliant query to filter depositions (default query 
-   is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo 
-   can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}. 
- }
- \item{\code{createEmptyRecord()}}{
-   Creates an empty record in the Zenodo deposit. Returns the record
-   newly created in Zenodo, as an object of class \code{ZenodoRecord}
-   with an assigned identifier.
- }
- \item{\code{editRecord(recordId)}}{
-   Unlocks a record already submitted. This is required to edit metadata of a Zenodo
-   record already published.
- }
- \item{\code{discardChanges(recordId)}}{
-   Discards changes operated on a record.
- }
- \item{\code{publishRecord(recordId)}}{
-   Publishes a deposited record online.
- }
- \item{\code{getFiles(recordId)}}{
-   Get the list of uploaded files for a deposited record
- }
- \item{\code{uploadFile(path, record, recordId)}}{
-   Uploads a file for a given Zenodo deposited record
- }
- \item{\code{deleteFile(recordId, fileId)}}{
-   Deletes a file for a given Zenodo deposited record
- }
- \item{\code{getRecords(q, size, all_versions, exact)}}{
-   Get the list of Zenodo records. By defaut the list of records will be returned by
-    page with a size of 10 results per page (default size of the Zenodo API). The parameter 
-    \code{q} allows to specify an ElasticSearch-compliant query to filter depositions 
-    (default query is empty to retrieve all records). The argument \code{all_versions}, 
-    if set to TRUE allows to get all versions of records as part of the depositions list. 
-    The argument \code{exact} specifies that an exact matching is wished, in which case 
-    paginated search will be disabled (only the first search page will be returned).
-    Examples of 
-   ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
- }
- \item{\code{getRecordByConceptDOI(conceptdoi)}}{
-   Get a Zenodo published record by concept DOI (generic DOI common to all record versions)
- }
- \item{\code{getRecordByDOI(doi)}}{
-   Get a Zenodo published record by DOI.
- }
- \item{\code{getRecordById(recid)}}{
-   Get a Zenodo published record by its Zenodo specific record id.
- }
- \item{\code{getRecordByConceptId(conceptrecid)}}{
-   Get a Zenodo published record by its Zenodo concept id.
- }
-}
-}
-
 \examples{
 \dontrun{
   ZENODO <- ZenodoManager$new(
@@ -222,3 +75,794 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 }
 \keyword{manager}
 \keyword{zenodo}
+\section{Super class}{
+\code{\link[zen4R:zen4RLogger]{zen4R::zen4RLogger}} -> \code{ZenodoManager}
+}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{anonymous}}{Zenodo manager anonymous status, \code{TRUE} when no token is specified}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{ZenodoManager$new()}}
+\item \href{#method-getToken}{\code{ZenodoManager$getToken()}}
+\item \href{#method-getLicenses}{\code{ZenodoManager$getLicenses()}}
+\item \href{#method-getLicenseById}{\code{ZenodoManager$getLicenseById()}}
+\item \href{#method-getCommunities}{\code{ZenodoManager$getCommunities()}}
+\item \href{#method-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
+\item \href{#method-getGrants}{\code{ZenodoManager$getGrants()}}
+\item \href{#method-getGrantById}{\code{ZenodoManager$getGrantById()}}
+\item \href{#method-getFunders}{\code{ZenodoManager$getFunders()}}
+\item \href{#method-getFunderById}{\code{ZenodoManager$getFunderById()}}
+\item \href{#method-getDepositions}{\code{ZenodoManager$getDepositions()}}
+\item \href{#method-getDepositionByConceptDOI}{\code{ZenodoManager$getDepositionByConceptDOI()}}
+\item \href{#method-getDepositionByDOI}{\code{ZenodoManager$getDepositionByDOI()}}
+\item \href{#method-getDepositionById}{\code{ZenodoManager$getDepositionById()}}
+\item \href{#method-getDepositionByConceptId}{\code{ZenodoManager$getDepositionByConceptId()}}
+\item \href{#method-depositRecord}{\code{ZenodoManager$depositRecord()}}
+\item \href{#method-depositRecordVersion}{\code{ZenodoManager$depositRecordVersion()}}
+\item \href{#method-deleteRecord}{\code{ZenodoManager$deleteRecord()}}
+\item \href{#method-deleteRecordByDOI}{\code{ZenodoManager$deleteRecordByDOI()}}
+\item \href{#method-deleteRecords}{\code{ZenodoManager$deleteRecords()}}
+\item \href{#method-createEmptyRecord}{\code{ZenodoManager$createEmptyRecord()}}
+\item \href{#method-editRecord}{\code{ZenodoManager$editRecord()}}
+\item \href{#method-discardChanges}{\code{ZenodoManager$discardChanges()}}
+\item \href{#method-publishRecord}{\code{ZenodoManager$publishRecord()}}
+\item \href{#method-getFiles}{\code{ZenodoManager$getFiles()}}
+\item \href{#method-uploadFile}{\code{ZenodoManager$uploadFile()}}
+\item \href{#method-deleteFile}{\code{ZenodoManager$deleteFile()}}
+\item \href{#method-getRecords}{\code{ZenodoManager$getRecords()}}
+\item \href{#method-getRecordByConceptDOI}{\code{ZenodoManager$getRecordByConceptDOI()}}
+\item \href{#method-getRecordByDOI}{\code{ZenodoManager$getRecordByDOI()}}
+\item \href{#method-getRecordById}{\code{ZenodoManager$getRecordById()}}
+\item \href{#method-getRecordByConceptId}{\code{ZenodoManager$getRecordByConceptId()}}
+\item \href{#method-clone}{\code{ZenodoManager$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR">}\href{../../zen4R/html/zen4RLogger.html#method-ERROR}{\code{zen4R::zen4RLogger$ERROR()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass">}\href{../../zen4R/html/zen4RLogger.html#method-getClass}{\code{zen4R::zen4RLogger$getClass()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName">}\href{../../zen4R/html/zen4RLogger.html#method-getClassName}{\code{zen4R::zen4RLogger$getClassName()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO">}\href{../../zen4R/html/zen4RLogger.html#method-INFO}{\code{zen4R::zen4RLogger$INFO()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger">}\href{../../zen4R/html/zen4RLogger.html#method-logger}{\code{zen4R::zen4RLogger$logger()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN">}\href{../../zen4R/html/zen4RLogger.html#method-WARN}{\code{zen4R::zen4RLogger$WARN()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+initializes the Zenodo Manager
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$new(
+  url = "https://zenodo.org/api",
+  token = zenodo_pat(),
+  logger = NULL,
+  keyring_backend = "env"
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{url}}{Zenodo API URL. By default, the url is set to "https://zenodo.org/api". For tests, 
+the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api}
+
+\item{\code{token}}{the user token. By default an attempt will be made to retrieve token using \link{zenodo_pat}}
+
+\item{\code{logger}}{logger type. The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
+(for complete curl http calls logs)}
+
+\item{\code{keyring_backend}}{The \pkg{keyring} backend used to store user token. The \code{keyring_backend} 
+can be set to use a different backend for storing the Zenodo token with \pkg{keyring} (Default value is 'env').}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getToken"></a>}}
+\if{latex}{\out{\hypertarget{method-getToken}{}}}
+\subsection{Method \code{getToken()}}{
+Get user token
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getToken()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the token, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getLicenses"></a>}}
+\if{latex}{\out{\hypertarget{method-getLicenses}{}}}
+\subsection{Method \code{getLicenses()}}{
+Get Licenses supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getLicenses(pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of licenses as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of licenses.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of licenses as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getLicenseById"></a>}}
+\if{latex}{\out{\hypertarget{method-getLicenseById}{}}}
+\subsection{Method \code{getLicenseById()}}{
+Get license by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getLicenseById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{license id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the license
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-getCommunities}{}}}
+\subsection{Method \code{getCommunities()}}{
+Get Communities supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getCommunities(pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of communities as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of communities}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of communities as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getCommunityById"></a>}}
+\if{latex}{\out{\hypertarget{method-getCommunityById}{}}}
+\subsection{Method \code{getCommunityById()}}{
+Get community by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getCommunityById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{community id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the community
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getGrants"></a>}}
+\if{latex}{\out{\hypertarget{method-getGrants}{}}}
+\subsection{Method \code{getGrants()}}{
+Get Grants supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getGrants(pretty = TRUE, size = 1000)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of grants as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of grants}
+
+\item{\code{size}}{number of grants to be returned. By default equal to 1000.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of grants as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getGrantById"></a>}}
+\if{latex}{\out{\hypertarget{method-getGrantById}{}}}
+\subsection{Method \code{getGrantById()}}{
+Get grant by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getGrantById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{grant id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the grant
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getFunders"></a>}}
+\if{latex}{\out{\hypertarget{method-getFunders}{}}}
+\subsection{Method \code{getFunders()}}{
+Get Funders supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFunders(pretty = TRUE, size = 1000)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of funders as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of grants}
+
+\item{\code{size}}{number of funders to be returned. By default equal to 1000.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of funders as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getFunderById"></a>}}
+\if{latex}{\out{\hypertarget{method-getFunderById}{}}}
+\subsection{Method \code{getFunderById()}}{
+Get funder by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFunderById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{funder id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the funder
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getDepositions"></a>}}
+\if{latex}{\out{\hypertarget{method-getDepositions}{}}}
+\subsection{Method \code{getDepositions()}}{
+Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
+   the list of depositions will be returned by page with a size of 10 results per
+   page (default size of the Zenodo API). The parameter \code{q} allows to specify
+   an ElasticSearch-compliant query to filter depositions (default query is empty 
+   to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
+   to get all versions of records as part of the depositions list. The argument \code{exact}
+   specifies that an exact matching is wished, in which case paginated search will be
+   disabled (only the first search page will be returned).
+   Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getDepositions(
+  q = "",
+  size = 10,
+  all_versions = FALSE,
+  exact = TRUE,
+  quiet = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{Elastic-Search-compliant query, as object of class \code{character}. Default is ""}
+
+\item{\code{size}}{number of depositions to be retrieved per request (paginated). Default is 10}
+
+\item{\code{all_versions}}{object of class \code{logical} indicating if all versions of deposits have to be retrieved. Default is \code{FALSE}}
+
+\item{\code{exact}}{object of class \code{logical} indicating if exact matching has to be applied. Default is \code{TRUE}}
+
+\item{\code{quiet}}{object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a list of \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getDepositionByConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getDepositionByConceptDOI}{}}}
+\subsection{Method \code{getDepositionByConceptDOI()}}{
+Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getDepositionByConceptDOI(conceptdoi)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{conceptdoi}}{the concept DOI, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getDepositionByDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getDepositionByDOI}{}}}
+\subsection{Method \code{getDepositionByDOI()}}{
+Get a Zenodo deposition record by DOI.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getDepositionByDOI(doi)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{doi}}{the DOI, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getDepositionById"></a>}}
+\if{latex}{\out{\hypertarget{method-getDepositionById}{}}}
+\subsection{Method \code{getDepositionById()}}{
+Get a Zenodo deposition record by ID.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getDepositionById(recid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recid}}{the record ID, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getDepositionByConceptId"></a>}}
+\if{latex}{\out{\hypertarget{method-getDepositionByConceptId}{}}}
+\subsection{Method \code{getDepositionByConceptId()}}{
+Get a Zenodo deposition record by concept ID.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getDepositionByConceptId(conceptrecid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{conceptrecid}}{the record concept ID, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-depositRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-depositRecord}{}}}
+\subsection{Method \code{depositRecord()}}{
+Deposits a record on Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$depositRecord(record, publish = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{the record to deposit, object of class \code{ZenodoRecord}}
+
+\item{\code{publish}}{object of class \code{logical} indicating if record has to be published (default \code{FALSE}). 
+Can be set to \code{TRUE} (to use CAUTIOUSLY, only if you want to publish your record)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-depositRecordVersion"></a>}}
+\if{latex}{\out{\hypertarget{method-depositRecordVersion}{}}}
+\subsection{Method \code{depositRecordVersion()}}{
+Deposits a record version on Zenodo. For details about the behavior of this function, 
+  see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$depositRecordVersion(
+  record,
+  delete_latest_files = TRUE,
+  files = list(),
+  publish = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{the record version to deposit, object of class \code{ZenodoRecord}}
+
+\item{\code{delete_latest_files}}{object of class \code{logical} indicating if latest files have to be deleted. Default is \code{TRUE}}
+
+\item{\code{files}}{a list of files to be uploaded with the new record version}
+
+\item{\code{publish}}{object of class \code{logical} indicating if record has to be published (default \code{FALSE})}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-deleteRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-deleteRecord}{}}}
+\subsection{Method \code{deleteRecord()}}{
+Deletes a record given its ID
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteRecord(recordId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of the record to be deleted}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if deleted, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-deleteRecordByDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-deleteRecordByDOI}{}}}
+\subsection{Method \code{deleteRecordByDOI()}}{
+Deletes a record by DOI
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteRecordByDOI(doi)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{doi}}{the DOI of the record to be deleted}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if deleted, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-deleteRecords"></a>}}
+\if{latex}{\out{\hypertarget{method-deleteRecords}{}}}
+\subsection{Method \code{deleteRecords()}}{
+Deletes all Zenodo deposited (unpublished) records. 
+  The parameter \code{q} allows to specify an ElasticSearch-compliant query to filter depositions (default query 
+   is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo  can be found at 
+   \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteRecords(q = "", size = 10)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}}
+
+\item{\code{size}}{number of records to be passed to \code{$getDepositions} method}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if all records have been deleted, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-createEmptyRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-createEmptyRecord}{}}}
+\subsection{Method \code{createEmptyRecord()}}{
+Creates an empty record in the Zenodo deposit. Returns the record
+   newly created in Zenodo, as an object of class \code{ZenodoRecord} with an 
+   assigned identifier.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$createEmptyRecord()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+an object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-editRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-editRecord}{}}}
+\subsection{Method \code{editRecord()}}{
+Unlocks a record already submitted. Required to edit metadata of a Zenodo record already published.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$editRecord(recordId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of the record to unlock and set in editing mode.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-discardChanges"></a>}}
+\if{latex}{\out{\hypertarget{method-discardChanges}{}}}
+\subsection{Method \code{discardChanges()}}{
+Discards changes on a Zenodo record.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$discardChanges(recordId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of the record for which changes have to be discarded.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-publishRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-publishRecord}{}}}
+\subsection{Method \code{publishRecord()}}{
+Publishes a Zenodo record.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$publishRecord(recordId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of the record to be published.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+an object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-getFiles}{}}}
+\subsection{Method \code{getFiles()}}{
+Get list of files attached to a Zenodo record.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFiles(recordId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of the record.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of files
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-uploadFile"></a>}}
+\if{latex}{\out{\hypertarget{method-uploadFile}{}}}
+\subsection{Method \code{uploadFile()}}{
+Uploads a file to a Zenodo record
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$uploadFile(path, record = NULL, recordId = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{path}}{Local path of the file}
+
+\item{\code{record}}{object of class \code{ZenodoRecord}}
+
+\item{\code{recordId}}{ID of the record. Deprecated, use \code{record} instead to take advantage of the new Zenodo bucket upload API.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-deleteFile"></a>}}
+\if{latex}{\out{\hypertarget{method-deleteFile}{}}}
+\subsection{Method \code{deleteFile()}}{
+Deletes a file for a record
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteFile(recordId, fileId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{ID of the record}
+
+\item{\code{fileId}}{ID of the file to delete}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRecords"></a>}}
+\if{latex}{\out{\hypertarget{method-getRecords}{}}}
+\subsection{Method \code{getRecords()}}{
+Get the list of Zenodo records. By defaut the list of records will be returned by
+    page with a size of 10 results per page (default size of the Zenodo API). The parameter 
+    \code{q} allows to specify an ElasticSearch-compliant query to filter depositions 
+    (default query is empty to retrieve all records). The argument \code{all_versions}, 
+    if set to TRUE allows to get all versions of records as part of the depositions list. 
+    The argument \code{exact} specifies that an exact matching is wished, in which case 
+    paginated search will be disabled (only the first search page will be returned).
+    Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecords(
+  q = "",
+  size = 10,
+  all_versions = FALSE,
+  exact = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{Elastic-Search-compliant query, as object of class \code{character}. Default is ""}
+
+\item{\code{size}}{number of records to be retrieved per request (paginated). Default is 10}
+
+\item{\code{all_versions}}{object of class \code{logical} indicating if all versions of records have to be retrieved. Default is \code{FALSE}}
+
+\item{\code{exact}}{object of class \code{logical} indicating if exact matching has to be applied. Default is \code{TRUE}}
+
+\item{\code{quiet}}{object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a list of \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRecordByConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getRecordByConceptDOI}{}}}
+\subsection{Method \code{getRecordByConceptDOI()}}{
+Get Record by concept DOI
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecordByConceptDOI(conceptdoi)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{conceptdoi}}{the concept DOI}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRecordByDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getRecordByDOI}{}}}
+\subsection{Method \code{getRecordByDOI()}}{
+Get Record by DOI
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecordByDOI(doi)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{doi}}{the DOI}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRecordById"></a>}}
+\if{latex}{\out{\hypertarget{method-getRecordById}{}}}
+\subsection{Method \code{getRecordById()}}{
+Get Record by ID
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecordById(recid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recid}}{the record ID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRecordByConceptId"></a>}}
+\if{latex}{\out{\hypertarget{method-getRecordByConceptId}{}}}
+\subsection{Method \code{getRecordByConceptId()}}{
+Get Record by concept ID
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecordByConceptId(conceptrecid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{conceptrecid}}{the concept ID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

@@ -5,31 +5,6 @@
 #' @keywords Zenodo Request
 #' @return Object of \code{\link{R6Class}} for modelling a generic Zenodo request
 #' @format \code{\link{R6Class}} object.
-#'
-#' @section Methods:
-#' \describe{
-#'  \item{\code{new(url, type, request, data, file, token, logger)}}{
-#'    This method is used to instantiate a object for doing an Zenodo request
-#'  }
-#'  \item{\code{getRequest()}}{
-#'    Get the request payload
-#'  }
-#'  \item{\code{getRequestHeaders()}}{
-#'    Get the request headers
-#'  }
-#'  \item{\code{getStatus()}}{
-#'    Get the request status code
-#'  }
-#'  \item{\code{getResponse()}}{
-#'    Get the request response
-#'  }
-#'  \item{\code{getException()}}{
-#'    Get the exception (in case of request failure)
-#'  }
-#'  \item{\code{getResult()}}{
-#'    Get the result \code{TRUE} if the request is successful, \code{FALSE} otherwise
-#'  }
-#' }
 #' 
 #' @note Abstract class used internally by \pkg{zen4R}
 #' 
@@ -51,8 +26,6 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     result = NA,
     token = NULL,
     
-    #prepareData
-    #---------------------------------------------------------------    
     prepareData = function(data){
       if(is(data, "ZenodoRecord")){
         data <- as.list(data)
@@ -81,8 +54,6 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(data)
     },
     
-    #GET
-    #---------------------------------------------------------------
     GET = function(url, request){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
@@ -100,8 +71,6 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(response)
     },
     
-    #POST
-    #---------------------------------------------------------------    
     POST = function(url, request, data, file = NULL){
       req <- paste(url, request, sep="/")
       if(!is.null(file)){
@@ -139,8 +108,6 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(response)
     },
     
-    #PUT
-    #---------------------------------------------------------------    
     PUT = function(url, request, data){
       req <- paste(url, request, sep="/")
       
@@ -171,8 +138,6 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(response)
     },
     
-    #DELETE
-    #---------------------------------------------------------------    
     DELETE = function(url, request, data){
       req <- paste(url, request, data, sep="/")
       #headers
@@ -197,7 +162,15 @@ ZenodoRequest <- R6Class("ZenodoRequest",
   ),
   #public methods
   public = list(
-    #initialize
+    #' @description Initializes a \code{ZenodoRequest}
+    #' @param url request URL
+    #' @param type Type of request: 'GET', 'POST', 'PUT', 'DELETE'
+    #' @param request the method request
+    #' @param data payload (optional)
+    #' @param file to be uploaded (optional)
+    #' @param token user token
+    #' @param logger the logger type
+    #' @param ... any other arg
     initialize = function(url, type, request, data = NULL, file = NULL,
                           token, logger = NULL, ...) {
       super$initialize(logger = logger)
@@ -210,7 +183,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
      
     },
     
-    #execute
+    #' @description Executes the request
     execute = function(){
       
       req <- switch(private$type,
@@ -233,37 +206,38 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       }
     },
     
-    #getRequest
+    #'@description Get request
     getRequest = function(){
       return(private$request)
     },
     
-    #getRequestHeaders
+    #'@description Get request headers
     getRequestHeaders = function(){
       return(private$requestHeaders)
     },
     
-    #getStatus
+    #'@description Get request status
     getStatus = function(){
       return(private$status)
     },
     
-    #getResponse
+    #'@description Get request response
     getResponse = function(){
       return(private$response)
     },
     
-    #getException
+    #'@description Get request exception
     getException = function(){
       return(private$exception)
     },
     
-    #getResult
+    #'@description Get request result
     getResult = function(){
       return(private$result)
     },
     
-    #setResult
+    #'@description Set request result
+    #'@param result result to be set
     setResult = function(result){
       private$result = result
     }

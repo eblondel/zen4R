@@ -4,353 +4,6 @@
 #' @keywords zenodo record
 #' @return Object of \code{\link{R6Class}} for modelling an ZenodoRecord
 #' @format \code{\link{R6Class}} object.
-#' @section Methods:
-#' \describe{
-#'  \item{\code{new()}}{
-#'    This method is used to instantiate a Zenodo Record
-#'  }
-#'  \item{\code{prereserveDOI(prereserve)}}{
-#'    Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
-#'    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI
-#'    assuming the record created doesn't yet handle a DOI. To avoid prereserving a DOI 
-#'    call \code{$prereserveDOI(FALSE)} on your record.
-#'  }
-#'  \item{\code{setUploadType(uploadType)}}{
-#'    Set the upload type (mandatory). Value should be among the following: 'publication',
-#'    'poster','presentation','dataset','image','video', or 'software'
-#'  }
-#'  \item{\code{setPublicationType(publicationType)}}{
-#'    Set the publication type (mandatory if upload type is 'publication'). Value should be
-#'    among the following: 'book','section','conferencepaper','article','patent','preprint',
-#'    'report','softwaredocumentation','thesis','technicalnote','workingpaper', or 'other'
-#'  }
-#'  \item{\code{setImageType(imageType)}}{
-#'    Set the image type (mandatory if image type is 'image'). Value should be among the 
-#'    following: 'figure','plot','drawing','diagram','photo', or 'other'
-#'  }
-#'  \item{\code{setPublicationDate(publicationDate)}}{
-#'    Set the publication date, as object of class \code{Date}
-#'  }
-#'  \item{\code{setEmbargoDate(embargoDate)}}{
-#'    Set the embargo date, as object of class \code{Date}
-#'  }
-#'  \item{\code{setTitle(title)}}{
-#'    Set title
-#'  }
-#'  \item{\code{setDescription(description)}}{
-#'    Set description
-#'  }
-#'  \item{\code{setAccessRight(accessRight)}}{
-#'    Set the access right. Value should be among the following: 'open','embargoed',
-#'    'restricted','closed'
-#'  }
-#'  \item{\code{setAccessConditions(accessConditions)}}{
-#'    Set access conditions.
-#'  }
-#'  \item{\code{addCreator(firsname, lastname, name, affiliation, orcid, gnd)}}{
-#'    Add a creator for the record. One approach is to use the \code{firstname} and
-#'    \code{lastname} arguments, that by default will be concatenated for Zenodo as
-#'    \code{lastname, firstname}. For more flexibility over this, the \code{name}
-#'    argument can be directly used.
-#'  }
-#'  \item{\code{removeCreator(by,property)}}{
-#'    Removes a creator by a property. The \code{by} parameter should be the name
-#'    of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
-#'    'orcid' or 'gnd'). Returns \code{TRUE} if some creator was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeCreatorByName(name)}}{
-#'    Removes a creator by name. Returns \code{TRUE} if some creator was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeCreatorByAffiliation(affiliation)}}{
-#'    Removes a creator by affiliation. Returns \code{TRUE} if some creator was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeCreatorByORCID(orcid)}}{
-#'    Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeCreatorByGND(gnd)}}{
-#'    Removes a creator by GND. Returns \code{TRUE} if some creator was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{addContributor(firsname, lastname, type, affiliation, orcid, gnd)}}{
-#'    Add a contributor for the record. Firstname, lastname, and type are mandatory.
-#'    The type should be an object of class \code{character} among values: ContactPerson, 
-#'    DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
-#'    Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
-#'    RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other. 
-#'  }
-#'  \item{\code{removeContributor(by,property)}}{
-#'    Removes a contributor by a property. The \code{by} parameter should be the name
-#'    of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
-#'    'orcid' or 'gnd'). Returns \code{TRUE} if some contributor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeContributorByName(name)}}{
-#'    Removes a contributor by name. Returns \code{TRUE} if some contributor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeContributorByAffiliation(affiliation)}}{
-#'    Removes a contributor by affiliation. Returns \code{TRUE} if some contributor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeContributorByORCID(orcid)}}{
-#'    Removes a contributor by ORCID. Returns \code{TRUE} if some contributor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeContributorByGND(gnd)}}{
-#'    Removes a contributor by GND. Returns \code{TRUE} if some contributor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{setLicense(licenseId)}}{
-#'    Set license. The license should be set with the Zenodo id of the license. If not
-#'    recognized by Zenodo, the function will return an error. The list of licenses can
-#'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
-#'  }
-#'  \item{\code{setDOI(doi)}}{
-#'    Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
-#'    This method will call the method \code{$prereserveDOI(FALSE)}.
-#'  }
-#'  \item{\code{getConceptDOI()}}{
-#'    Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
-#'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
-#'    on the prereserved DOI of the first record version.
-#'  }
-#'  \item{\code{getFirstDOI()}}{
-#'    Get DOI of the first record version.
-#'  }
-#'  \item{\code{getLastDOI()}}{
-#'    Get DOI of the latest record version.
-#'  }
-#'  \item{\code{getVersions()}}{
-#'    Get a \code{data.frame} listing record versions with creation/publication date, version (ordering number) and DOI.
-#'  }
-#'  \item{\code{setVersion(version)}}{
-#'    Set the version.
-#'  }
-#'  \item{\code{setLanguage(language)}}{
-#'    Set the language ISO 639-2 or 639-3 code.
-#'  }
-#'  \item{\code{addRelatedIdentifier(relation, identifier)}}{
-#'    Adds a related identifier with a given relation. Relation can be one of among
-#'    following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, isNewVersionOf,
-#'    isPreviousVersionOf, isPartOf, hasPart, compiles, isCompiledBy, isIdenticalTo, 
-#'    isAlternateIdentifier
-#'  }
-#'  \item{code{removeRelatedIdentifier(relation, identifier)}}{
-#'    Remove a related identifier
-#'  }
-#'  \item{\code{setReferences(references)}}{
-#'    Set a vector of character strings as references
-#'  }
-#'  \item{\code{addReference(reference)}}{
-#'    Adds a reference to the record metadata. Return \code{TRUE} if added, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removedReference(reference)}}{
-#'    Removes a reference from the record metadata. Return \code{TRUE} if removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{setKeywords(keywords)}}{
-#'    Set a vector of character strings as keywords
-#'  }
-#'  \item{\code{addKeyword(keyword)}}{
-#'    Adds a keyword to the record metadata. Return \code{TRUE} if added, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removedKeyword(keyword)}}{
-#'    Removes a keyword from the record metadata. Return \code{TRUE} if removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{addSubject(term, identifier)}}{
-#'    Add a Subject for the record.
-#'  }
-#'  \item{\code{removeSubject(by,property)}}{
-#'    Removes a subject by a property. The \code{by} parameter should be the name
-#'    of the subject property ('term' or 'identifier'). Returns \code{TRUE} if some 
-#'    subject was removed, \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeSubjectByTerm(term)}}{
-#'    Removes a subject by term. Returns \code{TRUE} if some subject was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeSubjectByIdentifier(identifier)}}{
-#'    Removes a subject by identifier. Returns \code{TRUE} if some subject was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{setNotes(notes)}}{
-#'    Set notes. HTML is not allowed
-#'  }
-#'  \item{\code{setCommunities(communities)}}{
-#'    Set a vector of character strings identifying communities
-#'  }
-#'  \item{\code{addCommunity(community)}}{
-#'    Adds a community to the record metadata. Return \code{TRUE} if added, 
-#'    \code{FALSE} otherwise. The community should be set with the Zenodo id of the community. If not
-#'    recognized by Zenodo, the function will return an error. The list of communities can
-#'    fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}.
-#'  }
-#'  \item{\code{removedCommunity(community)}}{
-#'    Removes a community from the record metadata. Return \code{TRUE} if removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{setGrants(grants)}}{
-#'    Set a vector of character strings identifying grants
-#'  }
-#'  \item{\code{addGrant(grant)}}{
-#'    Adds a grant to the record metadata. Return \code{TRUE} if added, 
-#'    \code{FALSE} otherwise. The grant should be set with the id of the grant. If not
-#'    recognized by Zenodo, the function will return an warning only. The list of grants can
-#'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
-#'  }
-#'  \item{\code{removeGrant(grant)}}{
-#'    Removes a grant from the record metadata. Return \code{TRUE} if removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{setJournalTitle(title)}}{
-#'    Set Journal title, object of class \code{\link{character}}, if deposition is a published article.
-#'  }
-#'  \item{\code{setJournalVolume(volume)}}{
-#'    Set Journal volume, object of class \code{\link{character}}, if deposition is a published article.
-#'  }
-#'  \item{\code{setJournalIssue(issue)}}{
-#'    Set Journal issue, object of class \code{\link{character}}, if deposition is a published article.
-#'  }
-#'  \item{\code{setJournalPages(pages)}}{
-#'    Set Journal pages, object of class \code{\link{character}}, if deposition is a published article.
-#'  }
-#'  \item{\code{setConferenceTitle(title)}}{
-#'   Set Conference title, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setConferenceAcronym(acronym)}}{
-#'    Set conference acronym, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setConferenceDates(dates)}}{
-#'    Set conference dates, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setConferencePlace(place)}}{
-#'    Set conference place, object of class \code{\link{character}}, in the format city, country 
-#'    (e.g. Kingston, Jamaica). Conference title or acronym must also be specified if this field 
-#'    is specified.
-#'  }
-#'  \item{\code{setConferenceUrl(url)}}{
-#'    Set conference url, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setConferenceSession(session)}}{
-#'    Set conference session, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setConferenceSessionPart(part)}}{
-#'    Set conference session part, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setImprintPublisher(publisher)}}{
-#'    Set imprint publisher, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setImprintISBN(isbn)}}{
-#'    Set imprint ISBN, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setImprintPlace(place)}}{
-#'    Set imprint place, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setPartofTitle(title)}}{
-#'    Set the book title in case of a chapter, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setPartofPages(pages)}}{
-#'    Set the page numbers of book, object of class \code{\link{character}}.
-#'  }
-#'  \item{\code{setThesisUniversity(university)}}{
-#'    Set the thesis university, object of class \code{\link{character}}
-#'  }
-#'  \item{\code{addThesisSupervisor(firsname, lastname, affiliation, orcid, gnd)}}{
-#'    Add a thesis supervisor for the record.
-#'  }
-#'  \item{\code{removeThesisSupervisor(by,property)}}{
-#'    Removes a thesi supervisor by a property. The \code{by} parameter should be the name
-#'    of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
-#'    'orcid' or 'gnd'). Returns \code{TRUE} if some thesis supervisor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeThesisSupervisorByName(name)}}{
-#'    Removes a thesis supervisor by name. Returns \code{TRUE} if some thesis supervisor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeThesisSupervisorByAffiliation(affiliation)}}{
-#'    Removes a thesis supervisor by affiliation. Returns \code{TRUE} if some thesis supervisor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeThesisSupervisorByORCID(orcid)}}{
-#'    Removes a thesis supervisor by ORCID. Returns \code{TRUE} if some thesis supervisor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{removeThesisSupervisorByGND(gnd)}}{
-#'    Removes a thesis supervisor by GND. Returns \code{TRUE} if some thesis supervisor was removed, 
-#'    \code{FALSE} otherwise.
-#'  }
-#'  \item{\code{exportAs(format, filename)}}{
-#'    Export metadata in a format supported by Zenodo. Supported formats are: BibTeX, CSL, DataCite, 
-#'    DublinCore, DCAT, JSON, JSON-LD, GeoJSON, MARCXML. The exported will be named with the specified
-#'    filename followed by the format name.
-#'  }
-#'  \item{\code{exportAsBibTeX(filename)}}{
-#'    Export metadata as BibTeX (BIB) file
-#'  }
-#'  \item{\code{exportAsCSL(filename)}}{
-#'    Export metadata as CSL (JSON) file
-#'  }
-#'  \item{\code{exportAsDataCite(filename)}}{
-#'    Export metadata as DataCite (XML) file
-#'  }
-#'  \item{\code{exportAsDublinCore(filename)}}{
-#'    Export metadata as Dublin Core file
-#'  }
-#'  \item{\code{exportAsDCAT(filename)}}{
-#'    Export metadata as DCAT (RDF) file
-#'  }
-#'  \item{\code{exportAsJSON(filename)}}{
-#'    Export metadata as JSON file
-#'  }
-#'  \item{\code{exportAsJSONLD(filename)}}{
-#'    Export metadata as JSON-LD (JSON) file
-#'  }
-#'  \item{\code{exportAsGeoJSON(filename)}}{
-#'    Export metadata as GeoJSON (JSON) file
-#'  }
-#'  \item{\code{exportAsMARCXML{filename}}}{
-#'    Export metadata as MARCXML (XML) file
-#'  }
-#'  \item{\code{exportAsAllFormats(filename)}}{
-#'    Export metadata as all Zenodo supported metadata formats. THis function will
-#'    create one file per Zenodo metadata formats.
-#'  }
-#'  \item{\code{listFiles(pretty)}}{
-#'    List files attached to the record. By default \code{pretty} is TRUE and the output
-#'    will be a \code{data.frame}, otherwise a \code{list} will be returned.
-#'  }
-#'  \item{\code{downloadFiles(path, files, parallel, parallel_handler, cl, ...)}}{
-#'    Download files attached to the record. The \code{path} can be specified as target
-#'    download directory (by default it will be the current working directory). 
-#'    
-#'    Download can be restrained to one more file which names can be provided as vector 
-#'    using the \code{files} argument. By default, all files are downloaded.
-#'    
-#'    The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
-#'    the files download. If set to \code{TRUE}, files will be downloaded in parallel.
-#'    using the chosen \code{parallel_handler}, eg \code{mclapply} interface from \pkg{parallel} package. 
-#'    To use a different parallel handler (such as eg \code{parLapply} or \code{parSapply}), specify its function
-#'    in \code{parallel_handler} argument. For cluster-based parallel download, this is the 
-#'    way to proceed. In that case, the cluster should be created earlier by the user with 
-#'    \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
-#'    will be stopped automatically. See examples in \code{download_zenodo} utility function.
-#'    
-#'    The logical argument \code{quiet} (default is \code{FALSE}) can be set to 
-#'    suppress informative messages (not warnings).
-#'    
-#'    Additional arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
-#'    can be added (eg. \code{mc.cores} for \code{mclapply})
-#'    
-#'  }
-#' }
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
 #' 
@@ -377,30 +30,54 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     }
   ),
   public = list(
+    #' @field conceptdoi record Concept DOI (common to all record versions)
     conceptdoi = NULL,
+    #' @field conceptrecid record concept id
     conceptrecid = NULL,
+    #' @field created record creation date
     created = NULL,
+    #' @field doi record doi
     doi = NULL,
+    #' @field doi_url record doi URL
     doi_url = NULL,
+    #' @field files list of files associated to the record
     files = list(),
+    #' @field id record id
     id = NULL,
+    #' @field links list of links associated to the record
     links = list(),
+    #' @field metadata metadata elements associated to the record
     metadata = list(),
+    #' @field modified record modification date
     modified = NULL,
+    #' @field owner record owner
     owner = NULL,
+    #' @field record_id record_id
     record_id = NULL,
+    #' @field state record state
     state = NULL,
+    #' @field submitted record submission status
     submitted = FALSE,
+    #' @field title record title
     title = NULL,
+    #' @field version record version
     version = NULL,
     
+    #' @description method is used to instantiate a \code{\link{ZenodoRecord}}
+    #' @param obj an optional list object to create the record
+    #' @param logger a logger to print log messages. It can be either NULL, "INFO" (with minimum logs), 
+    #' or "DEBUG" (for complete curl http calls logs)
     initialize = function(obj = NULL, logger = "INFO"){
       super$initialize(logger = logger)
       self$prereserveDOI(TRUE)
       if(!is.null(obj)) private$fromList(obj)
     },
     
-    #setPrereserveDOI
+    #' @description Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
+    #'    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
+    #'    the record created doesn't yet handle a DOI. To avoid prereserving a DOI call \code{$prereserveDOI(FALSE)} 
+    #'    on your record.
+    #' @param prereserve whether a DOI has to be pre-reserved by Zenodo
     prereserveDOI = function(prereserve){
       if(!is(prereserve,"logical")){
         stop("The argument should be 'logical' (TRUE/FALSE)")
@@ -408,13 +85,18 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$prereserve_doi <- prereserve
     },
  
-    #setDOI
+    #' @description Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+    #'    This method will call the method \code{$prereserveDOI(FALSE)}.
+    #' @param doi DOI to set for the record
     setDOI = function(doi){
       self$metadata$doi <- doi
       self$prereserveDOI(FALSE)
     },
     
-    #getConceptDOI
+    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
+    #'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
+    #'    on the prereserved DOI of the first record version.
+    #' @return the concept DOI, object of class \code{character}
     getConceptDOI = function(){
       conceptdoi <- self$conceptdoi
       if(is.null(conceptdoi)){
@@ -427,19 +109,23 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(conceptdoi)
     },
     
-    #getFirstDOI
+    #' @description Get DOI of the first record version.
+    #' @return the first DOI, object of class \code{character}
     getFirstDOI = function(){
       versions <- self$getVersions()
       return(versions[1,"doi"])
     },
     
-    #getLastDOI
+    #' @description Get DOI of the latest record version.
+    #' @return the last DOI, object of class \code{character}
     getLastDOI = function(){
       versions <- self$getVersions()
       return(versions[nrow(versions),"doi"])
     },
     
-    #getVersions
+    #' @description Get record versions with creation/publication date, 
+    #'   version (ordering number) and DOI.
+    #' @return a \code{data.frame} with the record versions
     getVersions = function(){
       locale <- Sys.getlocale("LC_TIME")
       Sys.setlocale("LC_TIME", "us_US")
@@ -477,7 +163,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(versions)
     },
     
-    #setUploadType
+    #' @description Set the upload type (mandatory). 
+    #' @param uploadType record upload type among the following values: 'publication',
+    #'    'poster','presentation','dataset','image','video', or 'software'
     setUploadType = function(uploadType){
       uploadTypeValues <- c("publication","poster","presentation",
                             "dataset","image","video","software","other")
@@ -491,7 +179,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$upload_type <- uploadType
     },
     
-    #setPublicationType
+    #' @description Set the publication type (mandatory if upload type is 'publication').
+    #' @param publicationType record publication type among the following values: 'book','section',
+    #' 'conferencepaper','article','patent','preprint','report','softwaredocumentation','thesis',
+    #' 'technicalnote','workingpaper', or 'other'
     setPublicationType = function(publicationType){
       publicationTypeValues <- c("book","section","conferencepaper","article",
                                  "patent","preprint","report","softwaredocumentation",
@@ -506,7 +197,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$publication_type <- publicationType
     },
     
-    #setImageType
+    #' @description Set the image type (mandatory if image type is 'image').
+    #' @param imageType record publication type among the following values: 'figure','plot',
+    #' 'drawing','diagram','photo', or 'other'
     setImageType = function(imageType){
       imageTypeValues = c("figure","plot","drawing","diagram","photo","other")
       if(!(imageType %in% imageTypeValues)){
@@ -519,7 +212,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$image_type <- imageType
     },
     
-    #setPublicationDate
+    #' @description Set the publication date.
+    #' @param publicationDate object of class \code{Date}
     setPublicationDate = function(publicationDate){
       if(!is(publicationDate,"Date")){
         stop("The publication date should be a 'Date' object")
@@ -527,7 +221,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$publication_date <- as(publicationDate, "character")
     },
     
-    #setEmbargoDate
+    #' @description Set the embargo date.
+    #' @param embargoDate object of class \code{Date}
     setEmbargoDate = function(embargoDate){
       if(!is(embargoDate,"Date")){
         stop("The embargo date should be a 'Date' object")
@@ -535,17 +230,20 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$embargo_date <- as(publicationDate, "character")
     },
     
-    #setTitle
+    #' @description Set the record title.
+    #' @param title object of class \code{character}
     setTitle = function(title){
       self$metadata$title <- title
     },
     
-    #setDescription
+    #' @description Set the record description
+    #' @param description object of class \code{character}
     setDescription = function(description){
       self$metadata$description <- description
     },
     
-    #setAccessRight
+    #' @description Set the access right. 
+    #' @param accessRight record access right among the following values: 'open','embargoed', 'restricted','closed'
     setAccessRight = function(accessRight){
       accessRightValues <- c("open","embargoed","restricted","closed")
       if(!(accessRight %in% accessRightValues)){
@@ -557,12 +255,23 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$access_right <- accessRight
     },
     
-    #setAccessConditions
+    #' @description set the access conditions.
+    #' @param accessConditions object of class \code{character}
     setAccessConditions = function(accessConditions){
       self$metadata$access_conditions <- accessConditions
     },
     
-    #addCreator
+    #' @description Add a creator for the record. One approach is to use the \code{firstname} and
+    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as
+    #'    \code{lastname, firstname}. For more flexibility over this, the \code{name}
+    #'    argument can be directly used.
+    #' @param firstname creator first name
+    #' @param lastname creator last name
+    #' @param name creator name
+    #' @param affiliation creator affiliation (optional)
+    #' @param orcid creator ORCID (optional)
+    #' @param gnd creator GND (optional)
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addCreator = function(firstname, lastname, name = paste(lastname, firstname, sep = ", "),
                           affiliation = NULL, orcid = NULL, gnd = NULL){
       creator <- list(name = name)
@@ -573,7 +282,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$creators[[length(self$metadata$creators)+1]] <- creator
     },
     
-    #removeCreator
+    #' @description Removes a creator by a property. The \code{by} parameter should be the name
+    #'    of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
+    #'    'orcid' or 'gnd').
+    #' @param by property used as criterion to remove the creator
+    #' @param property property value used to remove the creator
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreator = function(by,property){
       removed <- FALSE
       for(i in 1:length(self$metadata$creators)){
@@ -586,27 +300,45 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #removeCreatorByName
+    #' @description Removes a creator by name.
+    #' @param name creator name
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByName = function(name){
       return(self$removeCreator(by = "name", name))
     },
 
-    #removeCreatorByAffiliation
+    #' @description Removes a creator by affiliation.
+    #' @param affiliation creator affiliation
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByAffiliation = function(affiliation){
       return(self$removeCreator(by = "affiliation", affiliation))
     },
     
-    #removeCreatorByORCID
+    #' @description Removes a creator by ORCID.
+    #' @param orcid creator ORCID
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByORCID = function(orcid){
       return(self$removeCreator(by = "orcid", orcid))
     },
     
-    #removeCreatorByGND
+    #' @description Removes a creator by GND.
+    #' @param gnd creator GND
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByGND = function(gnd){
       return(self$removeCreator(by = "gnd", gnd))
     },
     
-    #addContributor
+    #' @description  Add a contributor for the record. Firstname, lastname, and type are mandatory.
+    #' @param firstname contributor first name
+    #' @param lastname contributor last name
+    #' @param type contributor type, among values: ContactPerson, 
+    #'    DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
+    #'    Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
+    #'    RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other.
+    #' @param affiliation contributor affiliation (optional)
+    #' @param orcid contributor orcid (optional)
+    #' @param gnd contributor gnd (optional)
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addContributor = function(firstname, lastname, type, affiliation = NULL, orcid = NULL, gnd = NULL){
       allowedTypes <- c("ContactPerson", "DataCollector", "DataCurator", "DataManager","Distributor",
                         "Editor", "Funder", "HostingInstitution", "Producer", "ProjectLeader", "ProjectManager",
@@ -624,7 +356,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$contributors[[length(self$metadata$contributors)+1]] <- contributor
     },
     
-    #removeContributor
+    #' @description Removes a contributor by a property. The \code{by} parameter should be the name
+    #'    of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
+    #'    'orcid' or 'gnd').
+    #'    \code{FALSE} otherwise.
+    #' @param by property used as criterion to remove the contributor
+    #' @param property property value used to remove the contributor
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributor = function(by,property){
       removed <- FALSE
       for(i in 1:length(self$metadata$contributors)){
@@ -637,27 +375,38 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #removeContributorByName
+    #' @description Removes a contributor by name.
+    #' @param name contributor name
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByName = function(name){
       return(self$removeContributor(by = "name", name))
     },
     
-    #removeContributorByAffiliation
+    #' @description Removes a contributor by affiliation.
+    #' @param affiliation contributor affiliation
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByAffiliation = function(affiliation){
       return(self$removeContributor(by = "affiliation", affiliation))
     },
     
-    #removeContributorByORCID
+    #' @description Removes a contributor by ORCID.
+    #' @param orcid contributor ORCID
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByORCID = function(orcid){
       return(self$removeContributor(by = "orcid", orcid))
     },
     
-    #removeContributorByGND
+    #' @description Removes a contributor by GND.
+    #' @param gnd contributor GND
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByGND = function(gnd){
       return(self$removeContributor(by = "gnd", gnd))
     },
     
-    #setLicense
+    #' @description Set license. The license should be set with the Zenodo id of the license. If not
+    #'    recognized by Zenodo, the function will return an error. The list of licenses can
+    #'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
+    #' @param licenseId a license Id 
     setLicense = function(licenseId){
       zen <- ZenodoManager$new()
       zen_license <- zen$getLicenseById(licenseId)
@@ -669,17 +418,23 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$license <- licenseId
     },
     
-    #setVersion
+    #' @description Set record version.
+    #' @param version the record version to set
     setVersion = function(version){
       self$metadata$version <- version
     },
     
-    #setLanguage
+    #' @description  Set the language.
+    #' @param language ISO 639-2 or 639-3 code
     setLanguage = function(language){
       self$metadata$language <- language
     },
     
-    #addRelatedIdentifier
+    #' @description Adds a related identifier with a given relation.
+    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, 
+    #'   isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
+    #'   isCompiledBy, isIdenticalTo, isAlternateIdentifier
+    #' @param identifier resource identifier
     addRelatedIdentifier = function(relation, identifier){
       allowedRelations <- c("isCitedBy", "cites", "isSupplementTo",
                             "isSupplementedBy", "isNewVersionOf", "isPreviousVersionOf", 
@@ -707,7 +462,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(added)
     },
     
-    #removeRelatedIdentifier
+    #' @description Removes a related identifier with a given relation.
+    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, 
+    #'   isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
+    #'   isCompiledBy, isIdenticalTo, isAlternateIdentifier
+    #' @param identifier resource identifier
     removeRelatedIdentifier = function(relation, identifier){
       allowedRelations <- c("isCitedBy", "cites", "isSupplementTo",
                             "isSupplementedBy", "isNewVersionOf", "isPreviousVersionOf", 
@@ -731,7 +490,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #setReferences
+    #' @description Set references
+    #' @param references a vector or list of references to set for the record
     setReferences = function(references){
       if(is.null(self$metadata$references)) self$metadata$references <- list()
       for(reference in references){
@@ -739,7 +499,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
     },
     
-    #addReference
+    #' @description Add a reference
+    #' @param reference the reference to add
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addReference = function(reference){
       added <- FALSE
       if(is.null(self$metadata$references)) self$metadata$references <- list()
@@ -750,7 +512,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(added)
     },
     
-    #removeReference
+    #' @description Remove a reference
+    #' @param reference the reference to remove
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeReference = function(reference){
       removed <- FALSE
       if(!is.null(self$metadata$references)){
@@ -766,7 +530,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #setKeywords
+    #' @description Set keywords
+    #' @param keywords a vector or list of keywords to set for the record
     setKeywords = function(keywords){
       if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
       for(keyword in keywords){
@@ -774,7 +539,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
     },
     
-    #addKeyword
+    #' @description Add a keyword
+    #' @param keyword the keyword to add
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addKeyword = function(keyword){
       added <- FALSE
       if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
@@ -785,7 +552,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(added)
     },
     
-    #removeKeyword
+    #' @description Remove a keyword
+    #' @param keyword the keyword to remove
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeKeyword = function(keyword){
       removed <- FALSE
       if(!is.null(self$metadata$keywords)){
@@ -801,14 +570,20 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #addSubject
+    #' @description Adds a subject given a term and identifier
+    #' @param term subject term
+    #' @param identifier subject identifier
     addSubject = function(term, identifier){
       subject <- list(term = term, identifier = identifier)
       if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
       self$metadata$subjects[[length(self$metadata$subjects)+1]] <- subject
     },
     
-    #removeSubject
+    #' @description Removes subject(s) by a property. The \code{by} parameter should be the name
+    #'    of the subject property ('term' or 'identifier').
+    #' @param by property used as criterion to remove subjects
+    #' @param property property value used to remove subjects
+    #' @return \code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
     removeSubject = function(by, property){
       removed <- FALSE
       for(i in 1:length(self$metadata$subjects)){
@@ -821,22 +596,30 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #removeSubjectByTerm
+    #' @description Removes subject(s) by term.
+    #' @param term the term to use to remove subject(s)
+    #' @return \code{TRUE} if at least one subject is removed, \code{FALSE} otherwise. 
     removeSubjectByTerm = function(term){
       return(self$removeSubject(by = "term", property = term))
     },
     
-    #removeSubjectByIdentifier
+    #' @description Removes subject(s) by identifier
+    #' @param identifier the identifier to use to remove subject(s)
+    #' @return \code{TRUE} if at least one subject is removed, \code{FALSE} otherwise. 
     removeSubjectByIdentifier = function(identifier){
       return(self$removeSubject(by = "identifier", property = identifier))
     },
     
-    #setNotes
+    #' @description Set notes. HTML is not allowed
+    #' @param notes object of class \code{character}
     setNotes = function(notes){
       self$metadata$notes <- notes
     },
     
-    #setCommunities
+    #' @description Set a vector of character strings identifying communities
+    #' @param communities a vector or list of communities. Values should among known communities. The list of communities can
+    #'    fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}. Each community should be set with 
+    #'    the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.
     setCommunities = function(communities){
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       for(community in communities){
@@ -844,7 +627,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
     },
     
-    #addCommunity
+    #' @description Adds a community to the record metadata. 
+    #' @param community community to add. The community should be set with the Zenodo id of the community. 
+    #'   If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
+    #'   with the \code{ZenodoManager} and the function \code{$getCommunities()}.
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addCommunity = function(community){
       added <- FALSE
       zen <- ZenodoManager$new()
@@ -862,7 +649,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(added)
     },
     
-    #removeCommunity
+    #' @description Removes a community from the record metadata. 
+    #' @param community community to remove. The community should be set with the Zenodo id of the community.
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCommunity = function(community){
       removed <- FALSE
       if(!is.null(self$metadata$communities)){
@@ -878,7 +667,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #setGrants
+    #' @description Set a vector of character strings identifying grants
+    #' @param grants a vector or list of grants Values should among known grants The list of grants can
+    #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 
+    #'    the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.
     setGrants = function(grants){
       if(is.null(self$metadata$grants)) self$metadata$grants <- list()
       for(grant in grants){
@@ -886,7 +678,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
     },
     
-    #addGrant
+    #' @description Adds a grant to the record metadata.
+    #' @param grant grant to add. The grant should be set with the id of the grant. If not
+    #'    recognized by Zenodo, the function will return an warning only. The list of grants can
+    #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addGrant = function(grant){
       added <- FALSE
       zen <- ZenodoManager$new()
@@ -905,7 +701,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(added)
     },
     
-    #removeGrant
+    #' @description Removes a grant from the record metadata. 
+    #' @param grant grant to remove. The grant should be set with the Zenodo id of the grant
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeGrant = function(grant){
       removed <- FALSE
       if(!is.null(self$metadata$grants)){
@@ -921,92 +719,114 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #setJournalTitle
+    #' @description Set Journal title to the record metadata
+    #' @param title a title, object of class \code{character}
     setJournalTitle = function(title){
       self$metadata$journal_title <- title
     },
     
-    #setJournalVolume
+    #' @description Set Journal volume to the record metadata
+    #' @param volume a volume
     setJournalVolume = function(volume){
       self$metadata$journal_volume <- volume
     },
     
-    #setJournalIssue
+    #' @description Set Journal issue to the record metadata
+    #' @param issue an issue
     setJournalIssue = function(issue){
       self$metadata$journal_issue <- issue
     },
     
-    #setJournalPages
+    #' @description Set Journal pages to the record metadata
+    #' @param pages number of pages
     setJournalPages = function(pages){
       self$metadata$journal_pages <- pages
     },
     
-    #setConferenceTitle
+    #' @description Set conference title to the record metadata
+    #' @param title conference title, object of class \code{character}
     setConferenceTitle = function(title){
       self$metadata$conference_title <- title
     },
     
-    #setConferenceAcronym
+    #' @description Set conference acronym to the record metadata
+    #' @param acronym conference acronym, object of class \code{character}
     setConferenceAcronym = function(acronym){
       self$metadata$conference_acronym <- acronym
     },
     
-    #setConferenceDates
+    #' @description Set conference dates to the record metadata
+    #' @param dates conference dates, object of class \code{character}
     setConferenceDates = function(dates){
       self$metadata$conference_dates <- dates
     },
     
-    #setConferencePlace
+    #' @description Set conference place to the record metadata
+    #' @param place conference place, object of class \code{character}
     setConferencePlace = function(place){
       self$metadata$conference_place <- place
     },
     
-    #setConferenceUrl
+    #' @description Set conference url to the record metadata
+    #' @param url conference url, object of class \code{character}
     setConferenceUrl = function(url){
       self$metadata$conference_url <- url
     },
     
-    #setConferenceSession
+    #' @description Set conference session to the record metadata
+    #' @param session conference session, object of class \code{character}
     setConferenceSession = function(session){
       self$metadata$conference_session <- session
     },
     
-    #setConferenceSessionPart
+    #' @description Set conference session part to the record metadata
+    #' @param part conference session part, object of class \code{character}
     setConferenceSessionPart = function(part){
       self$metadata$conference_session_part <- part
     },
     
-    #setImprintPublisher
+    #' @description Set imprint publisher to the record metadata
+    #' @param publisher the publisher, object of class \code{character}
     setImprintPublisher = function(publisher){
       self$metadata$imprint_publisher <- publisher
     },
     
-    #setImprintISBN
+    #' @description Set imprint ISBN to the record metadata
+    #' @param isbn the ISBN, object of class \code{character}
     setImprintISBN = function(isbn){
       self$metadata$imprint_isbn <- isbn
     },
     
-    #setImprintPlace
+    #' @description Set imprint place to the record metadata
+    #' @param place the place, object of class \code{character}
     setImprintPlace = function(place){
       self$metadata$imprint_place <- place
     },
     
-    #setPartofTitle
+    #' @description Set title to which record is part of
+    #' @param title the title, object of class \code{character}
     setPartofTitle = function(title){
       self$metadata$partof_title <- title
     },
     
-    #setPartofPages
+    #' @description Set pages to which record is part of
+    #' @param pages the pages, object of class \code{character}
     setPartofPages = function(pages){
       self$metadata$partof_pages <- pages
     },
     
-    #setThesisUniversity
+    #' @description Set thesis university
+    #' @param university the university, object of class \code{character}
     setThesisUniversity = function(university){
       self$metadata_thesis_university <- university
     },
     
-    #addThesisSupervisor
+    #' @description Adds thesis supervisor
+    #' @param firstname supervisor first name
+    #' @param lastname supervisor last name
+    #' @param affiliation supervisor affiliation (optional)
+    #' @param orcid supervisor ORCID (optional)
+    #' @param gnd supervisor GND (optional)
     addThesisSupervisor = function(firstname, lastname, affiliation = NULL, orcid = NULL, gnd = NULL){
       supervisor <- list(name = paste(lastname, firstname, sep=", "))
       if(!is.null(affiliation)) supervisor <- c(supervisor, affiliation = affiliation)
@@ -1016,7 +836,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$thesis_supervisors[[length(self$metadata$thesis_supervisors)+1]] <- supervisor
     },
     
-    #removeThesisSupervisor
+    #' @description Removes a thesis supervisor by a property. The \code{by} parameter should be the name
+    #'    of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
+    #'    'orcid' or 'gnd').
+    #' @param by property used as criterion to remove the thesis supervisor
+    #' @param property property value used to remove the thesis supervisor
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeThesisSupervisor = function(by,property){
       removed <- FALSE
       for(i in 1:length(self$metadata$thesis_supervisors)){
@@ -1029,27 +854,38 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #removeThesisSupervisorByName
+    #' @description Removes a thesis supervisor by name.
+    #' @param name thesis supervisor name
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeThesisSupervisorByName = function(name){
       return(self$removeThesisSupervisor(by = "name", name))
     },
     
-    #removeThesisSupervisorByAffiliation
+    #' @description Removes a thesis supervisor by affiliation
+    #' @param affiliation thesis supervisor affiliation
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeThesisSupervisorByAffiliation = function(affiliation){
       return(self$removeThesisSupervisor(by = "affiliation", affiliation))
     },
     
-    #removeThesisSupervisorByORCID
+    #' @description Removes a thesis supervisor by ORCID
+    #' @param orcid thesis supervisor ORCID
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeThesisSupervisorByORCID = function(orcid){
       return(self$removeThesisSupervisor(by = "orcid", orcid))
     },
     
-    #removeThesisSupervisorByGND
+    #' @description Removes a thesis supervisor by GND
+    #' @param gnd thesis supervisor GND
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeThesisSupervisorByGND = function(gnd){
       return(self$removeThesisSupervisor(by = "gnd", gnd))
     },
     
-    #exportAs
+    #' @description Exports record to a file by format.
+    #' @param format the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
+    #'   JSON, JSON-LD, GeoJSON, MARCXML
+    #' @param filename the target filename (without extension)
     exportAs = function(format, filename){
       formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
       zenodo_url <- self$links$record_html
@@ -1098,58 +934,72 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       writeChar(reference, destfile, eos = NULL)
     },
     
-    #exportAsBibTeX
+    #' @description Exports record as BibTeX
+    #' @param filename the target filename (without extension)
     exportAsBibTeX = function(filename){
       self$exportAs("BibTeX", filename)
     },
     
-    #exportAsCSL
+    #' @description Exports record as CSL
+    #' @param filename the target filename (without extension)
     exportAsCSL = function(filename){
       self$exportAs("CSL", filename)
     },
     
-    #exportAsDataCite
+    #' @description Exports record as DataCite
+    #' @param filename the target filename (without extension)
     exportAsDataCite = function(filename){
       self$exportAs("DataCite", filename)
     },
     
-    #exportAsDublinCore
+    #' @description Exports record as DublinCore
+    #' @param filename the target filename (without extension)
     exportAsDublinCore = function(filename){
       self$exportAs("DublinCore", filename)
     },
     
-    #exportAsDCAT
+    #' @description Exports record as DCAT
+    #' @param filename the target filename (without extension)
     exportAsDCAT = function(filename){
       self$exportAs("DCAT", filename)
     },
     
-    #exportAsJSON
+    #' @description Exports record as JSON
+    #' @param filename the target filename (without extension)
     exportAsJSON = function(filename){
       self$exportAs("JSON", filename)
     },
     
-    #exportAsJSONLD
+    #' @description Exports record as JSONLD
+    #' @param filename the target filename (without extension)
     exportAsJSONLD = function(filename){
       self$exportAs("JSON-LD", filename)
     },
     
-    #exportAsGeoJSON
+    #' @description Exports record as GeoJSON
+    #' @param filename the target filename (without extension)
     exportAsGeoJSON = function(filename){
       self$exportAs("GeoJSON", filename)
     },
     
-    #exportAsMARCXML
+    #' @description Exports record as MARCXML
+    #' @param filename the target filename (without extension)
     exportAsMARCXML = function(filename){
       self$exportAs("MARCXML", filename)
     },
     
-    #exportAsAllFormats
+    #' @description Exports record in all Zenodo record export formats. This function will
+    #'    create one file per Zenodo metadata formats.
+    #' @param filename the target filename (without extension)
     exportAsAllFormats = function(filename){
       formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
       invisible(lapply(formats, self$exportAs, filename))
     },
     
-    #listFiles
+    #' @description list files attached to the record
+    #' @param pretty whether a pretty output (\code{data.frame}) should be returned (default \code{TRUE}), otherwise
+    #'   the raw list of files is returned.
+    #' @return the files, as \code{data.frame} or \code{list}
     listFiles = function(pretty = TRUE){
       if(!pretty) return(self$files)
       outdf <- do.call("rbind", lapply(self$files, function(x){
@@ -1167,7 +1017,21 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(outdf)
     },
     
-    #downloadFiles
+    #' @description Downloads files attached to the record
+    #' @param path target download path (by default it will be the current working directory)
+    #' @param files (list of) file(s) to download. If not specified, by default all files will be downloaded.
+    #' @param parallel whether download has to be done in parallel using the chosen \code{parallel_handler}. Default is \code{FALSE}
+    #' @param parallel_handler The parallel handler to use eg. \code{mclapply}. To use a different parallel handler (such as eg 
+    #'   \code{parLapply} or \code{parSapply}), specify its function in \code{parallel_handler} argument. For cluster-based parallel 
+    #'   download, this is the way to proceed. In that case, the cluster should be created earlier by the user with  \code{makeCluster}
+    #'   and passed as \code{cl} argument. After downloading all files, the cluster will be stopped automatically.
+    #' @param cl an optional cluster for cluster-based parallel handlers
+    #' @param quiet (default is \code{FALSE}) can be set to suppress informative messages (not warnings).
+    #' @param ... arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
+    #'   can be added (eg. \code{mc.cores} for \code{mclapply})
+    #' 
+    #' @note See examples in \code{\link{download_zenodo}} utility function.
+    #' 
     downloadFiles = function(path = ".", files = list(),
                              parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, ...){
       if(length(self$files)==0){

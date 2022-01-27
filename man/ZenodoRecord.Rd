@@ -12,359 +12,1842 @@ Object of \code{\link{R6Class}} for modelling an ZenodoRecord
 }
 \description{
 ZenodoRecord
-}
-\section{Methods}{
 
-\describe{
- \item{\code{new()}}{
-   This method is used to instantiate a Zenodo Record
- }
- \item{\code{prereserveDOI(prereserve)}}{
-   Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
-   prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI
-   assuming the record created doesn't yet handle a DOI. To avoid prereserving a DOI 
-   call \code{$prereserveDOI(FALSE)} on your record.
- }
- \item{\code{setUploadType(uploadType)}}{
-   Set the upload type (mandatory). Value should be among the following: 'publication',
-   'poster','presentation','dataset','image','video', or 'software'
- }
- \item{\code{setPublicationType(publicationType)}}{
-   Set the publication type (mandatory if upload type is 'publication'). Value should be
-   among the following: 'book','section','conferencepaper','article','patent','preprint',
-   'report','softwaredocumentation','thesis','technicalnote','workingpaper', or 'other'
- }
- \item{\code{setImageType(imageType)}}{
-   Set the image type (mandatory if image type is 'image'). Value should be among the 
-   following: 'figure','plot','drawing','diagram','photo', or 'other'
- }
- \item{\code{setPublicationDate(publicationDate)}}{
-   Set the publication date, as object of class \code{Date}
- }
- \item{\code{setEmbargoDate(embargoDate)}}{
-   Set the embargo date, as object of class \code{Date}
- }
- \item{\code{setTitle(title)}}{
-   Set title
- }
- \item{\code{setDescription(description)}}{
-   Set description
- }
- \item{\code{setAccessRight(accessRight)}}{
-   Set the access right. Value should be among the following: 'open','embargoed',
-   'restricted','closed'
- }
- \item{\code{setAccessConditions(accessConditions)}}{
-   Set access conditions.
- }
- \item{\code{addCreator(firsname, lastname, name, affiliation, orcid, gnd)}}{
-   Add a creator for the record. One approach is to use the \code{firstname} and
-   \code{lastname} arguments, that by default will be concatenated for Zenodo as
-   \code{lastname, firstname}. For more flexibility over this, the \code{name}
-   argument can be directly used.
- }
- \item{\code{removeCreator(by,property)}}{
-   Removes a creator by a property. The \code{by} parameter should be the name
-   of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
-   'orcid' or 'gnd'). Returns \code{TRUE} if some creator was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeCreatorByName(name)}}{
-   Removes a creator by name. Returns \code{TRUE} if some creator was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeCreatorByAffiliation(affiliation)}}{
-   Removes a creator by affiliation. Returns \code{TRUE} if some creator was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeCreatorByORCID(orcid)}}{
-   Removes a creator by ORCID. Returns \code{TRUE} if some creator was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeCreatorByGND(gnd)}}{
-   Removes a creator by GND. Returns \code{TRUE} if some creator was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{addContributor(firsname, lastname, type, affiliation, orcid, gnd)}}{
-   Add a contributor for the record. Firstname, lastname, and type are mandatory.
-   The type should be an object of class \code{character} among values: ContactPerson, 
-   DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
-   Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
-   RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other. 
- }
- \item{\code{removeContributor(by,property)}}{
-   Removes a contributor by a property. The \code{by} parameter should be the name
-   of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
-   'orcid' or 'gnd'). Returns \code{TRUE} if some contributor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeContributorByName(name)}}{
-   Removes a contributor by name. Returns \code{TRUE} if some contributor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeContributorByAffiliation(affiliation)}}{
-   Removes a contributor by affiliation. Returns \code{TRUE} if some contributor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeContributorByORCID(orcid)}}{
-   Removes a contributor by ORCID. Returns \code{TRUE} if some contributor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeContributorByGND(gnd)}}{
-   Removes a contributor by GND. Returns \code{TRUE} if some contributor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{setLicense(licenseId)}}{
-   Set license. The license should be set with the Zenodo id of the license. If not
-   recognized by Zenodo, the function will return an error. The list of licenses can
-   fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
- }
- \item{\code{setDOI(doi)}}{
-   Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
-   This method will call the method \code{$prereserveDOI(FALSE)}.
- }
- \item{\code{getConceptDOI()}}{
-   Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
-   of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
-   on the prereserved DOI of the first record version.
- }
- \item{\code{getFirstDOI()}}{
-   Get DOI of the first record version.
- }
- \item{\code{getLastDOI()}}{
-   Get DOI of the latest record version.
- }
- \item{\code{getVersions()}}{
-   Get a \code{data.frame} listing record versions with creation/publication date, version (ordering number) and DOI.
- }
- \item{\code{setVersion(version)}}{
-   Set the version.
- }
- \item{\code{setLanguage(language)}}{
-   Set the language ISO 639-2 or 639-3 code.
- }
- \item{\code{addRelatedIdentifier(relation, identifier)}}{
-   Adds a related identifier with a given relation. Relation can be one of among
-   following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, isNewVersionOf,
-   isPreviousVersionOf, isPartOf, hasPart, compiles, isCompiledBy, isIdenticalTo, 
-   isAlternateIdentifier
- }
- \item{code{removeRelatedIdentifier(relation, identifier)}}{
-   Remove a related identifier
- }
- \item{\code{setReferences(references)}}{
-   Set a vector of character strings as references
- }
- \item{\code{addReference(reference)}}{
-   Adds a reference to the record metadata. Return \code{TRUE} if added, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removedReference(reference)}}{
-   Removes a reference from the record metadata. Return \code{TRUE} if removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{setKeywords(keywords)}}{
-   Set a vector of character strings as keywords
- }
- \item{\code{addKeyword(keyword)}}{
-   Adds a keyword to the record metadata. Return \code{TRUE} if added, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removedKeyword(keyword)}}{
-   Removes a keyword from the record metadata. Return \code{TRUE} if removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{addSubject(term, identifier)}}{
-   Add a Subject for the record.
- }
- \item{\code{removeSubject(by,property)}}{
-   Removes a subject by a property. The \code{by} parameter should be the name
-   of the subject property ('term' or 'identifier'). Returns \code{TRUE} if some 
-   subject was removed, \code{FALSE} otherwise.
- }
- \item{\code{removeSubjectByTerm(term)}}{
-   Removes a subject by term. Returns \code{TRUE} if some subject was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeSubjectByIdentifier(identifier)}}{
-   Removes a subject by identifier. Returns \code{TRUE} if some subject was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{setNotes(notes)}}{
-   Set notes. HTML is not allowed
- }
- \item{\code{setCommunities(communities)}}{
-   Set a vector of character strings identifying communities
- }
- \item{\code{addCommunity(community)}}{
-   Adds a community to the record metadata. Return \code{TRUE} if added, 
-   \code{FALSE} otherwise. The community should be set with the Zenodo id of the community. If not
-   recognized by Zenodo, the function will return an error. The list of communities can
-   fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}.
- }
- \item{\code{removedCommunity(community)}}{
-   Removes a community from the record metadata. Return \code{TRUE} if removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{setGrants(grants)}}{
-   Set a vector of character strings identifying grants
- }
- \item{\code{addGrant(grant)}}{
-   Adds a grant to the record metadata. Return \code{TRUE} if added, 
-   \code{FALSE} otherwise. The grant should be set with the id of the grant. If not
-   recognized by Zenodo, the function will return an warning only. The list of grants can
-   fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
- }
- \item{\code{removeGrant(grant)}}{
-   Removes a grant from the record metadata. Return \code{TRUE} if removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{setJournalTitle(title)}}{
-   Set Journal title, object of class \code{\link{character}}, if deposition is a published article.
- }
- \item{\code{setJournalVolume(volume)}}{
-   Set Journal volume, object of class \code{\link{character}}, if deposition is a published article.
- }
- \item{\code{setJournalIssue(issue)}}{
-   Set Journal issue, object of class \code{\link{character}}, if deposition is a published article.
- }
- \item{\code{setJournalPages(pages)}}{
-   Set Journal pages, object of class \code{\link{character}}, if deposition is a published article.
- }
- \item{\code{setConferenceTitle(title)}}{
-  Set Conference title, object of class \code{\link{character}}.
- }
- \item{\code{setConferenceAcronym(acronym)}}{
-   Set conference acronym, object of class \code{\link{character}}.
- }
- \item{\code{setConferenceDates(dates)}}{
-   Set conference dates, object of class \code{\link{character}}.
- }
- \item{\code{setConferencePlace(place)}}{
-   Set conference place, object of class \code{\link{character}}, in the format city, country 
-   (e.g. Kingston, Jamaica). Conference title or acronym must also be specified if this field 
-   is specified.
- }
- \item{\code{setConferenceUrl(url)}}{
-   Set conference url, object of class \code{\link{character}}.
- }
- \item{\code{setConferenceSession(session)}}{
-   Set conference session, object of class \code{\link{character}}.
- }
- \item{\code{setConferenceSessionPart(part)}}{
-   Set conference session part, object of class \code{\link{character}}.
- }
- \item{\code{setImprintPublisher(publisher)}}{
-   Set imprint publisher, object of class \code{\link{character}}.
- }
- \item{\code{setImprintISBN(isbn)}}{
-   Set imprint ISBN, object of class \code{\link{character}}.
- }
- \item{\code{setImprintPlace(place)}}{
-   Set imprint place, object of class \code{\link{character}}.
- }
- \item{\code{setPartofTitle(title)}}{
-   Set the book title in case of a chapter, object of class \code{\link{character}}.
- }
- \item{\code{setPartofPages(pages)}}{
-   Set the page numbers of book, object of class \code{\link{character}}.
- }
- \item{\code{setThesisUniversity(university)}}{
-   Set the thesis university, object of class \code{\link{character}}
- }
- \item{\code{addThesisSupervisor(firsname, lastname, affiliation, orcid, gnd)}}{
-   Add a thesis supervisor for the record.
- }
- \item{\code{removeThesisSupervisor(by,property)}}{
-   Removes a thesi supervisor by a property. The \code{by} parameter should be the name
-   of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
-   'orcid' or 'gnd'). Returns \code{TRUE} if some thesis supervisor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeThesisSupervisorByName(name)}}{
-   Removes a thesis supervisor by name. Returns \code{TRUE} if some thesis supervisor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeThesisSupervisorByAffiliation(affiliation)}}{
-   Removes a thesis supervisor by affiliation. Returns \code{TRUE} if some thesis supervisor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeThesisSupervisorByORCID(orcid)}}{
-   Removes a thesis supervisor by ORCID. Returns \code{TRUE} if some thesis supervisor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{removeThesisSupervisorByGND(gnd)}}{
-   Removes a thesis supervisor by GND. Returns \code{TRUE} if some thesis supervisor was removed, 
-   \code{FALSE} otherwise.
- }
- \item{\code{exportAs(format, filename)}}{
-   Export metadata in a format supported by Zenodo. Supported formats are: BibTeX, CSL, DataCite, 
-   DublinCore, DCAT, JSON, JSON-LD, GeoJSON, MARCXML. The exported will be named with the specified
-   filename followed by the format name.
- }
- \item{\code{exportAsBibTeX(filename)}}{
-   Export metadata as BibTeX (BIB) file
- }
- \item{\code{exportAsCSL(filename)}}{
-   Export metadata as CSL (JSON) file
- }
- \item{\code{exportAsDataCite(filename)}}{
-   Export metadata as DataCite (XML) file
- }
- \item{\code{exportAsDublinCore(filename)}}{
-   Export metadata as Dublin Core file
- }
- \item{\code{exportAsDCAT(filename)}}{
-   Export metadata as DCAT (RDF) file
- }
- \item{\code{exportAsJSON(filename)}}{
-   Export metadata as JSON file
- }
- \item{\code{exportAsJSONLD(filename)}}{
-   Export metadata as JSON-LD (JSON) file
- }
- \item{\code{exportAsGeoJSON(filename)}}{
-   Export metadata as GeoJSON (JSON) file
- }
- \item{\code{exportAsMARCXML{filename}}}{
-   Export metadata as MARCXML (XML) file
- }
- \item{\code{exportAsAllFormats(filename)}}{
-   Export metadata as all Zenodo supported metadata formats. THis function will
-   create one file per Zenodo metadata formats.
- }
- \item{\code{listFiles(pretty)}}{
-   List files attached to the record. By default \code{pretty} is TRUE and the output
-   will be a \code{data.frame}, otherwise a \code{list} will be returned.
- }
- \item{\code{downloadFiles(path, files, parallel, parallel_handler, cl, ...)}}{
-   Download files attached to the record. The \code{path} can be specified as target
-   download directory (by default it will be the current working directory). 
-   
-   Download can be restrained to one more file which names can be provided as vector 
-   using the \code{files} argument. By default, all files are downloaded.
-   
-   The argument \code{parallel} (default is \code{FALSE}) can be used to parallelize
-   the files download. If set to \code{TRUE}, files will be downloaded in parallel.
-   using the chosen \code{parallel_handler}, eg \code{mclapply} interface from \pkg{parallel} package. 
-   To use a different parallel handler (such as eg \code{parLapply} or \code{parSapply}), specify its function
-   in \code{parallel_handler} argument. For cluster-based parallel download, this is the 
-   way to proceed. In that case, the cluster should be created earlier by the user with 
-   \code{makeCluster} and passed as \code{cl} argument. After downloading all files, the cluster
-   will be stopped automatically. See examples in \code{download_zenodo} utility function.
-   
-   The logical argument \code{quiet} (default is \code{FALSE}) can be set to 
-   suppress informative messages (not warnings).
-   
-   Additional arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
-   can be added (eg. \code{mc.cores} for \code{mclapply})
-   
- }
+ZenodoRecord
 }
+\note{
+See examples in \code{\link{download_zenodo}} utility function.
 }
-
 \author{
 Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 }
 \keyword{record}
 \keyword{zenodo}
+\section{Super class}{
+\code{\link[zen4R:zen4RLogger]{zen4R::zen4RLogger}} -> \code{ZenodoRecord}
+}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{conceptdoi}}{record Concept DOI (common to all record versions)}
+
+\item{\code{conceptrecid}}{record concept id}
+
+\item{\code{created}}{record creation date}
+
+\item{\code{doi}}{record doi}
+
+\item{\code{doi_url}}{record doi URL}
+
+\item{\code{files}}{list of files associated to the record}
+
+\item{\code{id}}{record id}
+
+\item{\code{links}}{list of links associated to the record}
+
+\item{\code{metadata}}{metadata elements associated to the record}
+
+\item{\code{modified}}{record modification date}
+
+\item{\code{owner}}{record owner}
+
+\item{\code{record_id}}{record_id}
+
+\item{\code{state}}{record state}
+
+\item{\code{submitted}}{record submission status}
+
+\item{\code{title}}{record title}
+
+\item{\code{version}}{record version}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{ZenodoRecord$new()}}
+\item \href{#method-prereserveDOI}{\code{ZenodoRecord$prereserveDOI()}}
+\item \href{#method-setDOI}{\code{ZenodoRecord$setDOI()}}
+\item \href{#method-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
+\item \href{#method-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
+\item \href{#method-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
+\item \href{#method-getVersions}{\code{ZenodoRecord$getVersions()}}
+\item \href{#method-setUploadType}{\code{ZenodoRecord$setUploadType()}}
+\item \href{#method-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
+\item \href{#method-setImageType}{\code{ZenodoRecord$setImageType()}}
+\item \href{#method-setPublicationDate}{\code{ZenodoRecord$setPublicationDate()}}
+\item \href{#method-setEmbargoDate}{\code{ZenodoRecord$setEmbargoDate()}}
+\item \href{#method-setTitle}{\code{ZenodoRecord$setTitle()}}
+\item \href{#method-setDescription}{\code{ZenodoRecord$setDescription()}}
+\item \href{#method-setAccessRight}{\code{ZenodoRecord$setAccessRight()}}
+\item \href{#method-setAccessConditions}{\code{ZenodoRecord$setAccessConditions()}}
+\item \href{#method-addCreator}{\code{ZenodoRecord$addCreator()}}
+\item \href{#method-removeCreator}{\code{ZenodoRecord$removeCreator()}}
+\item \href{#method-removeCreatorByName}{\code{ZenodoRecord$removeCreatorByName()}}
+\item \href{#method-removeCreatorByAffiliation}{\code{ZenodoRecord$removeCreatorByAffiliation()}}
+\item \href{#method-removeCreatorByORCID}{\code{ZenodoRecord$removeCreatorByORCID()}}
+\item \href{#method-removeCreatorByGND}{\code{ZenodoRecord$removeCreatorByGND()}}
+\item \href{#method-addContributor}{\code{ZenodoRecord$addContributor()}}
+\item \href{#method-removeContributor}{\code{ZenodoRecord$removeContributor()}}
+\item \href{#method-removeContributorByName}{\code{ZenodoRecord$removeContributorByName()}}
+\item \href{#method-removeContributorByAffiliation}{\code{ZenodoRecord$removeContributorByAffiliation()}}
+\item \href{#method-removeContributorByORCID}{\code{ZenodoRecord$removeContributorByORCID()}}
+\item \href{#method-removeContributorByGND}{\code{ZenodoRecord$removeContributorByGND()}}
+\item \href{#method-setLicense}{\code{ZenodoRecord$setLicense()}}
+\item \href{#method-setVersion}{\code{ZenodoRecord$setVersion()}}
+\item \href{#method-setLanguage}{\code{ZenodoRecord$setLanguage()}}
+\item \href{#method-addRelatedIdentifier}{\code{ZenodoRecord$addRelatedIdentifier()}}
+\item \href{#method-removeRelatedIdentifier}{\code{ZenodoRecord$removeRelatedIdentifier()}}
+\item \href{#method-setReferences}{\code{ZenodoRecord$setReferences()}}
+\item \href{#method-addReference}{\code{ZenodoRecord$addReference()}}
+\item \href{#method-removeReference}{\code{ZenodoRecord$removeReference()}}
+\item \href{#method-setKeywords}{\code{ZenodoRecord$setKeywords()}}
+\item \href{#method-addKeyword}{\code{ZenodoRecord$addKeyword()}}
+\item \href{#method-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
+\item \href{#method-addSubject}{\code{ZenodoRecord$addSubject()}}
+\item \href{#method-removeSubject}{\code{ZenodoRecord$removeSubject()}}
+\item \href{#method-removeSubjectByTerm}{\code{ZenodoRecord$removeSubjectByTerm()}}
+\item \href{#method-removeSubjectByIdentifier}{\code{ZenodoRecord$removeSubjectByIdentifier()}}
+\item \href{#method-setNotes}{\code{ZenodoRecord$setNotes()}}
+\item \href{#method-setCommunities}{\code{ZenodoRecord$setCommunities()}}
+\item \href{#method-addCommunity}{\code{ZenodoRecord$addCommunity()}}
+\item \href{#method-removeCommunity}{\code{ZenodoRecord$removeCommunity()}}
+\item \href{#method-setGrants}{\code{ZenodoRecord$setGrants()}}
+\item \href{#method-addGrant}{\code{ZenodoRecord$addGrant()}}
+\item \href{#method-removeGrant}{\code{ZenodoRecord$removeGrant()}}
+\item \href{#method-setJournalTitle}{\code{ZenodoRecord$setJournalTitle()}}
+\item \href{#method-setJournalVolume}{\code{ZenodoRecord$setJournalVolume()}}
+\item \href{#method-setJournalIssue}{\code{ZenodoRecord$setJournalIssue()}}
+\item \href{#method-setJournalPages}{\code{ZenodoRecord$setJournalPages()}}
+\item \href{#method-setConferenceTitle}{\code{ZenodoRecord$setConferenceTitle()}}
+\item \href{#method-setConferenceAcronym}{\code{ZenodoRecord$setConferenceAcronym()}}
+\item \href{#method-setConferenceDates}{\code{ZenodoRecord$setConferenceDates()}}
+\item \href{#method-setConferencePlace}{\code{ZenodoRecord$setConferencePlace()}}
+\item \href{#method-setConferenceUrl}{\code{ZenodoRecord$setConferenceUrl()}}
+\item \href{#method-setConferenceSession}{\code{ZenodoRecord$setConferenceSession()}}
+\item \href{#method-setConferenceSessionPart}{\code{ZenodoRecord$setConferenceSessionPart()}}
+\item \href{#method-setImprintPublisher}{\code{ZenodoRecord$setImprintPublisher()}}
+\item \href{#method-setImprintISBN}{\code{ZenodoRecord$setImprintISBN()}}
+\item \href{#method-setImprintPlace}{\code{ZenodoRecord$setImprintPlace()}}
+\item \href{#method-setPartofTitle}{\code{ZenodoRecord$setPartofTitle()}}
+\item \href{#method-setPartofPages}{\code{ZenodoRecord$setPartofPages()}}
+\item \href{#method-setThesisUniversity}{\code{ZenodoRecord$setThesisUniversity()}}
+\item \href{#method-addThesisSupervisor}{\code{ZenodoRecord$addThesisSupervisor()}}
+\item \href{#method-removeThesisSupervisor}{\code{ZenodoRecord$removeThesisSupervisor()}}
+\item \href{#method-removeThesisSupervisorByName}{\code{ZenodoRecord$removeThesisSupervisorByName()}}
+\item \href{#method-removeThesisSupervisorByAffiliation}{\code{ZenodoRecord$removeThesisSupervisorByAffiliation()}}
+\item \href{#method-removeThesisSupervisorByORCID}{\code{ZenodoRecord$removeThesisSupervisorByORCID()}}
+\item \href{#method-removeThesisSupervisorByGND}{\code{ZenodoRecord$removeThesisSupervisorByGND()}}
+\item \href{#method-exportAs}{\code{ZenodoRecord$exportAs()}}
+\item \href{#method-exportAsBibTeX}{\code{ZenodoRecord$exportAsBibTeX()}}
+\item \href{#method-exportAsCSL}{\code{ZenodoRecord$exportAsCSL()}}
+\item \href{#method-exportAsDataCite}{\code{ZenodoRecord$exportAsDataCite()}}
+\item \href{#method-exportAsDublinCore}{\code{ZenodoRecord$exportAsDublinCore()}}
+\item \href{#method-exportAsDCAT}{\code{ZenodoRecord$exportAsDCAT()}}
+\item \href{#method-exportAsJSON}{\code{ZenodoRecord$exportAsJSON()}}
+\item \href{#method-exportAsJSONLD}{\code{ZenodoRecord$exportAsJSONLD()}}
+\item \href{#method-exportAsGeoJSON}{\code{ZenodoRecord$exportAsGeoJSON()}}
+\item \href{#method-exportAsMARCXML}{\code{ZenodoRecord$exportAsMARCXML()}}
+\item \href{#method-exportAsAllFormats}{\code{ZenodoRecord$exportAsAllFormats()}}
+\item \href{#method-listFiles}{\code{ZenodoRecord$listFiles()}}
+\item \href{#method-downloadFiles}{\code{ZenodoRecord$downloadFiles()}}
+\item \href{#method-clone}{\code{ZenodoRecord$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR">}\href{../../zen4R/html/zen4RLogger.html#method-ERROR}{\code{zen4R::zen4RLogger$ERROR()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass">}\href{../../zen4R/html/zen4RLogger.html#method-getClass}{\code{zen4R::zen4RLogger$getClass()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName">}\href{../../zen4R/html/zen4RLogger.html#method-getClassName}{\code{zen4R::zen4RLogger$getClassName()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO">}\href{../../zen4R/html/zen4RLogger.html#method-INFO}{\code{zen4R::zen4RLogger$INFO()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger">}\href{../../zen4R/html/zen4RLogger.html#method-logger}{\code{zen4R::zen4RLogger$logger()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN">}\href{../../zen4R/html/zen4RLogger.html#method-WARN}{\code{zen4R::zen4RLogger$WARN()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+method is used to instantiate a \code{\link{ZenodoRecord}}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$new(obj = NULL, logger = "INFO")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{obj}}{an optional list object to create the record}
+
+\item{\code{logger}}{a logger to print log messages. It can be either NULL, "INFO" (with minimum logs), 
+or "DEBUG" (for complete curl http calls logs)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-prereserveDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-prereserveDOI}{}}}
+\subsection{Method \code{prereserveDOI()}}{
+Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
+   prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
+   the record created doesn't yet handle a DOI. To avoid prereserving a DOI call \code{$prereserveDOI(FALSE)} 
+   on your record.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$prereserveDOI(prereserve)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{prereserve}}{whether a DOI has to be pre-reserved by Zenodo}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-setDOI}{}}}
+\subsection{Method \code{setDOI()}}{
+Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+   This method will call the method \code{$prereserveDOI(FALSE)}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setDOI(doi)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{doi}}{DOI to set for the record}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getConceptDOI}{}}}
+\subsection{Method \code{getConceptDOI()}}{
+Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
+   of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
+   on the prereserved DOI of the first record version.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getConceptDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the concept DOI, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getFirstDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getFirstDOI}{}}}
+\subsection{Method \code{getFirstDOI()}}{
+Get DOI of the first record version.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getFirstDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the first DOI, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getLastDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-getLastDOI}{}}}
+\subsection{Method \code{getLastDOI()}}{
+Get DOI of the latest record version.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getLastDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the last DOI, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getVersions"></a>}}
+\if{latex}{\out{\hypertarget{method-getVersions}{}}}
+\subsection{Method \code{getVersions()}}{
+Get record versions with creation/publication date, 
+  version (ordering number) and DOI.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getVersions()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+a \code{data.frame} with the record versions
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setUploadType"></a>}}
+\if{latex}{\out{\hypertarget{method-setUploadType}{}}}
+\subsection{Method \code{setUploadType()}}{
+Set the upload type (mandatory).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setUploadType(uploadType)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{uploadType}}{record upload type among the following values: 'publication',
+'poster','presentation','dataset','image','video', or 'software'}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setPublicationType"></a>}}
+\if{latex}{\out{\hypertarget{method-setPublicationType}{}}}
+\subsection{Method \code{setPublicationType()}}{
+Set the publication type (mandatory if upload type is 'publication').
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPublicationType(publicationType)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{publicationType}}{record publication type among the following values: 'book','section',
+'conferencepaper','article','patent','preprint','report','softwaredocumentation','thesis',
+'technicalnote','workingpaper', or 'other'}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setImageType"></a>}}
+\if{latex}{\out{\hypertarget{method-setImageType}{}}}
+\subsection{Method \code{setImageType()}}{
+Set the image type (mandatory if image type is 'image').
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setImageType(imageType)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{imageType}}{record publication type among the following values: 'figure','plot',
+'drawing','diagram','photo', or 'other'}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setPublicationDate"></a>}}
+\if{latex}{\out{\hypertarget{method-setPublicationDate}{}}}
+\subsection{Method \code{setPublicationDate()}}{
+Set the publication date.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPublicationDate(publicationDate)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{publicationDate}}{object of class \code{Date}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setEmbargoDate"></a>}}
+\if{latex}{\out{\hypertarget{method-setEmbargoDate}{}}}
+\subsection{Method \code{setEmbargoDate()}}{
+Set the embargo date.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setEmbargoDate(embargoDate)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{embargoDate}}{object of class \code{Date}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-setTitle}{}}}
+\subsection{Method \code{setTitle()}}{
+Set the record title.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setTitle(title)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{title}}{object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setDescription"></a>}}
+\if{latex}{\out{\hypertarget{method-setDescription}{}}}
+\subsection{Method \code{setDescription()}}{
+Set the record description
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setDescription(description)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{description}}{object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setAccessRight"></a>}}
+\if{latex}{\out{\hypertarget{method-setAccessRight}{}}}
+\subsection{Method \code{setAccessRight()}}{
+Set the access right.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessRight(accessRight)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{accessRight}}{record access right among the following values: 'open','embargoed', 'restricted','closed'}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setAccessConditions"></a>}}
+\if{latex}{\out{\hypertarget{method-setAccessConditions}{}}}
+\subsection{Method \code{setAccessConditions()}}{
+set the access conditions.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessConditions(accessConditions)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{accessConditions}}{object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addCreator"></a>}}
+\if{latex}{\out{\hypertarget{method-addCreator}{}}}
+\subsection{Method \code{addCreator()}}{
+Add a creator for the record. One approach is to use the \code{firstname} and
+   \code{lastname} arguments, that by default will be concatenated for Zenodo as
+   \code{lastname, firstname}. For more flexibility over this, the \code{name}
+   argument can be directly used.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCreator(
+  firstname,
+  lastname,
+  name = paste(lastname, firstname, sep = ", "),
+  affiliation = NULL,
+  orcid = NULL,
+  gnd = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{firstname}}{creator first name}
+
+\item{\code{lastname}}{creator last name}
+
+\item{\code{name}}{creator name}
+
+\item{\code{affiliation}}{creator affiliation (optional)}
+
+\item{\code{orcid}}{creator ORCID (optional)}
+
+\item{\code{gnd}}{creator GND (optional)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeCreator"></a>}}
+\if{latex}{\out{\hypertarget{method-removeCreator}{}}}
+\subsection{Method \code{removeCreator()}}{
+Removes a creator by a property. The \code{by} parameter should be the name
+   of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
+   'orcid' or 'gnd').
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreator(by, property)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{by}}{property used as criterion to remove the creator}
+
+\item{\code{property}}{property value used to remove the creator}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeCreatorByName"></a>}}
+\if{latex}{\out{\hypertarget{method-removeCreatorByName}{}}}
+\subsection{Method \code{removeCreatorByName()}}{
+Removes a creator by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreatorByName(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{creator name}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeCreatorByAffiliation"></a>}}
+\if{latex}{\out{\hypertarget{method-removeCreatorByAffiliation}{}}}
+\subsection{Method \code{removeCreatorByAffiliation()}}{
+Removes a creator by affiliation.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreatorByAffiliation(affiliation)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{affiliation}}{creator affiliation}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeCreatorByORCID"></a>}}
+\if{latex}{\out{\hypertarget{method-removeCreatorByORCID}{}}}
+\subsection{Method \code{removeCreatorByORCID()}}{
+Removes a creator by ORCID.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreatorByORCID(orcid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{orcid}}{creator ORCID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeCreatorByGND"></a>}}
+\if{latex}{\out{\hypertarget{method-removeCreatorByGND}{}}}
+\subsection{Method \code{removeCreatorByGND()}}{
+Removes a creator by GND.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreatorByGND(gnd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{gnd}}{creator GND}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addContributor"></a>}}
+\if{latex}{\out{\hypertarget{method-addContributor}{}}}
+\subsection{Method \code{addContributor()}}{
+Add a contributor for the record. Firstname, lastname, and type are mandatory.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addContributor(
+  firstname,
+  lastname,
+  type,
+  affiliation = NULL,
+  orcid = NULL,
+  gnd = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{firstname}}{contributor first name}
+
+\item{\code{lastname}}{contributor last name}
+
+\item{\code{type}}{contributor type, among values: ContactPerson, 
+DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
+Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
+RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other.}
+
+\item{\code{affiliation}}{contributor affiliation (optional)}
+
+\item{\code{orcid}}{contributor orcid (optional)}
+
+\item{\code{gnd}}{contributor gnd (optional)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeContributor"></a>}}
+\if{latex}{\out{\hypertarget{method-removeContributor}{}}}
+\subsection{Method \code{removeContributor()}}{
+Removes a contributor by a property. The \code{by} parameter should be the name
+   of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
+   'orcid' or 'gnd').
+   \code{FALSE} otherwise.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributor(by, property)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{by}}{property used as criterion to remove the contributor}
+
+\item{\code{property}}{property value used to remove the contributor}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeContributorByName"></a>}}
+\if{latex}{\out{\hypertarget{method-removeContributorByName}{}}}
+\subsection{Method \code{removeContributorByName()}}{
+Removes a contributor by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributorByName(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{contributor name}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeContributorByAffiliation"></a>}}
+\if{latex}{\out{\hypertarget{method-removeContributorByAffiliation}{}}}
+\subsection{Method \code{removeContributorByAffiliation()}}{
+Removes a contributor by affiliation.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributorByAffiliation(affiliation)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{affiliation}}{contributor affiliation}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeContributorByORCID"></a>}}
+\if{latex}{\out{\hypertarget{method-removeContributorByORCID}{}}}
+\subsection{Method \code{removeContributorByORCID()}}{
+Removes a contributor by ORCID.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributorByORCID(orcid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{orcid}}{contributor ORCID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeContributorByGND"></a>}}
+\if{latex}{\out{\hypertarget{method-removeContributorByGND}{}}}
+\subsection{Method \code{removeContributorByGND()}}{
+Removes a contributor by GND.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributorByGND(gnd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{gnd}}{contributor GND}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setLicense"></a>}}
+\if{latex}{\out{\hypertarget{method-setLicense}{}}}
+\subsection{Method \code{setLicense()}}{
+Set license. The license should be set with the Zenodo id of the license. If not
+   recognized by Zenodo, the function will return an error. The list of licenses can
+   fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLicense(licenseId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{licenseId}}{a license Id}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setVersion"></a>}}
+\if{latex}{\out{\hypertarget{method-setVersion}{}}}
+\subsection{Method \code{setVersion()}}{
+Set record version.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setVersion(version)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{version}}{the record version to set}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setLanguage"></a>}}
+\if{latex}{\out{\hypertarget{method-setLanguage}{}}}
+\subsection{Method \code{setLanguage()}}{
+Set the language.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLanguage(language)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{language}}{ISO 639-2 or 639-3 code}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addRelatedIdentifier"></a>}}
+\if{latex}{\out{\hypertarget{method-addRelatedIdentifier}{}}}
+\subsection{Method \code{addRelatedIdentifier()}}{
+Adds a related identifier with a given relation.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addRelatedIdentifier(relation, identifier)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, 
+isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
+isCompiledBy, isIdenticalTo, isAlternateIdentifier}
+
+\item{\code{identifier}}{resource identifier}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeRelatedIdentifier"></a>}}
+\if{latex}{\out{\hypertarget{method-removeRelatedIdentifier}{}}}
+\subsection{Method \code{removeRelatedIdentifier()}}{
+Removes a related identifier with a given relation.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeRelatedIdentifier(relation, identifier)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, 
+isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
+isCompiledBy, isIdenticalTo, isAlternateIdentifier}
+
+\item{\code{identifier}}{resource identifier}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setReferences"></a>}}
+\if{latex}{\out{\hypertarget{method-setReferences}{}}}
+\subsection{Method \code{setReferences()}}{
+Set references
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setReferences(references)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{references}}{a vector or list of references to set for the record}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addReference"></a>}}
+\if{latex}{\out{\hypertarget{method-addReference}{}}}
+\subsection{Method \code{addReference()}}{
+Add a reference
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addReference(reference)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{reference}}{the reference to add}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeReference"></a>}}
+\if{latex}{\out{\hypertarget{method-removeReference}{}}}
+\subsection{Method \code{removeReference()}}{
+Remove a reference
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeReference(reference)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{reference}}{the reference to remove}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setKeywords"></a>}}
+\if{latex}{\out{\hypertarget{method-setKeywords}{}}}
+\subsection{Method \code{setKeywords()}}{
+Set keywords
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setKeywords(keywords)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{keywords}}{a vector or list of keywords to set for the record}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addKeyword"></a>}}
+\if{latex}{\out{\hypertarget{method-addKeyword}{}}}
+\subsection{Method \code{addKeyword()}}{
+Add a keyword
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addKeyword(keyword)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{keyword}}{the keyword to add}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeKeyword"></a>}}
+\if{latex}{\out{\hypertarget{method-removeKeyword}{}}}
+\subsection{Method \code{removeKeyword()}}{
+Remove a keyword
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeKeyword(keyword)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{keyword}}{the keyword to remove}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addSubject"></a>}}
+\if{latex}{\out{\hypertarget{method-addSubject}{}}}
+\subsection{Method \code{addSubject()}}{
+Adds a subject given a term and identifier
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addSubject(term, identifier)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{term}}{subject term}
+
+\item{\code{identifier}}{subject identifier}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeSubject"></a>}}
+\if{latex}{\out{\hypertarget{method-removeSubject}{}}}
+\subsection{Method \code{removeSubject()}}{
+Removes subject(s) by a property. The \code{by} parameter should be the name
+   of the subject property ('term' or 'identifier').
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubject(by, property)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{by}}{property used as criterion to remove subjects}
+
+\item{\code{property}}{property value used to remove subjects}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeSubjectByTerm"></a>}}
+\if{latex}{\out{\hypertarget{method-removeSubjectByTerm}{}}}
+\subsection{Method \code{removeSubjectByTerm()}}{
+Removes subject(s) by term.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubjectByTerm(term)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{term}}{the term to use to remove subject(s)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeSubjectByIdentifier"></a>}}
+\if{latex}{\out{\hypertarget{method-removeSubjectByIdentifier}{}}}
+\subsection{Method \code{removeSubjectByIdentifier()}}{
+Removes subject(s) by identifier
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubjectByIdentifier(identifier)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{identifier}}{the identifier to use to remove subject(s)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setNotes"></a>}}
+\if{latex}{\out{\hypertarget{method-setNotes}{}}}
+\subsection{Method \code{setNotes()}}{
+Set notes. HTML is not allowed
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setNotes(notes)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{notes}}{object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-setCommunities}{}}}
+\subsection{Method \code{setCommunities()}}{
+Set a vector of character strings identifying communities
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setCommunities(communities)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{communities}}{a vector or list of communities. Values should among known communities. The list of communities can
+fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}. Each community should be set with 
+the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addCommunity"></a>}}
+\if{latex}{\out{\hypertarget{method-addCommunity}{}}}
+\subsection{Method \code{addCommunity()}}{
+Adds a community to the record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCommunity(community)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{community}}{community to add. The community should be set with the Zenodo id of the community. 
+If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
+with the \code{ZenodoManager} and the function \code{$getCommunities()}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeCommunity"></a>}}
+\if{latex}{\out{\hypertarget{method-removeCommunity}{}}}
+\subsection{Method \code{removeCommunity()}}{
+Removes a community from the record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCommunity(community)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{community}}{community to remove. The community should be set with the Zenodo id of the community.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setGrants"></a>}}
+\if{latex}{\out{\hypertarget{method-setGrants}{}}}
+\subsection{Method \code{setGrants()}}{
+Set a vector of character strings identifying grants
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setGrants(grants)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{grants}}{a vector or list of grants Values should among known grants The list of grants can
+fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 
+the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addGrant"></a>}}
+\if{latex}{\out{\hypertarget{method-addGrant}{}}}
+\subsection{Method \code{addGrant()}}{
+Adds a grant to the record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addGrant(grant)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{grant}}{grant to add. The grant should be set with the id of the grant. If not
+recognized by Zenodo, the function will return an warning only. The list of grants can
+fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeGrant"></a>}}
+\if{latex}{\out{\hypertarget{method-removeGrant}{}}}
+\subsection{Method \code{removeGrant()}}{
+Removes a grant from the record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeGrant(grant)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{grant}}{grant to remove. The grant should be set with the Zenodo id of the grant}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setJournalTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-setJournalTitle}{}}}
+\subsection{Method \code{setJournalTitle()}}{
+Set Journal title to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setJournalTitle(title)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{title}}{a title, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setJournalVolume"></a>}}
+\if{latex}{\out{\hypertarget{method-setJournalVolume}{}}}
+\subsection{Method \code{setJournalVolume()}}{
+Set Journal volume to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setJournalVolume(volume)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{volume}}{a volume}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setJournalIssue"></a>}}
+\if{latex}{\out{\hypertarget{method-setJournalIssue}{}}}
+\subsection{Method \code{setJournalIssue()}}{
+Set Journal issue to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setJournalIssue(issue)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{issue}}{an issue}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setJournalPages"></a>}}
+\if{latex}{\out{\hypertarget{method-setJournalPages}{}}}
+\subsection{Method \code{setJournalPages()}}{
+Set Journal pages to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setJournalPages(pages)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pages}}{number of pages}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferenceTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferenceTitle}{}}}
+\subsection{Method \code{setConferenceTitle()}}{
+Set conference title to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferenceTitle(title)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{title}}{conference title, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferenceAcronym"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferenceAcronym}{}}}
+\subsection{Method \code{setConferenceAcronym()}}{
+Set conference acronym to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferenceAcronym(acronym)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{acronym}}{conference acronym, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferenceDates"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferenceDates}{}}}
+\subsection{Method \code{setConferenceDates()}}{
+Set conference dates to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferenceDates(dates)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{dates}}{conference dates, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferencePlace"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferencePlace}{}}}
+\subsection{Method \code{setConferencePlace()}}{
+Set conference place to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferencePlace(place)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{place}}{conference place, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferenceUrl"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferenceUrl}{}}}
+\subsection{Method \code{setConferenceUrl()}}{
+Set conference url to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferenceUrl(url)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{url}}{conference url, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferenceSession"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferenceSession}{}}}
+\subsection{Method \code{setConferenceSession()}}{
+Set conference session to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferenceSession(session)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{session}}{conference session, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setConferenceSessionPart"></a>}}
+\if{latex}{\out{\hypertarget{method-setConferenceSessionPart}{}}}
+\subsection{Method \code{setConferenceSessionPart()}}{
+Set conference session part to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setConferenceSessionPart(part)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{part}}{conference session part, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setImprintPublisher"></a>}}
+\if{latex}{\out{\hypertarget{method-setImprintPublisher}{}}}
+\subsection{Method \code{setImprintPublisher()}}{
+Set imprint publisher to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setImprintPublisher(publisher)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{publisher}}{the publisher, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setImprintISBN"></a>}}
+\if{latex}{\out{\hypertarget{method-setImprintISBN}{}}}
+\subsection{Method \code{setImprintISBN()}}{
+Set imprint ISBN to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setImprintISBN(isbn)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{isbn}}{the ISBN, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setImprintPlace"></a>}}
+\if{latex}{\out{\hypertarget{method-setImprintPlace}{}}}
+\subsection{Method \code{setImprintPlace()}}{
+Set imprint place to the record metadata
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setImprintPlace(place)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{place}}{the place, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setPartofTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-setPartofTitle}{}}}
+\subsection{Method \code{setPartofTitle()}}{
+Set title to which record is part of
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPartofTitle(title)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{title}}{the title, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setPartofPages"></a>}}
+\if{latex}{\out{\hypertarget{method-setPartofPages}{}}}
+\subsection{Method \code{setPartofPages()}}{
+Set pages to which record is part of
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPartofPages(pages)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pages}}{the pages, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setThesisUniversity"></a>}}
+\if{latex}{\out{\hypertarget{method-setThesisUniversity}{}}}
+\subsection{Method \code{setThesisUniversity()}}{
+Set thesis university
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setThesisUniversity(university)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{university}}{the university, object of class \code{character}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-addThesisSupervisor"></a>}}
+\if{latex}{\out{\hypertarget{method-addThesisSupervisor}{}}}
+\subsection{Method \code{addThesisSupervisor()}}{
+Adds thesis supervisor
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addThesisSupervisor(
+  firstname,
+  lastname,
+  affiliation = NULL,
+  orcid = NULL,
+  gnd = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{firstname}}{supervisor first name}
+
+\item{\code{lastname}}{supervisor last name}
+
+\item{\code{affiliation}}{supervisor affiliation (optional)}
+
+\item{\code{orcid}}{supervisor ORCID (optional)}
+
+\item{\code{gnd}}{supervisor GND (optional)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeThesisSupervisor"></a>}}
+\if{latex}{\out{\hypertarget{method-removeThesisSupervisor}{}}}
+\subsection{Method \code{removeThesisSupervisor()}}{
+Removes a thesis supervisor by a property. The \code{by} parameter should be the name
+   of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
+   'orcid' or 'gnd').
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeThesisSupervisor(by, property)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{by}}{property used as criterion to remove the thesis supervisor}
+
+\item{\code{property}}{property value used to remove the thesis supervisor}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeThesisSupervisorByName"></a>}}
+\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByName}{}}}
+\subsection{Method \code{removeThesisSupervisorByName()}}{
+Removes a thesis supervisor by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeThesisSupervisorByName(name)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{thesis supervisor name}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeThesisSupervisorByAffiliation"></a>}}
+\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByAffiliation}{}}}
+\subsection{Method \code{removeThesisSupervisorByAffiliation()}}{
+Removes a thesis supervisor by affiliation
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeThesisSupervisorByAffiliation(affiliation)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{affiliation}}{thesis supervisor affiliation}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeThesisSupervisorByORCID"></a>}}
+\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByORCID}{}}}
+\subsection{Method \code{removeThesisSupervisorByORCID()}}{
+Removes a thesis supervisor by ORCID
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeThesisSupervisorByORCID(orcid)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{orcid}}{thesis supervisor ORCID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-removeThesisSupervisorByGND"></a>}}
+\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByGND}{}}}
+\subsection{Method \code{removeThesisSupervisorByGND()}}{
+Removes a thesis supervisor by GND
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeThesisSupervisorByGND(gnd)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{gnd}}{thesis supervisor GND}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAs"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAs}{}}}
+\subsection{Method \code{exportAs()}}{
+Exports record to a file by format.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAs(format, filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{format}}{the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
+JSON, JSON-LD, GeoJSON, MARCXML}
+
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsBibTeX"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsBibTeX}{}}}
+\subsection{Method \code{exportAsBibTeX()}}{
+Exports record as BibTeX
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsBibTeX(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsCSL"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsCSL}{}}}
+\subsection{Method \code{exportAsCSL()}}{
+Exports record as CSL
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsCSL(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsDataCite"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsDataCite}{}}}
+\subsection{Method \code{exportAsDataCite()}}{
+Exports record as DataCite
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDataCite(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsDublinCore"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsDublinCore}{}}}
+\subsection{Method \code{exportAsDublinCore()}}{
+Exports record as DublinCore
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDublinCore(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsDCAT"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsDCAT}{}}}
+\subsection{Method \code{exportAsDCAT()}}{
+Exports record as DCAT
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDCAT(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsJSON"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsJSON}{}}}
+\subsection{Method \code{exportAsJSON()}}{
+Exports record as JSON
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsJSON(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsJSONLD"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsJSONLD}{}}}
+\subsection{Method \code{exportAsJSONLD()}}{
+Exports record as JSONLD
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsJSONLD(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsGeoJSON"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsGeoJSON}{}}}
+\subsection{Method \code{exportAsGeoJSON()}}{
+Exports record as GeoJSON
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsGeoJSON(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsMARCXML"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsMARCXML}{}}}
+\subsection{Method \code{exportAsMARCXML()}}{
+Exports record as MARCXML
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsMARCXML(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-exportAsAllFormats"></a>}}
+\if{latex}{\out{\hypertarget{method-exportAsAllFormats}{}}}
+\subsection{Method \code{exportAsAllFormats()}}{
+Exports record in all Zenodo record export formats. This function will
+   create one file per Zenodo metadata formats.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsAllFormats(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-listFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-listFiles}{}}}
+\subsection{Method \code{listFiles()}}{
+list files attached to the record
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$listFiles(pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{whether a pretty output (\code{data.frame}) should be returned (default \code{TRUE}), otherwise
+the raw list of files is returned.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the files, as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-downloadFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-downloadFiles}{}}}
+\subsection{Method \code{downloadFiles()}}{
+Downloads files attached to the record
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$downloadFiles(
+  path = ".",
+  files = list(),
+  parallel = FALSE,
+  parallel_handler = NULL,
+  cl = NULL,
+  quiet = FALSE,
+  ...
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{path}}{target download path (by default it will be the current working directory)}
+
+\item{\code{files}}{(list of) file(s) to download. If not specified, by default all files will be downloaded.}
+
+\item{\code{parallel}}{whether download has to be done in parallel using the chosen \code{parallel_handler}. Default is \code{FALSE}}
+
+\item{\code{parallel_handler}}{The parallel handler to use eg. \code{mclapply}. To use a different parallel handler (such as eg 
+\code{parLapply} or \code{parSapply}), specify its function in \code{parallel_handler} argument. For cluster-based parallel 
+download, this is the way to proceed. In that case, the cluster should be created earlier by the user with  \code{makeCluster}
+and passed as \code{cl} argument. After downloading all files, the cluster will be stopped automatically.}
+
+\item{\code{cl}}{an optional cluster for cluster-based parallel handlers}
+
+\item{\code{quiet}}{(default is \code{FALSE}) can be set to suppress informative messages (not warnings).}
+
+\item{\code{...}}{arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
+can be added (eg. \code{mc.cores} for \code{mclapply})}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

@@ -12,6 +12,8 @@ Object of \code{\link{R6Class}} for modelling a simple logger
 }
 \description{
 zen4RLogger
+
+zen4RLogger
 }
 \note{
 Logger class used internally by zen4R
@@ -32,3 +34,158 @@ Logger class used internally by zen4R
 }
 
 \keyword{logger}
+\section{Public fields}{
+\if{html}{\out{<div class="r6-fields">}}
+\describe{
+\item{\code{verbose.info}}{logger info status}
+
+\item{\code{verbose.debug}}{logger debug status}
+
+\item{\code{loggerType}}{Logger type, either "INFO", "DEBUG" or NULL (if no logger)}
+}
+\if{html}{\out{</div>}}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-logger}{\code{zen4RLogger$logger()}}
+\item \href{#method-INFO}{\code{zen4RLogger$INFO()}}
+\item \href{#method-WARN}{\code{zen4RLogger$WARN()}}
+\item \href{#method-ERROR}{\code{zen4RLogger$ERROR()}}
+\item \href{#method-new}{\code{zen4RLogger$new()}}
+\item \href{#method-getClassName}{\code{zen4RLogger$getClassName()}}
+\item \href{#method-getClass}{\code{zen4RLogger$getClass()}}
+\item \href{#method-clone}{\code{zen4RLogger$clone()}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-logger"></a>}}
+\if{latex}{\out{\hypertarget{method-logger}{}}}
+\subsection{Method \code{logger()}}{
+internal logger function for the Zenodo manager
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$logger(type, text)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{type}}{logger message type, "INFO", "WARN", or "ERROR"}
+
+\item{\code{text}}{log message}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-INFO"></a>}}
+\if{latex}{\out{\hypertarget{method-INFO}{}}}
+\subsection{Method \code{INFO()}}{
+internal INFO logger function
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$INFO(text)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{text}}{log message}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-WARN"></a>}}
+\if{latex}{\out{\hypertarget{method-WARN}{}}}
+\subsection{Method \code{WARN()}}{
+internal WARN logger function
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$WARN(text)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{text}}{log message}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ERROR"></a>}}
+\if{latex}{\out{\hypertarget{method-ERROR}{}}}
+\subsection{Method \code{ERROR()}}{
+internal ERROR logger function
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$ERROR(text)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{text}}{log message}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+initialize the Zenodo logger
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$new(logger = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{logger}}{logger type NULL, 'INFO', or 'DEBUG'}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getClassName"></a>}}
+\if{latex}{\out{\hypertarget{method-getClassName}{}}}
+\subsection{Method \code{getClassName()}}{
+Get object class name
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$getClassName()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the class name, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getClass"></a>}}
+\if{latex}{\out{\hypertarget{method-getClass}{}}}
+\subsection{Method \code{getClass()}}{
+Get object class
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$getClass()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the class, object of class \code{R6}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{zen4RLogger$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}

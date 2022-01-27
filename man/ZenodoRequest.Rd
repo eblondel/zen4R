@@ -12,39 +12,189 @@ Object of \code{\link{R6Class}} for modelling a generic Zenodo request
 }
 \description{
 ZenodoRequest
+
+ZenodoRequest
 }
 \note{
 Abstract class used internally by \pkg{zen4R}
 }
-\section{Methods}{
-
-\describe{
- \item{\code{new(url, type, request, data, file, token, logger)}}{
-   This method is used to instantiate a object for doing an Zenodo request
- }
- \item{\code{getRequest()}}{
-   Get the request payload
- }
- \item{\code{getRequestHeaders()}}{
-   Get the request headers
- }
- \item{\code{getStatus()}}{
-   Get the request status code
- }
- \item{\code{getResponse()}}{
-   Get the request response
- }
- \item{\code{getException()}}{
-   Get the exception (in case of request failure)
- }
- \item{\code{getResult()}}{
-   Get the result \code{TRUE} if the request is successful, \code{FALSE} otherwise
- }
-}
-}
-
 \author{
 Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 }
 \keyword{Request}
 \keyword{Zenodo}
+\section{Super class}{
+\code{\link[zen4R:zen4RLogger]{zen4R::zen4RLogger}} -> \code{ZenodoRequest}
+}
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-new}{\code{ZenodoRequest$new()}}
+\item \href{#method-execute}{\code{ZenodoRequest$execute()}}
+\item \href{#method-getRequest}{\code{ZenodoRequest$getRequest()}}
+\item \href{#method-getRequestHeaders}{\code{ZenodoRequest$getRequestHeaders()}}
+\item \href{#method-getStatus}{\code{ZenodoRequest$getStatus()}}
+\item \href{#method-getResponse}{\code{ZenodoRequest$getResponse()}}
+\item \href{#method-getException}{\code{ZenodoRequest$getException()}}
+\item \href{#method-getResult}{\code{ZenodoRequest$getResult()}}
+\item \href{#method-setResult}{\code{ZenodoRequest$setResult()}}
+\item \href{#method-clone}{\code{ZenodoRequest$clone()}}
+}
+}
+\if{html}{
+\out{<details ><summary>Inherited methods</summary>}
+\itemize{
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR">}\href{../../zen4R/html/zen4RLogger.html#method-ERROR}{\code{zen4R::zen4RLogger$ERROR()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass">}\href{../../zen4R/html/zen4RLogger.html#method-getClass}{\code{zen4R::zen4RLogger$getClass()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName">}\href{../../zen4R/html/zen4RLogger.html#method-getClassName}{\code{zen4R::zen4RLogger$getClassName()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO">}\href{../../zen4R/html/zen4RLogger.html#method-INFO}{\code{zen4R::zen4RLogger$INFO()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger">}\href{../../zen4R/html/zen4RLogger.html#method-logger}{\code{zen4R::zen4RLogger$logger()}}\out{</span>}
+\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN">}\href{../../zen4R/html/zen4RLogger.html#method-WARN}{\code{zen4R::zen4RLogger$WARN()}}\out{</span>}
+}
+\out{</details>}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-new"></a>}}
+\if{latex}{\out{\hypertarget{method-new}{}}}
+\subsection{Method \code{new()}}{
+Initializes a \code{ZenodoRequest}
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$new(
+  url,
+  type,
+  request,
+  data = NULL,
+  file = NULL,
+  token,
+  logger = NULL,
+  ...
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{url}}{request URL}
+
+\item{\code{type}}{Type of request: 'GET', 'POST', 'PUT', 'DELETE'}
+
+\item{\code{request}}{the method request}
+
+\item{\code{data}}{payload (optional)}
+
+\item{\code{file}}{to be uploaded (optional)}
+
+\item{\code{token}}{user token}
+
+\item{\code{logger}}{the logger type}
+
+\item{\code{...}}{any other arg}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-execute"></a>}}
+\if{latex}{\out{\hypertarget{method-execute}{}}}
+\subsection{Method \code{execute()}}{
+Executes the request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$execute()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-getRequest}{}}}
+\subsection{Method \code{getRequest()}}{
+Get request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getRequest()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getRequestHeaders"></a>}}
+\if{latex}{\out{\hypertarget{method-getRequestHeaders}{}}}
+\subsection{Method \code{getRequestHeaders()}}{
+Get request headers
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getRequestHeaders()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getStatus"></a>}}
+\if{latex}{\out{\hypertarget{method-getStatus}{}}}
+\subsection{Method \code{getStatus()}}{
+Get request status
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getStatus()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getResponse"></a>}}
+\if{latex}{\out{\hypertarget{method-getResponse}{}}}
+\subsection{Method \code{getResponse()}}{
+Get request response
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getResponse()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getException"></a>}}
+\if{latex}{\out{\hypertarget{method-getException}{}}}
+\subsection{Method \code{getException()}}{
+Get request exception
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getException()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-getResult"></a>}}
+\if{latex}{\out{\hypertarget{method-getResult}{}}}
+\subsection{Method \code{getResult()}}{
+Get request result
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getResult()}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-setResult"></a>}}
+\if{latex}{\out{\hypertarget{method-setResult}{}}}
+\subsection{Method \code{setResult()}}{
+Set request result
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$setResult(result)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{result}}{result to be set}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-clone}{}}}
+\subsection{Method \code{clone()}}{
+The objects of this class are cloneable with this method.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$clone(deep = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{deep}}{Whether to make a deep clone.}
+}
+\if{html}{\out{</div>}}
+}
+}
+}
