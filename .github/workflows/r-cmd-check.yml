@@ -19,9 +19,9 @@ jobs:
     strategy:
       matrix:
         config:
-          - {os: ubuntu-20.04,  r: '4.0.5', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
-          - {os: windows-latest, r: '4.0.5'}
-          - {os: macOS-latest,  r: '4.0.5'}
+          - {os: ubuntu-20.04,  r: 'release',}
+          - {os: windows-latest, r: 'release'}
+          - {os: macOS-latest,  r: 'release'}
     
     env:
         ZENODO_SANDBOX_TOKEN: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
