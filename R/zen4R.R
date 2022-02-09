@@ -16,16 +16,6 @@
 #' @description Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
 #'   including management of depositions, attribution of DOIs by 'Zenodo', 
 #'   upload and download of files.
-#'
-#' @details
-#'  \tabular{ll}{
-#'    Package: \tab zen4R\cr
-#'    Type: \tab Package\cr
-#'    Version: \tab 0.5-3\cr
-#'    Date: \tab 2022-01-25\cr
-#'    License: \tab MIT\cr
-#'    LazyLoad: \tab yes\cr
-#'  }
 #'  
 #'@author Emmanuel Blondel \email{emmanuel.blondel1@@gmail.com}
 #'
