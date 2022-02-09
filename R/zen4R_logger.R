@@ -5,19 +5,6 @@
 #' @keywords logger
 #' @return Object of \code{\link{R6Class}} for modelling a simple logger
 #' @format \code{\link{R6Class}} object.
-#'
-#' @section Abstract Methods:
-#' \describe{
-#'  \item{\code{INFO(text)}}{
-#'    Logger to report information. Used internally
-#'  }
-#'  \item{\code{WARN(text)}}{
-#'    Logger to report warnings. Used internally
-#'  }
-#'  \item{\code{ERROR(text)}}{
-#'    Logger to report errors. Used internally
-#'  }
-#' }
 #' 
 #' @note Logger class used internally by zen4R
 #'
@@ -34,7 +21,7 @@ zen4RLogger <-  R6Class("zen4RLogger",
     #' @param type logger message type, "INFO", "WARN", or "ERROR"
     #' @param text log message
     logger = function(type, text){
-      if(private$verbose.info){
+      if(self$verbose.info){
         cat(sprintf("[zen4R][%s] %s - %s \n", type, self$getClassName(), text))
       }
     },
