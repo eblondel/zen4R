@@ -20,8 +20,8 @@ jobs:
       matrix:
         config:
           - {os: ubuntu-20.04,  r: 'release',}
-          - {os: windows-latest, r: 'release'}
-          - {os: macOS-latest,  r: 'release'}
+          #- {os: windows-latest, r: 'release'}
+          #- {os: macOS-latest,  r: 'release'}
     
     env:
         ZENODO_SANDBOX_TOKEN: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
