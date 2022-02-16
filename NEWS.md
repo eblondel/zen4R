@@ -4,6 +4,7 @@
 
 * [#65](https://github.com/eblondel/zen4R/issues/65) Better handling of record versions
 * [#67](https://github.com/eblondel/zen4R/issues/67) Rate limit for deleting files
+* [#68](https://github.com/eblondel/zen4R/issues/68) Standardize R6-class R documentation
 
 
 ## **_0.5-2_**
