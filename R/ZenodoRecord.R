@@ -227,7 +227,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       if(!is(embargoDate,"Date")){
         stop("The embargo date should be a 'Date' object")
       }
-      self$metadata$embargo_date <- as(publicationDate, "character")
+      self$metadata$embargo_date <- as(embargoDate, "character")
     },
     
     #' @description Set the record title.
