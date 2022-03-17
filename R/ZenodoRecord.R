@@ -127,8 +127,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'   version (ordering number) and DOI.
     #' @return a \code{data.frame} with the record versions
     getVersions = function(){
-      locale <- Sys.getlocale("LC_TIME")
-      Sys.setlocale("LC_TIME", "us_US")
       
       record_type <- if(self$state == "done") "record" else if(self$state == "unsubmitted") "deposit"
       ref_link <- if(record_type == "record") "latest_html" else if(record_type == "deposit") "latest_draft_html"
@@ -158,7 +156,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         row.names(versions) <- 1:nrow(versions)
         if(all(is.na(versions$version))) versions$version <- 1:nrow(versions)
       }
-      Sys.setlocale("LC_TIME", locale)
       
       return(versions)
     },
