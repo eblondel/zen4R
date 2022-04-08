@@ -1,3 +1,13 @@
+## **_0.5-4_**
+
+**New features**
+
+* [#66](https://github.com/eblondel/zen4R/issues/66) Add record print methods
+
+**Bug fixes**
+
+* [#70](https://github.com/eblondel/zen4R/issues/70) Fix setEmbargoDate record method
+
 ## **_0.5-3_**
 
 **Enhancements**
