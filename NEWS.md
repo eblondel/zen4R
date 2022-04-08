@@ -1,8 +1,9 @@
-## **_0.5-4_**
+## **_0.6_**
 
 **New features**
 
-* [#66](https://github.com/eblondel/zen4R/issues/66) Add record print methods
+* [#66](https://github.com/eblondel/zen4R/issues/66) Add record custom print method supporting various formats (internal + Zenodo supported export formats)
+* [#71](https://github.com/eblondel/zen4R/issues/71) Add `export_zenodo` function 
 
 **Bug fixes**
 
