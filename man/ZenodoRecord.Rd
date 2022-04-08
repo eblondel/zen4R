@@ -1587,7 +1587,7 @@ Removes a thesis supervisor by GND
 \subsection{Method \code{exportAs()}}{
 Exports record to a file by format.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAs(format, filename)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAs(format, filename, append_format = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1597,6 +1597,9 @@ Exports record to a file by format.
 JSON, JSON-LD, GeoJSON, MARCXML}
 
 \item{\code{filename}}{the target filename (without extension)}
+
+\item{\code{append_format}}{wether format name has to be appended to the filename. Default is \code{TRUE} (for
+backward compatibility reasons). Set it to \code{FALSE} if you want to use only the \code{filename}.}
 }
 \if{html}{\out{</div>}}
 }

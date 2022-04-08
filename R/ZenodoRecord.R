@@ -897,8 +897,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param format the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
     #'   JSON, JSON-LD, GeoJSON, MARCXML
     #' @param filename the target filename (without extension)
+    #' @param append_format wether format name has to be appended to the filename. Default is \code{TRUE} (for
+    #' backward compatibility reasons). Set it to \code{FALSE} if you want to use only the \code{filename}.
     #' @return the writen file name (with extension)
-    exportAs = function(format, filename){
+    exportAs = function(format, filename, append_format = TRUE){
       zenodo_url <- self$links$record_html
       if(is.null(zenodo_url)) zenodo_url <- self$links$latest_html
       if(is.null(zenodo_url)){
@@ -932,7 +934,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         reference <- gsub("&gt;", ">", reference)
       }
     
-      destfile <- paste(paste0(filename, "_", format), fileext, sep = ".")
+      destfile <- paste(paste0(filename, ifelse(append_format,paste0("_", format),"")), fileext, sep = ".")
       writeChar(reference, destfile, eos = NULL)
       return(destfile)
     },
