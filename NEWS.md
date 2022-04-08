@@ -5,6 +5,10 @@
 * [#66](https://github.com/eblondel/zen4R/issues/66) Add record custom print method supporting various formats (internal + Zenodo supported export formats)
 * [#71](https://github.com/eblondel/zen4R/issues/71) Add `export_zenodo` function 
 
+**Enhancements**
+
+* [#72](https://github.com/eblondel/zen4R/issues/72) Zenodo has new path for GET request --> avoid permanent redirect done by Zenodo
+
 **Bug fixes**
 
 * [#70](https://github.com/eblondel/zen4R/issues/70) Fix setEmbargoDate record method
