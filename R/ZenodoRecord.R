@@ -10,6 +10,20 @@
 ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
+    export_formats = c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML"),
+    getExportFormatExtension = function(format){
+      switch(format,
+         "BibTeX" = "bib",
+         "CSL" = "json",
+         "DataCite" ="xml",
+         "DublinCore" = "xml",
+         "DCAT" = "rdf",
+         "JSON" = "json",
+         "JSON-LD" = "json",
+         "GeoJSON" = "json",
+         "MARCXML" = "xml"           
+      )
+    },
     fromList = function(obj){
       self$conceptdoi = obj$conceptdoi
       self$conceptrecid = obj$conceptrecid
@@ -883,9 +897,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param format the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
     #'   JSON, JSON-LD, GeoJSON, MARCXML
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAs = function(format, filename){
-      formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
       zenodo_url <- self$links$record_html
+      if(is.null(zenodo_url)) zenodo_url <- self$links$latest_html
       if(is.null(zenodo_url)){
         stop("Ups, this record seems a draft, can't export metadata until it is published!")
       }
@@ -902,20 +917,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         NULL
       )
       if(is.null(metadata_export_url)){
-        stop(sprintf("Unknown Zenodo metadata format '%s'. Supported formats are [%s]", format, paste(formats, collapse=",")))
+        stop(sprintf("Unknown Zenodo metadata export format '%s'. Supported export formats are [%s]", format, paste(private$export_formats, collapse=",")))
       }
       
-      fileext <- switch(format,
-        "BibTeX" = "bib",
-        "CSL" = "json",
-        "DataCite" ="xml",
-        "DublinCore" = "xml",
-        "DCAT" = "rdf",
-        "JSON" = "json",
-        "JSON-LD" = "json",
-        "GeoJSON" = "json",
-        "MARCXML" = "xml"           
-      )
+      fileext <- private$getExportFormatExtension(format)
       
       html <- xml2::read_html(metadata_export_url)
       reference <- xml2::xml_find_all(html, ".//pre")
@@ -929,40 +934,47 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
       destfile <- paste(paste0(filename, "_", format), fileext, sep = ".")
       writeChar(reference, destfile, eos = NULL)
+      return(destfile)
     },
     
     #' @description Exports record as BibTeX
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsBibTeX = function(filename){
       self$exportAs("BibTeX", filename)
     },
     
     #' @description Exports record as CSL
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsCSL = function(filename){
       self$exportAs("CSL", filename)
     },
     
     #' @description Exports record as DataCite
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsDataCite = function(filename){
       self$exportAs("DataCite", filename)
     },
     
     #' @description Exports record as DublinCore
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsDublinCore = function(filename){
       self$exportAs("DublinCore", filename)
     },
     
     #' @description Exports record as DCAT
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsDCAT = function(filename){
       self$exportAs("DCAT", filename)
     },
     
     #' @description Exports record as JSON
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsJSON = function(filename){
       self$exportAs("JSON", filename)
     },
@@ -975,12 +987,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #' @description Exports record as GeoJSON
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsGeoJSON = function(filename){
       self$exportAs("GeoJSON", filename)
     },
     
     #' @description Exports record as MARCXML
     #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
     exportAsMARCXML = function(filename){
       self$exportAs("MARCXML", filename)
     },
@@ -989,8 +1003,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'    create one file per Zenodo metadata formats.
     #' @param filename the target filename (without extension)
     exportAsAllFormats = function(filename){
-      formats <- c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML")
-      invisible(lapply(formats, self$exportAs, filename))
+      invisible(lapply(private$export_formats, self$exportAs, filename))
     },
     
     #' @description list files attached to the record
@@ -1115,6 +1128,91 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         invisible(lapply(files.list, check_integrity))
         if (!quiet) self$INFO("End of download")
       }
+    },
+    
+    #'@description Prints a \link{ZenodoRecord} 
+    #'@param ... any other parameter. Not used
+    #'@param format format to use for printing. By default, \code{internal} uses an \pkg{zen4R} internal
+    #' printing method. Other methods available are those supported by Zenodo for record export, and can be used 
+    #' only if the record has already been published (with a DOI). Attemps to print using a Zenodo export format
+    #' for a record will raise a warning message and revert to "internal" format
+    #'@param depth an internal depth parameter for indentation of print statements, in case of listing or recursive use of print
+    print = function(..., format = "internal", depth = 1){
+      
+      if(format != "internal"){
+        zenodo_url <- self$links$record_html
+        if(is.null(zenodo_url)) zenodo_url <- self$links$latest_html
+        if(is.null(zenodo_url)){
+          self$WARN(sprintf("Can't print record as '%s' format: record is not published! Use 'internal' printing format ...", format))
+          method <- "internal"
+        }
+      }
+      
+      switch(format,
+        "internal" = {
+          cat(sprintf("<%s>", self$getClassName()))
+          fields <- rev(names(self))
+          fields <- fields[!sapply(fields, function(x){
+            (class(self[[x]])[1] %in% c("environment", "function")) ||
+              (x %in% c("verbose.info", "verbose.debug", "loggerType"))
+          })]
+          
+          for(field in fields){
+            fieldObj <- self[[field]]
+            shift <- "...."
+            if(is(fieldObj, "list")){
+              if(length(fieldObj)>0){
+                cat(paste0("\n", paste(rep(shift, depth), collapse=""),"|-- ", field, ": "))
+                
+                if(!is.null(names(fieldObj))){
+                  #named list
+                  for(fieldObjProp in names(fieldObj)){
+                    item = fieldObj[[fieldObjProp]]
+                    if(is(item, "list")){
+                      if(length(item)>0){
+                        cat(paste0("\n", paste(rep(shift, depth+1), collapse=""),"|-- ", fieldObjProp, ": "))
+                        for(itemObj in names(item)){
+                          cat(paste0("\n",paste(rep(shift, depth+2), collapse=""),"|-- ", itemObj, ": ", item[[itemObj]]))
+                        }
+                      }else{
+                        item <- "<NULL>"
+                        cat(paste0("\n",paste(rep(shift, depth+1), collapse=""),"|-- ", fieldObjProp, ": ", item))
+                      }
+                    }else{
+                      cat(paste0("\n", paste(rep(shift, depth+1), collapse=""),"|-- ", fieldObjProp, ": ", item))
+                    }
+                    
+                  }
+                }else{
+                  #unamed lists (eg. files)
+                  for(i in 1:length(fieldObj)){
+                    item = fieldObj[[i]]
+                    cat(paste0("\n", paste(rep(shift, depth+1), collapse=""), i,"."))
+                    for(itemObj in names(item)){
+                      cat(paste0("\n", paste(rep(shift, depth+1), collapse=""),"|-- ", itemObj, ": ", item[[itemObj]]))
+                    }
+                  }
+                }
+              }else{
+                fieldObj <- "<NULL>"
+                cat(paste0("\n",paste(rep(shift, depth), collapse=""),"|-- ", field, ": ", fieldObj))
+              }
+            }else{
+              if(is.null(fieldObj)) fieldObj <- "<NULL>"
+              cat(paste0("\n",paste(rep(shift, depth), collapse=""),"|-- ", field, ": ", fieldObj))
+            }
+          }
+        },
+        {
+          tmp <- tempfile()
+          export = self$exportAs(format = format, filename = tmp)
+          cat(suppressWarnings(paste(readLines(export),collapse="\n")))
+          unlink(tmp)
+          unlink(export)
+          
+        }
+      )
+      invisible(self)
     }
     
   )
