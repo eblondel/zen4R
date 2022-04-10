@@ -4,6 +4,7 @@
 
 * [#66](https://github.com/eblondel/zen4R/issues/66) Add record custom print method supporting various formats (internal + Zenodo supported export formats)
 * [#71](https://github.com/eblondel/zen4R/issues/71) Add `export_zenodo` function 
+ù [#73](https://github.com/eblondel/zen4R/issues/73) Add mapping from published ZenodoRecord to [atom4R](https://github.com/eblondel/atom4R) DCEntry
 
 **Enhancements**
 
