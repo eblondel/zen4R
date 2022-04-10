@@ -192,7 +192,7 @@ test_that("versioning",{
 
 test_that("mapping to atom4R",{
   zenodo <- ZenodoManager$new(logger = "INFO")
-  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+  rec <- zenodo$getRecordByConceptDOI("10.5281/zenodo.2547036")
   dcentry <- rec$toDCEntry()
   expect_is(dcentry, "DCEntry")
   xml <- dcentry$encode()
