@@ -190,6 +190,15 @@ test_that("versioning",{
   unlink(publication_filename)
 })
 
+test_that("mapping to atom4R",{
+  zenodo <- ZenodoManager$new(logger = "INFO")
+  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+  dcentry <- rec$toDCEntry()
+  expect_is(dcentry, "DCEntry")
+  xml <- dcentry$encode()
+  expect_is(xml, "XMLInternalNode")
+})
+
 #test_that("versions & DOIs",{
 #  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
 #  Sys.sleep(5)

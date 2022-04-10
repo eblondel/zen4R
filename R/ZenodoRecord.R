@@ -1215,6 +1215,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }
       )
       invisible(self)
+    },
+    
+    #'@description Maps to an \pkg{atom4R} \link{DCEntry}. Note: applies only to published records.
+    #'@return an object of class \code{DCEntry}
+    toDCEntry = function(){
+      tmp <- tempfile()
+      dcfile <- self$exportAsDublinCore(filename = tmp)
+      return(atom4R::DCEntry$new(xml = XML::xmlParse(dcfile)))
     }
     
   )

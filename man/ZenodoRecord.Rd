@@ -153,6 +153,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-listFiles}{\code{ZenodoRecord$listFiles()}}
 \item \href{#method-downloadFiles}{\code{ZenodoRecord$downloadFiles()}}
 \item \href{#method-print}{\code{ZenodoRecord$print()}}
+\item \href{#method-toDCEntry}{\code{ZenodoRecord$toDCEntry()}}
 \item \href{#method-clone}{\code{ZenodoRecord$clone()}}
 }
 }
@@ -1886,6 +1887,19 @@ for a record will raise a warning message and revert to "internal" format}
 \item{\code{depth}}{an internal depth parameter for indentation of print statements, in case of listing or recursive use of print}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-toDCEntry"></a>}}
+\if{latex}{\out{\hypertarget{method-toDCEntry}{}}}
+\subsection{Method \code{toDCEntry()}}{
+Maps to an \pkg{atom4R} \link{DCEntry}. Note: applies only to published records.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$toDCEntry()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+an object of class \code{DCEntry}
 }
 }
 \if{html}{\out{<hr>}}
