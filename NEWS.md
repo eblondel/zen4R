@@ -1,4 +1,5 @@
-## **_0.6_**
+
+## [zen4R 0.6](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://github.com/eblondel/zen4R)
 
 **New features**
 
@@ -15,7 +16,7 @@
 
 * [#70](https://github.com/eblondel/zen4R/issues/70) Fix setEmbargoDate record method
 
-## **_0.5-3_**
+## [zen4R 0.5-3](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
 
@@ -24,7 +25,7 @@
 * [#68](https://github.com/eblondel/zen4R/issues/68) Standardize R6-class R documentation
 
 
-## **_0.5-2_**
+## [zen4R 0.5-2](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.5-2.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.5-2.tar.gz)
 
 **Bug fixes**
 
@@ -32,7 +33,7 @@
 * [#63](https://github.com/eblondel/zen4R/issues/63) Fix new file upload API - case with filename with spaces
 * [#64](https://github.com/eblondel/zen4R/issues/64) Fix new file upload API - actual file upload
 
-## **_0.5-1_**
+## [zen4R 0.5-1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.5-1.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.5-1.tar.gz)
 
 **Bug fixes**
 
@@ -40,7 +41,7 @@
 * [#58](https://github.com/eblondel/zen4R/pull/58) Fix getDepositionByConceptDOI method
 * [#60](https://github.com/eblondel/zen4R/issues/60) Fix old file upload API
 
-## **_0.5_**
+## [zen4R 0.5](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.5.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.5.tar.gz)
 
 **New features**
 
@@ -66,13 +67,13 @@
 * [#48](https://github.com/eblondel/zen4R/issues/48) Document download features in wiki + refine package description
 * [#49](https://github.com/eblondel/zen4R/issues/49) Add information on installation for Linux/OSX to documentation
 
-## **_0.4-1_**
+## [zen4R 0.4-1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.4-1.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.4-1.tar.gz)
 
 **Improvements**
 
 *[#41](https://github.com/eblondel/zen4R/issues/41) Make ZenodoManager raise an error if token is invalid
 
-## **_0.4_**
+## [zen4R 0.4](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.4.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.4.tar.gz)
 
 **New features**
 
@@ -94,7 +95,7 @@
 * [#38](https://github.com/eblondel/zen4R/issues/38) download_zenodo() issue with md5sum
 * [#39](https://github.com/eblondel/zen4R/issues/39) getDepositionByConceptDOI / getRecordByConceptDOI doesn't return latest record
 
-## **_0.3_**
+## [zen4R 0.3](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.3.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.3.tar.gz)
 
 **New features**
 
@@ -104,7 +105,7 @@
 
 * [#24](https://github.com/eblondel/zen4R/issues/24) Exact search/matching with concept DOI doesn't work
 
-## **_0.2_**
+## [zen4R 0.2](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.2.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.2.tar.gz)
 
 **New features**
 
@@ -137,6 +138,6 @@
 
 _No issues_
 
-## **_0.1_**
+## [zen4R 0.1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.1.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.1.tar.gz)
 
 First version
