@@ -443,7 +443,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getDepositions = function(q = "", size = 10, all_versions = FALSE, exact = TRUE,
                               quiet = FALSE){
       page <- 1
-      req <- sprintf("deposit/depositions/?q=%s&size=%s&page=%s", q, size, page)
+      req <- sprintf("deposit/depositions/?q=%s&size=%s&page=%s", URLencode(q), size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
                                   token = self$getToken(),
@@ -918,7 +918,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return a list of \code{ZenodoRecord}
     getRecords = function(q = "", size = 10, all_versions = FALSE, exact = FALSE){
       page <- 1
-      req <- sprintf("records/?q=%s&size=%s&page=%s", q, size, page)
+      req <- sprintf("records/?q=%s&size=%s&page=%s", URLencode(q), size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
                                   token = self$getToken(),
