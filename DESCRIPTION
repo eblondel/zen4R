@@ -11,8 +11,6 @@ Authors@R: c(
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
 Imports: R6, httr, jsonlite, XML, xml2, keyring, tools, atom4R
-Remotes:
-  eblondel/atom4R
 Suggests: testthat, parallel
 Description: Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
   including management of depositions, attribution of DOIs by 'Zenodo' and 
