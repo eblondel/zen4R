@@ -5,3 +5,6 @@
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+.REnviron
+test_Zen4R
+test_lter.R
