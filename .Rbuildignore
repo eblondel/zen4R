@@ -1,10 +1,11 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
-.github
 ^CODE_OF_CONDUCT\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.github$
 .REnviron
 test_Zen4R
 test_lter.R
+
