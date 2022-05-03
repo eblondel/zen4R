@@ -5,7 +5,7 @@
 
 **zen4R – R Interface to Zenodo REST API**
 
-The R package ``zen4R`` provides an interface to the [Zenodo e-infrastructure](https://zenodo.org) API.
+``zen4R`` provides an interface to the [Zenodo e-infrastructure](https://zenodo.org) API.
 
 Please check the [online documentation](https://github.com/eblondel/zen4R/wiki) for more details!
 
