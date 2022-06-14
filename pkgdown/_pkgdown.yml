@@ -1,0 +1,7 @@
+url: "https://eblondel.github.io/zen4R/"
+
+home:
+  title: Interface to 'Zenodo' REST API
+
+template:
+  bootstrap: 5

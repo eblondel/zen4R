@@ -11,7 +11,7 @@ Authors@R: c(
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
 Imports: R6, httr, jsonlite, XML, xml2, keyring, tools, atom4R
-Suggests: testthat, parallel
+Suggests: testthat, parallel, knitr, markdown
 Description: Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
   including management of depositions, attribution of DOIs by 'Zenodo' and 
   upload and download of files.
@@ -21,3 +21,4 @@ BugReports: https://github.com/eblondel/zen4R/issues
 LazyLoad: yes
 RoxygenNote: 7.1.1
 Encoding: UTF-8
+VignetteBuilder: knitr
