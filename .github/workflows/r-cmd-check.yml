@@ -19,9 +19,8 @@ jobs:
     strategy:
       matrix:
         config:
-          - {os: ubuntu-20.04,  r: 'release',}
-          #- {os: windows-latest, r: 'release'}
-          #- {os: macOS-latest,  r: 'release'}
+          - {os: ubuntu-latest,  r: 'release'}
+          - {os: ubuntu-latest,  r: 'devel'}
     
     env:
         ZENODO_SANDBOX_TOKEN: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
@@ -30,12 +29,14 @@ jobs:
       - uses: actions/checkout@v2
       #R Set-up
       - name: Set up R ${{ matrix.config.r }}
-        uses: r-lib/actions/setup-r@master
+        uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
       #Install dependencies
       - name: Install dependencies
-        uses: r-lib/actions/setup-r-dependencies@v1
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::XML
       #Check R Package
       - name: Check R package
         uses: r-lib/actions/check-r-package@check-r-package
