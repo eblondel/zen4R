@@ -18,12 +18,15 @@ record, identified by its DOI or concept DOI."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
+  <a href="../articles/zen4R.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -69,19 +72,30 @@ record, identified by its DOI or concept DOI.</p>
     <h2>Arguments</h2>
     <dl><dt>doi</dt>
 <dd><p>a Zenodo DOI or concept DOI</p></dd>
+
+
 <dt>path</dt>
 <dd><p>the target directory where to download files</p></dd>
+
+
 <dt>files</dt>
 <dd><p>subset of filenames to restrain to download. If ignored, all files will be downloaded.</p></dd>
+
+
 <dt>logger</dt>
 <dd><p>a logger to print Zenodo API-related messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>Logical (<code>FALSE</code> by default).
 Do you want to suppress informative messages (not warnings)?</p></dd>
+
+
 <dt>...</dt>
 <dd><p>any other arguments for parallel downloading (more information at
 <a href="ZenodoRecord.html">ZenodoRecord</a>, <code>downloadFiles()</code> documentation)</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
@@ -139,7 +153,7 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
       </footer></div>
