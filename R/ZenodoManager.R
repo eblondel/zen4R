@@ -446,7 +446,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
                               quiet = FALSE){
       page <- 1
       baseUrl <- "deposit/depositions"
-      if(!private$sandbox) baseUrl <- paste0(baseUrl, "/")
+      
+      #set in #72, now re-deactivated through #76 (due to Zenodo server-side changes)
+      #if(!private$sandbox) baseUrl <- paste0(baseUrl, "/")
+      
       req <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, URLencode(q), size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
