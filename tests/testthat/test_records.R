@@ -75,6 +75,9 @@ test_that("create and deposit record",{
   expect_equal(myrec$metadata$creator[[1]]$affiliation, "Independent")
   expect_true(myrec$metadata$prereserve_doi)
   
+  #add locations
+  myrec$addLocation("Greenwich", description = "Well you know!", lon = -0.001545, lat = 51.477928)
+  
   #deposit
   deposit = ZENODO$depositRecord(myrec)
   expect_is(deposit, "ZenodoRecord")
