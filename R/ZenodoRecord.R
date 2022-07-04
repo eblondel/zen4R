@@ -893,6 +893,34 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(self$removeThesisSupervisor(by = "gnd", gnd))
     },
     
+    #' @description Adds a location to the record metadata.
+    #' @param place place (required)
+    #' @param description description
+    #' @param lat latitude
+    #' @param lon longitude
+    addLocation = function(place, description = NULL, lat = NULL, lon = NULL){
+      if(is.null(self$metadata$locations)) self$metadata$locations <- list()
+      self$metadata$locations[[length(self$metadata$locations)+1]] <- list(place = place, description = description, lat = lat, lon = lon)
+    },
+    
+    #' @description Removes a grant from the record metadata. 
+    #' @param place place (required)
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeLocation = function(place){
+      removed <- FALSE
+      if(!is.null(self$metadata$locations)){
+        for(i in 1:length(self$metadata$locations)){
+          loc <- self$metadata$locations[[i]]
+          if(loc$place == place){
+            self$metadata$locations[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
+    },
+    
     #' @description Exports record to a file by format.
     #' @param format the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
     #'   JSON, JSON-LD, GeoJSON, MARCXML

@@ -29,33 +29,33 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{ZenodoRequest$new()}}
-\item \href{#method-execute}{\code{ZenodoRequest$execute()}}
-\item \href{#method-getRequest}{\code{ZenodoRequest$getRequest()}}
-\item \href{#method-getRequestHeaders}{\code{ZenodoRequest$getRequestHeaders()}}
-\item \href{#method-getStatus}{\code{ZenodoRequest$getStatus()}}
-\item \href{#method-getResponse}{\code{ZenodoRequest$getResponse()}}
-\item \href{#method-getException}{\code{ZenodoRequest$getException()}}
-\item \href{#method-getResult}{\code{ZenodoRequest$getResult()}}
-\item \href{#method-setResult}{\code{ZenodoRequest$setResult()}}
-\item \href{#method-clone}{\code{ZenodoRequest$clone()}}
+\item \href{#method-ZenodoRequest-new}{\code{ZenodoRequest$new()}}
+\item \href{#method-ZenodoRequest-execute}{\code{ZenodoRequest$execute()}}
+\item \href{#method-ZenodoRequest-getRequest}{\code{ZenodoRequest$getRequest()}}
+\item \href{#method-ZenodoRequest-getRequestHeaders}{\code{ZenodoRequest$getRequestHeaders()}}
+\item \href{#method-ZenodoRequest-getStatus}{\code{ZenodoRequest$getStatus()}}
+\item \href{#method-ZenodoRequest-getResponse}{\code{ZenodoRequest$getResponse()}}
+\item \href{#method-ZenodoRequest-getException}{\code{ZenodoRequest$getException()}}
+\item \href{#method-ZenodoRequest-getResult}{\code{ZenodoRequest$getResult()}}
+\item \href{#method-ZenodoRequest-setResult}{\code{ZenodoRequest$setResult()}}
+\item \href{#method-ZenodoRequest-clone}{\code{ZenodoRequest$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR">}\href{../../zen4R/html/zen4RLogger.html#method-ERROR}{\code{zen4R::zen4RLogger$ERROR()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass">}\href{../../zen4R/html/zen4RLogger.html#method-getClass}{\code{zen4R::zen4RLogger$getClass()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName">}\href{../../zen4R/html/zen4RLogger.html#method-getClassName}{\code{zen4R::zen4RLogger$getClassName()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO">}\href{../../zen4R/html/zen4RLogger.html#method-INFO}{\code{zen4R::zen4RLogger$INFO()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger">}\href{../../zen4R/html/zen4RLogger.html#method-logger}{\code{zen4R::zen4RLogger$logger()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN">}\href{../../zen4R/html/zen4RLogger.html#method-WARN}{\code{zen4R::zen4RLogger$WARN()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR'><code>zen4R::zen4RLogger$ERROR()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO'><code>zen4R::zen4RLogger$INFO()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN'><code>zen4R::zen4RLogger$WARN()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass'><code>zen4R::zen4RLogger$getClass()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName'><code>zen4R::zen4RLogger$getClassName()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger'><code>zen4R::zen4RLogger$logger()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-new}{}}}
 \subsection{Method \code{new()}}{
 Initializes a \code{ZenodoRequest}
 \subsection{Usage}{
@@ -94,8 +94,8 @@ Initializes a \code{ZenodoRequest}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-execute"></a>}}
-\if{latex}{\out{\hypertarget{method-execute}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-execute"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-execute}{}}}
 \subsection{Method \code{execute()}}{
 Executes the request
 \subsection{Usage}{
@@ -104,8 +104,8 @@ Executes the request
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRequest"></a>}}
-\if{latex}{\out{\hypertarget{method-getRequest}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-getRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-getRequest}{}}}
 \subsection{Method \code{getRequest()}}{
 Get request
 \subsection{Usage}{
@@ -114,8 +114,8 @@ Get request
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRequestHeaders"></a>}}
-\if{latex}{\out{\hypertarget{method-getRequestHeaders}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-getRequestHeaders"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-getRequestHeaders}{}}}
 \subsection{Method \code{getRequestHeaders()}}{
 Get request headers
 \subsection{Usage}{
@@ -124,8 +124,8 @@ Get request headers
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getStatus"></a>}}
-\if{latex}{\out{\hypertarget{method-getStatus}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-getStatus"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-getStatus}{}}}
 \subsection{Method \code{getStatus()}}{
 Get request status
 \subsection{Usage}{
@@ -134,8 +134,8 @@ Get request status
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getResponse"></a>}}
-\if{latex}{\out{\hypertarget{method-getResponse}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-getResponse"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-getResponse}{}}}
 \subsection{Method \code{getResponse()}}{
 Get request response
 \subsection{Usage}{
@@ -144,8 +144,8 @@ Get request response
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getException"></a>}}
-\if{latex}{\out{\hypertarget{method-getException}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-getException"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-getException}{}}}
 \subsection{Method \code{getException()}}{
 Get request exception
 \subsection{Usage}{
@@ -154,8 +154,8 @@ Get request exception
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getResult"></a>}}
-\if{latex}{\out{\hypertarget{method-getResult}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-getResult"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-getResult}{}}}
 \subsection{Method \code{getResult()}}{
 Get request result
 \subsection{Usage}{
@@ -164,8 +164,8 @@ Get request result
 
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setResult"></a>}}
-\if{latex}{\out{\hypertarget{method-setResult}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-setResult"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-setResult}{}}}
 \subsection{Method \code{setResult()}}{
 Set request result
 \subsection{Usage}{
@@ -181,8 +181,8 @@ Set request result
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-ZenodoRequest-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

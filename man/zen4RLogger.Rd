@@ -33,19 +33,19 @@ Logger class used internally by zen4R
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-logger}{\code{zen4RLogger$logger()}}
-\item \href{#method-INFO}{\code{zen4RLogger$INFO()}}
-\item \href{#method-WARN}{\code{zen4RLogger$WARN()}}
-\item \href{#method-ERROR}{\code{zen4RLogger$ERROR()}}
-\item \href{#method-new}{\code{zen4RLogger$new()}}
-\item \href{#method-getClassName}{\code{zen4RLogger$getClassName()}}
-\item \href{#method-getClass}{\code{zen4RLogger$getClass()}}
-\item \href{#method-clone}{\code{zen4RLogger$clone()}}
+\item \href{#method-zen4RLogger-logger}{\code{zen4RLogger$logger()}}
+\item \href{#method-zen4RLogger-INFO}{\code{zen4RLogger$INFO()}}
+\item \href{#method-zen4RLogger-WARN}{\code{zen4RLogger$WARN()}}
+\item \href{#method-zen4RLogger-ERROR}{\code{zen4RLogger$ERROR()}}
+\item \href{#method-zen4RLogger-new}{\code{zen4RLogger$new()}}
+\item \href{#method-zen4RLogger-getClassName}{\code{zen4RLogger$getClassName()}}
+\item \href{#method-zen4RLogger-getClass}{\code{zen4RLogger$getClass()}}
+\item \href{#method-zen4RLogger-clone}{\code{zen4RLogger$clone()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-logger"></a>}}
-\if{latex}{\out{\hypertarget{method-logger}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-logger"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-logger}{}}}
 \subsection{Method \code{logger()}}{
 internal logger function for the Zenodo manager
 \subsection{Usage}{
@@ -63,8 +63,8 @@ internal logger function for the Zenodo manager
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-INFO"></a>}}
-\if{latex}{\out{\hypertarget{method-INFO}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-INFO"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-INFO}{}}}
 \subsection{Method \code{INFO()}}{
 internal INFO logger function
 \subsection{Usage}{
@@ -80,8 +80,8 @@ internal INFO logger function
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-WARN"></a>}}
-\if{latex}{\out{\hypertarget{method-WARN}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-WARN"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-WARN}{}}}
 \subsection{Method \code{WARN()}}{
 internal WARN logger function
 \subsection{Usage}{
@@ -97,8 +97,8 @@ internal WARN logger function
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ERROR"></a>}}
-\if{latex}{\out{\hypertarget{method-ERROR}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-ERROR"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-ERROR}{}}}
 \subsection{Method \code{ERROR()}}{
 internal ERROR logger function
 \subsection{Usage}{
@@ -114,8 +114,8 @@ internal ERROR logger function
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-new"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-new}{}}}
 \subsection{Method \code{new()}}{
 initialize the Zenodo logger
 \subsection{Usage}{
@@ -131,8 +131,8 @@ initialize the Zenodo logger
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getClassName"></a>}}
-\if{latex}{\out{\hypertarget{method-getClassName}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-getClassName"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-getClassName}{}}}
 \subsection{Method \code{getClassName()}}{
 Get object class name
 \subsection{Usage}{
@@ -144,8 +144,8 @@ the class name, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getClass"></a>}}
-\if{latex}{\out{\hypertarget{method-getClass}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-getClass"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-getClass}{}}}
 \subsection{Method \code{getClass()}}{
 Get object class
 \subsection{Usage}{
@@ -157,8 +157,8 @@ the class, object of class \code{R6}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-zen4RLogger-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-zen4RLogger-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

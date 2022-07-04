@@ -88,56 +88,56 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{ZenodoManager$new()}}
-\item \href{#method-getToken}{\code{ZenodoManager$getToken()}}
-\item \href{#method-getLicenses}{\code{ZenodoManager$getLicenses()}}
-\item \href{#method-getLicenseById}{\code{ZenodoManager$getLicenseById()}}
-\item \href{#method-getCommunities}{\code{ZenodoManager$getCommunities()}}
-\item \href{#method-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
-\item \href{#method-getGrants}{\code{ZenodoManager$getGrants()}}
-\item \href{#method-getGrantById}{\code{ZenodoManager$getGrantById()}}
-\item \href{#method-getFunders}{\code{ZenodoManager$getFunders()}}
-\item \href{#method-getFunderById}{\code{ZenodoManager$getFunderById()}}
-\item \href{#method-getDepositions}{\code{ZenodoManager$getDepositions()}}
-\item \href{#method-getDepositionByConceptDOI}{\code{ZenodoManager$getDepositionByConceptDOI()}}
-\item \href{#method-getDepositionByDOI}{\code{ZenodoManager$getDepositionByDOI()}}
-\item \href{#method-getDepositionById}{\code{ZenodoManager$getDepositionById()}}
-\item \href{#method-getDepositionByConceptId}{\code{ZenodoManager$getDepositionByConceptId()}}
-\item \href{#method-depositRecord}{\code{ZenodoManager$depositRecord()}}
-\item \href{#method-depositRecordVersion}{\code{ZenodoManager$depositRecordVersion()}}
-\item \href{#method-deleteRecord}{\code{ZenodoManager$deleteRecord()}}
-\item \href{#method-deleteRecordByDOI}{\code{ZenodoManager$deleteRecordByDOI()}}
-\item \href{#method-deleteRecords}{\code{ZenodoManager$deleteRecords()}}
-\item \href{#method-createEmptyRecord}{\code{ZenodoManager$createEmptyRecord()}}
-\item \href{#method-editRecord}{\code{ZenodoManager$editRecord()}}
-\item \href{#method-discardChanges}{\code{ZenodoManager$discardChanges()}}
-\item \href{#method-publishRecord}{\code{ZenodoManager$publishRecord()}}
-\item \href{#method-getFiles}{\code{ZenodoManager$getFiles()}}
-\item \href{#method-uploadFile}{\code{ZenodoManager$uploadFile()}}
-\item \href{#method-deleteFile}{\code{ZenodoManager$deleteFile()}}
-\item \href{#method-getRecords}{\code{ZenodoManager$getRecords()}}
-\item \href{#method-getRecordByConceptDOI}{\code{ZenodoManager$getRecordByConceptDOI()}}
-\item \href{#method-getRecordByDOI}{\code{ZenodoManager$getRecordByDOI()}}
-\item \href{#method-getRecordById}{\code{ZenodoManager$getRecordById()}}
-\item \href{#method-getRecordByConceptId}{\code{ZenodoManager$getRecordByConceptId()}}
-\item \href{#method-clone}{\code{ZenodoManager$clone()}}
+\item \href{#method-ZenodoManager-new}{\code{ZenodoManager$new()}}
+\item \href{#method-ZenodoManager-getToken}{\code{ZenodoManager$getToken()}}
+\item \href{#method-ZenodoManager-getLicenses}{\code{ZenodoManager$getLicenses()}}
+\item \href{#method-ZenodoManager-getLicenseById}{\code{ZenodoManager$getLicenseById()}}
+\item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
+\item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
+\item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
+\item \href{#method-ZenodoManager-getGrantById}{\code{ZenodoManager$getGrantById()}}
+\item \href{#method-ZenodoManager-getFunders}{\code{ZenodoManager$getFunders()}}
+\item \href{#method-ZenodoManager-getFunderById}{\code{ZenodoManager$getFunderById()}}
+\item \href{#method-ZenodoManager-getDepositions}{\code{ZenodoManager$getDepositions()}}
+\item \href{#method-ZenodoManager-getDepositionByConceptDOI}{\code{ZenodoManager$getDepositionByConceptDOI()}}
+\item \href{#method-ZenodoManager-getDepositionByDOI}{\code{ZenodoManager$getDepositionByDOI()}}
+\item \href{#method-ZenodoManager-getDepositionById}{\code{ZenodoManager$getDepositionById()}}
+\item \href{#method-ZenodoManager-getDepositionByConceptId}{\code{ZenodoManager$getDepositionByConceptId()}}
+\item \href{#method-ZenodoManager-depositRecord}{\code{ZenodoManager$depositRecord()}}
+\item \href{#method-ZenodoManager-depositRecordVersion}{\code{ZenodoManager$depositRecordVersion()}}
+\item \href{#method-ZenodoManager-deleteRecord}{\code{ZenodoManager$deleteRecord()}}
+\item \href{#method-ZenodoManager-deleteRecordByDOI}{\code{ZenodoManager$deleteRecordByDOI()}}
+\item \href{#method-ZenodoManager-deleteRecords}{\code{ZenodoManager$deleteRecords()}}
+\item \href{#method-ZenodoManager-createEmptyRecord}{\code{ZenodoManager$createEmptyRecord()}}
+\item \href{#method-ZenodoManager-editRecord}{\code{ZenodoManager$editRecord()}}
+\item \href{#method-ZenodoManager-discardChanges}{\code{ZenodoManager$discardChanges()}}
+\item \href{#method-ZenodoManager-publishRecord}{\code{ZenodoManager$publishRecord()}}
+\item \href{#method-ZenodoManager-getFiles}{\code{ZenodoManager$getFiles()}}
+\item \href{#method-ZenodoManager-uploadFile}{\code{ZenodoManager$uploadFile()}}
+\item \href{#method-ZenodoManager-deleteFile}{\code{ZenodoManager$deleteFile()}}
+\item \href{#method-ZenodoManager-getRecords}{\code{ZenodoManager$getRecords()}}
+\item \href{#method-ZenodoManager-getRecordByConceptDOI}{\code{ZenodoManager$getRecordByConceptDOI()}}
+\item \href{#method-ZenodoManager-getRecordByDOI}{\code{ZenodoManager$getRecordByDOI()}}
+\item \href{#method-ZenodoManager-getRecordById}{\code{ZenodoManager$getRecordById()}}
+\item \href{#method-ZenodoManager-getRecordByConceptId}{\code{ZenodoManager$getRecordByConceptId()}}
+\item \href{#method-ZenodoManager-clone}{\code{ZenodoManager$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR">}\href{../../zen4R/html/zen4RLogger.html#method-ERROR}{\code{zen4R::zen4RLogger$ERROR()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass">}\href{../../zen4R/html/zen4RLogger.html#method-getClass}{\code{zen4R::zen4RLogger$getClass()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName">}\href{../../zen4R/html/zen4RLogger.html#method-getClassName}{\code{zen4R::zen4RLogger$getClassName()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO">}\href{../../zen4R/html/zen4RLogger.html#method-INFO}{\code{zen4R::zen4RLogger$INFO()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger">}\href{../../zen4R/html/zen4RLogger.html#method-logger}{\code{zen4R::zen4RLogger$logger()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN">}\href{../../zen4R/html/zen4RLogger.html#method-WARN}{\code{zen4R::zen4RLogger$WARN()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR'><code>zen4R::zen4RLogger$ERROR()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO'><code>zen4R::zen4RLogger$INFO()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN'><code>zen4R::zen4RLogger$WARN()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass'><code>zen4R::zen4RLogger$getClass()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName'><code>zen4R::zen4RLogger$getClassName()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger'><code>zen4R::zen4RLogger$logger()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-new}{}}}
 \subsection{Method \code{new()}}{
 initializes the Zenodo Manager
 \subsection{Usage}{
@@ -167,8 +167,8 @@ can be set to use a different backend for storing the Zenodo token with \pkg{key
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getToken"></a>}}
-\if{latex}{\out{\hypertarget{method-getToken}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getToken"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getToken}{}}}
 \subsection{Method \code{getToken()}}{
 Get user token
 \subsection{Usage}{
@@ -180,8 +180,8 @@ the token, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getLicenses"></a>}}
-\if{latex}{\out{\hypertarget{method-getLicenses}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getLicenses"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getLicenses}{}}}
 \subsection{Method \code{getLicenses()}}{
 Get Licenses supported by Zenodo.
 \subsection{Usage}{
@@ -202,8 +202,8 @@ list of licenses as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getLicenseById"></a>}}
-\if{latex}{\out{\hypertarget{method-getLicenseById}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getLicenseById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getLicenseById}{}}}
 \subsection{Method \code{getLicenseById()}}{
 Get license by Id.
 \subsection{Usage}{
@@ -222,8 +222,8 @@ the license
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getCommunities"></a>}}
-\if{latex}{\out{\hypertarget{method-getCommunities}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getCommunities}{}}}
 \subsection{Method \code{getCommunities()}}{
 Get Communities supported by Zenodo.
 \subsection{Usage}{
@@ -244,8 +244,8 @@ list of communities as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getCommunityById"></a>}}
-\if{latex}{\out{\hypertarget{method-getCommunityById}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getCommunityById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getCommunityById}{}}}
 \subsection{Method \code{getCommunityById()}}{
 Get community by Id.
 \subsection{Usage}{
@@ -264,8 +264,8 @@ the community
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getGrants"></a>}}
-\if{latex}{\out{\hypertarget{method-getGrants}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getGrants"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getGrants}{}}}
 \subsection{Method \code{getGrants()}}{
 Get Grants supported by Zenodo.
 \subsection{Usage}{
@@ -288,8 +288,8 @@ list of grants as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getGrantById"></a>}}
-\if{latex}{\out{\hypertarget{method-getGrantById}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getGrantById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getGrantById}{}}}
 \subsection{Method \code{getGrantById()}}{
 Get grant by Id.
 \subsection{Usage}{
@@ -308,8 +308,8 @@ the grant
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getFunders"></a>}}
-\if{latex}{\out{\hypertarget{method-getFunders}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getFunders"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getFunders}{}}}
 \subsection{Method \code{getFunders()}}{
 Get Funders supported by Zenodo.
 \subsection{Usage}{
@@ -332,8 +332,8 @@ list of funders as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getFunderById"></a>}}
-\if{latex}{\out{\hypertarget{method-getFunderById}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getFunderById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getFunderById}{}}}
 \subsection{Method \code{getFunderById()}}{
 Get funder by Id.
 \subsection{Usage}{
@@ -352,8 +352,8 @@ the funder
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDepositions"></a>}}
-\if{latex}{\out{\hypertarget{method-getDepositions}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getDepositions"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getDepositions}{}}}
 \subsection{Method \code{getDepositions()}}{
 Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
    the list of depositions will be returned by page with a size of 10 results per
@@ -394,8 +394,8 @@ a list of \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDepositionByConceptDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getDepositionByConceptDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getDepositionByConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getDepositionByConceptDOI}{}}}
 \subsection{Method \code{getDepositionByConceptDOI()}}{
 Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions).
 \subsection{Usage}{
@@ -414,8 +414,8 @@ an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDepositionByDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getDepositionByDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getDepositionByDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getDepositionByDOI}{}}}
 \subsection{Method \code{getDepositionByDOI()}}{
 Get a Zenodo deposition record by DOI.
 \subsection{Usage}{
@@ -434,8 +434,8 @@ an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDepositionById"></a>}}
-\if{latex}{\out{\hypertarget{method-getDepositionById}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getDepositionById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getDepositionById}{}}}
 \subsection{Method \code{getDepositionById()}}{
 Get a Zenodo deposition record by ID.
 \subsection{Usage}{
@@ -454,8 +454,8 @@ an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getDepositionByConceptId"></a>}}
-\if{latex}{\out{\hypertarget{method-getDepositionByConceptId}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getDepositionByConceptId"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getDepositionByConceptId}{}}}
 \subsection{Method \code{getDepositionByConceptId()}}{
 Get a Zenodo deposition record by concept ID.
 \subsection{Usage}{
@@ -474,8 +474,8 @@ an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-depositRecord"></a>}}
-\if{latex}{\out{\hypertarget{method-depositRecord}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-depositRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-depositRecord}{}}}
 \subsection{Method \code{depositRecord()}}{
 Deposits a record on Zenodo.
 \subsection{Usage}{
@@ -497,8 +497,8 @@ Can be set to \code{TRUE} (to use CAUTIOUSLY, only if you want to publish your r
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-depositRecordVersion"></a>}}
-\if{latex}{\out{\hypertarget{method-depositRecordVersion}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-depositRecordVersion"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-depositRecordVersion}{}}}
 \subsection{Method \code{depositRecordVersion()}}{
 Deposits a record version on Zenodo. For details about the behavior of this function, 
   see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
@@ -529,8 +529,8 @@ Deposits a record version on Zenodo. For details about the behavior of this func
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-deleteRecord"></a>}}
-\if{latex}{\out{\hypertarget{method-deleteRecord}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-deleteRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-deleteRecord}{}}}
 \subsection{Method \code{deleteRecord()}}{
 Deletes a record given its ID
 \subsection{Usage}{
@@ -549,8 +549,8 @@ Deletes a record given its ID
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-deleteRecordByDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-deleteRecordByDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-deleteRecordByDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-deleteRecordByDOI}{}}}
 \subsection{Method \code{deleteRecordByDOI()}}{
 Deletes a record by DOI
 \subsection{Usage}{
@@ -569,8 +569,8 @@ Deletes a record by DOI
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-deleteRecords"></a>}}
-\if{latex}{\out{\hypertarget{method-deleteRecords}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-deleteRecords"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-deleteRecords}{}}}
 \subsection{Method \code{deleteRecords()}}{
 Deletes all Zenodo deposited (unpublished) records. 
   The parameter \code{q} allows to specify an ElasticSearch-compliant query to filter depositions (default query 
@@ -594,8 +594,8 @@ Deletes all Zenodo deposited (unpublished) records.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-createEmptyRecord"></a>}}
-\if{latex}{\out{\hypertarget{method-createEmptyRecord}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-createEmptyRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-createEmptyRecord}{}}}
 \subsection{Method \code{createEmptyRecord()}}{
 Creates an empty record in the Zenodo deposit. Returns the record
    newly created in Zenodo, as an object of class \code{ZenodoRecord} with an 
@@ -609,8 +609,8 @@ an object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-editRecord"></a>}}
-\if{latex}{\out{\hypertarget{method-editRecord}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-editRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-editRecord}{}}}
 \subsection{Method \code{editRecord()}}{
 Unlocks a record already submitted. Required to edit metadata of a Zenodo record already published.
 \subsection{Usage}{
@@ -629,8 +629,8 @@ an object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-discardChanges"></a>}}
-\if{latex}{\out{\hypertarget{method-discardChanges}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-discardChanges"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-discardChanges}{}}}
 \subsection{Method \code{discardChanges()}}{
 Discards changes on a Zenodo record.
 \subsection{Usage}{
@@ -649,8 +649,8 @@ an object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-publishRecord"></a>}}
-\if{latex}{\out{\hypertarget{method-publishRecord}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-publishRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-publishRecord}{}}}
 \subsection{Method \code{publishRecord()}}{
 Publishes a Zenodo record.
 \subsection{Usage}{
@@ -669,8 +669,8 @@ an object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getFiles"></a>}}
-\if{latex}{\out{\hypertarget{method-getFiles}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getFiles}{}}}
 \subsection{Method \code{getFiles()}}{
 Get list of files attached to a Zenodo record.
 \subsection{Usage}{
@@ -689,8 +689,8 @@ list of files
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-uploadFile"></a>}}
-\if{latex}{\out{\hypertarget{method-uploadFile}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-uploadFile"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-uploadFile}{}}}
 \subsection{Method \code{uploadFile()}}{
 Uploads a file to a Zenodo record
 \subsection{Usage}{
@@ -710,8 +710,8 @@ Uploads a file to a Zenodo record
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-deleteFile"></a>}}
-\if{latex}{\out{\hypertarget{method-deleteFile}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-deleteFile"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-deleteFile}{}}}
 \subsection{Method \code{deleteFile()}}{
 Deletes a file for a record
 \subsection{Usage}{
@@ -729,8 +729,8 @@ Deletes a file for a record
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRecords"></a>}}
-\if{latex}{\out{\hypertarget{method-getRecords}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getRecords"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRecords}{}}}
 \subsection{Method \code{getRecords()}}{
 Get the list of Zenodo records. By defaut the list of records will be returned by
     page with a size of 10 results per page (default size of the Zenodo API). The parameter 
@@ -769,8 +769,8 @@ a list of \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRecordByConceptDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getRecordByConceptDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getRecordByConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRecordByConceptDOI}{}}}
 \subsection{Method \code{getRecordByConceptDOI()}}{
 Get Record by concept DOI
 \subsection{Usage}{
@@ -789,8 +789,8 @@ a object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRecordByDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getRecordByDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getRecordByDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRecordByDOI}{}}}
 \subsection{Method \code{getRecordByDOI()}}{
 Get Record by DOI
 \subsection{Usage}{
@@ -809,8 +809,8 @@ a object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRecordById"></a>}}
-\if{latex}{\out{\hypertarget{method-getRecordById}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getRecordById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRecordById}{}}}
 \subsection{Method \code{getRecordById()}}{
 Get Record by ID
 \subsection{Usage}{
@@ -829,8 +829,8 @@ a object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getRecordByConceptId"></a>}}
-\if{latex}{\out{\hypertarget{method-getRecordByConceptId}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-getRecordByConceptId"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRecordByConceptId}{}}}
 \subsection{Method \code{getRecordByConceptId()}}{
 Get Record by concept ID
 \subsection{Usage}{
@@ -849,8 +849,8 @@ a object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-ZenodoManager-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{

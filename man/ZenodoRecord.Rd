@@ -66,112 +66,114 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-new}{\code{ZenodoRecord$new()}}
-\item \href{#method-prereserveDOI}{\code{ZenodoRecord$prereserveDOI()}}
-\item \href{#method-setDOI}{\code{ZenodoRecord$setDOI()}}
-\item \href{#method-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
-\item \href{#method-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
-\item \href{#method-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
-\item \href{#method-getVersions}{\code{ZenodoRecord$getVersions()}}
-\item \href{#method-setUploadType}{\code{ZenodoRecord$setUploadType()}}
-\item \href{#method-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
-\item \href{#method-setImageType}{\code{ZenodoRecord$setImageType()}}
-\item \href{#method-setPublicationDate}{\code{ZenodoRecord$setPublicationDate()}}
-\item \href{#method-setEmbargoDate}{\code{ZenodoRecord$setEmbargoDate()}}
-\item \href{#method-setTitle}{\code{ZenodoRecord$setTitle()}}
-\item \href{#method-setDescription}{\code{ZenodoRecord$setDescription()}}
-\item \href{#method-setAccessRight}{\code{ZenodoRecord$setAccessRight()}}
-\item \href{#method-setAccessConditions}{\code{ZenodoRecord$setAccessConditions()}}
-\item \href{#method-addCreator}{\code{ZenodoRecord$addCreator()}}
-\item \href{#method-removeCreator}{\code{ZenodoRecord$removeCreator()}}
-\item \href{#method-removeCreatorByName}{\code{ZenodoRecord$removeCreatorByName()}}
-\item \href{#method-removeCreatorByAffiliation}{\code{ZenodoRecord$removeCreatorByAffiliation()}}
-\item \href{#method-removeCreatorByORCID}{\code{ZenodoRecord$removeCreatorByORCID()}}
-\item \href{#method-removeCreatorByGND}{\code{ZenodoRecord$removeCreatorByGND()}}
-\item \href{#method-addContributor}{\code{ZenodoRecord$addContributor()}}
-\item \href{#method-removeContributor}{\code{ZenodoRecord$removeContributor()}}
-\item \href{#method-removeContributorByName}{\code{ZenodoRecord$removeContributorByName()}}
-\item \href{#method-removeContributorByAffiliation}{\code{ZenodoRecord$removeContributorByAffiliation()}}
-\item \href{#method-removeContributorByORCID}{\code{ZenodoRecord$removeContributorByORCID()}}
-\item \href{#method-removeContributorByGND}{\code{ZenodoRecord$removeContributorByGND()}}
-\item \href{#method-setLicense}{\code{ZenodoRecord$setLicense()}}
-\item \href{#method-setVersion}{\code{ZenodoRecord$setVersion()}}
-\item \href{#method-setLanguage}{\code{ZenodoRecord$setLanguage()}}
-\item \href{#method-addRelatedIdentifier}{\code{ZenodoRecord$addRelatedIdentifier()}}
-\item \href{#method-removeRelatedIdentifier}{\code{ZenodoRecord$removeRelatedIdentifier()}}
-\item \href{#method-setReferences}{\code{ZenodoRecord$setReferences()}}
-\item \href{#method-addReference}{\code{ZenodoRecord$addReference()}}
-\item \href{#method-removeReference}{\code{ZenodoRecord$removeReference()}}
-\item \href{#method-setKeywords}{\code{ZenodoRecord$setKeywords()}}
-\item \href{#method-addKeyword}{\code{ZenodoRecord$addKeyword()}}
-\item \href{#method-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
-\item \href{#method-addSubject}{\code{ZenodoRecord$addSubject()}}
-\item \href{#method-removeSubject}{\code{ZenodoRecord$removeSubject()}}
-\item \href{#method-removeSubjectByTerm}{\code{ZenodoRecord$removeSubjectByTerm()}}
-\item \href{#method-removeSubjectByIdentifier}{\code{ZenodoRecord$removeSubjectByIdentifier()}}
-\item \href{#method-setNotes}{\code{ZenodoRecord$setNotes()}}
-\item \href{#method-setCommunities}{\code{ZenodoRecord$setCommunities()}}
-\item \href{#method-addCommunity}{\code{ZenodoRecord$addCommunity()}}
-\item \href{#method-removeCommunity}{\code{ZenodoRecord$removeCommunity()}}
-\item \href{#method-setGrants}{\code{ZenodoRecord$setGrants()}}
-\item \href{#method-addGrant}{\code{ZenodoRecord$addGrant()}}
-\item \href{#method-removeGrant}{\code{ZenodoRecord$removeGrant()}}
-\item \href{#method-setJournalTitle}{\code{ZenodoRecord$setJournalTitle()}}
-\item \href{#method-setJournalVolume}{\code{ZenodoRecord$setJournalVolume()}}
-\item \href{#method-setJournalIssue}{\code{ZenodoRecord$setJournalIssue()}}
-\item \href{#method-setJournalPages}{\code{ZenodoRecord$setJournalPages()}}
-\item \href{#method-setConferenceTitle}{\code{ZenodoRecord$setConferenceTitle()}}
-\item \href{#method-setConferenceAcronym}{\code{ZenodoRecord$setConferenceAcronym()}}
-\item \href{#method-setConferenceDates}{\code{ZenodoRecord$setConferenceDates()}}
-\item \href{#method-setConferencePlace}{\code{ZenodoRecord$setConferencePlace()}}
-\item \href{#method-setConferenceUrl}{\code{ZenodoRecord$setConferenceUrl()}}
-\item \href{#method-setConferenceSession}{\code{ZenodoRecord$setConferenceSession()}}
-\item \href{#method-setConferenceSessionPart}{\code{ZenodoRecord$setConferenceSessionPart()}}
-\item \href{#method-setImprintPublisher}{\code{ZenodoRecord$setImprintPublisher()}}
-\item \href{#method-setImprintISBN}{\code{ZenodoRecord$setImprintISBN()}}
-\item \href{#method-setImprintPlace}{\code{ZenodoRecord$setImprintPlace()}}
-\item \href{#method-setPartofTitle}{\code{ZenodoRecord$setPartofTitle()}}
-\item \href{#method-setPartofPages}{\code{ZenodoRecord$setPartofPages()}}
-\item \href{#method-setThesisUniversity}{\code{ZenodoRecord$setThesisUniversity()}}
-\item \href{#method-addThesisSupervisor}{\code{ZenodoRecord$addThesisSupervisor()}}
-\item \href{#method-removeThesisSupervisor}{\code{ZenodoRecord$removeThesisSupervisor()}}
-\item \href{#method-removeThesisSupervisorByName}{\code{ZenodoRecord$removeThesisSupervisorByName()}}
-\item \href{#method-removeThesisSupervisorByAffiliation}{\code{ZenodoRecord$removeThesisSupervisorByAffiliation()}}
-\item \href{#method-removeThesisSupervisorByORCID}{\code{ZenodoRecord$removeThesisSupervisorByORCID()}}
-\item \href{#method-removeThesisSupervisorByGND}{\code{ZenodoRecord$removeThesisSupervisorByGND()}}
-\item \href{#method-exportAs}{\code{ZenodoRecord$exportAs()}}
-\item \href{#method-exportAsBibTeX}{\code{ZenodoRecord$exportAsBibTeX()}}
-\item \href{#method-exportAsCSL}{\code{ZenodoRecord$exportAsCSL()}}
-\item \href{#method-exportAsDataCite}{\code{ZenodoRecord$exportAsDataCite()}}
-\item \href{#method-exportAsDublinCore}{\code{ZenodoRecord$exportAsDublinCore()}}
-\item \href{#method-exportAsDCAT}{\code{ZenodoRecord$exportAsDCAT()}}
-\item \href{#method-exportAsJSON}{\code{ZenodoRecord$exportAsJSON()}}
-\item \href{#method-exportAsJSONLD}{\code{ZenodoRecord$exportAsJSONLD()}}
-\item \href{#method-exportAsGeoJSON}{\code{ZenodoRecord$exportAsGeoJSON()}}
-\item \href{#method-exportAsMARCXML}{\code{ZenodoRecord$exportAsMARCXML()}}
-\item \href{#method-exportAsAllFormats}{\code{ZenodoRecord$exportAsAllFormats()}}
-\item \href{#method-listFiles}{\code{ZenodoRecord$listFiles()}}
-\item \href{#method-downloadFiles}{\code{ZenodoRecord$downloadFiles()}}
-\item \href{#method-print}{\code{ZenodoRecord$print()}}
-\item \href{#method-toDCEntry}{\code{ZenodoRecord$toDCEntry()}}
-\item \href{#method-clone}{\code{ZenodoRecord$clone()}}
+\item \href{#method-ZenodoRecord-new}{\code{ZenodoRecord$new()}}
+\item \href{#method-ZenodoRecord-prereserveDOI}{\code{ZenodoRecord$prereserveDOI()}}
+\item \href{#method-ZenodoRecord-setDOI}{\code{ZenodoRecord$setDOI()}}
+\item \href{#method-ZenodoRecord-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
+\item \href{#method-ZenodoRecord-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
+\item \href{#method-ZenodoRecord-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
+\item \href{#method-ZenodoRecord-getVersions}{\code{ZenodoRecord$getVersions()}}
+\item \href{#method-ZenodoRecord-setUploadType}{\code{ZenodoRecord$setUploadType()}}
+\item \href{#method-ZenodoRecord-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
+\item \href{#method-ZenodoRecord-setImageType}{\code{ZenodoRecord$setImageType()}}
+\item \href{#method-ZenodoRecord-setPublicationDate}{\code{ZenodoRecord$setPublicationDate()}}
+\item \href{#method-ZenodoRecord-setEmbargoDate}{\code{ZenodoRecord$setEmbargoDate()}}
+\item \href{#method-ZenodoRecord-setTitle}{\code{ZenodoRecord$setTitle()}}
+\item \href{#method-ZenodoRecord-setDescription}{\code{ZenodoRecord$setDescription()}}
+\item \href{#method-ZenodoRecord-setAccessRight}{\code{ZenodoRecord$setAccessRight()}}
+\item \href{#method-ZenodoRecord-setAccessConditions}{\code{ZenodoRecord$setAccessConditions()}}
+\item \href{#method-ZenodoRecord-addCreator}{\code{ZenodoRecord$addCreator()}}
+\item \href{#method-ZenodoRecord-removeCreator}{\code{ZenodoRecord$removeCreator()}}
+\item \href{#method-ZenodoRecord-removeCreatorByName}{\code{ZenodoRecord$removeCreatorByName()}}
+\item \href{#method-ZenodoRecord-removeCreatorByAffiliation}{\code{ZenodoRecord$removeCreatorByAffiliation()}}
+\item \href{#method-ZenodoRecord-removeCreatorByORCID}{\code{ZenodoRecord$removeCreatorByORCID()}}
+\item \href{#method-ZenodoRecord-removeCreatorByGND}{\code{ZenodoRecord$removeCreatorByGND()}}
+\item \href{#method-ZenodoRecord-addContributor}{\code{ZenodoRecord$addContributor()}}
+\item \href{#method-ZenodoRecord-removeContributor}{\code{ZenodoRecord$removeContributor()}}
+\item \href{#method-ZenodoRecord-removeContributorByName}{\code{ZenodoRecord$removeContributorByName()}}
+\item \href{#method-ZenodoRecord-removeContributorByAffiliation}{\code{ZenodoRecord$removeContributorByAffiliation()}}
+\item \href{#method-ZenodoRecord-removeContributorByORCID}{\code{ZenodoRecord$removeContributorByORCID()}}
+\item \href{#method-ZenodoRecord-removeContributorByGND}{\code{ZenodoRecord$removeContributorByGND()}}
+\item \href{#method-ZenodoRecord-setLicense}{\code{ZenodoRecord$setLicense()}}
+\item \href{#method-ZenodoRecord-setVersion}{\code{ZenodoRecord$setVersion()}}
+\item \href{#method-ZenodoRecord-setLanguage}{\code{ZenodoRecord$setLanguage()}}
+\item \href{#method-ZenodoRecord-addRelatedIdentifier}{\code{ZenodoRecord$addRelatedIdentifier()}}
+\item \href{#method-ZenodoRecord-removeRelatedIdentifier}{\code{ZenodoRecord$removeRelatedIdentifier()}}
+\item \href{#method-ZenodoRecord-setReferences}{\code{ZenodoRecord$setReferences()}}
+\item \href{#method-ZenodoRecord-addReference}{\code{ZenodoRecord$addReference()}}
+\item \href{#method-ZenodoRecord-removeReference}{\code{ZenodoRecord$removeReference()}}
+\item \href{#method-ZenodoRecord-setKeywords}{\code{ZenodoRecord$setKeywords()}}
+\item \href{#method-ZenodoRecord-addKeyword}{\code{ZenodoRecord$addKeyword()}}
+\item \href{#method-ZenodoRecord-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
+\item \href{#method-ZenodoRecord-addSubject}{\code{ZenodoRecord$addSubject()}}
+\item \href{#method-ZenodoRecord-removeSubject}{\code{ZenodoRecord$removeSubject()}}
+\item \href{#method-ZenodoRecord-removeSubjectByTerm}{\code{ZenodoRecord$removeSubjectByTerm()}}
+\item \href{#method-ZenodoRecord-removeSubjectByIdentifier}{\code{ZenodoRecord$removeSubjectByIdentifier()}}
+\item \href{#method-ZenodoRecord-setNotes}{\code{ZenodoRecord$setNotes()}}
+\item \href{#method-ZenodoRecord-setCommunities}{\code{ZenodoRecord$setCommunities()}}
+\item \href{#method-ZenodoRecord-addCommunity}{\code{ZenodoRecord$addCommunity()}}
+\item \href{#method-ZenodoRecord-removeCommunity}{\code{ZenodoRecord$removeCommunity()}}
+\item \href{#method-ZenodoRecord-setGrants}{\code{ZenodoRecord$setGrants()}}
+\item \href{#method-ZenodoRecord-addGrant}{\code{ZenodoRecord$addGrant()}}
+\item \href{#method-ZenodoRecord-removeGrant}{\code{ZenodoRecord$removeGrant()}}
+\item \href{#method-ZenodoRecord-setJournalTitle}{\code{ZenodoRecord$setJournalTitle()}}
+\item \href{#method-ZenodoRecord-setJournalVolume}{\code{ZenodoRecord$setJournalVolume()}}
+\item \href{#method-ZenodoRecord-setJournalIssue}{\code{ZenodoRecord$setJournalIssue()}}
+\item \href{#method-ZenodoRecord-setJournalPages}{\code{ZenodoRecord$setJournalPages()}}
+\item \href{#method-ZenodoRecord-setConferenceTitle}{\code{ZenodoRecord$setConferenceTitle()}}
+\item \href{#method-ZenodoRecord-setConferenceAcronym}{\code{ZenodoRecord$setConferenceAcronym()}}
+\item \href{#method-ZenodoRecord-setConferenceDates}{\code{ZenodoRecord$setConferenceDates()}}
+\item \href{#method-ZenodoRecord-setConferencePlace}{\code{ZenodoRecord$setConferencePlace()}}
+\item \href{#method-ZenodoRecord-setConferenceUrl}{\code{ZenodoRecord$setConferenceUrl()}}
+\item \href{#method-ZenodoRecord-setConferenceSession}{\code{ZenodoRecord$setConferenceSession()}}
+\item \href{#method-ZenodoRecord-setConferenceSessionPart}{\code{ZenodoRecord$setConferenceSessionPart()}}
+\item \href{#method-ZenodoRecord-setImprintPublisher}{\code{ZenodoRecord$setImprintPublisher()}}
+\item \href{#method-ZenodoRecord-setImprintISBN}{\code{ZenodoRecord$setImprintISBN()}}
+\item \href{#method-ZenodoRecord-setImprintPlace}{\code{ZenodoRecord$setImprintPlace()}}
+\item \href{#method-ZenodoRecord-setPartofTitle}{\code{ZenodoRecord$setPartofTitle()}}
+\item \href{#method-ZenodoRecord-setPartofPages}{\code{ZenodoRecord$setPartofPages()}}
+\item \href{#method-ZenodoRecord-setThesisUniversity}{\code{ZenodoRecord$setThesisUniversity()}}
+\item \href{#method-ZenodoRecord-addThesisSupervisor}{\code{ZenodoRecord$addThesisSupervisor()}}
+\item \href{#method-ZenodoRecord-removeThesisSupervisor}{\code{ZenodoRecord$removeThesisSupervisor()}}
+\item \href{#method-ZenodoRecord-removeThesisSupervisorByName}{\code{ZenodoRecord$removeThesisSupervisorByName()}}
+\item \href{#method-ZenodoRecord-removeThesisSupervisorByAffiliation}{\code{ZenodoRecord$removeThesisSupervisorByAffiliation()}}
+\item \href{#method-ZenodoRecord-removeThesisSupervisorByORCID}{\code{ZenodoRecord$removeThesisSupervisorByORCID()}}
+\item \href{#method-ZenodoRecord-removeThesisSupervisorByGND}{\code{ZenodoRecord$removeThesisSupervisorByGND()}}
+\item \href{#method-ZenodoRecord-addLocation}{\code{ZenodoRecord$addLocation()}}
+\item \href{#method-ZenodoRecord-removeLocation}{\code{ZenodoRecord$removeLocation()}}
+\item \href{#method-ZenodoRecord-exportAs}{\code{ZenodoRecord$exportAs()}}
+\item \href{#method-ZenodoRecord-exportAsBibTeX}{\code{ZenodoRecord$exportAsBibTeX()}}
+\item \href{#method-ZenodoRecord-exportAsCSL}{\code{ZenodoRecord$exportAsCSL()}}
+\item \href{#method-ZenodoRecord-exportAsDataCite}{\code{ZenodoRecord$exportAsDataCite()}}
+\item \href{#method-ZenodoRecord-exportAsDublinCore}{\code{ZenodoRecord$exportAsDublinCore()}}
+\item \href{#method-ZenodoRecord-exportAsDCAT}{\code{ZenodoRecord$exportAsDCAT()}}
+\item \href{#method-ZenodoRecord-exportAsJSON}{\code{ZenodoRecord$exportAsJSON()}}
+\item \href{#method-ZenodoRecord-exportAsJSONLD}{\code{ZenodoRecord$exportAsJSONLD()}}
+\item \href{#method-ZenodoRecord-exportAsGeoJSON}{\code{ZenodoRecord$exportAsGeoJSON()}}
+\item \href{#method-ZenodoRecord-exportAsMARCXML}{\code{ZenodoRecord$exportAsMARCXML()}}
+\item \href{#method-ZenodoRecord-exportAsAllFormats}{\code{ZenodoRecord$exportAsAllFormats()}}
+\item \href{#method-ZenodoRecord-listFiles}{\code{ZenodoRecord$listFiles()}}
+\item \href{#method-ZenodoRecord-downloadFiles}{\code{ZenodoRecord$downloadFiles()}}
+\item \href{#method-ZenodoRecord-print}{\code{ZenodoRecord$print()}}
+\item \href{#method-ZenodoRecord-toDCEntry}{\code{ZenodoRecord$toDCEntry()}}
+\item \href{#method-ZenodoRecord-clone}{\code{ZenodoRecord$clone()}}
 }
 }
-\if{html}{
-\out{<details ><summary>Inherited methods</summary>}
-\itemize{
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR">}\href{../../zen4R/html/zen4RLogger.html#method-ERROR}{\code{zen4R::zen4RLogger$ERROR()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass">}\href{../../zen4R/html/zen4RLogger.html#method-getClass}{\code{zen4R::zen4RLogger$getClass()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName">}\href{../../zen4R/html/zen4RLogger.html#method-getClassName}{\code{zen4R::zen4RLogger$getClassName()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO">}\href{../../zen4R/html/zen4RLogger.html#method-INFO}{\code{zen4R::zen4RLogger$INFO()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger">}\href{../../zen4R/html/zen4RLogger.html#method-logger}{\code{zen4R::zen4RLogger$logger()}}\out{</span>}
-\item \out{<span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN">}\href{../../zen4R/html/zen4RLogger.html#method-WARN}{\code{zen4R::zen4RLogger$WARN()}}\out{</span>}
-}
-\out{</details>}
-}
+\if{html}{\out{
+<details><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR'><code>zen4R::zen4RLogger$ERROR()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO'><code>zen4R::zen4RLogger$INFO()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN'><code>zen4R::zen4RLogger$WARN()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass'><code>zen4R::zen4RLogger$getClass()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName'><code>zen4R::zen4RLogger$getClassName()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger'><code>zen4R::zen4RLogger$logger()</code></a></li>
+</ul>
+</details>
+}}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-new"></a>}}
-\if{latex}{\out{\hypertarget{method-new}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-new}{}}}
 \subsection{Method \code{new()}}{
 method is used to instantiate a \code{\link{ZenodoRecord}}
 \subsection{Usage}{
@@ -190,8 +192,8 @@ or "DEBUG" (for complete curl http calls logs)}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-prereserveDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-prereserveDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-prereserveDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-prereserveDOI}{}}}
 \subsection{Method \code{prereserveDOI()}}{
 Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
@@ -210,8 +212,8 @@ Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record wit
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-setDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setDOI}{}}}
 \subsection{Method \code{setDOI()}}{
 Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
    This method will call the method \code{$prereserveDOI(FALSE)}.
@@ -228,8 +230,8 @@ Set the DOI. This method can be used if a DOI has been already assigned outside 
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getConceptDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getConceptDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-getConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getConceptDOI}{}}}
 \subsection{Method \code{getConceptDOI()}}{
 Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
@@ -243,8 +245,8 @@ the concept DOI, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getFirstDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getFirstDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-getFirstDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getFirstDOI}{}}}
 \subsection{Method \code{getFirstDOI()}}{
 Get DOI of the first record version.
 \subsection{Usage}{
@@ -256,8 +258,8 @@ the first DOI, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getLastDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-getLastDOI}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-getLastDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getLastDOI}{}}}
 \subsection{Method \code{getLastDOI()}}{
 Get DOI of the latest record version.
 \subsection{Usage}{
@@ -269,8 +271,8 @@ the last DOI, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-getVersions"></a>}}
-\if{latex}{\out{\hypertarget{method-getVersions}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-getVersions"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getVersions}{}}}
 \subsection{Method \code{getVersions()}}{
 Get record versions with creation/publication date, 
   version (ordering number) and DOI.
@@ -283,8 +285,8 @@ a \code{data.frame} with the record versions
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setUploadType"></a>}}
-\if{latex}{\out{\hypertarget{method-setUploadType}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setUploadType"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setUploadType}{}}}
 \subsection{Method \code{setUploadType()}}{
 Set the upload type (mandatory).
 \subsection{Usage}{
@@ -301,8 +303,8 @@ Set the upload type (mandatory).
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setPublicationType"></a>}}
-\if{latex}{\out{\hypertarget{method-setPublicationType}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setPublicationType"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setPublicationType}{}}}
 \subsection{Method \code{setPublicationType()}}{
 Set the publication type (mandatory if upload type is 'publication').
 \subsection{Usage}{
@@ -320,8 +322,8 @@ Set the publication type (mandatory if upload type is 'publication').
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setImageType"></a>}}
-\if{latex}{\out{\hypertarget{method-setImageType}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setImageType"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setImageType}{}}}
 \subsection{Method \code{setImageType()}}{
 Set the image type (mandatory if image type is 'image').
 \subsection{Usage}{
@@ -338,8 +340,8 @@ Set the image type (mandatory if image type is 'image').
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setPublicationDate"></a>}}
-\if{latex}{\out{\hypertarget{method-setPublicationDate}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setPublicationDate"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setPublicationDate}{}}}
 \subsection{Method \code{setPublicationDate()}}{
 Set the publication date.
 \subsection{Usage}{
@@ -355,8 +357,8 @@ Set the publication date.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setEmbargoDate"></a>}}
-\if{latex}{\out{\hypertarget{method-setEmbargoDate}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setEmbargoDate"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setEmbargoDate}{}}}
 \subsection{Method \code{setEmbargoDate()}}{
 Set the embargo date.
 \subsection{Usage}{
@@ -372,8 +374,8 @@ Set the embargo date.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setTitle"></a>}}
-\if{latex}{\out{\hypertarget{method-setTitle}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setTitle}{}}}
 \subsection{Method \code{setTitle()}}{
 Set the record title.
 \subsection{Usage}{
@@ -389,8 +391,8 @@ Set the record title.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setDescription"></a>}}
-\if{latex}{\out{\hypertarget{method-setDescription}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setDescription"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setDescription}{}}}
 \subsection{Method \code{setDescription()}}{
 Set the record description
 \subsection{Usage}{
@@ -406,8 +408,8 @@ Set the record description
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setAccessRight"></a>}}
-\if{latex}{\out{\hypertarget{method-setAccessRight}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setAccessRight"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessRight}{}}}
 \subsection{Method \code{setAccessRight()}}{
 Set the access right.
 \subsection{Usage}{
@@ -423,8 +425,8 @@ Set the access right.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setAccessConditions"></a>}}
-\if{latex}{\out{\hypertarget{method-setAccessConditions}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setAccessConditions"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessConditions}{}}}
 \subsection{Method \code{setAccessConditions()}}{
 set the access conditions.
 \subsection{Usage}{
@@ -440,8 +442,8 @@ set the access conditions.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addCreator"></a>}}
-\if{latex}{\out{\hypertarget{method-addCreator}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addCreator"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addCreator}{}}}
 \subsection{Method \code{addCreator()}}{
 Add a creator for the record. One approach is to use the \code{firstname} and
    \code{lastname} arguments, that by default will be concatenated for Zenodo as
@@ -480,8 +482,8 @@ Add a creator for the record. One approach is to use the \code{firstname} and
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeCreator"></a>}}
-\if{latex}{\out{\hypertarget{method-removeCreator}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreator"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreator}{}}}
 \subsection{Method \code{removeCreator()}}{
 Removes a creator by a property. The \code{by} parameter should be the name
    of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
@@ -504,8 +506,8 @@ Removes a creator by a property. The \code{by} parameter should be the name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeCreatorByName"></a>}}
-\if{latex}{\out{\hypertarget{method-removeCreatorByName}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreatorByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreatorByName}{}}}
 \subsection{Method \code{removeCreatorByName()}}{
 Removes a creator by name.
 \subsection{Usage}{
@@ -524,8 +526,8 @@ Removes a creator by name.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeCreatorByAffiliation"></a>}}
-\if{latex}{\out{\hypertarget{method-removeCreatorByAffiliation}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreatorByAffiliation"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreatorByAffiliation}{}}}
 \subsection{Method \code{removeCreatorByAffiliation()}}{
 Removes a creator by affiliation.
 \subsection{Usage}{
@@ -544,8 +546,8 @@ Removes a creator by affiliation.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeCreatorByORCID"></a>}}
-\if{latex}{\out{\hypertarget{method-removeCreatorByORCID}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreatorByORCID"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreatorByORCID}{}}}
 \subsection{Method \code{removeCreatorByORCID()}}{
 Removes a creator by ORCID.
 \subsection{Usage}{
@@ -564,8 +566,8 @@ Removes a creator by ORCID.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeCreatorByGND"></a>}}
-\if{latex}{\out{\hypertarget{method-removeCreatorByGND}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreatorByGND"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreatorByGND}{}}}
 \subsection{Method \code{removeCreatorByGND()}}{
 Removes a creator by GND.
 \subsection{Usage}{
@@ -584,8 +586,8 @@ Removes a creator by GND.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addContributor"></a>}}
-\if{latex}{\out{\hypertarget{method-addContributor}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addContributor"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addContributor}{}}}
 \subsection{Method \code{addContributor()}}{
 Add a contributor for the record. Firstname, lastname, and type are mandatory.
 \subsection{Usage}{
@@ -624,8 +626,8 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeContributor"></a>}}
-\if{latex}{\out{\hypertarget{method-removeContributor}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributor"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributor}{}}}
 \subsection{Method \code{removeContributor()}}{
 Removes a contributor by a property. The \code{by} parameter should be the name
    of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
@@ -649,8 +651,8 @@ Removes a contributor by a property. The \code{by} parameter should be the name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeContributorByName"></a>}}
-\if{latex}{\out{\hypertarget{method-removeContributorByName}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributorByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributorByName}{}}}
 \subsection{Method \code{removeContributorByName()}}{
 Removes a contributor by name.
 \subsection{Usage}{
@@ -669,8 +671,8 @@ Removes a contributor by name.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeContributorByAffiliation"></a>}}
-\if{latex}{\out{\hypertarget{method-removeContributorByAffiliation}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributorByAffiliation"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributorByAffiliation}{}}}
 \subsection{Method \code{removeContributorByAffiliation()}}{
 Removes a contributor by affiliation.
 \subsection{Usage}{
@@ -689,8 +691,8 @@ Removes a contributor by affiliation.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeContributorByORCID"></a>}}
-\if{latex}{\out{\hypertarget{method-removeContributorByORCID}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributorByORCID"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributorByORCID}{}}}
 \subsection{Method \code{removeContributorByORCID()}}{
 Removes a contributor by ORCID.
 \subsection{Usage}{
@@ -709,8 +711,8 @@ Removes a contributor by ORCID.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeContributorByGND"></a>}}
-\if{latex}{\out{\hypertarget{method-removeContributorByGND}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributorByGND"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributorByGND}{}}}
 \subsection{Method \code{removeContributorByGND()}}{
 Removes a contributor by GND.
 \subsection{Usage}{
@@ -729,8 +731,8 @@ Removes a contributor by GND.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setLicense"></a>}}
-\if{latex}{\out{\hypertarget{method-setLicense}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setLicense"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setLicense}{}}}
 \subsection{Method \code{setLicense()}}{
 Set license. The license should be set with the Zenodo id of the license. If not
    recognized by Zenodo, the function will return an error. The list of licenses can
@@ -748,8 +750,8 @@ Set license. The license should be set with the Zenodo id of the license. If not
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setVersion"></a>}}
-\if{latex}{\out{\hypertarget{method-setVersion}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setVersion"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setVersion}{}}}
 \subsection{Method \code{setVersion()}}{
 Set record version.
 \subsection{Usage}{
@@ -765,8 +767,8 @@ Set record version.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setLanguage"></a>}}
-\if{latex}{\out{\hypertarget{method-setLanguage}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setLanguage"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setLanguage}{}}}
 \subsection{Method \code{setLanguage()}}{
 Set the language.
 \subsection{Usage}{
@@ -782,8 +784,8 @@ Set the language.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addRelatedIdentifier"></a>}}
-\if{latex}{\out{\hypertarget{method-addRelatedIdentifier}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addRelatedIdentifier"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addRelatedIdentifier}{}}}
 \subsection{Method \code{addRelatedIdentifier()}}{
 Adds a related identifier with a given relation.
 \subsection{Usage}{
@@ -803,8 +805,8 @@ isCompiledBy, isIdenticalTo, isAlternateIdentifier}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeRelatedIdentifier"></a>}}
-\if{latex}{\out{\hypertarget{method-removeRelatedIdentifier}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeRelatedIdentifier"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeRelatedIdentifier}{}}}
 \subsection{Method \code{removeRelatedIdentifier()}}{
 Removes a related identifier with a given relation.
 \subsection{Usage}{
@@ -824,8 +826,8 @@ isCompiledBy, isIdenticalTo, isAlternateIdentifier}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setReferences"></a>}}
-\if{latex}{\out{\hypertarget{method-setReferences}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setReferences"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setReferences}{}}}
 \subsection{Method \code{setReferences()}}{
 Set references
 \subsection{Usage}{
@@ -841,8 +843,8 @@ Set references
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addReference"></a>}}
-\if{latex}{\out{\hypertarget{method-addReference}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addReference"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addReference}{}}}
 \subsection{Method \code{addReference()}}{
 Add a reference
 \subsection{Usage}{
@@ -861,8 +863,8 @@ Add a reference
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeReference"></a>}}
-\if{latex}{\out{\hypertarget{method-removeReference}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeReference"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeReference}{}}}
 \subsection{Method \code{removeReference()}}{
 Remove a reference
 \subsection{Usage}{
@@ -881,8 +883,8 @@ Remove a reference
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setKeywords"></a>}}
-\if{latex}{\out{\hypertarget{method-setKeywords}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setKeywords"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setKeywords}{}}}
 \subsection{Method \code{setKeywords()}}{
 Set keywords
 \subsection{Usage}{
@@ -898,8 +900,8 @@ Set keywords
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addKeyword"></a>}}
-\if{latex}{\out{\hypertarget{method-addKeyword}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addKeyword"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addKeyword}{}}}
 \subsection{Method \code{addKeyword()}}{
 Add a keyword
 \subsection{Usage}{
@@ -918,8 +920,8 @@ Add a keyword
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeKeyword"></a>}}
-\if{latex}{\out{\hypertarget{method-removeKeyword}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeKeyword"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeKeyword}{}}}
 \subsection{Method \code{removeKeyword()}}{
 Remove a keyword
 \subsection{Usage}{
@@ -938,8 +940,8 @@ Remove a keyword
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addSubject"></a>}}
-\if{latex}{\out{\hypertarget{method-addSubject}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addSubject"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addSubject}{}}}
 \subsection{Method \code{addSubject()}}{
 Adds a subject given a term and identifier
 \subsection{Usage}{
@@ -957,8 +959,8 @@ Adds a subject given a term and identifier
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeSubject"></a>}}
-\if{latex}{\out{\hypertarget{method-removeSubject}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeSubject"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubject}{}}}
 \subsection{Method \code{removeSubject()}}{
 Removes subject(s) by a property. The \code{by} parameter should be the name
    of the subject property ('term' or 'identifier').
@@ -980,8 +982,8 @@ Removes subject(s) by a property. The \code{by} parameter should be the name
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeSubjectByTerm"></a>}}
-\if{latex}{\out{\hypertarget{method-removeSubjectByTerm}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeSubjectByTerm"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubjectByTerm}{}}}
 \subsection{Method \code{removeSubjectByTerm()}}{
 Removes subject(s) by term.
 \subsection{Usage}{
@@ -1000,8 +1002,8 @@ Removes subject(s) by term.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeSubjectByIdentifier"></a>}}
-\if{latex}{\out{\hypertarget{method-removeSubjectByIdentifier}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeSubjectByIdentifier"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubjectByIdentifier}{}}}
 \subsection{Method \code{removeSubjectByIdentifier()}}{
 Removes subject(s) by identifier
 \subsection{Usage}{
@@ -1020,8 +1022,8 @@ Removes subject(s) by identifier
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setNotes"></a>}}
-\if{latex}{\out{\hypertarget{method-setNotes}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setNotes"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setNotes}{}}}
 \subsection{Method \code{setNotes()}}{
 Set notes. HTML is not allowed
 \subsection{Usage}{
@@ -1037,8 +1039,8 @@ Set notes. HTML is not allowed
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setCommunities"></a>}}
-\if{latex}{\out{\hypertarget{method-setCommunities}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setCommunities}{}}}
 \subsection{Method \code{setCommunities()}}{
 Set a vector of character strings identifying communities
 \subsection{Usage}{
@@ -1056,8 +1058,8 @@ the Zenodo id of the community. If not recognized by Zenodo, the function will r
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addCommunity"></a>}}
-\if{latex}{\out{\hypertarget{method-addCommunity}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addCommunity"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addCommunity}{}}}
 \subsection{Method \code{addCommunity()}}{
 Adds a community to the record metadata.
 \subsection{Usage}{
@@ -1078,8 +1080,8 @@ with the \code{ZenodoManager} and the function \code{$getCommunities()}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeCommunity"></a>}}
-\if{latex}{\out{\hypertarget{method-removeCommunity}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCommunity"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCommunity}{}}}
 \subsection{Method \code{removeCommunity()}}{
 Removes a community from the record metadata.
 \subsection{Usage}{
@@ -1098,8 +1100,8 @@ Removes a community from the record metadata.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setGrants"></a>}}
-\if{latex}{\out{\hypertarget{method-setGrants}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setGrants"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setGrants}{}}}
 \subsection{Method \code{setGrants()}}{
 Set a vector of character strings identifying grants
 \subsection{Usage}{
@@ -1117,8 +1119,8 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addGrant"></a>}}
-\if{latex}{\out{\hypertarget{method-addGrant}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addGrant"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addGrant}{}}}
 \subsection{Method \code{addGrant()}}{
 Adds a grant to the record metadata.
 \subsection{Usage}{
@@ -1139,8 +1141,8 @@ fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeGrant"></a>}}
-\if{latex}{\out{\hypertarget{method-removeGrant}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeGrant"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeGrant}{}}}
 \subsection{Method \code{removeGrant()}}{
 Removes a grant from the record metadata.
 \subsection{Usage}{
@@ -1159,8 +1161,8 @@ Removes a grant from the record metadata.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setJournalTitle"></a>}}
-\if{latex}{\out{\hypertarget{method-setJournalTitle}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setJournalTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setJournalTitle}{}}}
 \subsection{Method \code{setJournalTitle()}}{
 Set Journal title to the record metadata
 \subsection{Usage}{
@@ -1176,8 +1178,8 @@ Set Journal title to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setJournalVolume"></a>}}
-\if{latex}{\out{\hypertarget{method-setJournalVolume}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setJournalVolume"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setJournalVolume}{}}}
 \subsection{Method \code{setJournalVolume()}}{
 Set Journal volume to the record metadata
 \subsection{Usage}{
@@ -1193,8 +1195,8 @@ Set Journal volume to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setJournalIssue"></a>}}
-\if{latex}{\out{\hypertarget{method-setJournalIssue}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setJournalIssue"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setJournalIssue}{}}}
 \subsection{Method \code{setJournalIssue()}}{
 Set Journal issue to the record metadata
 \subsection{Usage}{
@@ -1210,8 +1212,8 @@ Set Journal issue to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setJournalPages"></a>}}
-\if{latex}{\out{\hypertarget{method-setJournalPages}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setJournalPages"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setJournalPages}{}}}
 \subsection{Method \code{setJournalPages()}}{
 Set Journal pages to the record metadata
 \subsection{Usage}{
@@ -1227,8 +1229,8 @@ Set Journal pages to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferenceTitle"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferenceTitle}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferenceTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferenceTitle}{}}}
 \subsection{Method \code{setConferenceTitle()}}{
 Set conference title to the record metadata
 \subsection{Usage}{
@@ -1244,8 +1246,8 @@ Set conference title to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferenceAcronym"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferenceAcronym}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferenceAcronym"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferenceAcronym}{}}}
 \subsection{Method \code{setConferenceAcronym()}}{
 Set conference acronym to the record metadata
 \subsection{Usage}{
@@ -1261,8 +1263,8 @@ Set conference acronym to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferenceDates"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferenceDates}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferenceDates"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferenceDates}{}}}
 \subsection{Method \code{setConferenceDates()}}{
 Set conference dates to the record metadata
 \subsection{Usage}{
@@ -1278,8 +1280,8 @@ Set conference dates to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferencePlace"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferencePlace}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferencePlace"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferencePlace}{}}}
 \subsection{Method \code{setConferencePlace()}}{
 Set conference place to the record metadata
 \subsection{Usage}{
@@ -1295,8 +1297,8 @@ Set conference place to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferenceUrl"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferenceUrl}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferenceUrl"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferenceUrl}{}}}
 \subsection{Method \code{setConferenceUrl()}}{
 Set conference url to the record metadata
 \subsection{Usage}{
@@ -1312,8 +1314,8 @@ Set conference url to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferenceSession"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferenceSession}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferenceSession"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferenceSession}{}}}
 \subsection{Method \code{setConferenceSession()}}{
 Set conference session to the record metadata
 \subsection{Usage}{
@@ -1329,8 +1331,8 @@ Set conference session to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setConferenceSessionPart"></a>}}
-\if{latex}{\out{\hypertarget{method-setConferenceSessionPart}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setConferenceSessionPart"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setConferenceSessionPart}{}}}
 \subsection{Method \code{setConferenceSessionPart()}}{
 Set conference session part to the record metadata
 \subsection{Usage}{
@@ -1346,8 +1348,8 @@ Set conference session part to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setImprintPublisher"></a>}}
-\if{latex}{\out{\hypertarget{method-setImprintPublisher}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setImprintPublisher"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setImprintPublisher}{}}}
 \subsection{Method \code{setImprintPublisher()}}{
 Set imprint publisher to the record metadata
 \subsection{Usage}{
@@ -1363,8 +1365,8 @@ Set imprint publisher to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setImprintISBN"></a>}}
-\if{latex}{\out{\hypertarget{method-setImprintISBN}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setImprintISBN"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setImprintISBN}{}}}
 \subsection{Method \code{setImprintISBN()}}{
 Set imprint ISBN to the record metadata
 \subsection{Usage}{
@@ -1380,8 +1382,8 @@ Set imprint ISBN to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setImprintPlace"></a>}}
-\if{latex}{\out{\hypertarget{method-setImprintPlace}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setImprintPlace"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setImprintPlace}{}}}
 \subsection{Method \code{setImprintPlace()}}{
 Set imprint place to the record metadata
 \subsection{Usage}{
@@ -1397,8 +1399,8 @@ Set imprint place to the record metadata
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setPartofTitle"></a>}}
-\if{latex}{\out{\hypertarget{method-setPartofTitle}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setPartofTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setPartofTitle}{}}}
 \subsection{Method \code{setPartofTitle()}}{
 Set title to which record is part of
 \subsection{Usage}{
@@ -1414,8 +1416,8 @@ Set title to which record is part of
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setPartofPages"></a>}}
-\if{latex}{\out{\hypertarget{method-setPartofPages}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setPartofPages"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setPartofPages}{}}}
 \subsection{Method \code{setPartofPages()}}{
 Set pages to which record is part of
 \subsection{Usage}{
@@ -1431,8 +1433,8 @@ Set pages to which record is part of
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-setThesisUniversity"></a>}}
-\if{latex}{\out{\hypertarget{method-setThesisUniversity}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-setThesisUniversity"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setThesisUniversity}{}}}
 \subsection{Method \code{setThesisUniversity()}}{
 Set thesis university
 \subsection{Usage}{
@@ -1448,8 +1450,8 @@ Set thesis university
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-addThesisSupervisor"></a>}}
-\if{latex}{\out{\hypertarget{method-addThesisSupervisor}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addThesisSupervisor"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addThesisSupervisor}{}}}
 \subsection{Method \code{addThesisSupervisor()}}{
 Adds thesis supervisor
 \subsection{Usage}{
@@ -1479,8 +1481,8 @@ Adds thesis supervisor
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeThesisSupervisor"></a>}}
-\if{latex}{\out{\hypertarget{method-removeThesisSupervisor}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeThesisSupervisor"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeThesisSupervisor}{}}}
 \subsection{Method \code{removeThesisSupervisor()}}{
 Removes a thesis supervisor by a property. The \code{by} parameter should be the name
    of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
@@ -1503,8 +1505,8 @@ Removes a thesis supervisor by a property. The \code{by} parameter should be the
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeThesisSupervisorByName"></a>}}
-\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByName}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeThesisSupervisorByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeThesisSupervisorByName}{}}}
 \subsection{Method \code{removeThesisSupervisorByName()}}{
 Removes a thesis supervisor by name.
 \subsection{Usage}{
@@ -1523,8 +1525,8 @@ Removes a thesis supervisor by name.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeThesisSupervisorByAffiliation"></a>}}
-\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByAffiliation}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeThesisSupervisorByAffiliation"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeThesisSupervisorByAffiliation}{}}}
 \subsection{Method \code{removeThesisSupervisorByAffiliation()}}{
 Removes a thesis supervisor by affiliation
 \subsection{Usage}{
@@ -1543,8 +1545,8 @@ Removes a thesis supervisor by affiliation
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeThesisSupervisorByORCID"></a>}}
-\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByORCID}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeThesisSupervisorByORCID"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeThesisSupervisorByORCID}{}}}
 \subsection{Method \code{removeThesisSupervisorByORCID()}}{
 Removes a thesis supervisor by ORCID
 \subsection{Usage}{
@@ -1563,8 +1565,8 @@ Removes a thesis supervisor by ORCID
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-removeThesisSupervisorByGND"></a>}}
-\if{latex}{\out{\hypertarget{method-removeThesisSupervisorByGND}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeThesisSupervisorByGND"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeThesisSupervisorByGND}{}}}
 \subsection{Method \code{removeThesisSupervisorByGND()}}{
 Removes a thesis supervisor by GND
 \subsection{Usage}{
@@ -1583,8 +1585,51 @@ Removes a thesis supervisor by GND
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAs"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAs}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-addLocation"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addLocation}{}}}
+\subsection{Method \code{addLocation()}}{
+Adds a location to the record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addLocation(place, description = NULL, lat = NULL, lon = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{place}}{place (required)}
+
+\item{\code{description}}{description}
+
+\item{\code{lat}}{latitude}
+
+\item{\code{lon}}{longitude}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeLocation"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeLocation}{}}}
+\subsection{Method \code{removeLocation()}}{
+Removes a grant from the record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeLocation(place)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{place}}{place (required)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAs"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAs}{}}}
 \subsection{Method \code{exportAs()}}{
 Exports record to a file by format.
 \subsection{Usage}{
@@ -1609,8 +1654,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsBibTeX"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsBibTeX}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsBibTeX"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsBibTeX}{}}}
 \subsection{Method \code{exportAsBibTeX()}}{
 Exports record as BibTeX
 \subsection{Usage}{
@@ -1629,8 +1674,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsCSL"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsCSL}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsCSL"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsCSL}{}}}
 \subsection{Method \code{exportAsCSL()}}{
 Exports record as CSL
 \subsection{Usage}{
@@ -1649,8 +1694,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsDataCite"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsDataCite}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsDataCite"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDataCite}{}}}
 \subsection{Method \code{exportAsDataCite()}}{
 Exports record as DataCite
 \subsection{Usage}{
@@ -1669,8 +1714,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsDublinCore"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsDublinCore}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsDublinCore"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDublinCore}{}}}
 \subsection{Method \code{exportAsDublinCore()}}{
 Exports record as DublinCore
 \subsection{Usage}{
@@ -1689,8 +1734,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsDCAT"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsDCAT}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsDCAT"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDCAT}{}}}
 \subsection{Method \code{exportAsDCAT()}}{
 Exports record as DCAT
 \subsection{Usage}{
@@ -1709,8 +1754,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsJSON"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsJSON}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsJSON"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsJSON}{}}}
 \subsection{Method \code{exportAsJSON()}}{
 Exports record as JSON
 \subsection{Usage}{
@@ -1729,8 +1774,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsJSONLD"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsJSONLD}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsJSONLD"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsJSONLD}{}}}
 \subsection{Method \code{exportAsJSONLD()}}{
 Exports record as JSONLD
 \subsection{Usage}{
@@ -1746,8 +1791,8 @@ Exports record as JSONLD
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsGeoJSON"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsGeoJSON}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsGeoJSON"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsGeoJSON}{}}}
 \subsection{Method \code{exportAsGeoJSON()}}{
 Exports record as GeoJSON
 \subsection{Usage}{
@@ -1766,8 +1811,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsMARCXML"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsMARCXML}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsMARCXML"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsMARCXML}{}}}
 \subsection{Method \code{exportAsMARCXML()}}{
 Exports record as MARCXML
 \subsection{Usage}{
@@ -1786,8 +1831,8 @@ the writen file name (with extension)
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-exportAsAllFormats"></a>}}
-\if{latex}{\out{\hypertarget{method-exportAsAllFormats}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsAllFormats"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsAllFormats}{}}}
 \subsection{Method \code{exportAsAllFormats()}}{
 Exports record in all Zenodo record export formats. This function will
    create one file per Zenodo metadata formats.
@@ -1804,8 +1849,8 @@ Exports record in all Zenodo record export formats. This function will
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-listFiles"></a>}}
-\if{latex}{\out{\hypertarget{method-listFiles}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-listFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-listFiles}{}}}
 \subsection{Method \code{listFiles()}}{
 list files attached to the record
 \subsection{Usage}{
@@ -1825,8 +1870,8 @@ the files, as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-downloadFiles"></a>}}
-\if{latex}{\out{\hypertarget{method-downloadFiles}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-downloadFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-downloadFiles}{}}}
 \subsection{Method \code{downloadFiles()}}{
 Downloads files attached to the record
 \subsection{Usage}{
@@ -1866,8 +1911,8 @@ can be added (eg. \code{mc.cores} for \code{mclapply})}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-print"></a>}}
-\if{latex}{\out{\hypertarget{method-print}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-print"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-print}{}}}
 \subsection{Method \code{print()}}{
 Prints a \link{ZenodoRecord}
 \subsection{Usage}{
@@ -1890,8 +1935,8 @@ for a record will raise a warning message and revert to "internal" format}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-toDCEntry"></a>}}
-\if{latex}{\out{\hypertarget{method-toDCEntry}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-toDCEntry"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-toDCEntry}{}}}
 \subsection{Method \code{toDCEntry()}}{
 Maps to an \pkg{atom4R} \link{DCEntry}. Note: applies only to published records.
 \subsection{Usage}{
@@ -1903,8 +1948,8 @@ an object of class \code{DCEntry}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-clone"></a>}}
-\if{latex}{\out{\hypertarget{method-clone}{}}}
+\if{html}{\out{<a id="method-ZenodoRecord-clone"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-clone}{}}}
 \subsection{Method \code{clone()}}{
 The objects of this class are cloneable with this method.
 \subsection{Usage}{
