@@ -389,10 +389,10 @@ The function ``depositRecordVersion`` will create a new version for the publishe
 
 ##### 4.5.1 Upload file
 
-With ``zen4R``, it is very easy to upload a file to a record deposition. The record should first deposited on Zenodo. To upload a file, the following single line can be used, where the file ``path`` is specified and the record deposition ``id`` to which the file should be uploaded:
+With ``zen4R``, it is very easy to upload a file to a record deposition. The record should first deposited on Zenodo. To upload a file, the following single line can be used, where the file ``path`` is specified and the record deposit to which the file should be uploaded:
 
 ```r
-zenodo$uploadFile("path/to/your/file", myrec$id)
+zenodo$uploadFile("path/to/your/file", record = myrec)
 ```
 
 <a name="ZenodoDepositFile-get"/>
