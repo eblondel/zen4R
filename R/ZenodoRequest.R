@@ -57,8 +57,14 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     GET = function(url, request){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
-      headers <- c("Authorization" = paste("Bearer",private$token))
-      
+      headers <- c(
+        "Authorization" = paste("Bearer",private$token),
+        "User-Agent" = paste(
+          "Mozilla/5.0 (X11; Linux x86_64)",
+          "AppleWebKit/537.36 (KHTML, like Gecko)",
+          "Chrome/103.0.0.0 Safari/537.36"
+        )
+      )
       r <- NULL
       if(self$verbose.debug){
         r <- with_verbose(GET(req, add_headers(headers)))
