@@ -1,3 +1,14 @@
+## [zen4R 0.6-2](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+
+**Bug fixes**
+
+* [#84](https://github.com/eblondel/zen4R/issues/84) Error 500 with GET requests (Change in Zenodo server) -> Support `User-Agent` header
+
+**New features**
+
+* [#77](https://github.com/eblondel/zen4R/issues/77) Support `locations` metadata (not clear yet if actually supported by Zenodo UI)
+
+
 ## [zen4R 0.6-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Bug fixes**
