@@ -18,7 +18,7 @@ ZenodoRequest"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6-2</span>
       </span>
     </div>
 
@@ -86,36 +86,36 @@ ZenodoRequest"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
-<ul><li><p><a href="#method-new"><code>ZenodoRequest$new()</code></a></p></li>
-<li><p><a href="#method-execute"><code>ZenodoRequest$execute()</code></a></p></li>
-<li><p><a href="#method-getRequest"><code>ZenodoRequest$getRequest()</code></a></p></li>
-<li><p><a href="#method-getRequestHeaders"><code>ZenodoRequest$getRequestHeaders()</code></a></p></li>
-<li><p><a href="#method-getStatus"><code>ZenodoRequest$getStatus()</code></a></p></li>
-<li><p><a href="#method-getResponse"><code>ZenodoRequest$getResponse()</code></a></p></li>
-<li><p><a href="#method-getException"><code>ZenodoRequest$getException()</code></a></p></li>
-<li><p><a href="#method-getResult"><code>ZenodoRequest$getResult()</code></a></p></li>
-<li><p><a href="#method-setResult"><code>ZenodoRequest$setResult()</code></a></p></li>
-<li><p><a href="#method-clone"><code>ZenodoRequest$clone()</code></a></p></li>
-</ul></div><p><details><summary>Inherited methods</summary><ul><li><p><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href="zen4RLogger.html#method-ERROR"><code>zen4R::zen4RLogger$ERROR()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href="zen4RLogger.html#method-getClass"><code>zen4R::zen4RLogger$getClass()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href="zen4RLogger.html#method-getClassName"><code>zen4R::zen4RLogger$getClassName()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href="zen4RLogger.html#method-INFO"><code>zen4R::zen4RLogger$INFO()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href="zen4RLogger.html#method-logger"><code>zen4R::zen4RLogger$logger()</code></a></span></p></li>
-<li><p><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href="zen4RLogger.html#method-WARN"><code>zen4R::zen4RLogger$WARN()</code></a></span></p></li>
-</ul></details></p><hr><a id="method-new"></a><div class="section">
+<ul><li><p><a href="#method-ZenodoRequest-new"><code>ZenodoRequest$new()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-execute"><code>ZenodoRequest$execute()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-getRequest"><code>ZenodoRequest$getRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-getRequestHeaders"><code>ZenodoRequest$getRequestHeaders()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-getStatus"><code>ZenodoRequest$getStatus()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-getResponse"><code>ZenodoRequest$getResponse()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-getException"><code>ZenodoRequest$getException()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-getResult"><code>ZenodoRequest$getResult()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-setResult"><code>ZenodoRequest$setResult()</code></a></p></li>
+<li><p><a href="#method-ZenodoRequest-clone"><code>ZenodoRequest$clone()</code></a></p></li>
+</ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href="zen4RLogger.html#method-ERROR"><code>zen4R::zen4RLogger$ERROR()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href="zen4RLogger.html#method-INFO"><code>zen4R::zen4RLogger$INFO()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href="zen4RLogger.html#method-WARN"><code>zen4R::zen4RLogger$WARN()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href="zen4RLogger.html#method-getClass"><code>zen4R::zen4RLogger$getClass()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href="zen4RLogger.html#method-getClassName"><code>zen4R::zen4RLogger$getClassName()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href="zen4RLogger.html#method-logger"><code>zen4R::zen4RLogger$logger()</code></a></span></li>
+</ul></details></p><hr><a id="method-ZenodoRequest-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Initializes a <code>ZenodoRequest</code></p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va"><a href="../reference/ZenodoRequest.html">ZenodoRequest</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>
-  <span class="va">url</span>,
-  <span class="va">type</span>,
-  <span class="va">request</span>,
-  data <span class="op">=</span> <span class="cn">NULL</span>,
-  file <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">token</span>,
-  logger <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ZenodoRequest.html">ZenodoRequest</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  <span class="va">url</span>,</span>
+<span>  <span class="va">type</span>,</span>
+<span>  <span class="va">request</span>,</span>
+<span>  data <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  file <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">token</span>,</span>
+<span>  logger <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -155,67 +155,67 @@ ZenodoRequest"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-execute"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-execute"></a><div class="section">
 <h3 id="method-execute-">Method <code>execute()</code><a class="anchor" aria-label="anchor" href="#method-execute-"></a></h3>
 <p>Executes the request</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">execute</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">execute</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-getRequest"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-getRequest"></a><div class="section">
 <h3 id="method-getrequest-">Method <code>getRequest()</code><a class="anchor" aria-label="anchor" href="#method-getrequest-"></a></h3>
 <p>Get request</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getRequest</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getRequest</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-getRequestHeaders"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-getRequestHeaders"></a><div class="section">
 <h3 id="method-getrequestheaders-">Method <code>getRequestHeaders()</code><a class="anchor" aria-label="anchor" href="#method-getrequestheaders-"></a></h3>
 <p>Get request headers</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getRequestHeaders</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getRequestHeaders</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-getStatus"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-getStatus"></a><div class="section">
 <h3 id="method-getstatus-">Method <code>getStatus()</code><a class="anchor" aria-label="anchor" href="#method-getstatus-"></a></h3>
 <p>Get request status</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getStatus</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getStatus</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-getResponse"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-getResponse"></a><div class="section">
 <h3 id="method-getresponse-">Method <code>getResponse()</code><a class="anchor" aria-label="anchor" href="#method-getresponse-"></a></h3>
 <p>Get request response</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getResponse</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getResponse</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-getException"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-getException"></a><div class="section">
 <h3 id="method-getexception-">Method <code>getException()</code><a class="anchor" aria-label="anchor" href="#method-getexception-"></a></h3>
 <p>Get request exception</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getException</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getException</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-getResult"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-getResult"></a><div class="section">
 <h3 id="method-getresult-">Method <code>getResult()</code><a class="anchor" aria-label="anchor" href="#method-getresult-"></a></h3>
 <p>Get request result</p><div class="section">
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getResult</span><span class="op">(</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">getResult</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 
-</div><p></p><hr><a id="method-setResult"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-setResult"></a><div class="section">
 <h3 id="method-setresult-">Method <code>setResult()</code><a class="anchor" aria-label="anchor" href="#method-setresult-"></a></h3>
 <p>Set request result</p><div class="section">
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">setResult</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">setResult</span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -227,11 +227,11 @@ ZenodoRequest"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-clone"></a><div class="section">
+</div><p></p><hr><a id="method-ZenodoRequest-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
 <h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRequest</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -259,7 +259,7 @@ ZenodoRequest"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
