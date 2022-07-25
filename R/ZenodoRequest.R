@@ -57,7 +57,10 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     GET = function(url, request){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
-      headers <- c("Authorization" = paste("Bearer",private$token))
+      headers <- c(
+        "Authorization" = paste("Bearer",private$token),
+        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+      )
       
       r <- NULL
       if(self$verbose.debug){
@@ -82,8 +85,11 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       }
       
       #headers
-      headers <- c("Content-Type" = contentType,
-                   "Authorization" = paste("Bearer",private$token))
+      headers <- c(
+        "Content-Type" = contentType,
+        "Authorization" = paste("Bearer",private$token),
+        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+      )
       
       #send request
       if(self$verbose.debug){
@@ -114,8 +120,11 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       if(regexpr("api/files", req)<0) data <- private$prepareData(data)
       
       #headers
-      headers <- c("Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
-                   "Authorization" = paste("Bearer",private$token))
+      headers <- c(
+        "Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
+        "Authorization" = paste("Bearer",private$token),
+        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+      )
       
       #send request
       if(self$verbose.debug){
@@ -141,7 +150,10 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     DELETE = function(url, request, data){
       req <- paste(url, request, data, sep="/")
       #headers
-      headers <- c("Authorization" = paste("Bearer",private$token))
+      headers <- c(
+        "Authorization" = paste("Bearer",private$token),
+        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+      )
       if(self$verbose.debug){
         r <- with_verbose(httr::DELETE(
           url = req,
