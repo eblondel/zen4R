@@ -16,7 +16,7 @@
 * [#76](https://github.com/eblondel/zen4R/issues/76) getDepositionByDOI() errors when Zenodo returns a 404 (due Zenodo reverting new path mentioned in #[#72](https://github.com/eblondel/zen4R/issues/72))
 
 
-## [zen4R 0.6](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.6](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.6.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.6.tar.gz)
 
 **New features**
 
