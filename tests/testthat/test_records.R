@@ -202,6 +202,12 @@ test_that("mapping to atom4R",{
   expect_is(xml, "XMLInternalNode")
 })
 
+test_that("get record by ID",{
+  zenodo <- ZenodoManager$new(logger = "INFO")
+  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+  expect_is(rec, "ZenodoRecord")
+})
+
 #test_that("versions & DOIs",{
 #  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
 #  Sys.sleep(5)
