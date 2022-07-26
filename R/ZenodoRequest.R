@@ -14,6 +14,11 @@ ZenodoRequest <- R6Class("ZenodoRequest",
   inherit = zen4RLogger,                    
   #private methods
   private = list(
+    agent = paste(
+      "Mozilla/5.0 (X11; Linux x86_64)",
+      "AppleWebKit/537.36 (KHTML, like Gecko)",
+      "Chrome/103.0.0.0 Safari/537.36"
+    ),
     url = NA,
     type = NA,
     request = NA,
@@ -59,7 +64,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       self$INFO(sprintf("Fetching %s", req))
       headers <- c(
         "Authorization" = paste("Bearer",private$token),
-        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+        "User-Agent" = private$agent
       )
       
       r <- NULL
@@ -88,7 +93,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       headers <- c(
         "Content-Type" = contentType,
         "Authorization" = paste("Bearer",private$token),
-        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+        "User-Agent" = private$agent
       )
       
       #send request
@@ -123,7 +128,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       headers <- c(
         "Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
         "Authorization" = paste("Bearer",private$token),
-        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+        "User-Agent" = private$agent
       )
       
       #send request
@@ -152,7 +157,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       #headers
       headers <- c(
         "Authorization" = paste("Bearer",private$token),
-        "User-Agent" = paste0("zen4R-", packageVersion("zen4R"))
+        "User-Agent" = private$agent
       )
       if(self$verbose.debug){
         r <- with_verbose(httr::DELETE(
