@@ -14,12 +14,12 @@ ZenodoRequest <- R6Class("ZenodoRequest",
   inherit = zen4RLogger,                    
   #private methods
   private = list(
-    #agent = paste(
-    #  "Mozilla/5.0 (X11; Linux x86_64)",
-    #  "AppleWebKit/537.36 (KHTML, like Gecko)",
-    #  "Chrome/103.0.0.0 Safari/537.36"
-    #),
-    agent = paste0("zen4R", as(packageVersion("zen4R"), "character")),
+    agent = paste(
+      "Mozilla/5.0 (X11; Linux x86_64)",
+      "AppleWebKit/537.36 (KHTML, like Gecko)",
+      "Chrome/103.0.0.0 Safari/537.36"
+    ),
+    #agent = paste0("zen4R", as(packageVersion("zen4R"), "character")),
     url = NA,
     type = NA,
     request = NA,
