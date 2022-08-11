@@ -296,8 +296,8 @@ Set the upload type (mandatory).
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{uploadType}}{record upload type among the following values: 'publication',
-'poster','presentation','dataset','image','video', or 'software'}
+\item{\code{uploadType}}{record upload type among the following values: 'publication', 'poster', 
+'presentation', 'dataset', 'image', 'video', 'software', 'lesson', 'physicalobject', 'other'}
 }
 \if{html}{\out{</div>}}
 }

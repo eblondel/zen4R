@@ -10,6 +10,7 @@
 ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
+    allowed_upload_types = c("publication","poster","presentation", "dataset","image","video","software", "lesson", "physicalobject", "other"),
     allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
                   "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
                   "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
@@ -181,14 +182,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #' @description Set the upload type (mandatory). 
-    #' @param uploadType record upload type among the following values: 'publication',
-    #'    'poster','presentation','dataset','image','video', or 'software'
+    #' @param uploadType record upload type among the following values: 'publication', 'poster', 
+    #'  'presentation', 'dataset', 'image', 'video', 'software', 'lesson', 'physicalobject', 'other'
     setUploadType = function(uploadType){
-      uploadTypeValues <- c("publication","poster","presentation",
-                            "dataset","image","video","software","other")
-      if(!(uploadType %in% uploadTypeValues)){
+      if(!(uploadType %in% private$allowed_upload_types)){
         errorMsg <- sprintf("The upload type should be among the values [%s]",
-                            paste(uploadTypeValues, collapse=","))
+                            paste(private$allowed_upload_types, collapse=","))
         self$ERROR(errorMsg)
         stop(errorMsg)
       }
