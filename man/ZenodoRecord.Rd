@@ -790,7 +790,7 @@ Set the language.
 \subsection{Method \code{addRelatedIdentifier()}}{
 Adds a related identifier with a given relation.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addRelatedIdentifier(relation, identifier)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addRelatedIdentifier(relation, identifier, resource_type = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -803,6 +803,9 @@ isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlte
 isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes}
 
 \item{\code{identifier}}{resource identifier}
+
+\item{\code{resource_type}}{optional resource type, value among possible publication types, image types, or upload 
+types (except 'publication' and 'image' for which a publication/image has to be specified). Default is \code{NULL}}
 }
 \if{html}{\out{</div>}}
 }

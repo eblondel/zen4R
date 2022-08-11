@@ -454,7 +454,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'  isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
     #'  isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes
     #' @param identifier resource identifier
-    addRelatedIdentifier = function(relation, identifier){
+    #' @param resource_type optional resource type, value among possible publication types, image types, or upload 
+    #'  types (except 'publication' and 'image' for which a publication/image has to be specified). Default is \code{NULL}
+    addRelatedIdentifier = function(relation, identifier, resource_type = NULL){
       if(!(relation %in% private$allowed_relations)){
         stop(sprintf("Relation '%s' incorrect. Use a value among the following [%s]", 
                     relation, paste(private$allowed_relations, collapse=",")))
@@ -468,10 +470,17 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }))
       }
       if(nrow(ids_df[ids_df$relation == relation & ids_df$identifier == identifier,])==0){
-        self$metadata$related_identifiers[[length(self$metadata$related_identifiers)+1]] <- list(
-          relation = relation,
-          identifier = identifier
-        )
+        new_rel <- list(relation = relation, identifier = identifier)
+        if(!is.null(resource_type)) {
+          allowed_resource_types <- c(private$allowed_upload_types, private$allowed_publication_types, private$allowed_image_types)
+          allowed_resource_types <- allowed_resource_types[!(allowed_resource_types %in% c("publication", "image"))]
+          if(!(resource_type %in% allowed_resource_types)){
+            stop(sprintf("Relation resource type '%s' incorrect. Use a value among the following [%s]", 
+                         relation, paste(allowed_resource_types, collapse=",")))
+          }
+          new_rel$resource_type <- resource_type
+        } 
+        self$metadata$related_identifiers[[length(self$metadata$related_identifiers)+1]] <- new_rel
         added <- TRUE
       }
       return(added)
