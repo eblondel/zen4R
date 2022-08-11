@@ -14,6 +14,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     allowed_publication_types = c("annotationcollection", "book","section","conferencepaper","datamanagementplan", "article","patent","preprint",
                                   "deliverable", "milestone", "proposal", "report","softwaredocumentation", "taxonomictreatment", "technicalnote",
                                   "thesis","workingpaper","other"),
+    allowed_image_types = c("figure","plot","drawing","diagram","photo","other"),
     allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
                   "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
                   "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
@@ -218,10 +219,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param imageType record publication type among the following values: 'figure','plot',
     #' 'drawing','diagram','photo', or 'other'
     setImageType = function(imageType){
-      imageTypeValues = c("figure","plot","drawing","diagram","photo","other")
-      if(!(imageType %in% imageTypeValues)){
+      if(!(imageType %in% private$allowed_image_types)){
         errorMsg <- sprintf("The image type should be among the values [%s",
-                            paste(imageTypeValues, collapse=","))
+                            paste(private$allowed_image_types, collapse=","))
         self$ERROR(errorMsg)
         stop(errorMsg)
       }
