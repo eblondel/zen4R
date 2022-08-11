@@ -11,6 +11,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
     allowed_upload_types = c("publication","poster","presentation", "dataset","image","video","software", "lesson", "physicalobject", "other"),
+    allowed_publication_types = c("annotationcollection", "book","section","conferencepaper","datamanagementplan", "article","patent","preprint",
+                                  "deliverable", "milestone", "proposal", "report","softwaredocumentation", "taxonomictreatment", "technicalnote",
+                                  "thesis","workingpaper","other"),
     allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
                   "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
                   "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
@@ -196,16 +199,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #' @description Set the publication type (mandatory if upload type is 'publication').
-    #' @param publicationType record publication type among the following values: 'book','section',
-    #' 'conferencepaper','article','patent','preprint','report','softwaredocumentation','thesis',
-    #' 'technicalnote','workingpaper', or 'other'
+    #' @param publicationType record publication type among the following values: 'annotationcollection', 'book', 
+    #'   'section', 'conferencepaper', 'datamanagementplan', 'article', 'patent', 'preprint', 'deliverable', 'milestone', 
+    #'   'proposal', 'report', 'softwaredocumentation', 'taxonomictreatment', 'technicalnote', 'thesis', 'workingpaper', 
+    #'   'other'
     setPublicationType = function(publicationType){
-      publicationTypeValues <- c("book","section","conferencepaper","article",
-                                 "patent","preprint","report","softwaredocumentation",
-                                 "thesis","technicalnote","workingpaper","other")
-      if(!(publicationType %in% publicationTypeValues)){
+      if(!(publicationType %in% private$allowed_publication_types)){
         errorMsg <- sprintf("The publication type should be among the values [%s]",
-                            paste(publicationTypeValues, collapse=","))
+                            paste(private$allowed_publication_types, collapse=","))
         self$ERROR(errorMsg)
         stop(errorMsg)
       }

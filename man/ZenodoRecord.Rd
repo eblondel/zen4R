@@ -314,9 +314,10 @@ Set the publication type (mandatory if upload type is 'publication').
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{publicationType}}{record publication type among the following values: 'book','section',
-'conferencepaper','article','patent','preprint','report','softwaredocumentation','thesis',
-'technicalnote','workingpaper', or 'other'}
+\item{\code{publicationType}}{record publication type among the following values: 'annotationcollection', 'book', 
+'section', 'conferencepaper', 'datamanagementplan', 'article', 'patent', 'preprint', 'deliverable', 'milestone', 
+'proposal', 'report', 'softwaredocumentation', 'taxonomictreatment', 'technicalnote', 'thesis', 'workingpaper', 
+'other'}
 }
 \if{html}{\out{</div>}}
 }
