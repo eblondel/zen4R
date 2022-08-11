@@ -57,8 +57,8 @@ test_that("create and deposit record",{
   expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#47-browse-zenodo-controlled-vocabularies"))
   expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#48-query-zenodo-published-records"))
   expect_true(myrec$addRelatedIdentifier("hasPart", "https://github.com/eblondel/zen4R/wiki#49-download-files-from-zenodo-records"))
-  expect_true(myrec$addRelatedIdentifier("isPartOf", "https://github.com/eblondel/zen4R/wiki#user_guide"))
-  expect_false(myrec$addRelatedIdentifier("isPartOf", "https://github.com/eblondel/zen4R/wiki#user_guide"))
+  expect_true(myrec$addRelatedIdentifier("isPartOf", "https://github.com/eblondel/zen4R/wiki#user_guide", "book"))
+  expect_false(myrec$addRelatedIdentifier("isPartOf", "https://github.com/eblondel/zen4R/wiki#user_guide", "book"))
   for(i in 1:10){
     expect_true(myrec$addRelatedIdentifier("hasPart", paste("http://chapter", i)))
   }

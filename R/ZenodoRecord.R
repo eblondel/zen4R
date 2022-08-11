@@ -478,7 +478,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
             stop(sprintf("Relation resource type '%s' incorrect. Use a value among the following [%s]", 
                          relation, paste(allowed_resource_types, collapse=",")))
           }
-          new_rel$resource_type <- resource_type
+          resource_type_prefix <- ""
+          if(resource_type %in% private$allowed_publication_types)resource_type_prefix = "publication-"
+          if(resource_type %in% private$allowed_image_types)resource_type_prefix = "image-"
+          
+          new_rel$resource_type <- paste0(resource_type_prefix, resource_type)
         } 
         self$metadata$related_identifiers[[length(self$metadata$related_identifiers)+1]] <- new_rel
         added <- TRUE
