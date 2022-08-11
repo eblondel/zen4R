@@ -10,6 +10,12 @@
 ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
+    allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
+                  "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
+                  "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
+                  "compiles", "isVariantFormOf", "isOriginalFormof", "isIdenticalTo", "isAlternateIdentifier", 
+                  "isReviewedBy", "reviews", "isDerivedFrom", "isSourceOf", "requires", "isRequiredBy", 
+                  "isObsoletedBy", "obsoletes"),
     export_formats = c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML"),
     getExportFormatExtension = function(format){
       switch(format,
@@ -442,18 +448,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #' @description Adds a related identifier with a given relation.
-    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, 
-    #'   isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
-    #'   isCompiledBy, isIdenticalTo, isAlternateIdentifier
+    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
+    #'  isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
+    #'  isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
+    #'  isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
+    #'  isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes
     #' @param identifier resource identifier
     addRelatedIdentifier = function(relation, identifier){
-      allowedRelations <- c("isCitedBy", "cites", "isSupplementTo",
-                            "isSupplementedBy", "isNewVersionOf", "isPreviousVersionOf", 
-                            "isPartOf", "hasPart", "compiles", "isCompiledBy", "isIdenticalTo",
-                            "isAlternateIdentifier")
-      if(!(relation %in% allowedRelations)){
+      if(!(relation %in% private$allowed_relations)){
         stop(sprintf("Relation '%s' incorrect. Use a value among the following [%s]", 
-                    relation, paste(allowedRelations, collapse=",")))
+                    relation, paste(private$allowed_relations, collapse=",")))
       }
       added <- FALSE
       if(is.null(self$metadata$related_identifiers)) self$metadata$related_identifiers <- list()
@@ -474,18 +478,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #' @description Removes a related identifier with a given relation.
-    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, 
-    #'   isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
-    #'   isCompiledBy, isIdenticalTo, isAlternateIdentifier
+    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
+    #'  isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
+    #'  isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
+    #'  isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
+    #'  isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes
     #' @param identifier resource identifier
     removeRelatedIdentifier = function(relation, identifier){
-      allowedRelations <- c("isCitedBy", "cites", "isSupplementTo",
-                            "isSupplementedBy", "isNewVersionOf", "isPreviousVersionOf", 
-                            "isPartOf", "hasPart", "compiles", "isCompiledBy", "isIdenticalTo",
-                            "isAlternateIdentifier")
-      if(!(relation %in% allowedRelations)){
-        stop(sprint("Relation '%s' incorrect. Use a value among the following [%s]", 
-                    relation, paste(allowedRelations, collapse=",")))
+      if(!(relation %in% private$allowed_relations)){
+        stop(sprintf("Relation '%s' incorrect. Use a value among the following [%s]", 
+                     relation, paste(private$allowed_relations, collapse=",")))
       }
       removed <- FALSE
       if(!is.null(self$metadata$related_identifiers)){

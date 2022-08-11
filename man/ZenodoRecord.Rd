@@ -795,9 +795,11 @@ Adds a related identifier with a given relation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, 
-isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
-isCompiledBy, isIdenticalTo, isAlternateIdentifier}
+\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
+isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
+isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
+isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
+isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes}
 
 \item{\code{identifier}}{resource identifier}
 }
@@ -816,9 +818,11 @@ Removes a related identifier with a given relation.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, 
-isSupplementedBy, isNewVersionOf, isPreviousVersionOf, isPartOf, hasPart, compiles, 
-isCompiledBy, isIdenticalTo, isAlternateIdentifier}
+\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
+isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
+isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
+isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
+isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes}
 
 \item{\code{identifier}}{resource identifier}
 }
