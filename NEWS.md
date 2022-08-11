@@ -11,9 +11,9 @@
 **Enhancements**
 
 * [#90](https://github.com/eblondel/zen4R/issues/90) Support optional `resource_type` for related identifiers
-* [#91](https://github.com/eblondel/zen4R/issues/91) Add missing upload types supported by Zenodo API
-* [#92](https://github.com/eblondel/zen4R/issues/92) Add missing publication types supported by Zenodo API
-* [#93](https://github.com/eblondel/zen4R/issues/93) Add missing image types supported by Zenodo API
+* [#91](https://github.com/eblondel/zen4R/issues/91) Add missing relations (for related identifiers) supported by Zenodo API
+* [#92](https://github.com/eblondel/zen4R/issues/92) Add missing upload types supported by Zenodo API
+* [#93](https://github.com/eblondel/zen4R/issues/93) Add missing publication types supported by Zenodo API
 
 ## [zen4R 0.6-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
