@@ -15,6 +15,10 @@
 * [#92](https://github.com/eblondel/zen4R/issues/92) Add missing upload types supported by Zenodo API
 * [#93](https://github.com/eblondel/zen4R/issues/93) Add missing publication types supported by Zenodo API
 
+**Documentation**
+
+* [#97](https://github.com/eblondel/zen4R/issues/97) Upgrade roxygen2 7.2.1 to fix html issues
+
 ## [zen4R 0.6-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Bug fixes**

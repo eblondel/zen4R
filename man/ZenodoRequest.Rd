@@ -44,12 +44,12 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \if{html}{\out{
 <details><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR'><code>zen4R::zen4RLogger$ERROR()</code></a></li>
-<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO'><code>zen4R::zen4RLogger$INFO()</code></a></li>
-<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN'><code>zen4R::zen4RLogger$WARN()</code></a></li>
-<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass'><code>zen4R::zen4RLogger$getClass()</code></a></li>
-<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName'><code>zen4R::zen4RLogger$getClassName()</code></a></li>
-<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger'><code>zen4R::zen4RLogger$logger()</code></a></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-ERROR'><code>zen4R::zen4RLogger$ERROR()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-INFO'><code>zen4R::zen4RLogger$INFO()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="WARN"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-WARN'><code>zen4R::zen4RLogger$WARN()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClass"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClass'><code>zen4R::zen4RLogger$getClass()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="getClassName"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-getClassName'><code>zen4R::zen4RLogger$getClassName()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="logger"><a href='../../zen4R/html/zen4RLogger.html#method-zen4RLogger-logger'><code>zen4R::zen4RLogger$logger()</code></a></span></li>
 </ul>
 </details>
 }}
