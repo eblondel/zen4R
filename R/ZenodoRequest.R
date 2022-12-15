@@ -25,6 +25,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     exception = NA,
     result = NA,
     token = NULL,
+    agent = paste0("zen4R_", as(packageVersion("zen4R"),"character")),
     
     prepareData = function(data){
       if(is(data, "ZenodoRecord")){
@@ -58,6 +59,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
       headers <- c(
+        "User-Agent" = private$agent,
         "Authorization" = paste("Bearer",private$token)
       )
       
@@ -85,6 +87,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       #headers
       headers <- c(
+        "User-Agent" = private$agent,
         "Content-Type" = contentType,
         "Authorization" = paste("Bearer",private$token)
       )
@@ -119,6 +122,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       #headers
       headers <- c(
+        "User-Agent" = private$agent,
         "Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
         "Authorization" = paste("Bearer",private$token)
       )
@@ -148,6 +152,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       req <- paste(url, request, data, sep="/")
       #headers
       headers <- c(
+        "User-Agent" = private$agent,
         "Authorization" = paste("Bearer",private$token)
       )
       if(self$verbose.debug){
