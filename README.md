@@ -22,7 +22,7 @@ Many thanks to the following organizations that have provided fundings for stren
 
 The following projects have contributed to strenghten ``zen4R``:
 
-<a href="https://blue-cloud.org/"><img height=100 width=300 src="https://www.blue-cloud.org/sites/all/themes/arcadia/logo.png"/></a>
+<a href="https://blue-cloud.org/"><img height=100 width=300 src="https://www.trust-itservices.com/sites/default/files/styles/portfolio-thumbnail/public/portfolio/logo.png?itok=dinMLJCY"/></a>
 
 _Blue-Cloud has received funding from the European Union's Horizon programme call BG-07-2019-2020, topic: [A] 2019 - Blue Cloud services, Grant Agreement No.862409._
 
