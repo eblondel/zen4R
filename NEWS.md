@@ -1,4 +1,12 @@
-## [zen4R 0.7](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-notavailable-red.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.7-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-red.svg)](https://cran.r-project.org/package=zen4R)
+
+**Bug fixes**
+
+* [#98](https://github.com/eblondel/zen4R/issues/98) User-Agent related issue with `getRecordByDOI` - relates to #103
+* [#102](https://github.com/eblondel/zen4R/issues/102) User-Agent related issue with `download_zenodo` - relates to #103
+* [#103](https://github.com/eblondel/zen4R/issues/103) Change User-Agent to bypass Zenodo API server restrictions
+
+## [zen4R 0.7](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-red.svg)](https://cran.r-project.org/package=zen4R)
 
 **Bug fixes**
 
