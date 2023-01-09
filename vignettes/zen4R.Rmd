@@ -22,7 +22,7 @@ Provides an Interface to [Zenodo](https://zenodo.org) REST API, including manage
 
 For zen4R sponsoring/funding new developments, enhancements, support requests, please contact me by [e-mail](mailto:eblondel.pro@gmail.com)
 
-Many thanks to the following organizations that have provided fundings for strenghtening the ``geoflow`` package:
+Many thanks to the following organizations that have provided fundings for strenghtening the ``zen4R`` package:
 
 <div style="float:left;">
   <a href="https://www.fao.org/home/en/"><img height=200 width=200 src="https://www.fao.org/fileadmin/templates/family-farming-decade/images/FAO-IFAD-Logos/FAO-Logo-EN.svg">
@@ -88,7 +88,7 @@ _Blue-Cloud has received funding from the European Union's Horizon programme cal
 
 The [zen4R](https://doi.org/10.5281/zenodo.2547036) package offers an R interface to the [Zenodo](https://zenodo.org) e-infrastructure. It supports the creation of metadata records (including versioning), upload of files, and assignment of Digital Object Identifier(s) (DOIs).
 
-[zen4R](https://doi.org/10.5281/zenodo.2547036) is jointly developed together with the [geoflow](https://github.com/eblondel/geoflow) which intends to facilitate and automate the production of geographic metadata documents and their associated datasources, where [zen4R](https://doi.org/10.5281/zenodo.2547036) is used to assign DOIs and cross-reference these DOIs in other metadata documents such as geographic metadata (ISO 19115/19139) hosted in metadata catalogues and open data portals.
+[zen4R](https://doi.org/10.5281/zenodo.2547036) is jointly developed together with the [geoflow](https://github.com/r-geoflow/geoflow) which intends to facilitate and automate the production of geographic metadata documents and their associated datasources, where [zen4R](https://doi.org/10.5281/zenodo.2547036) is used to assign DOIs and cross-reference these DOIs in other metadata documents such as geographic metadata (ISO 19115/19139) hosted in metadata catalogues and open data portals.
 
 <a name="package_status"/>
 
