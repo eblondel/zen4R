@@ -416,6 +416,17 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #' @description Get funders by name.
+    #' @param name name
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of funders as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of funders
+    #' @return list of funders as \code{data.frame} or \code{list}
+    getFundersByName = function(name, pretty = TRUE){
+      query = sprintf("name:%s", URLencode(paste0("\"",name,"\"")))
+      self$getFunders(q = query, pretty = pretty)
+    },
+    
     #' @description Get funder by Id.
     #' @param id funder id
     #' @return the funder

@@ -97,6 +97,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
 \item \href{#method-ZenodoManager-getGrantById}{\code{ZenodoManager$getGrantById()}}
 \item \href{#method-ZenodoManager-getFunders}{\code{ZenodoManager$getFunders()}}
+\item \href{#method-ZenodoManager-getFundersByName}{\code{ZenodoManager$getFundersByName()}}
 \item \href{#method-ZenodoManager-getFunderById}{\code{ZenodoManager$getFunderById()}}
 \item \href{#method-ZenodoManager-getDepositions}{\code{ZenodoManager$getDepositions()}}
 \item \href{#method-ZenodoManager-getDepositionByConceptDOI}{\code{ZenodoManager$getDepositionByConceptDOI()}}
@@ -328,6 +329,30 @@ not all funders can be listed from Zenodo, a query has to be specified.}
 Set \code{pretty = FALSE} to get the raw list of funders}
 
 \item{\code{size}}{number of funders to be returned. By default equal to 1000.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of funders as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getFundersByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getFundersByName}{}}}
+\subsection{Method \code{getFundersByName()}}{
+Get funders by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFundersByName(name, pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{name}
+
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of funders as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of funders}
 }
 \if{html}{\out{</div>}}
 }
