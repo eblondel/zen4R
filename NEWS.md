@@ -1,3 +1,5 @@
+# Change log
+
 ## [zen4R 0.7-2](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
