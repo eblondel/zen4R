@@ -1,10 +1,17 @@
 # Change log
 
-## [zen4R 0.7-2](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
 
 * [#106](https://github.com/eblondel/zen4R/issues/106) Quote DOIs in deposit/record search methods
+* [#108](https://github.com/eblondel/zen4R/issues/108) `getFunders` additional `q` Elastic search argument
+* [#109](https://github.com/eblondel/zen4R/issues/109) `getGrants` additional `q` Elastic search argument
+
+**New features**
+
+* [#110](https://github.com/eblondel/zen4R/issues/110) `getFundersByName` new method
+* [#111](https://github.com/eblondel/zen4R/issues/111) `getGrantsByName` new method
 
 ## [zen4R 0.7-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
