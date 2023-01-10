@@ -246,7 +246,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(q=="") size = 10000
       page <- 1
       lastPage <- FALSE
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/?q=%s&size=%s&page=%s", q, size, page), 
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -273,7 +273,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           }else{
             lastPage <- TRUE
           }
-          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/?q=%s&size=%s&page=%s", q, size, page), 
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
@@ -372,7 +372,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(q=="") size = 10000
       page <- 1
       lastPage <- FALSE
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/?q=%s&size=%s&page=%s", q, size, page), 
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -399,7 +399,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           }else{
             lastPage <- TRUE
           }
-          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/?q=%s&size=%s&page=%s", q, size, page), 
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
