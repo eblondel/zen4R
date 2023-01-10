@@ -95,6 +95,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
 \item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
+\item \href{#method-ZenodoManager-getGrantsByName}{\code{ZenodoManager$getGrantsByName()}}
 \item \href{#method-ZenodoManager-getGrantById}{\code{ZenodoManager$getGrantById()}}
 \item \href{#method-ZenodoManager-getFunders}{\code{ZenodoManager$getFunders()}}
 \item \href{#method-ZenodoManager-getFundersByName}{\code{ZenodoManager$getFundersByName()}}
@@ -285,6 +286,30 @@ not all grants can be listed from Zenodo, a query has to be specified.}
 Set \code{pretty = FALSE} to get the raw list of grants}
 
 \item{\code{size}}{number of grants to be returned. By default equal to 1000.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of grants as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getGrantsByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getGrantsByName}{}}}
+\subsection{Method \code{getGrantsByName()}}{
+Get grants by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getGrantsByName(name, pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{name}
+
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of grants as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of grants}
 }
 \if{html}{\out{</div>}}
 }

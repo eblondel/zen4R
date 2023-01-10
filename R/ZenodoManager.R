@@ -327,6 +327,17 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #' @description Get grants by name.
+    #' @param name name
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of grants
+    #' @return list of grants as \code{data.frame} or \code{list}
+    getGrantsByName = function(name, pretty = TRUE){
+      query = sprintf("title:%s", URLencode(paste0("\"",name,"\"")))
+      self$getGrants(q = query, pretty = pretty)
+    },
+    
     #' @description Get grant by Id.
     #' @param id grant id
     #' @return the grant
