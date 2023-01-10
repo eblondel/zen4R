@@ -311,17 +311,21 @@ the grant
 \if{html}{\out{<a id="method-ZenodoManager-getFunders"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-getFunders}{}}}
 \subsection{Method \code{getFunders()}}{
-Get Funders supported by Zenodo.
+Get Funders supported by Zenodo based on a query.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFunders(pretty = TRUE, size = 1000)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFunders(q = "", pretty = TRUE, size = 1000)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 funders to be retrieved. Consequently,
+not all funders can be listed from Zenodo, a query has to be specified.}
+
 \item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
 \code{TRUE} which will returns the list of funders as \code{data.frame}.
-Set \code{pretty = FALSE} to get the raw list of grants}
+Set \code{pretty = FALSE} to get the raw list of funders}
 
 \item{\code{size}}{number of funders to be returned. By default equal to 1000.}
 }
