@@ -1,4 +1,10 @@
-## [zen4R 0.7-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-red.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.7-2](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable.svg)](https://cran.r-project.org/package=zen4R)
+
+**Enhancements**
+
+* [#106](https://github.com/eblondel/zen4R/issues/106) Quote DOIs in deposit/record search methods
+
+## [zen4R 0.7-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Bug fixes**
 
@@ -6,7 +12,7 @@
 * [#102](https://github.com/eblondel/zen4R/issues/102) User-Agent related issue with `download_zenodo` - relates to #103
 * [#103](https://github.com/eblondel/zen4R/issues/103) Change User-Agent to bypass Zenodo API server restrictions
 
-## [zen4R 0.7](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-red.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.7](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Bug fixes**
 

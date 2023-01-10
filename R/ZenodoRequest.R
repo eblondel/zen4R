@@ -25,7 +25,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     exception = NA,
     result = NA,
     token = NULL,
-    agent = paste0("eblondel/zen4R_", as(packageVersion("zen4R"),"character")),
+    agent = paste0("zen4R_", as(packageVersion("zen4R"),"character")),
     
     prepareData = function(data){
       if(is(data, "ZenodoRecord")){

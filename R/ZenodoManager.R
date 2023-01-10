@@ -494,7 +494,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param conceptdoi the concept DOI, object of class \code{character}
     #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionByConceptDOI = function(conceptdoi){
-      query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
+      query <- sprintf("conceptdoi:\"%s\"", conceptdoi)
       result <- self$getDepositions(q = query, exact = TRUE)
       if(length(result)>0){
         conceptdois <- vapply(result, function(i){
@@ -534,7 +534,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param doi the DOI, object of class \code{character}
     #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionByDOI = function(doi){
-      query <- sprintf("doi:%s", gsub("/", "//", doi))
+      query <- sprintf("doi:\"%s\"", doi)
       result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
@@ -972,7 +972,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(regexpr("zenodo", conceptdoi) < 0){
         stop(sprintf("DOI '%s' doesn not seem to be a Zenodo DOI", conceptdoi))
       }
-      query <- sprintf("conceptdoi:%s", gsub("/", "//", conceptdoi))
+      query <- sprintf("conceptdoi:\"%s\"", conceptdoi)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
@@ -1005,7 +1005,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(regexpr("zenodo", doi) < 0){
         stop(sprintf("DOI '%s' doesn not seem to be a Zenodo DOI", doi))
       }
-      query <- sprintf("doi:%s", gsub("/", "//", doi))
+      query <- sprintf("doi:\"%s\"", doi)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
