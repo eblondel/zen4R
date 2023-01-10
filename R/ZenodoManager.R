@@ -255,6 +255,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
         resp <- zenReq$getResponse()
         grants <- resp$hits$hits
         total <- resp$hits$total
+        if(total > 10000){
+          self$WARN(sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)) 
+        }
         total_remaining <- total
         hasGrants <- length(grants)>0
         while(hasGrants){
@@ -367,6 +370,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
         resp <- zenReq$getResponse()
         funders <- resp$hits$hits
         total <- resp$hits$total
+        if(total > 10000){
+          self$WARN(sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)) 
+        }
         total_remaining <- total
         hasFunders <- length(funders)>0
         while(hasFunders){
