@@ -4,6 +4,7 @@
 
 **Enhancements**
 
+* [#95](https://github.com/eblondel/zen4R/95) Support progress when uploading files
 * [#114](https://github.com/eblondel/zen4R/issues/114) Avoid re-downloading existing files
 
 ## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)

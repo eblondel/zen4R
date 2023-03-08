@@ -911,6 +911,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         ZenodoRequest$new(
           private$url, method, method_url, 
           data = upload_file(path),
+          progress = TRUE,
           token = self$getToken(),
           logger = self$loggerType
         )
@@ -918,6 +919,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         ZenodoRequest$new(
           private$url, method, method_url, 
           data = filename, file = upload_file(path),
+          progress = TRUE,
           token = self$getToken(),
           logger = self$loggerType
         )

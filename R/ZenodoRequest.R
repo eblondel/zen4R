@@ -20,6 +20,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     requestHeaders = NA,
     data = NA,
     file = NULL,
+    progress = FALSE,
     status = NA,
     response = NA,
     exception = NA,
@@ -55,7 +56,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(data)
     },
     
-    GET = function(url, request){
+    GET = function(url, request, progress){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
       headers <- c(
@@ -65,9 +66,9 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       r <- NULL
       if(self$verbose.debug){
-        r <- with_verbose(GET(req, add_headers(headers)))
+        r <- with_verbose(GET(req, add_headers(headers), if(progress) httr::progress(type = "up")))
       }else{
-        r <- GET(req, add_headers(headers))
+        r <- GET(req, add_headers(headers), if(progress) httr::progress(type = "up"))
       }
       responseContent <- content(r, type = "application/json", encoding = "UTF-8")
       response <- list(request = request, requestHeaders = headers(r),
@@ -75,7 +76,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(response)
     },
     
-    POST = function(url, request, data, file = NULL){
+    POST = function(url, request, data, file = NULL, progress){
       req <- paste(url, request, sep="/")
       if(!is.null(file)){
         contentType <- "multipart/form-data"
@@ -98,14 +99,16 @@ ZenodoRequest <- R6Class("ZenodoRequest",
           url = req,
           add_headers(headers),
           encode = ifelse(is.null(file),"json", "multipart"),
-          body = data
+          body = data,
+          if(progress) httr::progress(type = "up")
         ))
       }else{
         r <- httr::POST(
           url = req,
           add_headers(headers),
           encode = ifelse(is.null(file),"json", "multipart"),
-          body = data
+          body = data,
+          if(progress) httr::progress(type = "up")
         )
       }
       
@@ -115,7 +118,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(response)
     },
     
-    PUT = function(url, request, data){
+    PUT = function(url, request, data, progress){
       req <- paste(url, request, sep="/")
       
       if(regexpr("api/files", req)<0) data <- private$prepareData(data)
@@ -132,13 +135,15 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         r <- with_verbose(httr::PUT(
           url = req,
           add_headers(headers),    
-          body = data
+          body = data,
+          if(progress) httr::progress(type = "up")
         ))
       }else{
         r <- httr::PUT(
           url = req,
           add_headers(headers),    
-          body = data
+          body = data,
+          if(progress) httr::progress(type = "up")
         )
       }
       
@@ -181,10 +186,11 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     #' @param request the method request
     #' @param data payload (optional)
     #' @param file to be uploaded (optional)
+    #' @param progress whether a progress status has to be displayed for download/upload
     #' @param token user token
     #' @param logger the logger type
     #' @param ... any other arg
-    initialize = function(url, type, request, data = NULL, file = NULL,
+    initialize = function(url, type, request, data = NULL, file = NULL, progress = FALSE,
                           token, logger = NULL, ...) {
       super$initialize(logger = logger)
       private$url = url
@@ -192,6 +198,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       private$request = request
       private$data = data
       private$file = file
+      private$progress = progress
       private$token = token
      
     },
@@ -200,9 +207,9 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     execute = function(){
       
       req <- switch(private$type,
-        "GET" = private$GET(private$url, private$request),
-        "POST" = private$POST(private$url, private$request, private$data, private$file),
-        "PUT" = private$PUT(private$url, private$request, private$data),
+        "GET" = private$GET(private$url, private$request, private$progress),
+        "POST" = private$POST(private$url, private$request, private$data, private$file, private$progress),
+        "PUT" = private$PUT(private$url, private$request, private$data, private$progress),
         "DELETE" = private$DELETE(private$url, private$request, private$data)
       )
       
