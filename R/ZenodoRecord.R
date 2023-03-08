@@ -1082,18 +1082,28 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'   and passed as \code{cl} argument. After downloading all files, the cluster will be stopped automatically.
     #' @param cl an optional cluster for cluster-based parallel handlers
     #' @param quiet (default is \code{FALSE}) can be set to suppress informative messages (not warnings).
+    #' @param overwrite (default is \code{TRUE}) can be set to FALSE to avoid re-downloading existing files.
+    #' @param timeout (default is 60s) see \code{download.file}.
     #' @param ... arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
     #'   can be added (eg. \code{mc.cores} for \code{mclapply})
     #' 
     #' @note See examples in \code{\link{download_zenodo}} utility function.
     #' 
     downloadFiles = function(path = ".", files = list(),
-                             parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, ...){
+                             parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, overwrite=TRUE, timeout=60, ...){
       if(length(self$files)==0){
         self$WARN(sprintf("No files to download for record '%s' (doi: '%s')",
                           self$id, self$doi))
       }else{
         files.list <- self$files
+
+        if(!overwrite){
+          files.list <- files.list[
+            which(sapply(files.list, function(x){
+            !file.exists(file.path(path, x$filename))}))
+          ]
+        }
+
         if(length(files)>0) files.list <- files.list[sapply(files.list, function(x){x$filename %in% files})]
         if(length(files.list)==0){
           errMsg <- sprintf("No files available in record '%s' (doi: '%s') for file names [%s]",
@@ -1107,7 +1117,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                               self$id, self$doi, file))
           }
         }
-        
+
         files_summary <- sprintf("Will download %s file%s from record '%s' (doi: '%s') - total size: %s",
                                 length(files.list), ifelse(length(files.list)>1,"s",""), self$id, self$doi, 
                                 human_filesize(sum(sapply(files.list, function(x){x$filesize}))))
@@ -1117,10 +1127,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           file$filename <- substring(file$filename, regexpr("/", file$filename)+1, nchar(file$filename))
           if (!quiet) cat(sprintf("[zen4R][INFO] Downloading file '%s' - size: %s\n", 
                             file$filename, human_filesize(file$filesize)))
-          target_file <-file.path(path, file$filename)
+          target_file <- file.path(path, file$filename)
+          timeout_cache <- getOption("timeout")
+          options(timeout = timeout)
           download.file(url = file$links$download, destfile = target_file, 
                         quiet = quiet, mode = "wb")
-        }          
+          options(timeout = timeout_cache)
+        }
         #check_integrity util
         check_integrity <- function(file){
           file$filename <- substring(file$filename, regexpr("/", file$filename)+1, nchar(file$filename))
