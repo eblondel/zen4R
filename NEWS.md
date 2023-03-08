@@ -1,5 +1,11 @@
 # Change log
 
+## [zen4R 0.8-1](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
+
+**Enhancements**
+
+* [#114](https://github.com/eblondel/zen4R/issues/114) Avoid re-downloading existing files
+
 ## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
