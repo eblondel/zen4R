@@ -18,7 +18,7 @@ record, identified by its DOI or concept DOI."><!-- mathjax --><script src="http
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.8-1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9</span>
       </span>
     </div>
 
@@ -104,13 +104,13 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 <span class="r-in"><span> <span class="co">#simple download (sequential)   </span></span></span>
 <span class="r-in"><span> <span class="fu">download_zenodo</span><span class="op">(</span><span class="st">"10.5281/zenodo.2547036"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Download in sequential mode </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '3358590' (doi: '10.5281/zenodo.3358590') - total size: 55.5 KiB </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Downloading file 'zen4R-0.2.tar.gz' - size: 23.9 KiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Downloading file 'zen4R-0.2.zip' - size: 31.6 KiB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '5509954' (doi: '10.5281/zenodo.5509954') - total size: 76.3 KiB </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Downloading file 'zen4R-0.5.tar.gz' - size: 33 KiB</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Downloading file 'zen4R-0.5.zip' - size: 43.2 KiB</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Files downloaded at '/home/runner/work/zen4R/zen4R/docs/reference'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Verifying file integrity... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.2.tar.gz': integrity verified (md5sum: d234cd0678018938ab1bed00c471fcd7)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.2.zip': integrity verified (md5sum: 78d85e904347cd4bcbb8808f04397b2a)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.5.tar.gz': integrity verified (md5sum: 3f47d0b4ab2dc341228bfabe208616d4)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.5.zip': integrity verified (md5sum: 9f0f3aa1c65ffae924365d7f98e9b1eb)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - End of download </span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span></span>
@@ -119,11 +119,11 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 <span class="r-in"><span>   parallel <span class="op">=</span> <span class="cn">TRUE</span>, parallel_handler <span class="op">=</span> <span class="va">parLapply</span>, cl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/parallel/makeCluster.html" class="external-link">makeCluster</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Download in parallel mode </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Using cluster-based parallel handler (cluster 'cl' argument specified) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '3358590' (doi: '10.5281/zenodo.3358590') - total size: 55.5 KiB </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '5509954' (doi: '10.5281/zenodo.5509954') - total size: 76.3 KiB </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Files downloaded at '/home/runner/work/zen4R/zen4R/docs/reference'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Verifying file integrity... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.2.tar.gz': integrity verified (md5sum: d234cd0678018938ab1bed00c471fcd7)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.2.zip': integrity verified (md5sum: 78d85e904347cd4bcbb8808f04397b2a)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.5.tar.gz': integrity verified (md5sum: 3f47d0b4ab2dc341228bfabe208616d4)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.5.zip': integrity verified (md5sum: 9f0f3aa1c65ffae924365d7f98e9b1eb)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - End of download </span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co">#download files as parallel using mclapply (for Unix systems)</span></span></span>
@@ -131,11 +131,11 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 <span class="r-in"><span>   parallel <span class="op">=</span> <span class="cn">TRUE</span>, parallel_handler <span class="op">=</span> <span class="va">mclapply</span>, mc.cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Download in parallel mode </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Using non cluster-based (no cluster 'cl' argument specified) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '3358590' (doi: '10.5281/zenodo.3358590') - total size: 55.5 KiB </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '5509954' (doi: '10.5281/zenodo.5509954') - total size: 76.3 KiB </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Files downloaded at '/home/runner/work/zen4R/zen4R/docs/reference'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Verifying file integrity... </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.2.tar.gz': integrity verified (md5sum: d234cd0678018938ab1bed00c471fcd7)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.2.zip': integrity verified (md5sum: 78d85e904347cd4bcbb8808f04397b2a)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.5.tar.gz': integrity verified (md5sum: 3f47d0b4ab2dc341228bfabe208616d4)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] File 'zen4R-0.5.zip': integrity verified (md5sum: 9f0f3aa1c65ffae924365d7f98e9b1eb)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - End of download </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span>                </span></span>
