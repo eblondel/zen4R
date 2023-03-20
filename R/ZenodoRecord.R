@@ -370,7 +370,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         stop(sprintf("The contributor type should be one value among values [%s]",
                       paste(allowedTypes, collapse=",")))
       }
-      contributor <- list(name = paste(lastname, firstname, sep=", "), type = type)
+      contributor <- list(name = name, type = type)
       if(!is.null(affiliation)) contributor <- c(contributor, affiliation = affiliation)
       if(!is.null(orcid)) contributor <- c(contributor, orcid = orcid)
       if(!is.null(gnd)) contributor <- c(contributor, gnd = gnd)
