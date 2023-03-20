@@ -65,6 +65,7 @@ Initializes a \code{ZenodoRequest}
   request,
   data = NULL,
   file = NULL,
+  progress = FALSE,
   token,
   logger = NULL,
   ...
@@ -83,6 +84,8 @@ Initializes a \code{ZenodoRequest}
 \item{\code{data}}{payload (optional)}
 
 \item{\code{file}}{to be uploaded (optional)}
+
+\item{\code{progress}}{whether a progress status has to be displayed for download/upload}
 
 \item{\code{token}}{user token}
 
