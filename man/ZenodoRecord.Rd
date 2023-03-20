@@ -590,11 +590,15 @@ Removes a creator by GND.
 \if{html}{\out{<a id="method-ZenodoRecord-addContributor"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-addContributor}{}}}
 \subsection{Method \code{addContributor()}}{
-Add a contributor for the record. Firstname, lastname, and type are mandatory.
+Add a contributor for the record. One approach is to use the \code{firstname} and
+   \code{lastname} arguments, that by default will be concatenated for Zenodo as
+   \code{lastname, firstname}. For more flexibility over this, the \code{name}
+   argument can be directly used.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addContributor(
   firstname,
   lastname,
+  name = paste(lastname, firstname, sep = ", "),
   type,
   affiliation = NULL,
   orcid = NULL,
@@ -608,6 +612,8 @@ Add a contributor for the record. Firstname, lastname, and type are mandatory.
 \item{\code{firstname}}{contributor first name}
 
 \item{\code{lastname}}{contributor last name}
+
+\item{\code{name}}{contributor name}
 
 \item{\code{type}}{contributor type, among values: ContactPerson, 
 DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
@@ -1890,6 +1896,8 @@ Downloads files attached to the record
   parallel_handler = NULL,
   cl = NULL,
   quiet = FALSE,
+  overwrite = TRUE,
+  timeout = 60,
   ...
 )}\if{html}{\out{</div>}}
 }
@@ -1911,6 +1919,10 @@ and passed as \code{cl} argument. After downloading all files, the cluster will 
 \item{\code{cl}}{an optional cluster for cluster-based parallel handlers}
 
 \item{\code{quiet}}{(default is \code{FALSE}) can be set to suppress informative messages (not warnings).}
+
+\item{\code{overwrite}}{(default is \code{TRUE}) can be set to FALSE to avoid re-downloading existing files.}
+
+\item{\code{timeout}}{(default is 60s) see \code{download.file}.}
 
 \item{\code{...}}{arguments inherited from \code{parallel::mclapply} or the custom \code{parallel_handler}
 can be added (eg. \code{mc.cores} for \code{mclapply})}

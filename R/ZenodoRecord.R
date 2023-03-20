@@ -345,9 +345,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(self$removeCreator(by = "gnd", gnd))
     },
     
-    #' @description  Add a contributor for the record. Firstname, lastname, and type are mandatory.
+    #' @description  Add a contributor for the record. One approach is to use the \code{firstname} and
+    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as
+    #'    \code{lastname, firstname}. For more flexibility over this, the \code{name}
+    #'    argument can be directly used.
     #' @param firstname contributor first name
     #' @param lastname contributor last name
+    #' @param name contributor name
     #' @param type contributor type, among values: ContactPerson, 
     #'    DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
     #'    Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
@@ -356,7 +360,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param orcid contributor orcid (optional)
     #' @param gnd contributor gnd (optional)
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addContributor = function(firstname, lastname, type, affiliation = NULL, orcid = NULL, gnd = NULL){
+    addContributor = function(firstname, lastname, name = paste(lastname, firstname, sep = ", "),
+                              type, affiliation = NULL, orcid = NULL, gnd = NULL){
       allowedTypes <- c("ContactPerson", "DataCollector", "DataCurator", "DataManager","Distributor",
                         "Editor", "Funder", "HostingInstitution", "Producer", "ProjectLeader", "ProjectManager",
                         "ProjectMember", "RegistrationAgency", "RegistrationAuthority", "RelatedPerson",
