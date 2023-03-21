@@ -429,8 +429,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'    recognized by Zenodo, the function will return an error. The list of licenses can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
     #' @param licenseId a license Id 
-    setLicense = function(licenseId){
-      zen <- ZenodoManager$new()
+    #' @param zen A ZenodoManager object
+    setLicense = function(licenseId, zen = ZenodoManager$new()){
       zen_license <- zen$getLicenseById(licenseId)
       if(!is.null(zen_license$status)){
         errorMsg <- sprintf("License with id '%s' doesn't exist in Zenodo", licenseId)
@@ -662,10 +662,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param community community to add. The community should be set with the Zenodo id of the community. 
     #'   If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
     #'   with the \code{ZenodoManager} and the function \code{$getCommunities()}.
+    #' @param zen A ZenodoManager object
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addCommunity = function(community){
+    addCommunity = function(community, zen = ZenodoManager$new()){
       added <- FALSE
-      zen <- ZenodoManager$new()
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       if(!(community %in% sapply(self$metadata$communities, function(x){x$identifier}))){
         zen_community <- zen$getCommunityById(community)
@@ -713,10 +713,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param grant grant to add. The grant should be set with the id of the grant. If not
     #'    recognized by Zenodo, the function will return an warning only. The list of grants can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
+    #' @param zen A ZenodoManager object
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addGrant = function(grant){
+    addGrant = function(grant, zen = ZenodoManager$new()){
       added <- FALSE
-      zen <- ZenodoManager$new()
       if(is.null(self$metadata$grants)) self$metadata$grants <- list()
       if(!(grant %in% self$metadata$grants)){
         if(regexpr("::", grant)>0){

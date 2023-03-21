@@ -745,13 +745,15 @@ Set license. The license should be set with the Zenodo id of the license. If not
    recognized by Zenodo, the function will return an error. The list of licenses can
    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLicense(licenseId)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLicense(licenseId, zen = ZenodoManager$new())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{licenseId}}{a license Id}
+
+\item{\code{zen}}{A ZenodoManager object}
 }
 \if{html}{\out{</div>}}
 }
@@ -1077,7 +1079,7 @@ the Zenodo id of the community. If not recognized by Zenodo, the function will r
 \subsection{Method \code{addCommunity()}}{
 Adds a community to the record metadata.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCommunity(community)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCommunity(community, zen = ZenodoManager$new())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1086,6 +1088,8 @@ Adds a community to the record metadata.
 \item{\code{community}}{community to add. The community should be set with the Zenodo id of the community. 
 If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
 with the \code{ZenodoManager} and the function \code{$getCommunities()}.}
+
+\item{\code{zen}}{A ZenodoManager object}
 }
 \if{html}{\out{</div>}}
 }
@@ -1138,7 +1142,7 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 \subsection{Method \code{addGrant()}}{
 Adds a grant to the record metadata.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addGrant(grant)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addGrant(grant, zen = ZenodoManager$new())}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1147,6 +1151,8 @@ Adds a grant to the record metadata.
 \item{\code{grant}}{grant to add. The grant should be set with the id of the grant. If not
 recognized by Zenodo, the function will return an warning only. The list of grants can
 fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.}
+
+\item{\code{zen}}{A ZenodoManager object}
 }
 \if{html}{\out{</div>}}
 }
