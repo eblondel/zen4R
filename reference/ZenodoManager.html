@@ -142,6 +142,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ZenodoManager.html">ZenodoManager</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  url <span class="op">=</span> <span class="st">"https://zenodo.org/api"</span>,</span>
 <span>  token <span class="op">=</span> <span class="fu"><a href="../reference/zenodo_pat.html">zenodo_pat</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  sandbox <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  logger <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  keyring_backend <span class="op">=</span> <span class="st">"env"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -156,6 +157,10 @@ the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api</p></dd>
 
 <dt><code>token</code></dt>
 <dd><p>the user token. By default an attempt will be made to retrieve token using <a href="zenodo_pat.html">zenodo_pat</a></p></dd>
+
+
+<dt><code>sandbox</code></dt>
+<dd><p>Indicates if the Zenodo sandbox platform should be used. Default is <code>FALSE</code></p></dd>
 
 
 <dt><code>logger</code></dt>
