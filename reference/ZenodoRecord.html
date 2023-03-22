@@ -835,13 +835,17 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
    recognized by Zenodo, the function will return an error. The list of licenses can
    fetched with the <code>ZenodoManager</code> and the function <code>$getLicenses()</code>.</p><div class="section">
 <h4 id="usage-28">Usage<a class="anchor" aria-label="anchor" href="#usage-28"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setLicense</span><span class="op">(</span><span class="va">licenseId</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setLicense</span><span class="op">(</span><span class="va">licenseId</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-24">Arguments<a class="anchor" aria-label="anchor" href="#arguments-24"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>licenseId</code></dt>
 <dd><p>a license Id</p></dd>
+
+
+<dt><code>sandbox</code></dt>
+<dd><p>Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is <code>FALSE</code></p></dd>
 
 
 </dl><p></p></div>
@@ -1149,7 +1153,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 <h3 id="method-setcommunities-">Method <code>setCommunities()</code><a class="anchor" aria-label="anchor" href="#method-setcommunities-"></a></h3>
 <p>Set a vector of character strings identifying communities</p><div class="section">
 <h4 id="usage-44">Usage<a class="anchor" aria-label="anchor" href="#usage-44"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setCommunities</span><span class="op">(</span><span class="va">communities</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setCommunities</span><span class="op">(</span><span class="va">communities</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -1160,6 +1164,10 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getCommuniti
 the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.</p></dd>
 
 
+<dt><code>sandbox</code></dt>
+<dd><p>Use the Zenodo sandbox infrastructure as basis to control available communities. Default is <code>FALSE</code></p></dd>
+
+
 </dl><p></p></div>
 </div>
 
@@ -1167,7 +1175,7 @@ the Zenodo id of the community. If not recognized by Zenodo, the function will r
 <h3 id="method-addcommunity-">Method <code>addCommunity()</code><a class="anchor" aria-label="anchor" href="#method-addcommunity-"></a></h3>
 <p>Adds a community to the record metadata.</p><div class="section">
 <h4 id="usage-45">Usage<a class="anchor" aria-label="anchor" href="#usage-45"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addCommunity</span><span class="op">(</span><span class="va">community</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addCommunity</span><span class="op">(</span><span class="va">community</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -1176,6 +1184,10 @@ the Zenodo id of the community. If not recognized by Zenodo, the function will r
 <dd><p>community to add. The community should be set with the Zenodo id of the community. 
 If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
 with the <code>ZenodoManager</code> and the function <code>$getCommunities()</code>.</p></dd>
+
+
+<dt><code>sandbox</code></dt>
+<dd><p>Use the Zenodo sandbox infrastructure as basis to control available communities. Default is <code>FALSE</code></p></dd>
 
 
 </dl><p></p></div>
@@ -1209,7 +1221,7 @@ with the <code>ZenodoManager</code> and the function <code>$getCommunities()</co
 <h3 id="method-setgrants-">Method <code>setGrants()</code><a class="anchor" aria-label="anchor" href="#method-setgrants-"></a></h3>
 <p>Set a vector of character strings identifying grants</p><div class="section">
 <h4 id="usage-47">Usage<a class="anchor" aria-label="anchor" href="#usage-47"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setGrants</span><span class="op">(</span><span class="va">grants</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setGrants</span><span class="op">(</span><span class="va">grants</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -1220,6 +1232,10 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.</p></dd>
 
 
+<dt><code>sandbox</code></dt>
+<dd><p>Use the Zenodo sandbox infrastructure as basis to control available grants. Default is <code>FALSE</code></p></dd>
+
+
 </dl><p></p></div>
 </div>
 
@@ -1227,7 +1243,7 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 <h3 id="method-addgrant-">Method <code>addGrant()</code><a class="anchor" aria-label="anchor" href="#method-addgrant-"></a></h3>
 <p>Adds a grant to the record metadata.</p><div class="section">
 <h4 id="usage-48">Usage<a class="anchor" aria-label="anchor" href="#usage-48"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addGrant</span><span class="op">(</span><span class="va">grant</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addGrant</span><span class="op">(</span><span class="va">grant</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -1236,6 +1252,10 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 <dd><p>grant to add. The grant should be set with the id of the grant. If not
 recognized by Zenodo, the function will return an warning only. The list of grants can
 fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()</code>.</p></dd>
+
+
+<dt><code>sandbox</code></dt>
+<dd><p>Use the Zenodo sandbox infrastructure as basis to control available grants. Default is <code>FALSE</code></p></dd>
 
 
 </dl><p></p></div>
