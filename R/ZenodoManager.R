@@ -78,14 +78,16 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param url Zenodo API URL. By default, the url is set to "https://zenodo.org/api". For tests, 
     #'   the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api 
     #' @param token the user token. By default an attempt will be made to retrieve token using \link{zenodo_pat}
+    #' @param sandbox Indicates if the Zenodo sandbox platform should be used. Default is \code{FALSE}
     #' @param logger logger type. The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
     #'    (for complete curl http calls logs)
     #' @param keyring_backend The \pkg{keyring} backend used to store user token. The \code{keyring_backend} 
     #' can be set to use a different backend for storing the Zenodo token with \pkg{keyring} (Default value is 'env').
-    initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), logger = NULL,
+    initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), sandbox = FALSE, logger = NULL,
                           keyring_backend = 'env'){
       super$initialize(logger = logger)
       private$url = url
+      if(sandbox) url = "https://sandbox.zenodo.org/api"
       if(url == "https://sandbox.zenodo.org/api") private$sandbox = TRUE
       if(!is.null(token)) if(nzchar(token)){
         if(!keyring_backend %in% names(keyring:::known_backends)){
