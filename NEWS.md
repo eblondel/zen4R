@@ -8,6 +8,7 @@
 * [#114](https://github.com/eblondel/zen4R/issues/114) Avoid re-downloading existing files
 * [#117](https://github.com/eblondel/zen4R/issues/117) Support single (organisation) name argument in `addContributor`
 * [#119](https://github.com/eblondel/zen4R/issues/119) Support sandbox argument for ZenodoManager for easy use
+* [#118](https://github.com/eblondel/zen4R/issues/118) Support sandbox-based controls for license, grant, community management methods
 
 
 ## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)

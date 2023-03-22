@@ -428,9 +428,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @description Set license. The license should be set with the Zenodo id of the license. If not
     #'    recognized by Zenodo, the function will return an error. The list of licenses can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
-    #' @param licenseId a license Id 
-    setLicense = function(licenseId){
-      zen <- ZenodoManager$new()
+    #' @param licenseId a license Id
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is \code{FALSE}
+    setLicense = function(licenseId, sandbox = FALSE){
+      zen <- ZenodoManager$new(sandbox = sandbox)
       zen_license <- zen$getLicenseById(licenseId)
       if(!is.null(zen_license$status)){
         errorMsg <- sprintf("License with id '%s' doesn't exist in Zenodo", licenseId)
@@ -651,10 +652,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param communities a vector or list of communities. Values should among known communities. The list of communities can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}. Each community should be set with 
     #'    the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.
-    setCommunities = function(communities){
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}
+    setCommunities = function(communities, sandbox = FALSE){
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       for(community in communities){
-        self$addCommunity(community)
+        self$addCommunity(community, sandbox = sandbox)
       }
     },
     
@@ -662,10 +664,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param community community to add. The community should be set with the Zenodo id of the community. 
     #'   If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
     #'   with the \code{ZenodoManager} and the function \code{$getCommunities()}.
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addCommunity = function(community){
+    addCommunity = function(community, sandbox = FALSE){
       added <- FALSE
-      zen <- ZenodoManager$new()
+      zen <- ZenodoManager$new(sandbox = sandbox)
       if(is.null(self$metadata$communities)) self$metadata$communities <- list()
       if(!(community %in% sapply(self$metadata$communities, function(x){x$identifier}))){
         zen_community <- zen$getCommunityById(community)
@@ -702,10 +705,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param grants a vector or list of grants Values should among known grants The list of grants can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 
     #'    the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.
-    setGrants = function(grants){
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}
+    setGrants = function(grants, sandbox = FALSE){
       if(is.null(self$metadata$grants)) self$metadata$grants <- list()
       for(grant in grants){
-        self$addGrant(grant)
+        self$addGrant(grant, sandbox = sandbox)
       }
     },
     
@@ -713,10 +717,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param grant grant to add. The grant should be set with the id of the grant. If not
     #'    recognized by Zenodo, the function will return an warning only. The list of grants can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addGrant = function(grant){
+    addGrant = function(grant, sandbox = FALSE){
       added <- FALSE
-      zen <- ZenodoManager$new()
+      zen <- ZenodoManager$new(sandbox = sandbox)
       if(is.null(self$metadata$grants)) self$metadata$grants <- list()
       if(!(grant %in% self$metadata$grants)){
         if(regexpr("::", grant)>0){

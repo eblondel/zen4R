@@ -745,13 +745,15 @@ Set license. The license should be set with the Zenodo id of the license. If not
    recognized by Zenodo, the function will return an error. The list of licenses can
    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLicense(licenseId)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLicense(licenseId, sandbox = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{licenseId}}{a license Id}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
@@ -1058,7 +1060,7 @@ Set notes. HTML is not allowed
 \subsection{Method \code{setCommunities()}}{
 Set a vector of character strings identifying communities
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setCommunities(communities)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setCommunities(communities, sandbox = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1067,6 +1069,8 @@ Set a vector of character strings identifying communities
 \item{\code{communities}}{a vector or list of communities. Values should among known communities. The list of communities can
 fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}. Each community should be set with 
 the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
@@ -1077,7 +1081,7 @@ the Zenodo id of the community. If not recognized by Zenodo, the function will r
 \subsection{Method \code{addCommunity()}}{
 Adds a community to the record metadata.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCommunity(community)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCommunity(community, sandbox = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1086,6 +1090,8 @@ Adds a community to the record metadata.
 \item{\code{community}}{community to add. The community should be set with the Zenodo id of the community. 
 If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
 with the \code{ZenodoManager} and the function \code{$getCommunities()}.}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
@@ -1119,7 +1125,7 @@ Removes a community from the record metadata.
 \subsection{Method \code{setGrants()}}{
 Set a vector of character strings identifying grants
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setGrants(grants)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setGrants(grants, sandbox = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1128,6 +1134,8 @@ Set a vector of character strings identifying grants
 \item{\code{grants}}{a vector or list of grants Values should among known grants The list of grants can
 fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 
 the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
@@ -1138,7 +1146,7 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 \subsection{Method \code{addGrant()}}{
 Adds a grant to the record metadata.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addGrant(grant)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addGrant(grant, sandbox = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -1147,6 +1155,8 @@ Adds a grant to the record metadata.
 \item{\code{grant}}{grant to add. The grant should be set with the id of the grant. If not
 recognized by Zenodo, the function will return an warning only. The list of grants can
 fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
