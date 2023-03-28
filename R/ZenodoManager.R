@@ -86,8 +86,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
     initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), sandbox = FALSE, logger = NULL,
                           keyring_backend = 'env'){
       super$initialize(logger = logger)
-      private$url = url
       if(sandbox) url = "https://sandbox.zenodo.org/api"
+      private$url = url
       if(url == "https://sandbox.zenodo.org/api") private$sandbox = TRUE
       if(!is.null(token)) if(nzchar(token)){
         if(!keyring_backend %in% names(keyring:::known_backends)){
