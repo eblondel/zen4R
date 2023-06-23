@@ -52,6 +52,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$submitted = obj$submitted
       self$title = obj$title
       self$version = obj$version
+      self$stats = data.frame(jsonlite::read_json(obj$links$self)$stats)
     }
   ),
   public = list(
@@ -87,6 +88,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     title = NULL,
     #' @field version record version
     version = NULL,
+    #' @field stats stats
+    stats = NULL,
     
     #' @description method is used to instantiate a \code{\link{ZenodoRecord}}
     #' @param obj an optional list object to create the record
@@ -183,6 +186,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
       
       return(versions)
+    },
+    
+    #' @description Get record statistics
+    #' @return statistics as \code{data.frame}
+    getStats = function(){
+      return(self$stats)
     },
     
     #' @description Set the upload type (mandatory). 
@@ -1264,6 +1273,21 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
               }else{
                 fieldObj <- "<NULL>"
                 cat(paste0("\n",paste(rep(shift, depth), collapse=""),"|-- ", field, ": ", fieldObj))
+              }
+            }else if(is(fieldObj, "data.frame")){
+              if(field == "stats"){
+                cat(paste0("\n",paste(rep(shift, depth), collapse=""),"|-- ", field, ":"))
+                download_cols = colnames(fieldObj)[regexpr("downloads", colnames(fieldObj))>0]
+                view_cols = colnames(fieldObj)[regexpr("views", colnames(fieldObj))>0]
+                volume_cols = colnames(fieldObj)[regexpr("volume", colnames(fieldObj))>0]
+                cols = c(download_cols, view_cols, volume_cols)
+                for(col in cols){
+                  symbol = ""
+                  if(regexpr("views", col)>0) symbol = "👁"
+                  if(regexpr("downloads", col)>0) symbol = "↓"
+                  if(regexpr("volume", col)>0) symbol = "■"
+                  cat(paste0("\n",paste(rep(" ", depth), collapse=""),"   ",symbol," ", col, " = ", fieldObj[,col]))
+                }
               }
             }else{
               if(is.null(fieldObj)) fieldObj <- "<NULL>"

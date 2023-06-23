@@ -60,6 +60,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item{\code{title}}{record title}
 
 \item{\code{version}}{record version}
+
+\item{\code{stats}}{stats}
 }
 \if{html}{\out{</div>}}
 }
@@ -73,6 +75,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
 \item \href{#method-ZenodoRecord-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
 \item \href{#method-ZenodoRecord-getVersions}{\code{ZenodoRecord$getVersions()}}
+\item \href{#method-ZenodoRecord-getStats}{\code{ZenodoRecord$getStats()}}
 \item \href{#method-ZenodoRecord-setUploadType}{\code{ZenodoRecord$setUploadType()}}
 \item \href{#method-ZenodoRecord-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
 \item \href{#method-ZenodoRecord-setImageType}{\code{ZenodoRecord$setImageType()}}
@@ -282,6 +285,19 @@ Get record versions with creation/publication date,
 
 \subsection{Returns}{
 a \code{data.frame} with the record versions
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getStats"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getStats}{}}}
+\subsection{Method \code{getStats()}}{
+Get record statistics
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getStats()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+statistics as \code{data.frame}
 }
 }
 \if{html}{\out{<hr>}}
