@@ -2,9 +2,14 @@
 
 ## [zen4R 0.9](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
 
+**New features**
+
+* [#121](https://github.com/eblondel/zen4R/issues/121) Get Zenodo record views/downloads statistics
+* [#122](https://github.com/eblondel/zen4R/issues/122) Support `get_zenodo` shortcut method to get a Zenodo Record
+
 **Enhancements**
 
-* [#95](https://github.com/eblondel/zen4R/95) Support progress when uploading files
+* [#95](https://github.com/eblondel/zen4R/issues/95) Support progress when uploading files
 * [#114](https://github.com/eblondel/zen4R/issues/114) Avoid re-downloading existing files
 * [#117](https://github.com/eblondel/zen4R/issues/117) Support single (organisation) name argument in `addContributor`
 * [#119](https://github.com/eblondel/zen4R/issues/119) Support sandbox argument for ZenodoManager for easy use
