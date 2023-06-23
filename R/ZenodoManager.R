@@ -979,7 +979,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       page <- 1
       req <- sprintf("records/?q=%s&size=%s&page=%s", URLencode(q), size, page)
       if(all_versions) req <- paste0(req, "&all_versions=1")
-      zenReq <- ZenodoRequest$new(private$url, "GET", req, 
+      zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", req, 
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -998,7 +998,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
             page <- page+1
             nextreq <- sprintf("records/?q=%s&size=%s&page=%s", URLencode(q), size, page)
             if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
-            zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
+            zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", nextreq, 
                                         token = self$getToken(),
                                         logger = self$loggerType)
             zenReq$execute()

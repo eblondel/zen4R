@@ -56,7 +56,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(data)
     },
     
-    GET = function(url, request, progress){
+    GET = function(url, request, progress, use_curl = FALSE){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
       headers <- c(
@@ -64,15 +64,26 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         "Authorization" = paste("Bearer",private$token)
       )
       
-      r <- NULL
-      if(self$verbose.debug){
-        r <- with_verbose(GET(req, add_headers(headers), if(progress) httr::progress(type = "up")))
+      responseContent <- NULL
+      response <- NULL
+      if(use_curl){
+        response <- curl::curl_fetch_memory(req)
+        responseContent = jsonlite::parse_json(rawToChar(response$content))
+        response <- list(
+          request = request, requestHeaders = rawToChar(response$headers), 
+          status = response$status_code, response = responseContent$hits[[1]]
+        )
       }else{
-        r <- GET(req, add_headers(headers), if(progress) httr::progress(type = "up"))
+        r <- NULL
+        if(self$verbose.debug){
+          r <- with_verbose(GET(req, add_headers(headers), if(progress) httr::progress(type = "up")))
+        }else{
+          r <- GET(req, add_headers(headers), if(progress) httr::progress(type = "up"))
+        }
+        responseContent <- content(r, type = "application/json", encoding = "UTF-8")
+        response <- list(request = request, requestHeaders = headers(r),
+                         status = status_code(r), response = responseContent)
       }
-      responseContent <- content(r, type = "application/json", encoding = "UTF-8")
-      response <- list(request = request, requestHeaders = headers(r),
-                       status = status_code(r), response = responseContent)
       return(response)
     },
     
@@ -208,6 +219,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       req <- switch(private$type,
         "GET" = private$GET(private$url, private$request, private$progress),
+        "GET_WITH_CURL" = private$GET(private$url, private$request, private$progress, use_curl = TRUE),
         "POST" = private$POST(private$url, private$request, private$data, private$file, private$progress),
         "PUT" = private$PUT(private$url, private$request, private$data, private$progress),
         "DELETE" = private$DELETE(private$url, private$request, private$data)

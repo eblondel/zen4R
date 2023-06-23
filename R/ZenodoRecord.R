@@ -52,7 +52,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$submitted = obj$submitted
       self$title = obj$title
       self$version = obj$version
-      self$stats = data.frame(jsonlite::read_json(obj$links$self)$stats)
+      self$stats = data.frame(obj$stats)
     }
   ),
   public = list(

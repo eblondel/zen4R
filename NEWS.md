@@ -6,6 +6,7 @@
 
 * [#121](https://github.com/eblondel/zen4R/issues/121) Get Zenodo record views/downloads statistics
 * [#122](https://github.com/eblondel/zen4R/issues/122) Support `get_zenodo` shortcut method to get a Zenodo Record
+* [#123](https://github.com/eblondel/zen4R/issues/123) Support curl fetch for Zenodo records to inherit stats directly
 
 **Enhancements**
 
