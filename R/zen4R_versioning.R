@@ -17,16 +17,8 @@
 #' @export
 #' 
 get_versions = function(doi, logger = NULL){
-  
-  zenodo <- suppressWarnings(ZenodoManager$new(logger = logger))
-  rec <- zenodo$getRecordByDOI(doi)
-  if(is.null(rec)){
-    #try to get it as concept DOI
-    rec <- zenodo$getRecordByConceptDOI(doi)
-    if(is.null(rec)){
-      stop("The DOI specified doesn't match any existing Zenodo DOI or concept DOI")
-    }
-  }
+  #get
+  rec = get_zenodo(doi = doi, logger = logger)
   #versions
   versions <- rec$getVersions()
   return(versions)

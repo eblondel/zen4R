@@ -32,16 +32,8 @@
 #' @export
 #' 
 download_zenodo = function(doi, path = ".", files = list(), logger = NULL, quiet = FALSE, ...){
-  
-  zenodo <- suppressWarnings(ZenodoManager$new(logger = logger))
-  rec <- zenodo$getRecordByDOI(doi)
-  if(is.null(rec)){
-    #try to get it as concept DOI
-    rec <- zenodo$getRecordByConceptDOI(doi)
-    if(is.null(rec)){
-      stop("The DOI specified doesn't match any existing Zenodo DOI or concept DOI")
-    }
-  }
+  #rec
+  rec = get_zenodo(doi = doi, logger = logger)
   #download
   rec$downloadFiles(path = path, files = files, quiet = quiet, ...)
 }
