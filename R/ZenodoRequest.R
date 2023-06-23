@@ -67,7 +67,9 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       responseContent <- NULL
       response <- NULL
       if(use_curl){
-        response <- curl::curl_fetch_memory(req)
+        h <- curl::new_handle()
+        curl::handle_setheaders(h, .list = as.list(headers))
+        response <- curl::curl_fetch_memory(req, handle = h)
         responseContent = jsonlite::parse_json(rawToChar(response$content))
         response <- list(
           request = request, requestHeaders = rawToChar(response$headers), 
