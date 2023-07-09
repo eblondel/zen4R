@@ -6,7 +6,6 @@
 
 * [#121](https://github.com/eblondel/zen4R/issues/121) Get Zenodo record views/downloads statistics
 * [#122](https://github.com/eblondel/zen4R/issues/122) Support `get_zenodo` shortcut method to get a Zenodo Record
-* [#123](https://github.com/eblondel/zen4R/issues/123) Support curl fetch for Zenodo records to inherit stats directly
 
 **Enhancements**
 
@@ -15,6 +14,8 @@
 * [#117](https://github.com/eblondel/zen4R/issues/117) Support single (organisation) name argument in `addContributor`
 * [#119](https://github.com/eblondel/zen4R/issues/119) Support sandbox argument for ZenodoManager for easy use
 * [#118](https://github.com/eblondel/zen4R/issues/118) Support sandbox-based controls for license, grant, community management methods
+* [#123](https://github.com/eblondel/zen4R/issues/123) Support curl fetch for Zenodo records to inherit stats directly
+* [#124](https://github.com/eblondel/zen4R/issues/124) Align files listing / download on new method to fetch records
 
 
 ## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
