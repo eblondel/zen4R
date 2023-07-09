@@ -41,7 +41,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$created = obj$created
       self$doi = obj$doi
       self$doi_url = obj$doi_url
-      self$files = obj$files
+      self$files = lapply(obj$files, function(file){
+        list(
+          filename = if(!is.null(file$filename)) file$filename else file$key,
+          filesize = if(!is.null(file$filesize)) file$filesize else file$size,
+          checksum = if(!startsWith(file$checksum, "md5:")) file$checksum else unlist(strsplit(file$checksum, "md5:"))[2],
+          download = if(!is.null(file$links$download)) file$links$download else file$links$self
+        )
+      })
       self$id = obj$id
       self$links = obj$links
       self$metadata = obj$metadata
@@ -1079,11 +1086,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       outdf <- do.call("rbind", lapply(self$files, function(x){
         return(
           data.frame(
-            id = x$id,
-            checksum = x$checksum,
             filename = x$filename,
-            download = x$links$download,
-            self = x$links$self,
+            filesize = x$filesize,
+            checksum = x$checksum,
+            download = x$download,
             stringsAsFactors = FALSE
           )
         )
@@ -1149,7 +1155,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           target_file <- file.path(path, file$filename)
           timeout_cache <- getOption("timeout")
           options(timeout = timeout)
-          download.file(url = file$links$download, destfile = target_file, 
+          download.file(url = file$download, destfile = target_file, 
                         quiet = quiet, mode = "wb")
           options(timeout = timeout_cache)
         }
