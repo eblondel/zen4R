@@ -24,6 +24,7 @@ jobs:
     
     env:
         ZENODO_SANDBOX_TOKEN: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
+        PKG_SYSREQS: false
     
     steps:
       - uses: actions/checkout@v2
@@ -33,6 +34,9 @@ jobs:
         with:
           r-version: ${{ matrix.config.r }}
       #Install dependencies
+      - name: Install dependencies on Linux
+        if: runner.os == 'Linux'
+        run: sudo apt-get install -y make libcurl4-openssl-dev libicu-dev libsecret-1-dev libsodium-dev libxml2-dev libssl-dev pandoc librdf0-dev libnode-dev
       - name: Install dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
