@@ -27,7 +27,7 @@ jobs:
         PKG_SYSREQS: false
     
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       #R Set-up
       - name: Set up R ${{ matrix.config.r }}
         uses: r-lib/actions/setup-r@v2
