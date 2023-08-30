@@ -17,6 +17,11 @@
 * [#123](https://github.com/eblondel/zen4R/issues/123) Support curl fetch for Zenodo records to inherit stats directly
 * [#124](https://github.com/eblondel/zen4R/issues/124) Align files listing / download on new method to fetch records
 
+**Bug fixes**
+
+* [#125](https://github.com/eblondel/zen4R/issues/125) Ensure null stats with deposition decoding (regression that relates to #123)
+
+
 
 ## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
