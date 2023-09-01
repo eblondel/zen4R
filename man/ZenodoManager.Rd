@@ -81,6 +81,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{sandbox}}{Zenodo manager sandbox status, \code{TRUE} if we interact with Sandbox infra}
+
 \item{\code{anonymous}}{Zenodo manager anonymous status, \code{TRUE} when no token is specified}
 }
 \if{html}{\out{</div>}}

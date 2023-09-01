@@ -66,11 +66,12 @@ ZenodoManager <-  R6Class("ZenodoManager",
     keyring_backend = NULL,
     keyring_service = NULL,
     url = "https://zenodo.org/api",
-    sandbox = FALSE,
     verbose.info = FALSE
   ),
   public = list(
     
+    #' @field sandbox Zenodo manager sandbox status, \code{TRUE} if we interact with Sandbox infra
+    sandbox = FALSE, 
     #' @field anonymous Zenodo manager anonymous status, \code{TRUE} when no token is specified
     anonymous = FALSE,
     
@@ -88,7 +89,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       super$initialize(logger = logger)
       if(sandbox) url = "https://sandbox.zenodo.org/api"
       private$url = url
-      if(url == "https://sandbox.zenodo.org/api") private$sandbox = TRUE
+      if(url == "https://sandbox.zenodo.org/api") self$sandbox = TRUE
       if(!is.null(token)) if(nzchar(token)){
         if(!keyring_backend %in% names(keyring:::known_backends)){
           errMsg <- sprintf("Backend '%s' is not a known keyring backend!", keyring_backend)

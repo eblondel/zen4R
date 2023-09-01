@@ -16,6 +16,7 @@
 * [#118](https://github.com/eblondel/zen4R/issues/118) Support sandbox-based controls for license, grant, community management methods
 * [#123](https://github.com/eblondel/zen4R/issues/123) Support curl fetch for Zenodo records to inherit stats directly
 * [#124](https://github.com/eblondel/zen4R/issues/124) Align files listing / download on new method to fetch records
+* [#126](https://github.com/eblondel/zen4R/issues/126) Make field `sandbox` public
 
 **Bug fixes**
 
