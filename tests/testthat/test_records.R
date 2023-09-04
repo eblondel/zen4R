@@ -83,10 +83,13 @@ test_that("create and deposit record",{
   expect_is(deposit, "ZenodoRecord")
   Sys.sleep(5)
   
+  #update metadata
+  myrec$addCommunity("fisheries")
+  ZENODO$depositRecord(myrec)
+  
   #add files
   writeLines("This is a dummy file for testing zen4R", "README.md")
   ZENODO$uploadFile("README.md", record = deposit)
-  unlink("README.md")
   Sys.sleep(5)
   
   #delete record
@@ -123,6 +126,10 @@ test_that("create, deposit and publish record",{
   #deposit
   deposit = ZENODO$depositRecord(myrec)
   expect_is(deposit, "ZenodoRecord")
+  
+  #update metadata
+  myrec$addCommunity("fisheries")
+  ZENODO$depositRecord(myrec)
   
   #add files
   writeLines("This is a dummy file for testing zen4R", "README.md")
