@@ -40,7 +40,13 @@
     <loc>/reference/export_zenodo.html</loc>
   </url>
   <url>
+    <loc>/reference/get_licenses.html</loc>
+  </url>
+  <url>
     <loc>/reference/get_versions.html</loc>
+  </url>
+  <url>
+    <loc>/reference/get_zenodo.html</loc>
   </url>
   <url>
     <loc>/reference/human_filesize.html</loc>
