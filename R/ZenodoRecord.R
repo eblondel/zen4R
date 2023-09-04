@@ -1289,7 +1289,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                 cols = c(download_cols, view_cols, volume_cols)
                 for(col in cols){
                   symbol = ""
-                  if(regexpr("views", col)>0) symbol = "👁"
+                  if(regexpr("views", col)>0) symbol = "○"
                   if(regexpr("downloads", col)>0) symbol = "↓"
                   if(regexpr("volume", col)>0) symbol = "■"
                   cat(paste0("\n",paste(rep(" ", depth), collapse=""),"   ",symbol," ", col, " = ", fieldObj[,col]))
