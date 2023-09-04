@@ -1,6 +1,6 @@
 # Change log
 
-## [zen4R 0.9](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.9](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **New features**
 
@@ -22,8 +22,6 @@
 
 * [#125](https://github.com/eblondel/zen4R/issues/125) Ensure null stats with deposition decoding (regression that relates to #123)
 
-
-
 ## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
@@ -37,7 +35,7 @@
 * [#110](https://github.com/eblondel/zen4R/issues/110) `getFundersByName` new method
 * [#111](https://github.com/eblondel/zen4R/issues/111) `getGrantsByName` new method
 
-## [zen4R 0.7-1](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.7-1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.7-1.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.7-1.tar.gz)
 
 **Bug fixes**
 
