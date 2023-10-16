@@ -191,7 +191,6 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return list of grants as \code{data.frame} or \code{list}
     getCommunities = function(pretty = TRUE, q = "", size = 500){
       page <- 1
-      lastPage <- FALSE
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                   token = self$getToken(),
                                   logger = self$loggerType)
@@ -208,13 +207,15 @@ ZenodoManager <-  R6Class("ZenodoManager",
         hasCommunities <- length(communities)>0
         while(hasCommunities){
           out <- c(out, communities)
-          if(!is.null(communities)){
-            self$INFO(sprintf("Successfully fetched list of communities - page %s", page))
-            page <- page+1  #next
-            total_remaining <- total_remaining-length(communities)
-          }else{
-            lastPage <- TRUE
+          self$INFO(sprintf("Successfully fetched list of communities - page %s", page))
+          total_remaining <- total_remaining-length(communities)
+          if(total_remaining <= size) size = total_remaining
+          if(total_remaining == 0){
+            break
           }
+          
+          #next page
+          page <- page+1
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                       token = self$getToken(),
                                       logger = self$loggerType)
@@ -223,12 +224,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
             resp <- zenReq$getResponse()
             communities <- resp$hits$hits
             hasCommunities <- length(communities)>0
-            if(lastPage) break;
           }else{
-            self$WARN(sprintf("Maximum allowed size for list of communities - page %s - attempt to decrease size", page))
-            size <- size-1
-            hasCommunities <- TRUE
-            communities <- NULL
+            self$WARN(sprintf("Maximum allowed size for list of communities at page %s", page))
+            break
           }
         }
         self$INFO("Successfully fetched list of communities!")
