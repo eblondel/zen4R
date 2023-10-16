@@ -99,8 +99,11 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
 \item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
+\item \href{#method-ZenodoManager-getAwards}{\code{ZenodoManager$getAwards()}}
 \item \href{#method-ZenodoManager-getGrantsByName}{\code{ZenodoManager$getGrantsByName()}}
+\item \href{#method-ZenodoManager-getAwardsByName}{\code{ZenodoManager$getAwardsByName()}}
 \item \href{#method-ZenodoManager-getGrantById}{\code{ZenodoManager$getGrantById()}}
+\item \href{#method-ZenodoManager-getAwardById}{\code{ZenodoManager$getAwardById()}}
 \item \href{#method-ZenodoManager-getFunders}{\code{ZenodoManager$getFunders()}}
 \item \href{#method-ZenodoManager-getFundersByName}{\code{ZenodoManager$getFundersByName()}}
 \item \href{#method-ZenodoManager-getFunderById}{\code{ZenodoManager$getFunderById()}}
@@ -324,7 +327,7 @@ the community
 \if{html}{\out{<a id="method-ZenodoManager-getGrants"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-getGrants}{}}}
 \subsection{Method \code{getGrants()}}{
-Get Grants supported by Zenodo.
+Get Grants supported by Zenodo. DEPRECATED: replaced by \code{getAwards}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getGrants(q = "", pretty = TRUE, size = 500)}\if{html}{\out{</div>}}
 }
@@ -349,10 +352,38 @@ list of grants as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getAwards"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getAwards}{}}}
+\subsection{Method \code{getAwards()}}{
+Get Awards supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getAwards(q = "", pretty = TRUE, size = 500)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all awards can be listed from Zenodo, a query has to be specified.}
+
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of awards as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of awards}
+
+\item{\code{size}}{number of awards to be returned. By default equal to 500.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of awards as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoManager-getGrantsByName"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-getGrantsByName}{}}}
 \subsection{Method \code{getGrantsByName()}}{
-Get grants by name.
+Get grants by name. DEPRECATED: replaced by \code{getAwardByName}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getGrantsByName(name, pretty = TRUE)}\if{html}{\out{</div>}}
 }
@@ -373,10 +404,34 @@ list of grants as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getAwardsByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getAwardsByName}{}}}
+\subsection{Method \code{getAwardsByName()}}{
+Get awards by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getAwardsByName(name, pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{name}
+
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of awards as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of awards}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of awards as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoManager-getGrantById"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-getGrantById}{}}}
 \subsection{Method \code{getGrantById()}}{
-Get grant by Id.
+Get grant by Id.DEPRECATED: replaced by \code{getAwardById}
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getGrantById(id)}\if{html}{\out{</div>}}
 }
@@ -390,6 +445,26 @@ Get grant by Id.
 }
 \subsection{Returns}{
 the grant
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getAwardById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getAwardById}{}}}
+\subsection{Method \code{getAwardById()}}{
+Get award by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getAwardById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{award id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the award
 }
 }
 \if{html}{\out{<hr>}}

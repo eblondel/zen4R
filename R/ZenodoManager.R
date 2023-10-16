@@ -335,10 +335,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #Grants
+    #Special vocabulary/Awards (former Grants)
     #------------------------------------------------------------------------------------------
     
-    #' @description Get Grants supported by Zenodo.
+    #' @description Get Grants supported by Zenodo. DEPRECATED: replaced by \code{getAwards}
     #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
     #'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
     #'    Set \code{pretty = FALSE} to get the raw list of grants
@@ -348,49 +348,56 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param size number of grants to be returned. By default equal to 500.
     #' @return list of grants as \code{data.frame} or \code{list}
     getGrants = function(q = "", pretty = TRUE, size = 500){
+      self$WARN("Method 'getGrants' is deprecated, please use 'getAwards' instead!")
+      return(self$getAwards(q = q, pretty = pretty, size = size)) 
+    },
+    
+    #' @description Get Awards supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of awards as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of awards
+    #' @param q an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+    #'  Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+    #'  not all awards can be listed from Zenodo, a query has to be specified.
+    #' @param size number of awards to be returned. By default equal to 500.
+    #' @return list of awards as \code{data.frame} or \code{list}
+    getAwards = function(q = "", pretty = TRUE, size = 500){
       page <- 1
-      lastPage <- FALSE
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("awards?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() == 200){
         resp <- zenReq$getResponse()
-        grants <- resp$hits$hits
+        awards <- resp$hits$hits
         total <- resp$hits$total
         if(total > 10000){
           self$WARN(sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)) 
         }
         total_remaining <- total
-        hasGrants <- length(grants)>0
-        while(hasGrants){
-          out <- c(out, grants)
-          if(!is.null(grants)){
-            self$INFO(sprintf("Successfully fetched list of grants - page %s", page))
-            if(q!=""){
-              page <- page+1  #next
-              total_remaining <- total_remaining-length(grants)
-            }else{
-              break;
-            }
-          }else{
-            lastPage <- TRUE
+        hasAwards <- length(awards)>0
+        while(hasAwards){
+          out <- c(out, awards)
+          total_remaining <- total_remaining-length(awards)
+          if(total_remaining <= size) size = total_remaining
+          if(total_remaining == 0){
+            break
           }
-          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+          
+          #next page
+          page = page+1
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("awards?q=%s&size=%s&page=%s", URLencode(q), size, page), 
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
           if(zenReq$getStatus() == 200){
             resp <- zenReq$getResponse()
-            grants <- resp$hits$hits
-            hasGrants <- length(grants)>0
-            if(lastPage) break;
+            awards <- resp$hits$hits
+            hasAwards <- length(awards)>0
           }else{
-            self$WARN(sprintf("Maximum allowed size for list of grants - page %s - attempt to decrease size", page))
-            size <- size-1
-            hasGrants <- TRUE
-            grants <- NULL
+            self$WARN(sprintf("Maximum allowed size for list of awars at page %s", page))
+            break
           }
         }
         self$INFO("Successfully fetched list of grants!")
@@ -405,24 +412,14 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(pretty){
         out = do.call("rbind", lapply(out,function(x){
           rec = data.frame(
-            id = x$metadata$internal_id,
-            code = x$metadata$code,
-            title = x$metadata$title,
-            startdate = x$metadata$startdate,
-            enddate = x$metadata$enddate,
-            url = x$metadata$url,
+            id = x$id,
+            number = x$number,
+            title = x$title[[1]],
             created = x$created,
             updated = x$updated,
-            funder_country = x$metadata$funder$country,
-            funder_doi = x$metadata$funder$doi,
-            funder_name = x$metadata$funder$name,
-            funder_type = x$metadata$funder$type,
-            funder_subtype = x$metadata$funder$subtype,
-            funder_parent_country = if(length(x$metadata$funder$parent)>0) x$metadata$funder$parent$country else NA,
-            funder_parent_doi = if(length(x$metadata$funder$parent)>0) x$metadata$funder$parent$doi else NA,
-            funder_parent_name = if(length(x$metadata$funder$parent)>0) x$metadata$funder$parent$name else NA,
-            funder_parent_type = if(length(x$metadata$funder$parent)>0) x$metadata$funder$parent$type else NA,
-            funder_parent_subtype = if(length(x$metadata$funder$parent)>0) x$metadata$funder$parent$subtype else NA,
+            funder_id = x$funder$id,
+            funder_name = x$funder$name,
+            program = if(!is.null(x$program)) x$program else NA,
             stringsAsFactors = FALSE
           )
           return(rec)
@@ -431,30 +428,49 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #' @description Get grants by name.
+    #' @description Get grants by name. DEPRECATED: replaced by \code{getAwardByName} 
     #' @param name name
     #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
     #'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
     #'    Set \code{pretty = FALSE} to get the raw list of grants
     #' @return list of grants as \code{data.frame} or \code{list}
     getGrantsByName = function(name, pretty = TRUE){
-      query = sprintf("title:%s", URLencode(paste0("\"",name,"\"")))
-      self$getGrants(q = query, pretty = pretty)
+      self$WARN("Method 'getGrantsByName' is deprecated, please use 'getAwardsByName' instead!")
+      return(self$getAwardsByName(name = name, pretty = pretty))
     },
     
-    #' @description Get grant by Id.
+    #' @description Get awards by name.
+    #' @param name name
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of awards as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of awards
+    #' @return list of awards as \code{data.frame} or \code{list}
+    getAwardsByName = function(name, pretty = TRUE){
+      query = sprintf("title.en:%s", URLencode(paste0("\"",name,"\"")))
+      self$getAwards(q = query, pretty = pretty)
+    },
+    
+    #' @description Get grant by Id.DEPRECATED: replaced by \code{getAwardById} 
     #' @param id grant id
     #' @return the grant
     getGrantById = function(id){
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("grants/%s",id),
+      self$WARN("Method 'getGrantById' is deprecated, please use 'getAwardById' instead!")
+      return(self$getAwardById(id))
+    },
+    
+    #' @description Get award by Id. 
+    #' @param id award id
+    #' @return the award
+    getAwardById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("awards/%s",id),
                                   token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
-        self$INFO(sprintf("Successfully fetched grant '%s'",id))
+        self$INFO(sprintf("Successfully fetched award '%s'",id))
       }else{
-        self$ERROR(sprintf("Error while fetching grant '%s': %s", id, out$message))
+        self$ERROR(sprintf("Error while fetching award '%s': %s", id, out$message))
         out <- NULL
       }
       return(out)
