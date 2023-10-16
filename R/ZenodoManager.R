@@ -134,22 +134,26 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #'    Set \code{pretty = FALSE} to get the raw list of licenses.
     #' @return list of licenses as \code{data.frame} or \code{list}
     getLicenses = function(pretty = TRUE){
-      zenReq <- ZenodoRequest$new(private$url, "GET", "licenses/?q=&size=1000",
+      zenReq <- ZenodoRequest$new(private$url, "GET", "vocabularies/licenses?q=&size=1000",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
-        out <- out$hits$hits
+        out = out$hits$hits
         if(pretty){
           out = do.call("rbind", lapply(out,function(x){
-            rec = x$metadata
-            rec$`$schema` <- NULL
-            rec$is_generic <- NULL
-            rec$suggest <- NULL
-            rec <- as.data.frame(rec)
-            rec <- rec[,c("id", "title", "url", "domain_content", "domain_data", "domain_software", "family", 
-                          "maintainer", "od_conformance", "osd_conformance", "status")]
+            rec = data.frame(
+              id = x$id,
+              title = x$title[[1]],
+              description = if(!is.null(x$description)) x$description[[1]] else NA,
+              url = x$props$url,
+              schema = x$props$scheme,
+              osi_approved = x$props$osi_approved,
+              revision_id = x$revision_id,
+              created = x$created,
+              updated = x$updated
+            )
             return(rec)
           }))
         }
@@ -164,7 +168,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param id license id
     #' @return the license
     getLicenseById = function(id){
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("licenses/%s",id),
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("vocabularies/licenses/%s",id),
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
