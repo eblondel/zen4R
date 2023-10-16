@@ -184,34 +184,82 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
     #'    \code{TRUE} which will returns the list of communities as \code{data.frame}.
     #'    Set \code{pretty = FALSE} to get the raw list of communities
-    #' @return list of communities as \code{data.frame} or \code{list}
-    getCommunities = function(pretty = TRUE){
-      zenReq <- ZenodoRequest$new(private$url, "GET", "communities/?q=&size=10000",
-                                  token= self$getToken(),
+    #' @param q an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+    #'  Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+    #'  not all grants can be listed from Zenodo, a query has to be specified.
+    #' @param size number of grants to be returned. By default equal to 1000.
+    #' @return list of grants as \code{data.frame} or \code{list}
+    getCommunities = function(pretty = TRUE, q = "", size = 100){
+      page <- 1
+      lastPage <- FALSE
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
-      out <- zenReq$getResponse()
+      out <- NULL
       if(zenReq$getStatus() == 200){
-        out <- out$hits$hits
-        if(pretty){
-          out = do.call("rbind", lapply(out,function(x){
-            rec = data.frame(
-              id = x$id,
-              title = x$title,
-              description = x$description,
-              curation_policy = x$curation_policy,
-              url = x$links$html,
-              created = x$created,
-              updated = x$updated,
-              stringsAsFactors = FALSE
-            )
-            return(rec)
-          }))
+        resp <- zenReq$getResponse()
+        communities <- resp$hits$hits
+        total <- resp$hits$total
+        if(total > 10000){
+          self$WARN(sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)) 
         }
-        self$INFO("Successfully fetched list of communities")
+        total_remaining <- total
+        hasCommunities <- length(communities)>0
+        while(hasCommunities){
+          out <- c(out, communities)
+          if(!is.null(communities)){
+            self$INFO(sprintf("Successfully fetched list of communities - page %s", page))
+            page <- page+1  #next
+            total_remaining <- total_remaining-length(communities)
+          }else{
+            lastPage <- TRUE
+          }
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                      token = self$getToken(),
+                                      logger = self$loggerType)
+          zenReq$execute()
+          if(zenReq$getStatus() == 200){
+            resp <- zenReq$getResponse()
+            communities <- resp$hits$hits
+            hasCommunities <- length(communities)>0
+            if(lastPage) break;
+          }else{
+            self$WARN(sprintf("Maximum allowed size for list of communities - page %s - attempt to decrease size", page))
+            size <- size-1
+            hasCommunities <- TRUE
+            communities <- NULL
+          }
+        }
+        self$INFO("Successfully fetched list of communities!")
       }else{
+        out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while fetching communities: %s", out$message))
+        for(error in out$errors){
+          self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
+        }
       }
+      
+      if(pretty){
+        out = do.call("rbind", lapply(out,function(x){
+          rec = data.frame(
+            id = x$id,
+            title = x$metadata$title,
+            description = if(!is.null(x$metadata$description)) x$metadata$description else NA,
+            website = if(!is.null(x$metadata$website)) x$metadata$website else NA,
+            visibility = x$access$visibility,
+            member_policy = x$access$member_policy,
+            record_policy = x$access$record_policy,
+            review_policy = x$access$review_policy,
+            url = x$links$self_html,
+            created = x$created,
+            updated = x$updated,
+            stringsAsFactors = FALSE
+          )
+          return(rec)
+        }))
+      }
+      
       return(out)
     },
     
@@ -241,7 +289,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #'    \code{TRUE} which will returns the list of grants as \code{data.frame}.
     #'    Set \code{pretty = FALSE} to get the raw list of grants
     #' @param q an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
-    #'  Note that the Zenodo API restrains a maximum number of 10,000 grants to be retrieved. Consequently,
+    #'  Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
     #'  not all grants can be listed from Zenodo, a query has to be specified.
     #' @param size number of grants to be returned. By default equal to 1000.
     #' @return list of grants as \code{data.frame} or \code{list}

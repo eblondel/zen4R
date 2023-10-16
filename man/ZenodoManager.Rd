@@ -234,7 +234,7 @@ the license
 \subsection{Method \code{getCommunities()}}{
 Get Communities supported by Zenodo.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getCommunities(pretty = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getCommunities(pretty = TRUE, q = "", size = 100)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -243,11 +243,15 @@ Get Communities supported by Zenodo.
 \item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
 \code{TRUE} which will returns the list of communities as \code{data.frame}.
 Set \code{pretty = FALSE} to get the raw list of communities}
+
+\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.}
+
+\item{\code{size}}{number of grants to be returned. By default equal to 1000.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-list of communities as \code{data.frame} or \code{list}
+list of grants as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
