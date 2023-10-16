@@ -756,8 +756,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
     depositRecord = function(record, publish = FALSE){
       data <- record
       type <- ifelse(is.null(record$id), "POST", "PUT")
-      request <- ifelse(is.null(record$id), "deposit/depositions", 
-                        sprintf("deposit/depositions/%s", record$id))
+      request <- ifelse(is.null(record$id), "records", 
+                        sprintf("records/%s/draft", record$id))
       zenReq <- ZenodoRequest$new(private$url, type, request, data = data,
                                   token = self$getToken(), 
                                   logger = self$loggerType)
