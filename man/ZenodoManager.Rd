@@ -92,6 +92,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \itemize{
 \item \href{#method-ZenodoManager-new}{\code{ZenodoManager$new()}}
 \item \href{#method-ZenodoManager-getToken}{\code{ZenodoManager$getToken()}}
+\item \href{#method-ZenodoManager-getLanguages}{\code{ZenodoManager$getLanguages()}}
+\item \href{#method-ZenodoManager-getLanguageById}{\code{ZenodoManager$getLanguageById()}}
 \item \href{#method-ZenodoManager-getLicenses}{\code{ZenodoManager$getLicenses()}}
 \item \href{#method-ZenodoManager-getLicenseById}{\code{ZenodoManager$getLicenseById()}}
 \item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
@@ -184,6 +186,48 @@ Get user token
 
 \subsection{Returns}{
 the token, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getLanguages"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getLanguages}{}}}
+\subsection{Method \code{getLanguages()}}{
+Get Languages supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getLanguages(pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of languages as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of languages}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of languages as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getLanguageById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getLanguageById}{}}}
+\subsection{Method \code{getLanguageById()}}{
+Get language by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getLanguageById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{license id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the license
 }
 }
 \if{html}{\out{<hr>}}

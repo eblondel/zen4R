@@ -125,7 +125,59 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(token)
     },
     
-    #Licenses
+    #Vocabulary/Languages
+    #------------------------------------------------------------------------------------------    
+    
+    #' @description Get Languages supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of languages as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of languages
+    #' @return list of languages as \code{data.frame} or \code{list}
+    getLanguages = function(pretty = TRUE){
+      zenReq <- ZenodoRequest$new(private$url, "GET", "vocabularies/languages?q=&size=1000",
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        out = out$hits$hits
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = data.frame(
+              id = x$id,
+              title = x$title[[1]],
+              revision_id = x$revision_id,
+              created = x$created,
+              updated = x$updated
+            )
+            return(rec)
+          }))
+        }
+        self$INFO("Successfully fetched list of languages")
+      }else{
+        self$ERROR(sprintf("Error while fetching languages: %s", out$message))
+      }
+      return(out)
+    },
+    
+    #' @description Get language by Id.
+    #' @param id license id
+    #' @return the license
+    getLanguageById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("vocabularies/languages/%s",id),
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successfully fetched language '%s'",id))
+      }else{
+        self$ERROR(sprintf("Error while fetching language '%s': %s", id, out$message))
+      }
+      return(out)
+    },
+    
+    #Vocabulary/Licenses
     #------------------------------------------------------------------------------------------
 
     #' @description Get Licenses supported by Zenodo.
