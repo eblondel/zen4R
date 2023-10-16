@@ -242,9 +242,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #'    Set \code{pretty = FALSE} to get the raw list of communities
     #' @param q an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
     #'  Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
-    #'  not all grants can be listed from Zenodo, a query has to be specified.
-    #' @param size number of grants to be returned. By default equal to 500
-    #' @return list of grants as \code{data.frame} or \code{list}
+    #'  not all communities can be listed from Zenodo, a query has to be specified.
+    #' @param size number of communities to be returned. By default equal to 500
+    #' @return list of communities as \code{data.frame} or \code{list}
     getCommunities = function(pretty = TRUE, q = "", size = 500){
       page <- 1
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 

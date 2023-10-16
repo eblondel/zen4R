@@ -290,14 +290,14 @@ Set \code{pretty = FALSE} to get the raw list of communities}
 
 \item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
 Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
-not all grants can be listed from Zenodo, a query has to be specified.}
+not all communities can be listed from Zenodo, a query has to be specified.}
 
-\item{\code{size}}{number of grants to be returned. By default equal to 500}
+\item{\code{size}}{number of communities to be returned. By default equal to 500}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-list of grants as \code{data.frame} or \code{list}
+list of communities as \code{data.frame} or \code{list}
 }
 }
 \if{html}{\out{<hr>}}
