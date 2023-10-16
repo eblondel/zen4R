@@ -234,7 +234,7 @@ the license
 \subsection{Method \code{getCommunities()}}{
 Get Communities supported by Zenodo.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getCommunities(pretty = TRUE, q = "", size = 100)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getCommunities(pretty = TRUE, q = "", size = 500)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -244,9 +244,11 @@ Get Communities supported by Zenodo.
 \code{TRUE} which will returns the list of communities as \code{data.frame}.
 Set \code{pretty = FALSE} to get the raw list of communities}
 
-\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.}
+\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all grants can be listed from Zenodo, a query has to be specified.}
 
-\item{\code{size}}{number of grants to be returned. By default equal to 1000.}
+\item{\code{size}}{number of grants to be returned. By default equal to 500}
 }
 \if{html}{\out{</div>}}
 }
@@ -287,7 +289,7 @@ Get Grants supported by Zenodo.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
-Note that the Zenodo API restrains a maximum number of 10,000 grants to be retrieved. Consequently,
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
 not all grants can be listed from Zenodo, a query has to be specified.}
 
 \item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
