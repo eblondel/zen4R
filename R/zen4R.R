@@ -14,6 +14,7 @@
 #' @importFrom tools md5sum
 #' @import atom4R
 #' @importFrom utf8 utf8_encode
+#' @importFrom plyr rbind.fill
 #' 
 #' @title Interface to 'Zenodo' REST API
 #' @description Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 

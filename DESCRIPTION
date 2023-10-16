@@ -11,7 +11,7 @@ Authors@R: c(
   person("Jemma", "Stachelek", role = c("ctb"), comment = c(ORCID = "0000-0002-5924-2464")))
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
-Imports: R6, httr, jsonlite, XML, xml2, keyring, tools, atom4R, utf8
+Imports: R6, httr, jsonlite, XML, xml2, keyring, tools, atom4R, utf8, plyr
 Suggests: testthat, parallel, knitr, markdown
 Description: Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API, 
   including management of depositions, attribution of DOIs by 'Zenodo' and 
