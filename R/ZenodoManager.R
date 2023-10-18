@@ -1023,8 +1023,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
         newapi <- FALSE
       }
       method <- if(newapi) "PUT"  else "POST"
-      if(newapi) self$INFO(sprintf("Using new file upload API with bucket: %s", record$links$bucket))
-      method_url <- if(newapi) sprintf("%s/%s", unlist(strsplit(record$links$bucket, "api/"))[2], URLencode(filename)) else sprintf("deposit/depositions/%s/files", recordId)
+      if(newapi) self$INFO("Using new file upload API with bucket")
+      method_url <- if(newapi) sprintf("records/%s/draft/files/%s/content", recordId, URLencode(filename)) else sprintf("deposit/depositions/%s/files", recordId)
+      print(method_url)
       zenReq <- if(newapi){
         ZenodoRequest$new(
           private$url, method, method_url, 
@@ -1045,8 +1046,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() == 201){
-        out <- ZenodoRecord$new(obj = zenReq$getResponse())
         self$INFO(sprintf("Successful uploaded file to record '%s'", recordId))
+        rec_files = self$getFiles(recordId = recordId)
+        out = rec_files$entries[sapply(rec_files$entries, function(x){x$key == filename})][[1]]
+        return(out)
       }else{
         out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while uploading file to record '%s': %s", recordId, out$message))

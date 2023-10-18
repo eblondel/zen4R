@@ -134,12 +134,12 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     PUT = function(url, request, data, progress){
       req <- paste(url, request, sep="/")
       
-      if(regexpr("api/files", req)<0) data <- private$prepareData(data)
+      if(regexpr("draft/files", req)<0) data <- private$prepareData(data)
       
       #headers
       headers <- c(
         "User-Agent" = private$agent,
-        "Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
+        "Content-Type" = if(regexpr("draft/files", req)>0) "application/octet-stream" else "application/json",
         "Authorization" = paste("Bearer",private$token)
       )
       
