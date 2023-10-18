@@ -989,7 +989,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param recordId the ID of the record.
     #' @return list of files
     getFiles = function(recordId){
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("deposit/depositions/%s/files", recordId), 
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/files", recordId), 
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
