@@ -122,6 +122,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-discardChanges}{\code{ZenodoManager$discardChanges()}}
 \item \href{#method-ZenodoManager-publishRecord}{\code{ZenodoManager$publishRecord()}}
 \item \href{#method-ZenodoManager-getFiles}{\code{ZenodoManager$getFiles()}}
+\item \href{#method-ZenodoManager-getFile}{\code{ZenodoManager$getFile()}}
 \item \href{#method-ZenodoManager-startFileUpload}{\code{ZenodoManager$startFileUpload()}}
 \item \href{#method-ZenodoManager-completeFileUpload}{\code{ZenodoManager$completeFileUpload()}}
 \item \href{#method-ZenodoManager-uploadFile}{\code{ZenodoManager$uploadFile()}}
@@ -876,6 +877,28 @@ Get list of files attached to a Zenodo record.
 }
 \subsection{Returns}{
 list of files
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getFile"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getFile}{}}}
+\subsection{Method \code{getFile()}}{
+Get a file record metadata.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getFile(recordId, filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of the record.}
+
+\item{\code{filename}}{filename}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the file metadata
 }
 }
 \if{html}{\out{<hr>}}

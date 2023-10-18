@@ -1007,6 +1007,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #' @description Get a file record metadata.
+    #' @param recordId the ID of the record.
+    #' @param filename filename
+    #' @return the file metadata
+    getFile = function(recordId, filename){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/files/%s", recordId, filename), 
+                                  token = self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successful fetched file metadata for record '%s' - filename '%s'", recordId, filename))
+      }else{
+        self$ERROR(sprintf("Error while fetching file(s) for record '%s': %s", recordId, out$message))
+      }
+      return(out)
+    },
+    
     #' @description Start a file upload. The method will create a key for the file to be uploaded
     #' This method is essentially for internal purpose, and is called directly in \code{uploadFile}
     #' for user convenience and for backward compatibility with the legacy Zenodo API.
