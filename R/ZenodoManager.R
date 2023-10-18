@@ -985,6 +985,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #File management
+    #------------------------------------------------------------------------------------------
+    
     #' @description Get list of files attached to a Zenodo record.
     #' @param recordId the ID of the record.
     #' @return list of files
@@ -1004,11 +1007,65 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #' @description Uploads a file to a Zenodo record
+    #' @description Start a file upload. The method will create a key for the file to be uploaded
+    #' This method is essentially for internal purpose, and is called directly in \code{uploadFile}
+    #' for user convenience and for backward compatibility with the legacy Zenodo API.
     #' @param path Local path of the file
-    #' @param record object of class \code{ZenodoRecord}
+    #' @param recordId ID of the record
+    startFileUpload = function(path, recordId){
+      self$INFO(sprintf("Start upload procedure for file '%s'", path))
+      fileparts <- unlist(strsplit(path,"/"))
+      filename <- fileparts[length(fileparts)]
+    
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft/files", recordId),
+                                  data = list(list(key = filename)),
+                                  token = self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- FALSE
+      if(zenReq$getStatus() == 201){
+        self$INFO(sprintf("Successfully started upload procedure for file '%s'", path))
+        out <- TRUE
+      }else{
+        self$ERROR(sprintf("Error while starting upload procedure for file '%s' in record %s: %s", 
+                           path, recordId, out$message))
+      }
+      return(out)
+    },
+    
+    #' @description Completes a file upload. The method will complete a file upload through a commit operation
+    #' This method is essentially for internal purpose, and is called directly in \code{uploadFile}
+    #' for user convenience and for backward compatibility with the legacy Zenodo API.
+    #' @param path Local path of the file
+    #' @param recordId ID of the record
+    completeFileUpload = function(path, recordId){
+      self$INFO(sprintf("Complete upload procedure for file '%s'", path))
+      fileparts <- unlist(strsplit(path,"/"))
+      filename <- fileparts[length(fileparts)]
+
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft/files/%s/commit", recordId, filename),
+                                  token = self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- FALSE
+      if(zenReq$getStatus() == 200){
+        self$INFO(sprintf("Successfully completed upload procedure for file '%s'", path))
+        out <- TRUE
+      }else{
+        self$ERROR(sprintf("Error while completing upload procedure for file '%s' in record %s: %s", 
+                           path, recordId, out$message))
+      }
+      return(out)
+    },
+    
+    #' @description Uploads a file to a Zenodo record. With the new Zenodo Invenio RDM API, this method
+    #' internally calls \code{startFileUpload} to create a file record (with a filename key) at start, followed
+    #' by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
+    #' the function calls \code{completeFileUpload} to commit the file which status becomes "completed".
+    #' @param path Local path of the file
     #' @param recordId ID of the record. Deprecated, use \code{record} instead to take advantage of the new Zenodo bucket upload API.
-    uploadFile = function(path, record = NULL, recordId = NULL){
+    #' @param record object of class \code{ZenodoRecord}
+    uploadFile = function(path, recordId = NULL, record = NULL){
       newapi = TRUE
       if(!is.null(recordId)){
         self$WARN("'recordId' argument is deprecated, please consider using 'record' argument giving an object of class 'ZenodoRecord'")
@@ -1022,6 +1079,16 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$WARN(sprintf("No bucket link for record id = %s. Revert to old file upload API", recordId))
         newapi <- FALSE
       }
+      
+      #start upload (needed with new Invenio RDM API)
+      if(newapi){
+        started = self$startFileUpload(path = path, recordId = recordId)
+        if(!started){
+          return(NULL)
+        }
+      }
+        
+      #proceed with upload
       method <- if(newapi) "PUT"  else "POST"
       if(newapi) self$INFO("Using new file upload API with bucket")
       method_url <- if(newapi) sprintf("records/%s/draft/files/%s/content", recordId, URLencode(filename)) else sprintf("deposit/depositions/%s/files", recordId)
@@ -1054,10 +1121,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
         out <- zenReq$getResponse()
         self$ERROR(sprintf("Error while uploading file to record '%s': %s", recordId, out$message))
       }
+      
+      #complete upload (needed with new Invenio RDM API)
+      if(newapi){
+        completed = self$completeFileUpload(path = path, recordId = recordId)
+        if(!completed){
+          self$WARN("File upload procedure completion failed, file is uploaded but remains in 'pending' status!")
+        }else{
+          out$status = "completed"
+        }
+      }
+
       return(out)
     },
     
-    #' @description Deletes a file for a record
+    #' @description Deletes a file for a record. With the new Zenodo Invenio RDM API, if a file is
+    #' deleted although its status was pending, only the upload content is deleted, and the file upload
+    #' record (identified by a filename key) is kept. If the status was completed (with a file commit),
+    #' the file record is deleted. 
     #' @param recordId ID of the record
     #' @param filename name of the file to be deleted
     deleteFile = function(recordId, filename){

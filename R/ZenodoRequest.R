@@ -47,8 +47,10 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         data <- data[!sapply(data, is.null)]
       }else if(is(data, "list")){
         meta <- data$metadata
-        if(!is.null(meta$prereserve_doi)) meta$prereserve_doi <- NULL
-        data <- list(metadata = meta)
+        if(!is.null(meta)){
+          if(!is.null(meta$prereserve_doi)) meta$prereserve_doi <- NULL
+          data <- list(metadata = meta)
+        }
       }
       
       data <- as(toJSON(data, pretty=T, auto_unbox=T), "character")

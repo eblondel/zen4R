@@ -122,6 +122,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-discardChanges}{\code{ZenodoManager$discardChanges()}}
 \item \href{#method-ZenodoManager-publishRecord}{\code{ZenodoManager$publishRecord()}}
 \item \href{#method-ZenodoManager-getFiles}{\code{ZenodoManager$getFiles()}}
+\item \href{#method-ZenodoManager-startFileUpload}{\code{ZenodoManager$startFileUpload()}}
+\item \href{#method-ZenodoManager-completeFileUpload}{\code{ZenodoManager$completeFileUpload()}}
 \item \href{#method-ZenodoManager-uploadFile}{\code{ZenodoManager$uploadFile()}}
 \item \href{#method-ZenodoManager-deleteFile}{\code{ZenodoManager$deleteFile()}}
 \item \href{#method-ZenodoManager-getRecords}{\code{ZenodoManager$getRecords()}}
@@ -877,12 +879,14 @@ list of files
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoManager-uploadFile"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoManager-uploadFile}{}}}
-\subsection{Method \code{uploadFile()}}{
-Uploads a file to a Zenodo record
+\if{html}{\out{<a id="method-ZenodoManager-startFileUpload"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-startFileUpload}{}}}
+\subsection{Method \code{startFileUpload()}}{
+Start a file upload. The method will create a key for the file to be uploaded
+This method is essentially for internal purpose, and is called directly in \code{uploadFile}
+for user convenience and for backward compatibility with the legacy Zenodo API.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$uploadFile(path, record = NULL, recordId = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$startFileUpload(path, recordId)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -890,9 +894,52 @@ Uploads a file to a Zenodo record
 \describe{
 \item{\code{path}}{Local path of the file}
 
-\item{\code{record}}{object of class \code{ZenodoRecord}}
+\item{\code{recordId}}{ID of the record}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-completeFileUpload"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-completeFileUpload}{}}}
+\subsection{Method \code{completeFileUpload()}}{
+Completes a file upload. The method will complete a file upload through a commit operation
+This method is essentially for internal purpose, and is called directly in \code{uploadFile}
+for user convenience and for backward compatibility with the legacy Zenodo API.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$completeFileUpload(path, recordId)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{path}}{Local path of the file}
+
+\item{\code{recordId}}{ID of the record}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-uploadFile"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-uploadFile}{}}}
+\subsection{Method \code{uploadFile()}}{
+Uploads a file to a Zenodo record. With the new Zenodo Invenio RDM API, this method
+internally calls \code{startFileUpload} to create a file record (with a filename key) at start, followed
+by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
+the function calls \code{completeFileUpload} to commit the file which status becomes "completed".
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$uploadFile(path, recordId = NULL, record = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{path}}{Local path of the file}
 
 \item{\code{recordId}}{ID of the record. Deprecated, use \code{record} instead to take advantage of the new Zenodo bucket upload API.}
+
+\item{\code{record}}{object of class \code{ZenodoRecord}}
 }
 \if{html}{\out{</div>}}
 }
@@ -901,7 +948,10 @@ Uploads a file to a Zenodo record
 \if{html}{\out{<a id="method-ZenodoManager-deleteFile"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-deleteFile}{}}}
 \subsection{Method \code{deleteFile()}}{
-Deletes a file for a record
+Deletes a file for a record. With the new Zenodo Invenio RDM API, if a file is
+deleted although its status was pending, only the upload content is deleted, and the file upload
+record (identified by a filename key) is kept. If the status was completed (with a file commit),
+the file record is deleted.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteFile(recordId, filename)}\if{html}{\out{</div>}}
 }
