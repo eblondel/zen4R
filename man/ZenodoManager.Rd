@@ -903,7 +903,7 @@ Uploads a file to a Zenodo record
 \subsection{Method \code{deleteFile()}}{
 Deletes a file for a record
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteFile(recordId, fileId)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteFile(recordId, filename)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -911,7 +911,7 @@ Deletes a file for a record
 \describe{
 \item{\code{recordId}}{ID of the record}
 
-\item{\code{fileId}}{ID of the file to delete}
+\item{\code{filename}}{name of the file to be deleted}
 }
 \if{html}{\out{</div>}}
 }

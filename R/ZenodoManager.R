@@ -1056,10 +1056,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #' @description Deletes a file for a record
     #' @param recordId ID of the record
-    #' @param fileId ID of the file to delete
-    deleteFile = function(recordId, fileId){
-      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("deposit/depositions/%s/files", recordId), 
-                                  data = fileId, token = self$getToken(),
+    #' @param filename name of the file to be deleted
+    deleteFile = function(recordId, filename){
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/draft/files", recordId), 
+                                  data = filename, token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
