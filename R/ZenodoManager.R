@@ -869,8 +869,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param recordId the ID of the record to be deleted
     #' @return \code{TRUE} if deleted, \code{FALSE} otherwise
     deleteRecord = function(recordId){
-      zenReq <- ZenodoRequest$new(private$url, "DELETE", "deposit/depositions", 
-                                  data = recordId, token = self$getToken(),
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/draft", recordId), 
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
