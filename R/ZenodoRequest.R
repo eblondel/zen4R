@@ -169,7 +169,8 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     },
     
     DELETE = function(url, request, data){
-      req <- paste(url, request, data, sep="/")
+      req <- paste(url, request, sep="/")
+      if(!is.null(data)) req <- paste(req, data, sep = "/")
       #headers
       headers <- c(
         "User-Agent" = private$agent,
