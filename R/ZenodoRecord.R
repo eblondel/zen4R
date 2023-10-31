@@ -108,6 +108,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       if(!is.null(obj)) private$fromList(obj)
     },
     
+    #Invenio RDM API new methods
+    #---------------------------------------------------------------------------
+    
+    
+    #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
+    #----------------------------------------------------------------------------
+    
     #' @description Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
     #'    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
     #'    the record created doesn't yet handle a DOI. To avoid prereserving a DOI call \code{$prereserveDOI(FALSE)} 
@@ -971,18 +978,18 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @return the writen file name (with extension)
     exportAs = function(format, filename, append_format = TRUE){
       zenodo_url <- self$links$record_html
-      if(is.null(zenodo_url)) zenodo_url <- self$links$latest_html
+      if(is.null(zenodo_url)) zenodo_url <- self$links$self_html
       if(is.null(zenodo_url)){
         stop("Ups, this record seems a draft, can't export metadata until it is published!")
       }
       metadata_export_url <- switch(format,
-        "BibTeX" = paste0(zenodo_url,"/export/hx"),
+        "BibTeX" = paste0(zenodo_url,"/export/bibtex"),
         "CSL" =  paste0(zenodo_url,"/export/csl"),
-        "DataCite" =  paste0(zenodo_url,"/export/dcite4"),
-        "DublinCore" =  paste0(zenodo_url,"/export/xd"),
-        "DCAT" =  paste0(zenodo_url,"/export/dcat"),
+        "DataCite" =  paste0(zenodo_url,"/export/datacite-xml"),
+        "DublinCore" =  paste0(zenodo_url,"/export/dublincore"),
+        "DCAT" =  paste0(zenodo_url,"/export/dcat-ap"),
         "JSON" =  paste0(zenodo_url,"/export/json"),
-        "JSON-LD" =  paste0(zenodo_url,"/export/schemaorg_jsonld"),
+        "JSON-LD" =  paste0(zenodo_url,"/export/json-ld"),
         "GeoJSON" =  paste0(zenodo_url,"/export/geojson"),
         "MARCXML" =  paste0(zenodo_url,"/export/xm"),
         NULL
@@ -992,19 +999,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
       
       fileext <- private$getExportFormatExtension(format)
-      
-      html <- xml2::read_html(metadata_export_url)
-      reference <- xml2::xml_find_all(html, ".//pre")
-      reference <- reference[1]
-      reference <- gsub("<pre.*\">","",reference)
-      reference <- gsub("</pre>","",reference)
-      if(fileext %in% c("xml", "rdf")){
-        reference <- gsub("&lt;", "<", reference)
-        reference <- gsub("&gt;", ">", reference)
-      }
-    
       destfile <- paste(paste0(filename, ifelse(append_format,paste0("_", format),"")), fileext, sep = ".")
-      writeChar(reference, destfile, eos = NULL)
+      req <- httr::GET(
+        url = metadata_export_url,
+        httr::write_disk(path = destfile, overwrite = TRUE)
+      )
       return(destfile)
     },
     
