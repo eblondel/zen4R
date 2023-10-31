@@ -87,7 +87,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     initialize = function(url = "https://zenodo.org/api", token = zenodo_pat(), sandbox = FALSE, logger = NULL,
                           keyring_backend = 'env'){
       super$initialize(logger = logger)
-      if(sandbox) url = "https://sandbox.zenodo.org/api"
+      if(sandbox) url = "https://zenodo-rdm-qa.web.cern.ch/api"
       private$url = url
       if(url == "https://sandbox.zenodo.org/api") self$sandbox = TRUE
       if(!is.null(token)) if(nzchar(token)){
