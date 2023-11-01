@@ -593,14 +593,13 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #Depositions
     #------------------------------------------------------------------------------------------
     
-    #' @description Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
-    #'    the list of depositions will be returned by page with a size of 10 results per
-    #'    page (default size of the Zenodo API). The parameter \code{q} allows to specify
-    #'    an ElasticSearch-compliant query to filter depositions (default query is empty 
-    #'    to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
-    #'    to get all versions of records as part of the depositions list. The argument \code{exact}
-    #'    specifies that an exact matching is wished, in which case paginated search will be
-    #'    disabled (only the first search page will be returned).
+    #' @description Get the list of Zenodo records deposited in your Zenodo workspace (user records). By default
+    #'    the list of depositions will be returned by page with a size of 10 results per page (default size of 
+    #'    the Zenodo API). The parameter \code{q} allows to specify an ElasticSearch-compliant query to filter 
+    #'    depositions (default query is empty to retrieve all records). The argument \code{all_versions}, if set 
+    #'    to TRUE allows to get all versions of records as part of the depositions list. The argument \code{exact}
+    #'    specifies that an exact matching is wished, in which case paginated search will be disabled (only the first 
+    #'    search page will be returned).
     #'    Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
     #' @param q Elastic-Search-compliant query, as object of class \code{character}. Default is ""
     #' @param size number of depositions to be retrieved per request (paginated). Default is 10
@@ -608,16 +607,16 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param exact object of class \code{logical} indicating if exact matching has to be applied. Default is \code{TRUE}
     #' @param quiet object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}
     #' @return a list of \code{ZenodoRecord}
-    getDepositions = function(q = "", size = 10, all_versions = FALSE, exact = TRUE,
+    getDepositions = function(q = "", size = 10, all_versions = FALSE, exact = FALSE,
                               quiet = FALSE){
       page <- 1
-      baseUrl <- "deposit/depositions"
+      baseUrl <- "user/records"
       
       #set in #72, now re-deactivated through #76 (due to Zenodo server-side changes)
       #if(!private$sandbox) baseUrl <- paste0(baseUrl, "/")
       
       req <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, URLencode(q), size, page)
-      if(all_versions) req <- paste0(req, "&all_versions=1")
+      if(all_versions) req <- paste0(req, "&allversions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
                                   token = self$getToken(),
                                   logger = if(quiet) NULL else self$loggerType)
@@ -625,10 +624,21 @@ ZenodoManager <-  R6Class("ZenodoManager",
       out <- NULL
       if(zenReq$getStatus() == 200){
         resp <- zenReq$getResponse()
-        hasRecords <- length(resp)>0
+        records <- resp$hits$hits
+        total <- resp$hits$total
+        if(total > 10000){
+          self$WARN(sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)) 
+        }
+        total_remaining <- total
+        hasRecords <- length(records)>0
         while(hasRecords){
-          out <- c(out, lapply(resp, ZenodoRecord$new))
-          if(!quiet) self$INFO(sprintf("Successfully fetched list of depositions - page %s", page))
+          out <- c(out, lapply(records, ZenodoRecord$new))
+          if(!quiet) self$INFO(sprintf("Successfully fetched list of depositions (user records) - page %s", page))
+          total_remaining <- total_remaining-length(records)
+          if(total_remaining <= size) size = total_remaining
+          if(total_remaining == 0){
+            break
+          }
           
           if(exact){
             hasRecords <- FALSE
@@ -636,19 +646,26 @@ ZenodoManager <-  R6Class("ZenodoManager",
             #next
             page <- page+1
             nextreq <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, q, size, page)
-            if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
+            if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
             zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
                                         token = self$getToken(),
                                         logger = if(quiet) NULL else self$loggerType)
             zenReq$execute()
             resp <- zenReq$getResponse()
-            hasRecords <- length(resp)>0
+            if(zenReq$getStatus() == 200){
+              resp <- zenReq$getResponse()
+              records <- resp$hits$hits
+              hasRecords <- length(records)>0
+            }else{
+              if(!quiet) self$WARN(sprintf("Maximum allowed size for list of depositions (user records) at page %s", page))
+              break
+            }
           }
         }
-        if(!quiet) self$INFO("Successfully fetched list of depositions!")
+        if(!quiet) self$INFO("Successfully fetched list of depositions (user records)!")
       }else{
         out <- zenReq$getResponse()
-        if(!quiet) self$ERROR(sprintf("Error while fetching depositions: %s", out$message))
+        if(!quiet) self$ERROR(sprintf("Error while fetching depositions (user records): %s", out$message))
         for(error in out$errors){
           self$ERROR(sprintf("Error: %s - %s", error$field, error$message))
         }

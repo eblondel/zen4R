@@ -546,21 +546,20 @@ the funder
 \if{html}{\out{<a id="method-ZenodoManager-getDepositions"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-getDepositions}{}}}
 \subsection{Method \code{getDepositions()}}{
-Get the list of Zenodo records deposited in your Zenodo workspace. By defaut
-   the list of depositions will be returned by page with a size of 10 results per
-   page (default size of the Zenodo API). The parameter \code{q} allows to specify
-   an ElasticSearch-compliant query to filter depositions (default query is empty 
-   to retrieve all records). The argument \code{all_versions}, if set to TRUE allows
-   to get all versions of records as part of the depositions list. The argument \code{exact}
-   specifies that an exact matching is wished, in which case paginated search will be
-   disabled (only the first search page will be returned).
+Get the list of Zenodo records deposited in your Zenodo workspace (user records). By default
+   the list of depositions will be returned by page with a size of 10 results per page (default size of 
+   the Zenodo API). The parameter \code{q} allows to specify an ElasticSearch-compliant query to filter 
+   depositions (default query is empty to retrieve all records). The argument \code{all_versions}, if set 
+   to TRUE allows to get all versions of records as part of the depositions list. The argument \code{exact}
+   specifies that an exact matching is wished, in which case paginated search will be disabled (only the first 
+   search page will be returned).
    Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getDepositions(
   q = "",
   size = 10,
   all_versions = FALSE,
-  exact = TRUE,
+  exact = FALSE,
   quiet = FALSE
 )}\if{html}{\out{</div>}}
 }
