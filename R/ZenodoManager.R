@@ -1213,7 +1213,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getRecords = function(q = "", size = 10, all_versions = FALSE, exact = FALSE){
       page <- 1
       req <- sprintf("records/?q=%s&size=%s&page=%s", URLencode(q), size, page)
-      if(all_versions) req <- paste0(req, "&all_versions=1")
+      if(all_versions) req <- paste0(req, "&allversions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", req, 
                                   token = self$getToken(),
                                   logger = self$loggerType)
@@ -1221,10 +1221,21 @@ ZenodoManager <-  R6Class("ZenodoManager",
       out <- NULL
       if(zenReq$getStatus() == 200){
         resp <- zenReq$getResponse()
+        records <- resp$hits$hits
+        total <- resp$hits$total
+        if(total > 10000){
+          self$WARN(sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)) 
+        }
+        total_remaining <- total
         hasRecords <- length(resp)>0
         while(hasRecords){
-          out <- c(out, lapply(resp, ZenodoRecord$new))
+          out <- c(out, lapply(records, ZenodoRecord$new))
           self$INFO(sprintf("Successfully fetched list of published records - page %s", page))
+          total_remaining <- total_remaining-length(records)
+          if(total_remaining <= size) size = total_remaining
+          if(total_remaining == 0){
+            break
+          }
           
           if(exact){
             hasRecords <- FALSE
@@ -1232,13 +1243,19 @@ ZenodoManager <-  R6Class("ZenodoManager",
             #next
             page <- page+1
             nextreq <- sprintf("records/?q=%s&size=%s&page=%s", URLencode(q), size, page)
-            if(all_versions) nextreq <- paste0(nextreq, "&all_versions=1")
+            if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
             zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", nextreq, 
                                         token = self$getToken(),
                                         logger = self$loggerType)
             zenReq$execute()
-            resp <- zenReq$getResponse()
-            hasRecords <- length(resp)>0
+            if(zenReq$getStatus() == 200){
+              resp <- zenReq$getResponse()
+              records <- resp$hits$hits
+              hasRecords <- length(records)>0
+            }else{
+              self$WARN(sprintf("Maximum allowed size for list of published records at page %s", page))
+              break
+            }
           }
         }
         self$INFO("Successfully fetched list of published records!")
