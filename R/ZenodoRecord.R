@@ -50,15 +50,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         )
       })
       self$id = obj$id
+      self$recid = obj$recid
       self$links = obj$links
       self$metadata = obj$metadata
       self$modified = obj$modified
-      self$owner = obj$owner
-      self$record_id = obj$record_id
+      self$owners = obj$owners
+      self$status = obj$status
       self$state = obj$state
       self$submitted = obj$submitted
       self$title = obj$title
-      self$version = obj$version
+      self$revision = obj$revision
       if(!is.null(obj$stats)) self$stats = data.frame(obj$stats)
     }
   ),
@@ -83,10 +84,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     metadata = list(),
     #' @field modified record modification date
     modified = NULL,
-    #' @field owner record owner
-    owner = NULL,
-    #' @field record_id record_id
-    record_id = NULL,
+    #' @field owners record owners
+    owners = NULL,
+    #' @field recid recid
+    recid = NULL,
+    #' @field status record status
+    status = NULL,
     #' @field state record state
     state = NULL,
     #' @field submitted record submission status

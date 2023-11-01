@@ -49,9 +49,11 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 
 \item{\code{modified}}{record modification date}
 
-\item{\code{owner}}{record owner}
+\item{\code{owners}}{record owners}
 
-\item{\code{record_id}}{record_id}
+\item{\code{recid}}{recid}
+
+\item{\code{status}}{record status}
 
 \item{\code{state}}{record state}
 
