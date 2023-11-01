@@ -559,7 +559,7 @@ Get the list of Zenodo records deposited in your Zenodo workspace (user records)
   q = "",
   size = 10,
   all_versions = FALSE,
-  exact = FALSE,
+  exact = TRUE,
   quiet = FALSE
 )}\if{html}{\out{</div>}}
 }
@@ -1001,12 +1001,7 @@ Get the list of Zenodo records. By defaut the list of records will be returned b
     paginated search will be disabled (only the first search page will be returned).
     Examples of ElasticSearch queries for Zenodo can be found at \href{https://help.zenodo.org/guides/search/}{https://help.zenodo.org/guides/search/}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecords(
-  q = "",
-  size = 10,
-  all_versions = FALSE,
-  exact = FALSE
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecords(q = "", size = 10, all_versions = FALSE, exact = TRUE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
