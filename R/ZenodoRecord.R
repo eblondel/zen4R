@@ -58,7 +58,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$status = obj$status
       self$state = obj$state
       self$submitted = obj$submitted
-      self$title = obj$title
       self$revision = obj$revision
       if(!is.null(obj$stats)) self$stats = data.frame(obj$stats)
     }
@@ -94,10 +93,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     state = NULL,
     #' @field submitted record submission status
     submitted = FALSE,
-    #' @field title record title
-    title = NULL,
-    #' @field version record version
-    version = NULL,
+    #' @field revision record revision
+    revision = NULL,
     #' @field stats stats
     stats = NULL,
     

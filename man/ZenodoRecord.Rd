@@ -59,9 +59,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 
 \item{\code{submitted}}{record submission status}
 
-\item{\code{title}}{record title}
-
-\item{\code{version}}{record version}
+\item{\code{revision}}{record revision}
 
 \item{\code{stats}}{stats}
 }
