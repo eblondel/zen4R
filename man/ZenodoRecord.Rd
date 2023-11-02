@@ -29,6 +29,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{access}}{access policies}
+
 \item{\code{conceptdoi}}{record Concept DOI (common to all record versions)}
 
 \item{\code{conceptrecid}}{record concept id}
@@ -69,6 +71,9 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-ZenodoRecord-new}{\code{ZenodoRecord$new()}}
+\item \href{#method-ZenodoRecord-setAccessPolicyRecord}{\code{ZenodoRecord$setAccessPolicyRecord()}}
+\item \href{#method-ZenodoRecord-setAccessPolicyFiles}{\code{ZenodoRecord$setAccessPolicyFiles()}}
+\item \href{#method-ZenodoRecord-setAccessPolicyEmbargo}{\code{ZenodoRecord$setAccessPolicyEmbargo()}}
 \item \href{#method-ZenodoRecord-prereserveDOI}{\code{ZenodoRecord$prereserveDOI()}}
 \item \href{#method-ZenodoRecord-setDOI}{\code{ZenodoRecord$setDOI()}}
 \item \href{#method-ZenodoRecord-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
@@ -190,6 +195,61 @@ method is used to instantiate a \code{\link{ZenodoRecord}}
 
 \item{\code{logger}}{a logger to print log messages. It can be either NULL, "INFO" (with minimum logs), 
 or "DEBUG" (for complete curl http calls logs)}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setAccessPolicyRecord"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessPolicyRecord}{}}}
+\subsection{Method \code{setAccessPolicyRecord()}}{
+Set the access policy for record, among values "public" (default) or "restricted"
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyRecord(access = c("public", "resticted"))}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{access}}{access policy ('public' or 'restricted')}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setAccessPolicyFiles"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessPolicyFiles}{}}}
+\subsection{Method \code{setAccessPolicyFiles()}}{
+Set the access policy for files, among values "public" (default) or "restricted"
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyFiles(access = c("public", "resticted"))}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{access}}{access policy ('public' or 'restricted')}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setAccessPolicyEmbargo"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessPolicyEmbargo}{}}}
+\subsection{Method \code{setAccessPolicyEmbargo()}}{
+Set access policy embargo options
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyEmbargo(active = FALSE, until = NULL, reason = "")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{active}}{whether embargo is active or not. Default is \code{FALSE}}
+
+\item{\code{until}}{embargo date, object of class \code{Date}. Default is \code{NULL}. Must be provided if embargo is active}
+
+\item{\code{reason}}{embargo reason, object of class \code{character}. Default is an empty string}
 }
 \if{html}{\out{</div>}}
 }

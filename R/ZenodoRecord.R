@@ -36,6 +36,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       )
     },
     fromList = function(obj){
+      self$access = obj$access
       self$conceptdoi = obj$conceptdoi
       self$conceptrecid = obj$conceptrecid
       self$created = obj$created
@@ -63,6 +64,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     }
   ),
   public = list(
+    #' @field access access policies
+    access = list(
+      record = "public", 
+      files = "public"
+    ),
     #' @field conceptdoi record Concept DOI (common to all record versions)
     conceptdoi = NULL,
     #' @field conceptrecid record concept id
@@ -104,13 +110,31 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' or "DEBUG" (for complete curl http calls logs)
     initialize = function(obj = NULL, logger = "INFO"){
       super$initialize(logger = logger)
-      self$prereserveDOI(TRUE)
       if(!is.null(obj)) private$fromList(obj)
     },
     
     #Invenio RDM API new methods
     #---------------------------------------------------------------------------
+    #'@description Set the access policy for record, among values "public" (default) or "restricted"
+    #'@param access access policy ('public' or 'restricted')
+    setAccessPolicyRecord = function(access = c("public","resticted")){
+      self$access$record = access
+    },
     
+    #'@description Set the access policy for files, among values "public" (default) or "restricted"
+    #'@param access access policy ('public' or 'restricted')
+    setAccessPolicyFiles = function(access = c("public","resticted")){
+      self$access$files = access
+    },
+    
+    #'@description Set access policy embargo options
+    #'@param active whether embargo is active or not. Default is \code{FALSE}
+    #'@param until embargo date, object of class \code{Date}. Default is \code{NULL}. Must be provided if embargo is active
+    #'@param reason embargo reason, object of class \code{character}. Default is an empty string
+    setAccessPolicyEmbargo = function(active = FALSE, until = NULL, reason = ""){
+      if(!is.null(until)) if(!is(until, "Date")) stop("Argument 'until' should be of class 'Date'")
+      self$access$embargo = list(active = active, until = until, reason = reason)
+    },
     
     #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
     #----------------------------------------------------------------------------
@@ -1000,6 +1024,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       
       fileext <- private$getExportFormatExtension(format)
       destfile <- paste(paste0(filename, ifelse(append_format,paste0("_", format),"")), fileext, sep = ".")
+      
       req <- httr::GET(
         url = metadata_export_url,
         httr::write_disk(path = destfile, overwrite = TRUE)
