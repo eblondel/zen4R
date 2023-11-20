@@ -32,8 +32,10 @@ The following projects have contributed to strenghten ``zen4R``:
 <img src="https://github.com/IRDG2OI/geoflow-g2oi/blob/main/img/logos_partenaires.png?raw=True" height="80px">
 
 
+## Sponsoring
 
 For zen4R sponsoring/funding new developments, enhancements, support requests, please contact me by [e-mail](mailto:eblondel.pro@gmail.com)
+
 
 ## Citation
 
