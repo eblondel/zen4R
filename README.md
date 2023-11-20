@@ -11,7 +11,7 @@ Please check the [online documentation](https://github.com/eblondel/zen4R/wiki) 
 
 ## Sponsors
 
-Many thanks to the following organizations that have provided fundings for strenghtening the ``geoflow`` package:
+Many thanks to the following organizations that have provided fundings for strenghtening the ``zen4R`` package:
 
 <div>
   <a href="https://www.fao.org/home/en/"><img height=200 width=200 src="https://www.fao.org/fileadmin/templates/family-farming-decade/images/FAO-IFAD-Logos/FAO-Logo-EN.svg">
@@ -22,9 +22,15 @@ Many thanks to the following organizations that have provided fundings for stren
 
 The following projects have contributed to strenghten ``zen4R``:
 
+* **Blue-Cloud** _Blue-Cloud has received funding from the European Union's Horizon programme call BG-07-2019-2020, topic: [A] 2019 - Blue Cloud services, Grant Agreement No.862409._ 
+
 <a href="https://blue-cloud.org/"><img height=100 width=300 src="https://hackathon.blue-cloud.org/wp-content/uploads/2021/11/Blue-cloud_extended_color.png"/></a>
 
-_Blue-Cloud has received funding from the European Union's Horizon programme call BG-07-2019-2020, topic: [A] 2019 - Blue Cloud services, Grant Agreement No.862409._
+* **G2OI** project, cofinanced by the European Union, the Reunion region, and the French Republic.
+<div align="center">
+
+<img src="https://github.com/IRDG2OI/geoflow-g2oi/blob/main/img/logos_partenaires.png?raw=True" height="80px">
+
 
 
 For zen4R sponsoring/funding new developments, enhancements, support requests, please contact me by [e-mail](mailto:eblondel.pro@gmail.com)
