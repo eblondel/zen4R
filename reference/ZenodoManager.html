@@ -986,12 +986,10 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 <span class="r-in"><span>     token <span class="op">=</span> <span class="st">"&lt;your_token&gt;"</span>,</span></span>
 <span class="r-in"><span>     logger <span class="op">=</span> <span class="st">"INFO"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Cannot connect to your Zenodo deposit: Invalid token </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in initialize(...):</span> Cannot connect to your Zenodo deposit: Invalid token</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#create (deposit) an empty record</span></span></span>
 <span class="r-in"><span>  <span class="va">newRec</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">createEmptyRecord</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Referer checking failed - no Referer. </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#create and fill a local (not yet deposited) record</span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span> <span class="op">&lt;-</span> <span class="va"><a href="ZenodoRecord.html">ZenodoRecord</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -1003,6 +1001,8 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 <span class="r-in"><span>    affiliation <span class="op">=</span> <span class="st">"Independent"</span>, orcid <span class="op">=</span> <span class="st">"0000-0000-0000-0000"</span></span></span>
 <span class="r-in"><span>   <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span><span class="op">$</span><span class="fu">setLicense</span><span class="op">(</span><span class="st">"mit"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoRecord - License with id 'mit' doesn't exist in Zenodo </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in myrec$setLicense("mit"):</span> License with id 'mit' doesn't exist in Zenodo</span>
 <span class="r-in"><span>  <span class="va">myrec</span><span class="op">$</span><span class="fu">setAccessRight</span><span class="op">(</span><span class="st">"open"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span><span class="op">$</span><span class="fu">setDOI</span><span class="op">(</span><span class="st">"mydoi"</span><span class="op">)</span> <span class="co">#use this method if your DOI has been assigned elsewhere, outside Zenodo</span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span><span class="op">$</span><span class="fu">addCommunity</span><span class="op">(</span><span class="st">"ecfunded"</span><span class="op">)</span></span></span>
@@ -1010,35 +1010,46 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#deposit the record </span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">depositRecord</span><span class="op">(</span><span class="va">myrec</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Referer checking failed - no Referer. </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#publish a record (with caution!!)</span></span></span>
 <span class="r-in"><span>  <span class="co">#this method will PUBLISH the deposition done earlier</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">publishRecord</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $message</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Referer checking failed - no Referer."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span>  <span class="co">#With even more caution the publication can be done with a shortcut argument at deposit time</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">depositRecord</span><span class="op">(</span><span class="va">myrec</span>, publish <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Referer checking failed - no Referer. </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $message</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Referer checking failed - no Referer."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $status</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#delete a record (by id)</span></span></span>
 <span class="r-in"><span>  <span class="co">#this methods only works for unpublished deposits </span></span></span>
 <span class="r-in"><span>  <span class="co">#(if a record is published, it cannot be deleted anymore!)</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">deleteRecord</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#HOW TO UPLOAD FILES to a deposit</span></span></span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#upload a file</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">uploadFile</span><span class="op">(</span><span class="st">"path/to/your/file"</span>, record <span class="op">=</span> <span class="va">myrec</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in upload_file(path):</span> file.exists(path) is not TRUE</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#list files</span></span></span>
 <span class="r-in"><span>  <span class="va">zen_files</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">getFiles</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRequest - Fetching https://sandbox.zenodo.org/api/ </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#delete a file?</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">deleteFile</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span>, <span class="va">zen_files</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'ZENODO' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in zen_files[[1]]$id:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
