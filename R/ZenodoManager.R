@@ -700,7 +700,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
       
       #id of the last record
       record_id <- unlist(strsplit(record$links$latest,"records/"))[[2]] 
-      
+      # strip trailing info from record_id
+      record_id <- gsub("(.*?)/(.*)", "\\1", record_id)
       self$INFO(sprintf("Creating new version for record '%s' (concept DOI: '%s')", record_id, record$getConceptDOI()))
       request <- sprintf("deposit/depositions/%s/actions/newversion", record_id)
       zenReq <- ZenodoRequest$new(private$url, type, request, data = NULL,
