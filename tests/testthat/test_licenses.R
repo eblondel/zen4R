@@ -21,7 +21,7 @@ test_that("licenses are retrieved",{
 test_that("license is retrieved by id",{
   zenodo <- ZenodoManager$new(logger = "INFO")
   zen_license <- zenodo$getLicenseById("mit")
-  expect_equal(zen_license$metadata$id, "MIT")
-  expect_equal(zen_license$metadata$title, "MIT License")
+  expect_equal(zen_license$id, "mit")
+  expect_equal(zen_license$title[[1]], "MIT License")
   Sys.sleep(2)
 })

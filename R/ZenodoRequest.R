@@ -47,8 +47,10 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         data <- data[!sapply(data, is.null)]
       }else if(is(data, "list")){
         meta <- data$metadata
-        if(!is.null(meta$prereserve_doi)) meta$prereserve_doi <- NULL
-        data <- list(metadata = meta)
+        if(!is.null(meta)){
+          if(!is.null(meta$prereserve_doi)) meta$prereserve_doi <- NULL
+          data <- list(metadata = meta)
+        }
       }
       
       data <- as(toJSON(data, pretty=T, auto_unbox=T), "character")
@@ -134,12 +136,12 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     PUT = function(url, request, data, progress){
       req <- paste(url, request, sep="/")
       
-      if(regexpr("api/files", req)<0) data <- private$prepareData(data)
+      if(regexpr("draft/files", req)<0) data <- private$prepareData(data)
       
       #headers
       headers <- c(
         "User-Agent" = private$agent,
-        "Content-Type" = if(regexpr("api/files", req)>0) "application/octet-stream" else "application/json",
+        "Content-Type" = if(regexpr("draft/files", req)>0) "application/octet-stream" else "application/json",
         "Authorization" = paste("Bearer",private$token)
       )
       
@@ -167,7 +169,8 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     },
     
     DELETE = function(url, request, data){
-      req <- paste(url, request, data, sep="/")
+      req <- paste(url, request, sep="/")
+      if(!is.null(data)) req <- paste(req, data, sep = "/")
       #headers
       headers <- c(
         "User-Agent" = private$agent,

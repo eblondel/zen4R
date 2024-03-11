@@ -36,6 +36,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       )
     },
     fromList = function(obj){
+      self$access = obj$access
       self$conceptdoi = obj$conceptdoi
       self$conceptrecid = obj$conceptrecid
       self$created = obj$created
@@ -50,19 +51,24 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         )
       })
       self$id = obj$id
+      self$recid = obj$recid
       self$links = obj$links
       self$metadata = obj$metadata
       self$modified = obj$modified
-      self$owner = obj$owner
-      self$record_id = obj$record_id
+      self$owners = obj$owners
+      self$status = obj$status
       self$state = obj$state
       self$submitted = obj$submitted
-      self$title = obj$title
-      self$version = obj$version
+      self$revision = obj$revision
       if(!is.null(obj$stats)) self$stats = data.frame(obj$stats)
     }
   ),
   public = list(
+    #' @field access access policies
+    access = list(
+      record = "public", 
+      files = "public"
+    ),
     #' @field conceptdoi record Concept DOI (common to all record versions)
     conceptdoi = NULL,
     #' @field conceptrecid record concept id
@@ -83,18 +89,18 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     metadata = list(),
     #' @field modified record modification date
     modified = NULL,
-    #' @field owner record owner
-    owner = NULL,
-    #' @field record_id record_id
-    record_id = NULL,
+    #' @field owners record owners
+    owners = NULL,
+    #' @field recid recid
+    recid = NULL,
+    #' @field status record status
+    status = NULL,
     #' @field state record state
     state = NULL,
     #' @field submitted record submission status
     submitted = FALSE,
-    #' @field title record title
-    title = NULL,
-    #' @field version record version
-    version = NULL,
+    #' @field revision record revision
+    revision = NULL,
     #' @field stats stats
     stats = NULL,
     
@@ -104,9 +110,34 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' or "DEBUG" (for complete curl http calls logs)
     initialize = function(obj = NULL, logger = "INFO"){
       super$initialize(logger = logger)
-      self$prereserveDOI(TRUE)
       if(!is.null(obj)) private$fromList(obj)
     },
+    
+    #Invenio RDM API new methods
+    #---------------------------------------------------------------------------
+    #'@description Set the access policy for record, among values "public" (default) or "restricted"
+    #'@param access access policy ('public' or 'restricted')
+    setAccessPolicyRecord = function(access = c("public","resticted")){
+      self$access$record = access
+    },
+    
+    #'@description Set the access policy for files, among values "public" (default) or "restricted"
+    #'@param access access policy ('public' or 'restricted')
+    setAccessPolicyFiles = function(access = c("public","resticted")){
+      self$access$files = access
+    },
+    
+    #'@description Set access policy embargo options
+    #'@param active whether embargo is active or not. Default is \code{FALSE}
+    #'@param until embargo date, object of class \code{Date}. Default is \code{NULL}. Must be provided if embargo is active
+    #'@param reason embargo reason, object of class \code{character}. Default is an empty string
+    setAccessPolicyEmbargo = function(active = FALSE, until = NULL, reason = ""){
+      if(!is.null(until)) if(!is(until, "Date")) stop("Argument 'until' should be of class 'Date'")
+      self$access$embargo = list(active = active, until = until, reason = reason)
+    },
+    
+    #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
+    #----------------------------------------------------------------------------
     
     #' @description Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
     #'    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
@@ -971,18 +1002,18 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @return the writen file name (with extension)
     exportAs = function(format, filename, append_format = TRUE){
       zenodo_url <- self$links$record_html
-      if(is.null(zenodo_url)) zenodo_url <- self$links$latest_html
+      if(is.null(zenodo_url)) zenodo_url <- self$links$self_html
       if(is.null(zenodo_url)){
         stop("Ups, this record seems a draft, can't export metadata until it is published!")
       }
       metadata_export_url <- switch(format,
-        "BibTeX" = paste0(zenodo_url,"/export/hx"),
+        "BibTeX" = paste0(zenodo_url,"/export/bibtex"),
         "CSL" =  paste0(zenodo_url,"/export/csl"),
-        "DataCite" =  paste0(zenodo_url,"/export/dcite4"),
-        "DublinCore" =  paste0(zenodo_url,"/export/xd"),
-        "DCAT" =  paste0(zenodo_url,"/export/dcat"),
+        "DataCite" =  paste0(zenodo_url,"/export/datacite-xml"),
+        "DublinCore" =  paste0(zenodo_url,"/export/dublincore"),
+        "DCAT" =  paste0(zenodo_url,"/export/dcat-ap"),
         "JSON" =  paste0(zenodo_url,"/export/json"),
-        "JSON-LD" =  paste0(zenodo_url,"/export/schemaorg_jsonld"),
+        "JSON-LD" =  paste0(zenodo_url,"/export/json-ld"),
         "GeoJSON" =  paste0(zenodo_url,"/export/geojson"),
         "MARCXML" =  paste0(zenodo_url,"/export/xm"),
         NULL
@@ -992,19 +1023,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
       
       fileext <- private$getExportFormatExtension(format)
-      
-      html <- xml2::read_html(metadata_export_url)
-      reference <- xml2::xml_find_all(html, ".//pre")
-      reference <- reference[1]
-      reference <- gsub("<pre.*\">","",reference)
-      reference <- gsub("</pre>","",reference)
-      if(fileext %in% c("xml", "rdf")){
-        reference <- gsub("&lt;", "<", reference)
-        reference <- gsub("&gt;", ">", reference)
-      }
-    
       destfile <- paste(paste0(filename, ifelse(append_format,paste0("_", format),"")), fileext, sep = ".")
-      writeChar(reference, destfile, eos = NULL)
+      
+      req <- httr::GET(
+        url = metadata_export_url,
+        httr::write_disk(path = destfile, overwrite = TRUE)
+      )
       return(destfile)
     },
     
