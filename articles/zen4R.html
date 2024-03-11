@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0</span>
       </span>
     </div>
 
@@ -210,10 +210,10 @@ known by Zenodo, do not require the token.</p>
 <code class="sourceCode R"><span><span class="va">zenodo</span> <span class="op">&lt;-</span> <span class="va"><a href="../reference/ZenodoManager.html">ZenodoManager</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>To use deposit functions of <code>zen4R</code>, you will need to
 specify the <code>token</code>. This token can be created <a href="https://zenodo.org/account/settings/applications/tokens/new/" class="external-link">here</a>.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>zenodo <span class="ot">&lt;-</span> ZenodoManager<span class="sc">$</span><span class="fu">new</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">token =</span> <span class="sc">&lt;</span>your_token<span class="sc">&gt;</span>, </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">logger =</span> <span class="st">"INFO"</span> <span class="co"># use "DEBUG" to see detailed API operation logs, use NULL if you don't want logs at all</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>zenodo <span class="ot">&lt;-</span> ZenodoManager<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>   <span class="at">token =</span> <span class="sc">&lt;</span>your_token<span class="sc">&gt;</span>, </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>   <span class="at">logger =</span> <span class="st">"INFO"</span> <span class="co"># use "DEBUG" to see detailed API operation logs, use NULL if you don't want logs at all</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>)</span></code></pre></div>
 <p>By default, the <code>zen4R</code> <strong>logger</strong> is
 deactivated. To enable the logger, specify the level of log you wish as
 parameter of the above R code. Two logging levels are available:</p>
@@ -240,11 +240,11 @@ confirmation link this account separately in order to be able to test
 your record management on this clone of Zenodo.</strong></p>
 <p>The below code instructs how to connect to the Sandbox Zenodo
 e-infrastructure:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>zenodo <span class="ot">&lt;-</span> ZenodoManager<span class="sc">$</span><span class="fu">new</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   <span class="at">url =</span> <span class="st">"https://sandbox.zenodo.org/api"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>   <span class="at">token =</span> <span class="sc">&lt;</span>your_zenodo_sandbox_token<span class="sc">&gt;</span>, </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>   <span class="at">logger =</span> <span class="st">"INFO"</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>zenodo <span class="ot">&lt;-</span> ZenodoManager<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>   <span class="at">url =</span> <span class="st">"https://sandbox.zenodo.org/api"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>   <span class="at">token =</span> <span class="sc">&lt;</span>your_zenodo_sandbox_token<span class="sc">&gt;</span>, </span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>   <span class="at">logger =</span> <span class="st">"INFO"</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>)</span></code></pre></div>
 <p><a name="ZenodoDeposit-query"></a></p>
 </div>
 <div class="section level5">
