@@ -10,11 +10,6 @@
 ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
-    allowed_upload_types = c("publication","poster","presentation", "dataset","image","video","software", "lesson", "physicalobject", "other"),
-    allowed_publication_types = c("annotationcollection", "book","section","conferencepaper","datamanagementplan", "article","patent","preprint",
-                                  "deliverable", "milestone", "proposal", "report","softwaredocumentation", "taxonomictreatment", "technicalnote",
-                                  "thesis","workingpaper","other"),
-    allowed_image_types = c("figure","plot","drawing","diagram","photo","other"),
     allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
                   "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
                   "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
