@@ -54,6 +54,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$recid = obj$recid
       self$links = obj$links
       self$metadata = obj$metadata
+      resource_type = self$metadata$resource_type
+      if(!is.null(resource_type)){
+        resource_type_id = resource_type$type
+        if(!is.null(resource_type$subtype)) resource_type_id = paste(resource_type_id, resource_type$subtype,sep="-")
+        self$metadata$resource_type = list(id = resource_type_id)
+      }
       self$modified = obj$modified
       self$owners = obj$owners
       self$status = obj$status
@@ -242,7 +248,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         self$ERROR(errorMsg)
         stop(errorMsg)
       }
-      self$metadata$resource_type <- zen_resourcetype
+      self$metadata$resource_type <- list(id = zen_resourcetype$id)
     },
     
     #' @description Set the upload type (mandatory). Deprecated since zen4R 1.0
