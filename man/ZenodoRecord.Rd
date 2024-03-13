@@ -81,6 +81,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
 \item \href{#method-ZenodoRecord-getVersions}{\code{ZenodoRecord$getVersions()}}
 \item \href{#method-ZenodoRecord-getStats}{\code{ZenodoRecord$getStats()}}
+\item \href{#method-ZenodoRecord-setResourceType}{\code{ZenodoRecord$setResourceType()}}
 \item \href{#method-ZenodoRecord-setUploadType}{\code{ZenodoRecord$setUploadType()}}
 \item \href{#method-ZenodoRecord-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
 \item \href{#method-ZenodoRecord-setImageType}{\code{ZenodoRecord$setImageType()}}
@@ -361,10 +362,27 @@ statistics as \code{data.frame}
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setResourceType"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setResourceType}{}}}
+\subsection{Method \code{setResourceType()}}{
+Set the resource type (mandatory).
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setResourceType(resourceType)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{resourceType}}{record resource type}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setUploadType"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setUploadType}{}}}
 \subsection{Method \code{setUploadType()}}{
-Set the upload type (mandatory).
+Set the upload type (mandatory). Deprecated since zen4R 1.0
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setUploadType(uploadType)}\if{html}{\out{</div>}}
 }
@@ -382,7 +400,7 @@ Set the upload type (mandatory).
 \if{html}{\out{<a id="method-ZenodoRecord-setPublicationType"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setPublicationType}{}}}
 \subsection{Method \code{setPublicationType()}}{
-Set the publication type (mandatory if upload type is 'publication').
+Set the publication type (mandatory if upload type is 'publication'). Deprecated since zen4R 1.0
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPublicationType(publicationType)}\if{html}{\out{</div>}}
 }
@@ -402,7 +420,7 @@ Set the publication type (mandatory if upload type is 'publication').
 \if{html}{\out{<a id="method-ZenodoRecord-setImageType"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setImageType}{}}}
 \subsection{Method \code{setImageType()}}{
-Set the image type (mandatory if image type is 'image').
+Set the image type (mandatory if image type is 'image'). Deprecated since zen4R 1.0
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setImageType(imageType)}\if{html}{\out{</div>}}
 }

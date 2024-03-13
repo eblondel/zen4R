@@ -96,6 +96,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getLanguageById}{\code{ZenodoManager$getLanguageById()}}
 \item \href{#method-ZenodoManager-getLicenses}{\code{ZenodoManager$getLicenses()}}
 \item \href{#method-ZenodoManager-getLicenseById}{\code{ZenodoManager$getLicenseById()}}
+\item \href{#method-ZenodoManager-getResourceTypes}{\code{ZenodoManager$getResourceTypes()}}
+\item \href{#method-ZenodoManager-getResourceTypeById}{\code{ZenodoManager$getResourceTypeById()}}
 \item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
 \item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
@@ -276,6 +278,48 @@ Get license by Id.
 }
 \subsection{Returns}{
 the license
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getResourceTypes"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getResourceTypes}{}}}
+\subsection{Method \code{getResourceTypes()}}{
+Get Resource types supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getResourceTypes(pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of resource types as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of resource types}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of resource types as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getResourceTypeById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getResourceTypeById}{}}}
+\subsection{Method \code{getResourceTypeById()}}{
+Get resource type by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getResourceTypeById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{resource type id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the resource type
 }
 }
 \if{html}{\out{<hr>}}

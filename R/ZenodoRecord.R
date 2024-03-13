@@ -232,48 +232,43 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(self$stats)
     },
     
-    #' @description Set the upload type (mandatory). 
-    #' @param uploadType record upload type among the following values: 'publication', 'poster', 
-    #'  'presentation', 'dataset', 'image', 'video', 'software', 'lesson', 'physicalobject', 'other'
-    setUploadType = function(uploadType){
-      if(!(uploadType %in% private$allowed_upload_types)){
-        errorMsg <- sprintf("The upload type should be among the values [%s]",
-                            paste(private$allowed_upload_types, collapse=","))
+    #' @description Set the resource type (mandatory). 
+    #' @param resourceType record resource type
+    setResourceType = function(resourceType){
+      zenodo = ZenodoManager$new()
+      zen_resourcetype <- zen$getResourceTypeById(resourceType)
+      if(is.null(zen_resourcetype)){
+        errorMsg <- sprintf("Resource type with id '%s' doesn't exist in Zenodo", resourceType)
         self$ERROR(errorMsg)
         stop(errorMsg)
       }
-      
-      self$metadata$upload_type <- uploadType
+      self$metadata$resource_type <- resourceType
     },
     
-    #' @description Set the publication type (mandatory if upload type is 'publication').
+    #' @description Set the upload type (mandatory). Deprecated since zen4R 1.0
+    #' @param uploadType record upload type among the following values: 'publication', 'poster', 
+    #'  'presentation', 'dataset', 'image', 'video', 'software', 'lesson', 'physicalobject', 'other'
+    setUploadType = function(uploadType){
+      warnMsg = "Method 'setUploadType' is deprecated, please use 'setResourceType'"
+      self$WARN(warnMsg)
+    },
+    
+    #' @description Set the publication type (mandatory if upload type is 'publication'). Deprecated since zen4R 1.0
     #' @param publicationType record publication type among the following values: 'annotationcollection', 'book', 
     #'   'section', 'conferencepaper', 'datamanagementplan', 'article', 'patent', 'preprint', 'deliverable', 'milestone', 
     #'   'proposal', 'report', 'softwaredocumentation', 'taxonomictreatment', 'technicalnote', 'thesis', 'workingpaper', 
     #'   'other'
     setPublicationType = function(publicationType){
-      if(!(publicationType %in% private$allowed_publication_types)){
-        errorMsg <- sprintf("The publication type should be among the values [%s]",
-                            paste(private$allowed_publication_types, collapse=","))
-        self$ERROR(errorMsg)
-        stop(errorMsg)
-      }
-      self$setUploadType("publication")
-      self$metadata$publication_type <- publicationType
+      warnMsg = "Method 'setPublicationType' is deprecated, please use 'setResourceType'"
+      self$WARN(warnMsg)
     },
     
-    #' @description Set the image type (mandatory if image type is 'image').
+    #' @description Set the image type (mandatory if image type is 'image'). Deprecated since zen4R 1.0
     #' @param imageType record publication type among the following values: 'figure','plot',
     #' 'drawing','diagram','photo', or 'other'
     setImageType = function(imageType){
-      if(!(imageType %in% private$allowed_image_types)){
-        errorMsg <- sprintf("The image type should be among the values [%s",
-                            paste(private$allowed_image_types, collapse=","))
-        self$ERROR(errorMsg)
-        stop(errorMsg)
-      }
-      self$setUploadType("image")
-      self$metadata$image_type <- imageType
+      warnMsg = "Method 'setImageType' is deprecated, please use 'setImageType'"
+      self$WARN(warnMsg)
     },
     
     #' @description Set the publication date.

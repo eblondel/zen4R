@@ -254,6 +254,66 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #Vocabulary/resourcetypes
+    #------------------------------------------------------------------------------------------    
+    
+    #' @description Get Resource types supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of resource types as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of resource types
+    #' @return list of resource types as \code{data.frame} or \code{list}
+    getResourceTypes = function(pretty = TRUE){
+      zenReq <- ZenodoRequest$new(private$url, "GET", "vocabularies/resourcetypes?q=&size=1000",
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        out = out$hits$hits
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = data.frame(
+              id = x$id,
+              title = x$title[[1]],
+              revision_id = x$revision_id,
+              created = x$created,
+              updated = x$updated
+            )
+            return(rec)
+          }))
+        }
+        infoMsg = "Successfully fetched list of resource types"
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while fetching resource types: %s", out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+      }
+      return(out)
+    },
+    
+    #' @description Get resource type by Id.
+    #' @param id resource type id
+    #' @return the resource type
+    getResourceTypeById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("vocabularies/resourcetypes/%s",id),
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfully fetched resourcetype '%s'",id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while fetching resourcetype '%s': %s", id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+      }
+      return(out)
+    },
+    
     #Communities
     #------------------------------------------------------------------------------------------
     
