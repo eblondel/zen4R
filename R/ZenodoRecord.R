@@ -236,13 +236,13 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param resourceType record resource type
     setResourceType = function(resourceType){
       zenodo = ZenodoManager$new()
-      zen_resourcetype <- zen$getResourceTypeById(resourceType)
+      zen_resourcetype <- zenodo$getResourceTypeById(resourceType)
       if(is.null(zen_resourcetype)){
         errorMsg <- sprintf("Resource type with id '%s' doesn't exist in Zenodo", resourceType)
         self$ERROR(errorMsg)
         stop(errorMsg)
       }
-      self$metadata$resource_type <- resourceType
+      self$metadata$resource_type <- zen_resourcetype
     },
     
     #' @description Set the upload type (mandatory). Deprecated since zen4R 1.0
