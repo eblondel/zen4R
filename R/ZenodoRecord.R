@@ -1141,8 +1141,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     downloadFiles = function(path = ".", files = list(),
                              parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, overwrite=TRUE, timeout=60, ...){
       if(length(self$files)==0){
-        self$WARN(sprintf("No files to download for record '%s' (doi: '%s')",
-                          self$id, self$doi))
+        warnMsg = sprintf("No files to download for record '%s' (doi: '%s')", self$id, self$doi)
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
       }else{
         files.list <- self$files
 
@@ -1157,13 +1158,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         if(length(files.list)==0){
           errMsg <- sprintf("No files available in record '%s' (doi: '%s') for file names [%s]",
                             self$id, self$doi, paste0(files, collapse=","))
+          cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
           stop(errMsg)
         }
         for(file in files){
           if(!file %in% sapply(files.list, function(x){x$filename})){
-            self$WARN(sprintf("No files available in record '%s' (doi: '%s') for file name '%s': ",
-                              self$id, self$doi, file))
+            warnMsg = sprintf("No files available in record '%s' (doi: '%s') for file name '%s': ",
+                              self$id, self$doi, file)
+            cli::cli_alert_warning(warnMsg)
+            self$WARN(warnMSg)
           }
         }
 
@@ -1174,8 +1178,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         #download_file util
         download_file <- function(file){
           file$filename <- substring(file$filename, regexpr("/", file$filename)+1, nchar(file$filename))
-          if (!quiet) cat(sprintf("[zen4R][INFO] Downloading file '%s' - size: %s\n", 
-                            file$filename, human_filesize(file$filesize)))
+          if (!quiet){
+            infoMsg = sprintf("Downloading file '%s' - size: %s\n", 
+                              file$filename, human_filesize(file$filesize))
+            cli::cli_alert_info(infoMSg)
+            cat(paste("[zen4R][INFO]", infoMsg))
+          }
           target_file <- file.path(path, file$filename)
           timeout_cache <- getOption("timeout")
           options(timeout = timeout)
@@ -1190,20 +1198,30 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           #check md5sum
           target_file_md5sum <- tools::md5sum(target_file)
           if(target_file_md5sum==file$checksum){
-            if (!quiet) cat(sprintf("[zen4R][INFO] File '%s': integrity verified (md5sum: %s)\n",
-                        file$filename, file$checksum))
+            if (!quiet){
+              infoMsg = sprintf("File '%s': integrity verified (md5sum: %s)\n",
+                                file$filename, file$checksum)
+              cli::cli_alert_info(infoMsg)
+              cat(paste("[zen4R][INFO]", infoMsg))
+            }
           }else{
-            warnMsg <- sprintf("[zen4R][WARN] Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md5sum (%s)\n", 
+            warnMsg <- sprintf("Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md5sum (%s)\n", 
                                target_file_md5sum, tools::file_path_as_absolute(target_file), file$checksum)
-            cat(warnMsg)
+            cli::cli_alert_warning(warnMsg)
+            cat(paste("[zen4R][WARN]", warnMsg))
             warning(warnMsg)
           }
         }
         
         if(parallel){
-          if (!quiet) self$INFO("Download in parallel mode")
+          if (!quiet){
+            infoMsg = "Download in parallel mode"
+            cli::cli_alert_info(infoMsg)
+            self$INFO(infoMsg)
+          }
           if (is.null(parallel_handler)) {
             errMsg <- "No 'parallel_handler' specified"
+            cli::cli_alert_danger(errMsg)
             self$ERROR(errMsg)
             stop(errMsg)
           }
@@ -1211,29 +1229,57 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
             if(!is.null(cl)){
               if (!requireNamespace("parallel", quietly = TRUE)) {
                 errMsg <- "Package \"parallel\" needed for cluster-based parallel handler. Please install it."
+                cli::cli_alert_danger(errMsg)
                 self$ERROR(errMsg)
                 stop(errMsg)
               }
-              if (!quiet) self$INFO("Using cluster-based parallel handler (cluster 'cl' argument specified)")
-              if (!quiet) self$INFO(files_summary)
+              if (!quiet){
+                infoMsg = "Using cluster-based parallel handler (cluster 'cl' argument specified)"
+                cli::cli_alert_info(infoMsg)
+                self$INFO(infoMsg)
+                cli::cli_alert_info(files_summary)
+                self$INFO(files_summary)
+              }
               invisible(parallel_handler(cl, files.list, download_file, ...))
               try(parallel::stopCluster(cl))
             }else{
-              if (!quiet) self$INFO("Using non cluster-based (no cluster 'cl' argument specified)")
-              if (!quiet) self$INFO(files_summary)
+              if (!quiet){
+                infoMsg = "Using non cluster-based (no cluster 'cl' argument specified)"
+                cli::cli_alert_info(infoMsg)
+                self$INFO(infoMsg)
+                cli::cli_alert_info(files_summary)
+                self$INFO(files_summary)
+              }
               invisible(parallel_handler(files.list, download_file, ...))
             }
           }
         }else{
-          if (!quiet) self$INFO("Download in sequential mode")
-          if (!quiet) self$INFO(files_summary) 
+          if (!quiet){
+            infoMsg = "Download in sequential mode"
+            cli::cli_alert_info(infoMsg)
+            self$INFO(infoMsg)
+            cli::cli_alert_info(files_summary)
+            self$INFO(files_summary)
+          }
           invisible(lapply(files.list, download_file))
         }
-        if (!quiet) cat(sprintf("[zen4R][INFO] File%s downloaded at '%s'.\n",
-                                ifelse(length(files.list)>1,"s",""), tools::file_path_as_absolute(path)))
-        if (!quiet) self$INFO("Verifying file integrity...")
+        if (!quiet){
+          infoMsg = sprintf("File%s downloaded at '%s'.\n",
+                            ifelse(length(files.list)>1,"s",""), tools::file_path_as_absolute(path))
+          cli::cli_alert_info(infoMsg)
+          cat(paste("[zen4R][INFO]", infoMsg))
+        }
+        if (!quiet){
+          infoMsg = "Verifying file integrity..."
+          cli::cli_alert_info(infoMsg)
+          self$INFO(infoMsg)
+        }
         invisible(lapply(files.list, check_integrity))
-        if (!quiet) self$INFO("End of download")
+        if (!quiet){
+          infoMsg = "End of download"
+          cli::cli_alert_success(infoMsg)
+          self$INFO(infoMsg)
+        }
       }
     },
     
@@ -1250,7 +1296,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         zenodo_url <- self$links$record_html
         if(is.null(zenodo_url)) zenodo_url <- self$links$latest_html
         if(is.null(zenodo_url)){
-          self$WARN(sprintf("Can't print record as '%s' format: record is not published! Use 'internal' printing format ...", format))
+          warnMsg = sprintf("Can't print record as '%s' format: record is not published! Use 'internal' printing format ...", format)
+          self$WARN(warnMsg)
           method <- "internal"
         }
       }

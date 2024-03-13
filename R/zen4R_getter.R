@@ -25,7 +25,9 @@ get_zenodo = function(doi, logger = NULL){
     #try to get it as concept DOI
     rec <- zenodo$getRecordByConceptDOI(doi)
     if(is.null(rec)){
-      stop("The DOI specified doesn't match any existing Zenodo DOI or concept DOI")
+      errMsg = "The DOI specified doesn't match any existing Zenodo DOI or concept DOI"
+      cli::cli_alert_danger(errMsg)
+      stop(errMsg)
     }
   }
   return(rec)
