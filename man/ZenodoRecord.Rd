@@ -89,6 +89,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-setUploadType}{\code{ZenodoRecord$setUploadType()}}
 \item \href{#method-ZenodoRecord-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
 \item \href{#method-ZenodoRecord-setImageType}{\code{ZenodoRecord$setImageType()}}
+\item \href{#method-ZenodoRecord-setPublisher}{\code{ZenodoRecord$setPublisher()}}
 \item \href{#method-ZenodoRecord-setPublicationDate}{\code{ZenodoRecord$setPublicationDate()}}
 \item \href{#method-ZenodoRecord-setEmbargoDate}{\code{ZenodoRecord$setEmbargoDate()}}
 \item \href{#method-ZenodoRecord-setTitle}{\code{ZenodoRecord$setTitle()}}
@@ -438,6 +439,23 @@ Set the image type (mandatory if image type is 'image'). Deprecated since zen4R 
 \describe{
 \item{\code{imageType}}{record publication type among the following values: 'figure','plot',
 'drawing','diagram','photo', or 'other'}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setPublisher"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setPublisher}{}}}
+\subsection{Method \code{setPublisher()}}{
+Set the publisher
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPublisher(publisher)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{publisher}}{publisher object of class \code{character}}
 }
 \if{html}{\out{</div>}}
 }

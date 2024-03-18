@@ -278,6 +278,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$WARN(warnMsg)
     },
     
+    #' @description Set the publisher
+    #' @param publisher publisher object of class \code{character}
+    setPublisher = function(publisher){
+      self$metadata$publisher = publisher  
+    },
+    
     #' @description Set the publication date.
     #' @param publicationDate object of class \code{Date}
     setPublicationDate = function(publicationDate){
