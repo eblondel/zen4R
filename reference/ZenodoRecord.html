@@ -179,6 +179,7 @@ ZenodoRecord"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
 <li><p><a href="#method-ZenodoRecord-setUploadType"><code>ZenodoRecord$setUploadType()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-setPublicationType"><code>ZenodoRecord$setPublicationType()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-setImageType"><code>ZenodoRecord$setImageType()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-setPublisher"><code>ZenodoRecord$setPublisher()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-setPublicationDate"><code>ZenodoRecord$setPublicationDate()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-setEmbargoDate"><code>ZenodoRecord$setEmbargoDate()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-setTitle"><code>ZenodoRecord$setTitle()</code></a></p></li>
@@ -515,15 +516,31 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-setPublicationDate"></a><div class="section">
-<h3 id="method-setpublicationdate-">Method <code>setPublicationDate()</code><a class="anchor" aria-label="anchor" href="#method-setpublicationdate-"></a></h3>
-<p>Set the publication date.</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-setPublisher"></a><div class="section">
+<h3 id="method-setpublisher-">Method <code>setPublisher()</code><a class="anchor" aria-label="anchor" href="#method-setpublisher-"></a></h3>
+<p>Set the publisher</p><div class="section">
 <h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setPublicationDate</span><span class="op">(</span><span class="va">publicationDate</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setPublisher</span><span class="op">(</span><span class="va">publisher</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>publisher</code></dt>
+<dd><p>publisher object of class <code>character</code></p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-setPublicationDate"></a><div class="section">
+<h3 id="method-setpublicationdate-">Method <code>setPublicationDate()</code><a class="anchor" aria-label="anchor" href="#method-setpublicationdate-"></a></h3>
+<p>Set the publication date.</p><div class="section">
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setPublicationDate</span><span class="op">(</span><span class="va">publicationDate</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>publicationDate</code></dt>
 <dd><p>object of class <code>Date</code></p></dd>
 
@@ -534,12 +551,12 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-setEmbargoDate"></a><div class="section">
 <h3 id="method-setembargodate-">Method <code>setEmbargoDate()</code><a class="anchor" aria-label="anchor" href="#method-setembargodate-"></a></h3>
 <p>Set the embargo date.</p><div class="section">
-<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setEmbargoDate</span><span class="op">(</span><span class="va">embargoDate</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
+<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>embargoDate</code></dt>
 <dd><p>object of class <code>Date</code></p></dd>
 
@@ -550,12 +567,12 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-setTitle"></a><div class="section">
 <h3 id="method-settitle-">Method <code>setTitle()</code><a class="anchor" aria-label="anchor" href="#method-settitle-"></a></h3>
 <p>Set the record title.</p><div class="section">
-<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setTitle</span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
+<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>title</code></dt>
 <dd><p>object of class <code>character</code></p></dd>
 
@@ -566,12 +583,12 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-setDescription"></a><div class="section">
 <h3 id="method-setdescription-">Method <code>setDescription()</code><a class="anchor" aria-label="anchor" href="#method-setdescription-"></a></h3>
 <p>Set the record description</p><div class="section">
-<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
+<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setDescription</span><span class="op">(</span><span class="va">description</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
+<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>description</code></dt>
 <dd><p>object of class <code>character</code></p></dd>
 
@@ -582,12 +599,12 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-setAccessRight"></a><div class="section">
 <h3 id="method-setaccessright-">Method <code>setAccessRight()</code><a class="anchor" aria-label="anchor" href="#method-setaccessright-"></a></h3>
 <p>Set the access right.</p><div class="section">
-<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
+<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setAccessRight</span><span class="op">(</span><span class="va">accessRight</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>accessRight</code></dt>
 <dd><p>record access right among the following values: 'open','embargoed', 'restricted','closed'</p></dd>
 
@@ -598,12 +615,12 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-setAccessConditions"></a><div class="section">
 <h3 id="method-setaccessconditions-">Method <code>setAccessConditions()</code><a class="anchor" aria-label="anchor" href="#method-setaccessconditions-"></a></h3>
 <p>set the access conditions.</p><div class="section">
-<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setAccessConditions</span><span class="op">(</span><span class="va">accessConditions</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>accessConditions</code></dt>
 <dd><p>object of class <code>character</code></p></dd>
 
@@ -616,7 +633,7 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 <p>Add a person or organization for the record. For persons, the approach is to use the <code>firstname</code> and
    <code>lastname</code> arguments, that by default will be concatenated for Zenodo as <code>lastname, firstname</code>.
    For organizations, use the <code>name</code> argument.</p><div class="section">
-<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
+<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addPersonOrOrg</span><span class="op">(</span></span>
 <span>  firstname <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lastname <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -633,7 +650,7 @@ or "DEBUG" (for complete curl http calls logs)</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
+<h4 id="arguments-17">Arguments<a class="anchor" aria-label="anchor" href="#arguments-17"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>firstname</code></dt>
 <dd><p>person first name</p></dd>
 
@@ -691,12 +708,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 <h3 id="method-removepersonororg-">Method <code>removePersonOrOrg()</code><a class="anchor" aria-label="anchor" href="#method-removepersonororg-"></a></h3>
 <p>Removes a person or organization by a property. The <code>by</code> parameter should be the name
    of the person or organization property ('name', 'affiliation','orcid','gnd','isni','ror').</p><div class="section">
-<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
+<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removePersonOrOrg</span><span class="op">(</span><span class="va">by</span>, <span class="va">property</span>, <span class="va">type</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-17">Arguments<a class="anchor" aria-label="anchor" href="#arguments-17"></a></h4>
+<h4 id="arguments-18">Arguments<a class="anchor" aria-label="anchor" href="#arguments-18"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>by</code></dt>
 <dd><p>property used as criterion to remove the person or organization</p></dd>
 
@@ -721,7 +738,7 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 <p>Add a creator for the record. For persons, the approach is to use the <code>firstname</code> and
    <code>lastname</code> arguments, that by default will be concatenated for Zenodo as <code>lastname, firstname</code>.
    For organizations, use the <code>name</code> argument.</p><div class="section">
-<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
+<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addCreator</span><span class="op">(</span></span>
 <span>  firstname <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lastname <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -737,7 +754,7 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div>
 
 <div class="section">
-<h4 id="arguments-18">Arguments<a class="anchor" aria-label="anchor" href="#arguments-18"></a></h4>
+<h4 id="arguments-19">Arguments<a class="anchor" aria-label="anchor" href="#arguments-19"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>firstname</code></dt>
 <dd><p>person first name</p></dd>
 
@@ -790,12 +807,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeCreatorByName"></a><div class="section">
 <h3 id="method-removecreatorbyname-">Method <code>removeCreatorByName()</code><a class="anchor" aria-label="anchor" href="#method-removecreatorbyname-"></a></h3>
 <p>Removes a creator by name.</p><div class="section">
-<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
+<h4 id="usage-25">Usage<a class="anchor" aria-label="anchor" href="#usage-25"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCreatorByName</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-19">Arguments<a class="anchor" aria-label="anchor" href="#arguments-19"></a></h4>
+<h4 id="arguments-20">Arguments<a class="anchor" aria-label="anchor" href="#arguments-20"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>creator name</p></dd>
 
@@ -810,12 +827,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeCreatorByAffiliation"></a><div class="section">
 <h3 id="method-removecreatorbyaffiliation-">Method <code>removeCreatorByAffiliation()</code><a class="anchor" aria-label="anchor" href="#method-removecreatorbyaffiliation-"></a></h3>
 <p>Removes a creator by affiliation.</p><div class="section">
-<h4 id="usage-25">Usage<a class="anchor" aria-label="anchor" href="#usage-25"></a></h4>
+<h4 id="usage-26">Usage<a class="anchor" aria-label="anchor" href="#usage-26"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCreatorByAffiliation</span><span class="op">(</span><span class="va">affiliation</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-20">Arguments<a class="anchor" aria-label="anchor" href="#arguments-20"></a></h4>
+<h4 id="arguments-21">Arguments<a class="anchor" aria-label="anchor" href="#arguments-21"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>affiliation</code></dt>
 <dd><p>creator affiliation</p></dd>
 
@@ -830,12 +847,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeCreatorByORCID"></a><div class="section">
 <h3 id="method-removecreatorbyorcid-">Method <code>removeCreatorByORCID()</code><a class="anchor" aria-label="anchor" href="#method-removecreatorbyorcid-"></a></h3>
 <p>Removes a creator by ORCID.</p><div class="section">
-<h4 id="usage-26">Usage<a class="anchor" aria-label="anchor" href="#usage-26"></a></h4>
+<h4 id="usage-27">Usage<a class="anchor" aria-label="anchor" href="#usage-27"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCreatorByORCID</span><span class="op">(</span><span class="va">orcid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-21">Arguments<a class="anchor" aria-label="anchor" href="#arguments-21"></a></h4>
+<h4 id="arguments-22">Arguments<a class="anchor" aria-label="anchor" href="#arguments-22"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>orcid</code></dt>
 <dd><p>creator ORCID</p></dd>
 
@@ -850,12 +867,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeCreatorByGND"></a><div class="section">
 <h3 id="method-removecreatorbygnd-">Method <code>removeCreatorByGND()</code><a class="anchor" aria-label="anchor" href="#method-removecreatorbygnd-"></a></h3>
 <p>Removes a creator by GND.</p><div class="section">
-<h4 id="usage-27">Usage<a class="anchor" aria-label="anchor" href="#usage-27"></a></h4>
+<h4 id="usage-28">Usage<a class="anchor" aria-label="anchor" href="#usage-28"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCreatorByGND</span><span class="op">(</span><span class="va">gnd</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-22">Arguments<a class="anchor" aria-label="anchor" href="#arguments-22"></a></h4>
+<h4 id="arguments-23">Arguments<a class="anchor" aria-label="anchor" href="#arguments-23"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>gnd</code></dt>
 <dd><p>creator GND</p></dd>
 
@@ -870,12 +887,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeCreatorByISNI"></a><div class="section">
 <h3 id="method-removecreatorbyisni-">Method <code>removeCreatorByISNI()</code><a class="anchor" aria-label="anchor" href="#method-removecreatorbyisni-"></a></h3>
 <p>Removes a creator by ISNI.</p><div class="section">
-<h4 id="usage-28">Usage<a class="anchor" aria-label="anchor" href="#usage-28"></a></h4>
+<h4 id="usage-29">Usage<a class="anchor" aria-label="anchor" href="#usage-29"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCreatorByISNI</span><span class="op">(</span><span class="va">isni</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-23">Arguments<a class="anchor" aria-label="anchor" href="#arguments-23"></a></h4>
+<h4 id="arguments-24">Arguments<a class="anchor" aria-label="anchor" href="#arguments-24"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>isni</code></dt>
 <dd><p>creator ISNI</p></dd>
 
@@ -890,12 +907,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeCreatorByROR"></a><div class="section">
 <h3 id="method-removecreatorbyror-">Method <code>removeCreatorByROR()</code><a class="anchor" aria-label="anchor" href="#method-removecreatorbyror-"></a></h3>
 <p>Removes a creator by ROR.</p><div class="section">
-<h4 id="usage-29">Usage<a class="anchor" aria-label="anchor" href="#usage-29"></a></h4>
+<h4 id="usage-30">Usage<a class="anchor" aria-label="anchor" href="#usage-30"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCreatorByROR</span><span class="op">(</span><span class="va">ror</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-24">Arguments<a class="anchor" aria-label="anchor" href="#arguments-24"></a></h4>
+<h4 id="arguments-25">Arguments<a class="anchor" aria-label="anchor" href="#arguments-25"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>ror</code></dt>
 <dd><p>creator ROR</p></dd>
 
@@ -912,7 +929,7 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 <p>Add a contributor for the record. For persons, the approach is to use the <code>firstname</code> and
    <code>lastname</code> arguments, that by default will be concatenated for Zenodo as <code>lastname, firstname</code>.
    For organizations, use the <code>name</code> argument.</p><div class="section">
-<h4 id="usage-30">Usage<a class="anchor" aria-label="anchor" href="#usage-30"></a></h4>
+<h4 id="usage-31">Usage<a class="anchor" aria-label="anchor" href="#usage-31"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addContributor</span><span class="op">(</span></span>
 <span>  firstname <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  lastname <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -928,7 +945,7 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div>
 
 <div class="section">
-<h4 id="arguments-25">Arguments<a class="anchor" aria-label="anchor" href="#arguments-25"></a></h4>
+<h4 id="arguments-26">Arguments<a class="anchor" aria-label="anchor" href="#arguments-26"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>firstname</code></dt>
 <dd><p>person first name</p></dd>
 
@@ -981,12 +998,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeContributorByName"></a><div class="section">
 <h3 id="method-removecontributorbyname-">Method <code>removeContributorByName()</code><a class="anchor" aria-label="anchor" href="#method-removecontributorbyname-"></a></h3>
 <p>Removes a contributor by name.</p><div class="section">
-<h4 id="usage-31">Usage<a class="anchor" aria-label="anchor" href="#usage-31"></a></h4>
+<h4 id="usage-32">Usage<a class="anchor" aria-label="anchor" href="#usage-32"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeContributorByName</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-26">Arguments<a class="anchor" aria-label="anchor" href="#arguments-26"></a></h4>
+<h4 id="arguments-27">Arguments<a class="anchor" aria-label="anchor" href="#arguments-27"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>contributor name</p></dd>
 
@@ -1001,12 +1018,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeContributorByAffiliation"></a><div class="section">
 <h3 id="method-removecontributorbyaffiliation-">Method <code>removeContributorByAffiliation()</code><a class="anchor" aria-label="anchor" href="#method-removecontributorbyaffiliation-"></a></h3>
 <p>Removes a contributor by affiliation.</p><div class="section">
-<h4 id="usage-32">Usage<a class="anchor" aria-label="anchor" href="#usage-32"></a></h4>
+<h4 id="usage-33">Usage<a class="anchor" aria-label="anchor" href="#usage-33"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeContributorByAffiliation</span><span class="op">(</span><span class="va">affiliation</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-27">Arguments<a class="anchor" aria-label="anchor" href="#arguments-27"></a></h4>
+<h4 id="arguments-28">Arguments<a class="anchor" aria-label="anchor" href="#arguments-28"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>affiliation</code></dt>
 <dd><p>contributor affiliation</p></dd>
 
@@ -1021,12 +1038,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeContributorByORCID"></a><div class="section">
 <h3 id="method-removecontributorbyorcid-">Method <code>removeContributorByORCID()</code><a class="anchor" aria-label="anchor" href="#method-removecontributorbyorcid-"></a></h3>
 <p>Removes a contributor by ORCID.</p><div class="section">
-<h4 id="usage-33">Usage<a class="anchor" aria-label="anchor" href="#usage-33"></a></h4>
+<h4 id="usage-34">Usage<a class="anchor" aria-label="anchor" href="#usage-34"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeContributorByORCID</span><span class="op">(</span><span class="va">orcid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-28">Arguments<a class="anchor" aria-label="anchor" href="#arguments-28"></a></h4>
+<h4 id="arguments-29">Arguments<a class="anchor" aria-label="anchor" href="#arguments-29"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>orcid</code></dt>
 <dd><p>contributor ORCID</p></dd>
 
@@ -1041,12 +1058,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeContributorByGND"></a><div class="section">
 <h3 id="method-removecontributorbygnd-">Method <code>removeContributorByGND()</code><a class="anchor" aria-label="anchor" href="#method-removecontributorbygnd-"></a></h3>
 <p>Removes a contributor by GND.</p><div class="section">
-<h4 id="usage-34">Usage<a class="anchor" aria-label="anchor" href="#usage-34"></a></h4>
+<h4 id="usage-35">Usage<a class="anchor" aria-label="anchor" href="#usage-35"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeContributorByGND</span><span class="op">(</span><span class="va">gnd</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-29">Arguments<a class="anchor" aria-label="anchor" href="#arguments-29"></a></h4>
+<h4 id="arguments-30">Arguments<a class="anchor" aria-label="anchor" href="#arguments-30"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>gnd</code></dt>
 <dd><p>contributor GND</p></dd>
 
@@ -1061,12 +1078,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeContributorByISNI"></a><div class="section">
 <h3 id="method-removecontributorbyisni-">Method <code>removeContributorByISNI()</code><a class="anchor" aria-label="anchor" href="#method-removecontributorbyisni-"></a></h3>
 <p>Removes a contributor by ISNI.</p><div class="section">
-<h4 id="usage-35">Usage<a class="anchor" aria-label="anchor" href="#usage-35"></a></h4>
+<h4 id="usage-36">Usage<a class="anchor" aria-label="anchor" href="#usage-36"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeContributorByISNI</span><span class="op">(</span><span class="va">isni</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-30">Arguments<a class="anchor" aria-label="anchor" href="#arguments-30"></a></h4>
+<h4 id="arguments-31">Arguments<a class="anchor" aria-label="anchor" href="#arguments-31"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>isni</code></dt>
 <dd><p>contributor ISNI</p></dd>
 
@@ -1081,12 +1098,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-removeContributorByROR"></a><div class="section">
 <h3 id="method-removecontributorbyror-">Method <code>removeContributorByROR()</code><a class="anchor" aria-label="anchor" href="#method-removecontributorbyror-"></a></h3>
 <p>Removes a contributor by ROR.</p><div class="section">
-<h4 id="usage-36">Usage<a class="anchor" aria-label="anchor" href="#usage-36"></a></h4>
+<h4 id="usage-37">Usage<a class="anchor" aria-label="anchor" href="#usage-37"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeContributorByROR</span><span class="op">(</span><span class="va">ror</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-31">Arguments<a class="anchor" aria-label="anchor" href="#arguments-31"></a></h4>
+<h4 id="arguments-32">Arguments<a class="anchor" aria-label="anchor" href="#arguments-32"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>ror</code></dt>
 <dd><p>contributor ROR</p></dd>
 
@@ -1103,12 +1120,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 <p>Set license. The license should be set with the Zenodo id of the license. If not
    recognized by Zenodo, the function will return an error. The list of licenses can
    fetched with the <code>ZenodoManager</code> and the function <code>$getLicenses()</code>.</p><div class="section">
-<h4 id="usage-37">Usage<a class="anchor" aria-label="anchor" href="#usage-37"></a></h4>
+<h4 id="usage-38">Usage<a class="anchor" aria-label="anchor" href="#usage-38"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setLicense</span><span class="op">(</span><span class="va">licenseId</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-32">Arguments<a class="anchor" aria-label="anchor" href="#arguments-32"></a></h4>
+<h4 id="arguments-33">Arguments<a class="anchor" aria-label="anchor" href="#arguments-33"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>licenseId</code></dt>
 <dd><p>a license Id</p></dd>
 
@@ -1123,12 +1140,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-setVersion"></a><div class="section">
 <h3 id="method-setversion-">Method <code>setVersion()</code><a class="anchor" aria-label="anchor" href="#method-setversion-"></a></h3>
 <p>Set record version.</p><div class="section">
-<h4 id="usage-38">Usage<a class="anchor" aria-label="anchor" href="#usage-38"></a></h4>
+<h4 id="usage-39">Usage<a class="anchor" aria-label="anchor" href="#usage-39"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setVersion</span><span class="op">(</span><span class="va">version</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-33">Arguments<a class="anchor" aria-label="anchor" href="#arguments-33"></a></h4>
+<h4 id="arguments-34">Arguments<a class="anchor" aria-label="anchor" href="#arguments-34"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>version</code></dt>
 <dd><p>the record version to set</p></dd>
 
@@ -1139,12 +1156,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-setLanguage"></a><div class="section">
 <h3 id="method-setlanguage-">Method <code>setLanguage()</code><a class="anchor" aria-label="anchor" href="#method-setlanguage-"></a></h3>
 <p>Set the language.</p><div class="section">
-<h4 id="usage-39">Usage<a class="anchor" aria-label="anchor" href="#usage-39"></a></h4>
+<h4 id="usage-40">Usage<a class="anchor" aria-label="anchor" href="#usage-40"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setLanguage</span><span class="op">(</span><span class="va">language</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-34">Arguments<a class="anchor" aria-label="anchor" href="#arguments-34"></a></h4>
+<h4 id="arguments-35">Arguments<a class="anchor" aria-label="anchor" href="#arguments-35"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>language</code></dt>
 <dd><p>ISO 639-2 or 639-3 code</p></dd>
 
@@ -1155,12 +1172,12 @@ RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, Wor
 </div><p></p><hr><a id="method-ZenodoRecord-addRelatedIdentifier"></a><div class="section">
 <h3 id="method-addrelatedidentifier-">Method <code>addRelatedIdentifier()</code><a class="anchor" aria-label="anchor" href="#method-addrelatedidentifier-"></a></h3>
 <p>Adds a related identifier with a given relation.</p><div class="section">
-<h4 id="usage-40">Usage<a class="anchor" aria-label="anchor" href="#usage-40"></a></h4>
+<h4 id="usage-41">Usage<a class="anchor" aria-label="anchor" href="#usage-41"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addRelatedIdentifier</span><span class="op">(</span><span class="va">relation</span>, <span class="va">identifier</span>, resource_type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-35">Arguments<a class="anchor" aria-label="anchor" href="#arguments-35"></a></h4>
+<h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>relation</code></dt>
 <dd><p>relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
 isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
@@ -1184,12 +1201,12 @@ types (except 'publication' and 'image' for which a publication/image has to be 
 </div><p></p><hr><a id="method-ZenodoRecord-removeRelatedIdentifier"></a><div class="section">
 <h3 id="method-removerelatedidentifier-">Method <code>removeRelatedIdentifier()</code><a class="anchor" aria-label="anchor" href="#method-removerelatedidentifier-"></a></h3>
 <p>Removes a related identifier with a given relation.</p><div class="section">
-<h4 id="usage-41">Usage<a class="anchor" aria-label="anchor" href="#usage-41"></a></h4>
+<h4 id="usage-42">Usage<a class="anchor" aria-label="anchor" href="#usage-42"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeRelatedIdentifier</span><span class="op">(</span><span class="va">relation</span>, <span class="va">identifier</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
+<h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>relation</code></dt>
 <dd><p>relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
 isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
@@ -1208,12 +1225,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-setReferences"></a><div class="section">
 <h3 id="method-setreferences-">Method <code>setReferences()</code><a class="anchor" aria-label="anchor" href="#method-setreferences-"></a></h3>
 <p>Set references</p><div class="section">
-<h4 id="usage-42">Usage<a class="anchor" aria-label="anchor" href="#usage-42"></a></h4>
+<h4 id="usage-43">Usage<a class="anchor" aria-label="anchor" href="#usage-43"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setReferences</span><span class="op">(</span><span class="va">references</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
+<h4 id="arguments-38">Arguments<a class="anchor" aria-label="anchor" href="#arguments-38"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>references</code></dt>
 <dd><p>a vector or list of references to set for the record</p></dd>
 
@@ -1224,12 +1241,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-addReference"></a><div class="section">
 <h3 id="method-addreference-">Method <code>addReference()</code><a class="anchor" aria-label="anchor" href="#method-addreference-"></a></h3>
 <p>Add a reference</p><div class="section">
-<h4 id="usage-43">Usage<a class="anchor" aria-label="anchor" href="#usage-43"></a></h4>
+<h4 id="usage-44">Usage<a class="anchor" aria-label="anchor" href="#usage-44"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addReference</span><span class="op">(</span><span class="va">reference</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-38">Arguments<a class="anchor" aria-label="anchor" href="#arguments-38"></a></h4>
+<h4 id="arguments-39">Arguments<a class="anchor" aria-label="anchor" href="#arguments-39"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>reference</code></dt>
 <dd><p>the reference to add</p></dd>
 
@@ -1244,12 +1261,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-removeReference"></a><div class="section">
 <h3 id="method-removereference-">Method <code>removeReference()</code><a class="anchor" aria-label="anchor" href="#method-removereference-"></a></h3>
 <p>Remove a reference</p><div class="section">
-<h4 id="usage-44">Usage<a class="anchor" aria-label="anchor" href="#usage-44"></a></h4>
+<h4 id="usage-45">Usage<a class="anchor" aria-label="anchor" href="#usage-45"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeReference</span><span class="op">(</span><span class="va">reference</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-39">Arguments<a class="anchor" aria-label="anchor" href="#arguments-39"></a></h4>
+<h4 id="arguments-40">Arguments<a class="anchor" aria-label="anchor" href="#arguments-40"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>reference</code></dt>
 <dd><p>the reference to remove</p></dd>
 
@@ -1264,12 +1281,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-setKeywords"></a><div class="section">
 <h3 id="method-setkeywords-">Method <code>setKeywords()</code><a class="anchor" aria-label="anchor" href="#method-setkeywords-"></a></h3>
 <p>Set keywords</p><div class="section">
-<h4 id="usage-45">Usage<a class="anchor" aria-label="anchor" href="#usage-45"></a></h4>
+<h4 id="usage-46">Usage<a class="anchor" aria-label="anchor" href="#usage-46"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setKeywords</span><span class="op">(</span><span class="va">keywords</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-40">Arguments<a class="anchor" aria-label="anchor" href="#arguments-40"></a></h4>
+<h4 id="arguments-41">Arguments<a class="anchor" aria-label="anchor" href="#arguments-41"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>keywords</code></dt>
 <dd><p>a vector or list of keywords to set for the record</p></dd>
 
@@ -1280,12 +1297,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-addKeyword"></a><div class="section">
 <h3 id="method-addkeyword-">Method <code>addKeyword()</code><a class="anchor" aria-label="anchor" href="#method-addkeyword-"></a></h3>
 <p>Add a keyword</p><div class="section">
-<h4 id="usage-46">Usage<a class="anchor" aria-label="anchor" href="#usage-46"></a></h4>
+<h4 id="usage-47">Usage<a class="anchor" aria-label="anchor" href="#usage-47"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addKeyword</span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-41">Arguments<a class="anchor" aria-label="anchor" href="#arguments-41"></a></h4>
+<h4 id="arguments-42">Arguments<a class="anchor" aria-label="anchor" href="#arguments-42"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>keyword</code></dt>
 <dd><p>the keyword to add</p></dd>
 
@@ -1300,12 +1317,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-removeKeyword"></a><div class="section">
 <h3 id="method-removekeyword-">Method <code>removeKeyword()</code><a class="anchor" aria-label="anchor" href="#method-removekeyword-"></a></h3>
 <p>Remove a keyword</p><div class="section">
-<h4 id="usage-47">Usage<a class="anchor" aria-label="anchor" href="#usage-47"></a></h4>
+<h4 id="usage-48">Usage<a class="anchor" aria-label="anchor" href="#usage-48"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeKeyword</span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-42">Arguments<a class="anchor" aria-label="anchor" href="#arguments-42"></a></h4>
+<h4 id="arguments-43">Arguments<a class="anchor" aria-label="anchor" href="#arguments-43"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>keyword</code></dt>
 <dd><p>the keyword to remove</p></dd>
 
@@ -1320,12 +1337,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-addSubject"></a><div class="section">
 <h3 id="method-addsubject-">Method <code>addSubject()</code><a class="anchor" aria-label="anchor" href="#method-addsubject-"></a></h3>
 <p>Adds a subject given a term and identifier</p><div class="section">
-<h4 id="usage-48">Usage<a class="anchor" aria-label="anchor" href="#usage-48"></a></h4>
+<h4 id="usage-49">Usage<a class="anchor" aria-label="anchor" href="#usage-49"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addSubject</span><span class="op">(</span><span class="va">term</span>, <span class="va">identifier</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-43">Arguments<a class="anchor" aria-label="anchor" href="#arguments-43"></a></h4>
+<h4 id="arguments-44">Arguments<a class="anchor" aria-label="anchor" href="#arguments-44"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>term</code></dt>
 <dd><p>subject term</p></dd>
 
@@ -1341,12 +1358,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 <h3 id="method-removesubject-">Method <code>removeSubject()</code><a class="anchor" aria-label="anchor" href="#method-removesubject-"></a></h3>
 <p>Removes subject(s) by a property. The <code>by</code> parameter should be the name
    of the subject property ('term' or 'identifier').</p><div class="section">
-<h4 id="usage-49">Usage<a class="anchor" aria-label="anchor" href="#usage-49"></a></h4>
+<h4 id="usage-50">Usage<a class="anchor" aria-label="anchor" href="#usage-50"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeSubject</span><span class="op">(</span><span class="va">by</span>, <span class="va">property</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-44">Arguments<a class="anchor" aria-label="anchor" href="#arguments-44"></a></h4>
+<h4 id="arguments-45">Arguments<a class="anchor" aria-label="anchor" href="#arguments-45"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>by</code></dt>
 <dd><p>property used as criterion to remove subjects</p></dd>
 
@@ -1365,12 +1382,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-removeSubjectByTerm"></a><div class="section">
 <h3 id="method-removesubjectbyterm-">Method <code>removeSubjectByTerm()</code><a class="anchor" aria-label="anchor" href="#method-removesubjectbyterm-"></a></h3>
 <p>Removes subject(s) by term.</p><div class="section">
-<h4 id="usage-50">Usage<a class="anchor" aria-label="anchor" href="#usage-50"></a></h4>
+<h4 id="usage-51">Usage<a class="anchor" aria-label="anchor" href="#usage-51"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeSubjectByTerm</span><span class="op">(</span><span class="va">term</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-45">Arguments<a class="anchor" aria-label="anchor" href="#arguments-45"></a></h4>
+<h4 id="arguments-46">Arguments<a class="anchor" aria-label="anchor" href="#arguments-46"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>term</code></dt>
 <dd><p>the term to use to remove subject(s)</p></dd>
 
@@ -1385,12 +1402,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-removeSubjectByIdentifier"></a><div class="section">
 <h3 id="method-removesubjectbyidentifier-">Method <code>removeSubjectByIdentifier()</code><a class="anchor" aria-label="anchor" href="#method-removesubjectbyidentifier-"></a></h3>
 <p>Removes subject(s) by identifier</p><div class="section">
-<h4 id="usage-51">Usage<a class="anchor" aria-label="anchor" href="#usage-51"></a></h4>
+<h4 id="usage-52">Usage<a class="anchor" aria-label="anchor" href="#usage-52"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeSubjectByIdentifier</span><span class="op">(</span><span class="va">identifier</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-46">Arguments<a class="anchor" aria-label="anchor" href="#arguments-46"></a></h4>
+<h4 id="arguments-47">Arguments<a class="anchor" aria-label="anchor" href="#arguments-47"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>identifier</code></dt>
 <dd><p>the identifier to use to remove subject(s)</p></dd>
 
@@ -1405,12 +1422,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-setNotes"></a><div class="section">
 <h3 id="method-setnotes-">Method <code>setNotes()</code><a class="anchor" aria-label="anchor" href="#method-setnotes-"></a></h3>
 <p>Set notes. HTML is not allowed</p><div class="section">
-<h4 id="usage-52">Usage<a class="anchor" aria-label="anchor" href="#usage-52"></a></h4>
+<h4 id="usage-53">Usage<a class="anchor" aria-label="anchor" href="#usage-53"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setNotes</span><span class="op">(</span><span class="va">notes</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-47">Arguments<a class="anchor" aria-label="anchor" href="#arguments-47"></a></h4>
+<h4 id="arguments-48">Arguments<a class="anchor" aria-label="anchor" href="#arguments-48"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>notes</code></dt>
 <dd><p>object of class <code>character</code></p></dd>
 
@@ -1421,12 +1438,12 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </div><p></p><hr><a id="method-ZenodoRecord-setCommunities"></a><div class="section">
 <h3 id="method-setcommunities-">Method <code>setCommunities()</code><a class="anchor" aria-label="anchor" href="#method-setcommunities-"></a></h3>
 <p>Set a vector of character strings identifying communities</p><div class="section">
-<h4 id="usage-53">Usage<a class="anchor" aria-label="anchor" href="#usage-53"></a></h4>
+<h4 id="usage-54">Usage<a class="anchor" aria-label="anchor" href="#usage-54"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setCommunities</span><span class="op">(</span><span class="va">communities</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-48">Arguments<a class="anchor" aria-label="anchor" href="#arguments-48"></a></h4>
+<h4 id="arguments-49">Arguments<a class="anchor" aria-label="anchor" href="#arguments-49"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>communities</code></dt>
 <dd><p>a vector or list of communities. Values should among known communities. The list of communities can
 fetched with the <code>ZenodoManager</code> and the function <code>$getCommunities()</code>. Each community should be set with 
@@ -1443,12 +1460,12 @@ the Zenodo id of the community. If not recognized by Zenodo, the function will r
 </div><p></p><hr><a id="method-ZenodoRecord-addCommunity"></a><div class="section">
 <h3 id="method-addcommunity-">Method <code>addCommunity()</code><a class="anchor" aria-label="anchor" href="#method-addcommunity-"></a></h3>
 <p>Adds a community to the record metadata.</p><div class="section">
-<h4 id="usage-54">Usage<a class="anchor" aria-label="anchor" href="#usage-54"></a></h4>
+<h4 id="usage-55">Usage<a class="anchor" aria-label="anchor" href="#usage-55"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addCommunity</span><span class="op">(</span><span class="va">community</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-49">Arguments<a class="anchor" aria-label="anchor" href="#arguments-49"></a></h4>
+<h4 id="arguments-50">Arguments<a class="anchor" aria-label="anchor" href="#arguments-50"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>community</code></dt>
 <dd><p>community to add. The community should be set with the Zenodo id of the community. 
 If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
@@ -1469,12 +1486,12 @@ with the <code>ZenodoManager</code> and the function <code>$getCommunities()</co
 </div><p></p><hr><a id="method-ZenodoRecord-removeCommunity"></a><div class="section">
 <h3 id="method-removecommunity-">Method <code>removeCommunity()</code><a class="anchor" aria-label="anchor" href="#method-removecommunity-"></a></h3>
 <p>Removes a community from the record metadata.</p><div class="section">
-<h4 id="usage-55">Usage<a class="anchor" aria-label="anchor" href="#usage-55"></a></h4>
+<h4 id="usage-56">Usage<a class="anchor" aria-label="anchor" href="#usage-56"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeCommunity</span><span class="op">(</span><span class="va">community</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-50">Arguments<a class="anchor" aria-label="anchor" href="#arguments-50"></a></h4>
+<h4 id="arguments-51">Arguments<a class="anchor" aria-label="anchor" href="#arguments-51"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>community</code></dt>
 <dd><p>community to remove. The community should be set with the Zenodo id of the community.</p></dd>
 
@@ -1489,12 +1506,12 @@ with the <code>ZenodoManager</code> and the function <code>$getCommunities()</co
 </div><p></p><hr><a id="method-ZenodoRecord-setGrants"></a><div class="section">
 <h3 id="method-setgrants-">Method <code>setGrants()</code><a class="anchor" aria-label="anchor" href="#method-setgrants-"></a></h3>
 <p>Set a vector of character strings identifying grants</p><div class="section">
-<h4 id="usage-56">Usage<a class="anchor" aria-label="anchor" href="#usage-56"></a></h4>
+<h4 id="usage-57">Usage<a class="anchor" aria-label="anchor" href="#usage-57"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setGrants</span><span class="op">(</span><span class="va">grants</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-51">Arguments<a class="anchor" aria-label="anchor" href="#arguments-51"></a></h4>
+<h4 id="arguments-52">Arguments<a class="anchor" aria-label="anchor" href="#arguments-52"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>grants</code></dt>
 <dd><p>a vector or list of grants Values should among known grants The list of grants can
 fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()</code>. Each grant should be set with 
@@ -1511,12 +1528,12 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 </div><p></p><hr><a id="method-ZenodoRecord-addGrant"></a><div class="section">
 <h3 id="method-addgrant-">Method <code>addGrant()</code><a class="anchor" aria-label="anchor" href="#method-addgrant-"></a></h3>
 <p>Adds a grant to the record metadata.</p><div class="section">
-<h4 id="usage-57">Usage<a class="anchor" aria-label="anchor" href="#usage-57"></a></h4>
+<h4 id="usage-58">Usage<a class="anchor" aria-label="anchor" href="#usage-58"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addGrant</span><span class="op">(</span><span class="va">grant</span>, sandbox <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-52">Arguments<a class="anchor" aria-label="anchor" href="#arguments-52"></a></h4>
+<h4 id="arguments-53">Arguments<a class="anchor" aria-label="anchor" href="#arguments-53"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>grant</code></dt>
 <dd><p>grant to add. The grant should be set with the id of the grant. If not
 recognized by Zenodo, the function will return an warning only. The list of grants can
@@ -1537,12 +1554,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-removeGrant"></a><div class="section">
 <h3 id="method-removegrant-">Method <code>removeGrant()</code><a class="anchor" aria-label="anchor" href="#method-removegrant-"></a></h3>
 <p>Removes a grant from the record metadata.</p><div class="section">
-<h4 id="usage-58">Usage<a class="anchor" aria-label="anchor" href="#usage-58"></a></h4>
+<h4 id="usage-59">Usage<a class="anchor" aria-label="anchor" href="#usage-59"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeGrant</span><span class="op">(</span><span class="va">grant</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-53">Arguments<a class="anchor" aria-label="anchor" href="#arguments-53"></a></h4>
+<h4 id="arguments-54">Arguments<a class="anchor" aria-label="anchor" href="#arguments-54"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>grant</code></dt>
 <dd><p>grant to remove. The grant should be set with the Zenodo id of the grant</p></dd>
 
@@ -1557,12 +1574,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setJournalTitle"></a><div class="section">
 <h3 id="method-setjournaltitle-">Method <code>setJournalTitle()</code><a class="anchor" aria-label="anchor" href="#method-setjournaltitle-"></a></h3>
 <p>Set Journal title to the record metadata</p><div class="section">
-<h4 id="usage-59">Usage<a class="anchor" aria-label="anchor" href="#usage-59"></a></h4>
+<h4 id="usage-60">Usage<a class="anchor" aria-label="anchor" href="#usage-60"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setJournalTitle</span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-54">Arguments<a class="anchor" aria-label="anchor" href="#arguments-54"></a></h4>
+<h4 id="arguments-55">Arguments<a class="anchor" aria-label="anchor" href="#arguments-55"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>title</code></dt>
 <dd><p>a title, object of class <code>character</code></p></dd>
 
@@ -1573,12 +1590,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setJournalVolume"></a><div class="section">
 <h3 id="method-setjournalvolume-">Method <code>setJournalVolume()</code><a class="anchor" aria-label="anchor" href="#method-setjournalvolume-"></a></h3>
 <p>Set Journal volume to the record metadata</p><div class="section">
-<h4 id="usage-60">Usage<a class="anchor" aria-label="anchor" href="#usage-60"></a></h4>
+<h4 id="usage-61">Usage<a class="anchor" aria-label="anchor" href="#usage-61"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setJournalVolume</span><span class="op">(</span><span class="va">volume</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-55">Arguments<a class="anchor" aria-label="anchor" href="#arguments-55"></a></h4>
+<h4 id="arguments-56">Arguments<a class="anchor" aria-label="anchor" href="#arguments-56"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>volume</code></dt>
 <dd><p>a volume</p></dd>
 
@@ -1589,12 +1606,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setJournalIssue"></a><div class="section">
 <h3 id="method-setjournalissue-">Method <code>setJournalIssue()</code><a class="anchor" aria-label="anchor" href="#method-setjournalissue-"></a></h3>
 <p>Set Journal issue to the record metadata</p><div class="section">
-<h4 id="usage-61">Usage<a class="anchor" aria-label="anchor" href="#usage-61"></a></h4>
+<h4 id="usage-62">Usage<a class="anchor" aria-label="anchor" href="#usage-62"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setJournalIssue</span><span class="op">(</span><span class="va">issue</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-56">Arguments<a class="anchor" aria-label="anchor" href="#arguments-56"></a></h4>
+<h4 id="arguments-57">Arguments<a class="anchor" aria-label="anchor" href="#arguments-57"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>issue</code></dt>
 <dd><p>an issue</p></dd>
 
@@ -1605,12 +1622,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setJournalPages"></a><div class="section">
 <h3 id="method-setjournalpages-">Method <code>setJournalPages()</code><a class="anchor" aria-label="anchor" href="#method-setjournalpages-"></a></h3>
 <p>Set Journal pages to the record metadata</p><div class="section">
-<h4 id="usage-62">Usage<a class="anchor" aria-label="anchor" href="#usage-62"></a></h4>
+<h4 id="usage-63">Usage<a class="anchor" aria-label="anchor" href="#usage-63"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setJournalPages</span><span class="op">(</span><span class="va">pages</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-57">Arguments<a class="anchor" aria-label="anchor" href="#arguments-57"></a></h4>
+<h4 id="arguments-58">Arguments<a class="anchor" aria-label="anchor" href="#arguments-58"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pages</code></dt>
 <dd><p>number of pages</p></dd>
 
@@ -1621,12 +1638,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferenceTitle"></a><div class="section">
 <h3 id="method-setconferencetitle-">Method <code>setConferenceTitle()</code><a class="anchor" aria-label="anchor" href="#method-setconferencetitle-"></a></h3>
 <p>Set conference title to the record metadata</p><div class="section">
-<h4 id="usage-63">Usage<a class="anchor" aria-label="anchor" href="#usage-63"></a></h4>
+<h4 id="usage-64">Usage<a class="anchor" aria-label="anchor" href="#usage-64"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferenceTitle</span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-58">Arguments<a class="anchor" aria-label="anchor" href="#arguments-58"></a></h4>
+<h4 id="arguments-59">Arguments<a class="anchor" aria-label="anchor" href="#arguments-59"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>title</code></dt>
 <dd><p>conference title, object of class <code>character</code></p></dd>
 
@@ -1637,12 +1654,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferenceAcronym"></a><div class="section">
 <h3 id="method-setconferenceacronym-">Method <code>setConferenceAcronym()</code><a class="anchor" aria-label="anchor" href="#method-setconferenceacronym-"></a></h3>
 <p>Set conference acronym to the record metadata</p><div class="section">
-<h4 id="usage-64">Usage<a class="anchor" aria-label="anchor" href="#usage-64"></a></h4>
+<h4 id="usage-65">Usage<a class="anchor" aria-label="anchor" href="#usage-65"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferenceAcronym</span><span class="op">(</span><span class="va">acronym</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-59">Arguments<a class="anchor" aria-label="anchor" href="#arguments-59"></a></h4>
+<h4 id="arguments-60">Arguments<a class="anchor" aria-label="anchor" href="#arguments-60"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>acronym</code></dt>
 <dd><p>conference acronym, object of class <code>character</code></p></dd>
 
@@ -1653,12 +1670,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferenceDates"></a><div class="section">
 <h3 id="method-setconferencedates-">Method <code>setConferenceDates()</code><a class="anchor" aria-label="anchor" href="#method-setconferencedates-"></a></h3>
 <p>Set conference dates to the record metadata</p><div class="section">
-<h4 id="usage-65">Usage<a class="anchor" aria-label="anchor" href="#usage-65"></a></h4>
+<h4 id="usage-66">Usage<a class="anchor" aria-label="anchor" href="#usage-66"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferenceDates</span><span class="op">(</span><span class="va">dates</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-60">Arguments<a class="anchor" aria-label="anchor" href="#arguments-60"></a></h4>
+<h4 id="arguments-61">Arguments<a class="anchor" aria-label="anchor" href="#arguments-61"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>dates</code></dt>
 <dd><p>conference dates, object of class <code>character</code></p></dd>
 
@@ -1669,12 +1686,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferencePlace"></a><div class="section">
 <h3 id="method-setconferenceplace-">Method <code>setConferencePlace()</code><a class="anchor" aria-label="anchor" href="#method-setconferenceplace-"></a></h3>
 <p>Set conference place to the record metadata</p><div class="section">
-<h4 id="usage-66">Usage<a class="anchor" aria-label="anchor" href="#usage-66"></a></h4>
+<h4 id="usage-67">Usage<a class="anchor" aria-label="anchor" href="#usage-67"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferencePlace</span><span class="op">(</span><span class="va">place</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-61">Arguments<a class="anchor" aria-label="anchor" href="#arguments-61"></a></h4>
+<h4 id="arguments-62">Arguments<a class="anchor" aria-label="anchor" href="#arguments-62"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>place</code></dt>
 <dd><p>conference place, object of class <code>character</code></p></dd>
 
@@ -1685,12 +1702,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferenceUrl"></a><div class="section">
 <h3 id="method-setconferenceurl-">Method <code>setConferenceUrl()</code><a class="anchor" aria-label="anchor" href="#method-setconferenceurl-"></a></h3>
 <p>Set conference url to the record metadata</p><div class="section">
-<h4 id="usage-67">Usage<a class="anchor" aria-label="anchor" href="#usage-67"></a></h4>
+<h4 id="usage-68">Usage<a class="anchor" aria-label="anchor" href="#usage-68"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferenceUrl</span><span class="op">(</span><span class="va">url</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-62">Arguments<a class="anchor" aria-label="anchor" href="#arguments-62"></a></h4>
+<h4 id="arguments-63">Arguments<a class="anchor" aria-label="anchor" href="#arguments-63"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>url</code></dt>
 <dd><p>conference url, object of class <code>character</code></p></dd>
 
@@ -1701,12 +1718,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferenceSession"></a><div class="section">
 <h3 id="method-setconferencesession-">Method <code>setConferenceSession()</code><a class="anchor" aria-label="anchor" href="#method-setconferencesession-"></a></h3>
 <p>Set conference session to the record metadata</p><div class="section">
-<h4 id="usage-68">Usage<a class="anchor" aria-label="anchor" href="#usage-68"></a></h4>
+<h4 id="usage-69">Usage<a class="anchor" aria-label="anchor" href="#usage-69"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferenceSession</span><span class="op">(</span><span class="va">session</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-63">Arguments<a class="anchor" aria-label="anchor" href="#arguments-63"></a></h4>
+<h4 id="arguments-64">Arguments<a class="anchor" aria-label="anchor" href="#arguments-64"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>session</code></dt>
 <dd><p>conference session, object of class <code>character</code></p></dd>
 
@@ -1717,12 +1734,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setConferenceSessionPart"></a><div class="section">
 <h3 id="method-setconferencesessionpart-">Method <code>setConferenceSessionPart()</code><a class="anchor" aria-label="anchor" href="#method-setconferencesessionpart-"></a></h3>
 <p>Set conference session part to the record metadata</p><div class="section">
-<h4 id="usage-69">Usage<a class="anchor" aria-label="anchor" href="#usage-69"></a></h4>
+<h4 id="usage-70">Usage<a class="anchor" aria-label="anchor" href="#usage-70"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setConferenceSessionPart</span><span class="op">(</span><span class="va">part</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-64">Arguments<a class="anchor" aria-label="anchor" href="#arguments-64"></a></h4>
+<h4 id="arguments-65">Arguments<a class="anchor" aria-label="anchor" href="#arguments-65"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>part</code></dt>
 <dd><p>conference session part, object of class <code>character</code></p></dd>
 
@@ -1733,12 +1750,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setImprintPublisher"></a><div class="section">
 <h3 id="method-setimprintpublisher-">Method <code>setImprintPublisher()</code><a class="anchor" aria-label="anchor" href="#method-setimprintpublisher-"></a></h3>
 <p>Set imprint publisher to the record metadata</p><div class="section">
-<h4 id="usage-70">Usage<a class="anchor" aria-label="anchor" href="#usage-70"></a></h4>
+<h4 id="usage-71">Usage<a class="anchor" aria-label="anchor" href="#usage-71"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setImprintPublisher</span><span class="op">(</span><span class="va">publisher</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-65">Arguments<a class="anchor" aria-label="anchor" href="#arguments-65"></a></h4>
+<h4 id="arguments-66">Arguments<a class="anchor" aria-label="anchor" href="#arguments-66"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>publisher</code></dt>
 <dd><p>the publisher, object of class <code>character</code></p></dd>
 
@@ -1749,12 +1766,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setImprintISBN"></a><div class="section">
 <h3 id="method-setimprintisbn-">Method <code>setImprintISBN()</code><a class="anchor" aria-label="anchor" href="#method-setimprintisbn-"></a></h3>
 <p>Set imprint ISBN to the record metadata</p><div class="section">
-<h4 id="usage-71">Usage<a class="anchor" aria-label="anchor" href="#usage-71"></a></h4>
+<h4 id="usage-72">Usage<a class="anchor" aria-label="anchor" href="#usage-72"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setImprintISBN</span><span class="op">(</span><span class="va">isbn</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-66">Arguments<a class="anchor" aria-label="anchor" href="#arguments-66"></a></h4>
+<h4 id="arguments-67">Arguments<a class="anchor" aria-label="anchor" href="#arguments-67"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>isbn</code></dt>
 <dd><p>the ISBN, object of class <code>character</code></p></dd>
 
@@ -1765,12 +1782,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setImprintPlace"></a><div class="section">
 <h3 id="method-setimprintplace-">Method <code>setImprintPlace()</code><a class="anchor" aria-label="anchor" href="#method-setimprintplace-"></a></h3>
 <p>Set imprint place to the record metadata</p><div class="section">
-<h4 id="usage-72">Usage<a class="anchor" aria-label="anchor" href="#usage-72"></a></h4>
+<h4 id="usage-73">Usage<a class="anchor" aria-label="anchor" href="#usage-73"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setImprintPlace</span><span class="op">(</span><span class="va">place</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-67">Arguments<a class="anchor" aria-label="anchor" href="#arguments-67"></a></h4>
+<h4 id="arguments-68">Arguments<a class="anchor" aria-label="anchor" href="#arguments-68"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>place</code></dt>
 <dd><p>the place, object of class <code>character</code></p></dd>
 
@@ -1781,12 +1798,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setPartofTitle"></a><div class="section">
 <h3 id="method-setpartoftitle-">Method <code>setPartofTitle()</code><a class="anchor" aria-label="anchor" href="#method-setpartoftitle-"></a></h3>
 <p>Set title to which record is part of</p><div class="section">
-<h4 id="usage-73">Usage<a class="anchor" aria-label="anchor" href="#usage-73"></a></h4>
+<h4 id="usage-74">Usage<a class="anchor" aria-label="anchor" href="#usage-74"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setPartofTitle</span><span class="op">(</span><span class="va">title</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-68">Arguments<a class="anchor" aria-label="anchor" href="#arguments-68"></a></h4>
+<h4 id="arguments-69">Arguments<a class="anchor" aria-label="anchor" href="#arguments-69"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>title</code></dt>
 <dd><p>the title, object of class <code>character</code></p></dd>
 
@@ -1797,12 +1814,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setPartofPages"></a><div class="section">
 <h3 id="method-setpartofpages-">Method <code>setPartofPages()</code><a class="anchor" aria-label="anchor" href="#method-setpartofpages-"></a></h3>
 <p>Set pages to which record is part of</p><div class="section">
-<h4 id="usage-74">Usage<a class="anchor" aria-label="anchor" href="#usage-74"></a></h4>
+<h4 id="usage-75">Usage<a class="anchor" aria-label="anchor" href="#usage-75"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setPartofPages</span><span class="op">(</span><span class="va">pages</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-69">Arguments<a class="anchor" aria-label="anchor" href="#arguments-69"></a></h4>
+<h4 id="arguments-70">Arguments<a class="anchor" aria-label="anchor" href="#arguments-70"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pages</code></dt>
 <dd><p>the pages, object of class <code>character</code></p></dd>
 
@@ -1813,12 +1830,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-setThesisUniversity"></a><div class="section">
 <h3 id="method-setthesisuniversity-">Method <code>setThesisUniversity()</code><a class="anchor" aria-label="anchor" href="#method-setthesisuniversity-"></a></h3>
 <p>Set thesis university</p><div class="section">
-<h4 id="usage-75">Usage<a class="anchor" aria-label="anchor" href="#usage-75"></a></h4>
+<h4 id="usage-76">Usage<a class="anchor" aria-label="anchor" href="#usage-76"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">setThesisUniversity</span><span class="op">(</span><span class="va">university</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-70">Arguments<a class="anchor" aria-label="anchor" href="#arguments-70"></a></h4>
+<h4 id="arguments-71">Arguments<a class="anchor" aria-label="anchor" href="#arguments-71"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>university</code></dt>
 <dd><p>the university, object of class <code>character</code></p></dd>
 
@@ -1829,7 +1846,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-addThesisSupervisor"></a><div class="section">
 <h3 id="method-addthesissupervisor-">Method <code>addThesisSupervisor()</code><a class="anchor" aria-label="anchor" href="#method-addthesissupervisor-"></a></h3>
 <p>Adds thesis supervisor</p><div class="section">
-<h4 id="usage-76">Usage<a class="anchor" aria-label="anchor" href="#usage-76"></a></h4>
+<h4 id="usage-77">Usage<a class="anchor" aria-label="anchor" href="#usage-77"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addThesisSupervisor</span><span class="op">(</span></span>
 <span>  <span class="va">firstname</span>,</span>
 <span>  <span class="va">lastname</span>,</span>
@@ -1840,7 +1857,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div>
 
 <div class="section">
-<h4 id="arguments-71">Arguments<a class="anchor" aria-label="anchor" href="#arguments-71"></a></h4>
+<h4 id="arguments-72">Arguments<a class="anchor" aria-label="anchor" href="#arguments-72"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>firstname</code></dt>
 <dd><p>supervisor first name</p></dd>
 
@@ -1869,12 +1886,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 <p>Removes a thesis supervisor by a property. The <code>by</code> parameter should be the name
    of the thesis supervisor property ('name' - in the form 'lastname, firstname', 'affiliation',
    'orcid' or 'gnd').</p><div class="section">
-<h4 id="usage-77">Usage<a class="anchor" aria-label="anchor" href="#usage-77"></a></h4>
+<h4 id="usage-78">Usage<a class="anchor" aria-label="anchor" href="#usage-78"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeThesisSupervisor</span><span class="op">(</span><span class="va">by</span>, <span class="va">property</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-72">Arguments<a class="anchor" aria-label="anchor" href="#arguments-72"></a></h4>
+<h4 id="arguments-73">Arguments<a class="anchor" aria-label="anchor" href="#arguments-73"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>by</code></dt>
 <dd><p>property used as criterion to remove the thesis supervisor</p></dd>
 
@@ -1893,12 +1910,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-removeThesisSupervisorByName"></a><div class="section">
 <h3 id="method-removethesissupervisorbyname-">Method <code>removeThesisSupervisorByName()</code><a class="anchor" aria-label="anchor" href="#method-removethesissupervisorbyname-"></a></h3>
 <p>Removes a thesis supervisor by name.</p><div class="section">
-<h4 id="usage-78">Usage<a class="anchor" aria-label="anchor" href="#usage-78"></a></h4>
+<h4 id="usage-79">Usage<a class="anchor" aria-label="anchor" href="#usage-79"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeThesisSupervisorByName</span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-73">Arguments<a class="anchor" aria-label="anchor" href="#arguments-73"></a></h4>
+<h4 id="arguments-74">Arguments<a class="anchor" aria-label="anchor" href="#arguments-74"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>thesis supervisor name</p></dd>
 
@@ -1913,12 +1930,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-removeThesisSupervisorByAffiliation"></a><div class="section">
 <h3 id="method-removethesissupervisorbyaffiliation-">Method <code>removeThesisSupervisorByAffiliation()</code><a class="anchor" aria-label="anchor" href="#method-removethesissupervisorbyaffiliation-"></a></h3>
 <p>Removes a thesis supervisor by affiliation</p><div class="section">
-<h4 id="usage-79">Usage<a class="anchor" aria-label="anchor" href="#usage-79"></a></h4>
+<h4 id="usage-80">Usage<a class="anchor" aria-label="anchor" href="#usage-80"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeThesisSupervisorByAffiliation</span><span class="op">(</span><span class="va">affiliation</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-74">Arguments<a class="anchor" aria-label="anchor" href="#arguments-74"></a></h4>
+<h4 id="arguments-75">Arguments<a class="anchor" aria-label="anchor" href="#arguments-75"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>affiliation</code></dt>
 <dd><p>thesis supervisor affiliation</p></dd>
 
@@ -1933,12 +1950,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-removeThesisSupervisorByORCID"></a><div class="section">
 <h3 id="method-removethesissupervisorbyorcid-">Method <code>removeThesisSupervisorByORCID()</code><a class="anchor" aria-label="anchor" href="#method-removethesissupervisorbyorcid-"></a></h3>
 <p>Removes a thesis supervisor by ORCID</p><div class="section">
-<h4 id="usage-80">Usage<a class="anchor" aria-label="anchor" href="#usage-80"></a></h4>
+<h4 id="usage-81">Usage<a class="anchor" aria-label="anchor" href="#usage-81"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeThesisSupervisorByORCID</span><span class="op">(</span><span class="va">orcid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-75">Arguments<a class="anchor" aria-label="anchor" href="#arguments-75"></a></h4>
+<h4 id="arguments-76">Arguments<a class="anchor" aria-label="anchor" href="#arguments-76"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>orcid</code></dt>
 <dd><p>thesis supervisor ORCID</p></dd>
 
@@ -1953,12 +1970,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-removeThesisSupervisorByGND"></a><div class="section">
 <h3 id="method-removethesissupervisorbygnd-">Method <code>removeThesisSupervisorByGND()</code><a class="anchor" aria-label="anchor" href="#method-removethesissupervisorbygnd-"></a></h3>
 <p>Removes a thesis supervisor by GND</p><div class="section">
-<h4 id="usage-81">Usage<a class="anchor" aria-label="anchor" href="#usage-81"></a></h4>
+<h4 id="usage-82">Usage<a class="anchor" aria-label="anchor" href="#usage-82"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeThesisSupervisorByGND</span><span class="op">(</span><span class="va">gnd</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-76">Arguments<a class="anchor" aria-label="anchor" href="#arguments-76"></a></h4>
+<h4 id="arguments-77">Arguments<a class="anchor" aria-label="anchor" href="#arguments-77"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>gnd</code></dt>
 <dd><p>thesis supervisor GND</p></dd>
 
@@ -1973,12 +1990,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-addLocation"></a><div class="section">
 <h3 id="method-addlocation-">Method <code>addLocation()</code><a class="anchor" aria-label="anchor" href="#method-addlocation-"></a></h3>
 <p>Adds a location to the record metadata.</p><div class="section">
-<h4 id="usage-82">Usage<a class="anchor" aria-label="anchor" href="#usage-82"></a></h4>
+<h4 id="usage-83">Usage<a class="anchor" aria-label="anchor" href="#usage-83"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addLocation</span><span class="op">(</span><span class="va">place</span>, description <span class="op">=</span> <span class="cn">NULL</span>, lat <span class="op">=</span> <span class="cn">NULL</span>, lon <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-77">Arguments<a class="anchor" aria-label="anchor" href="#arguments-77"></a></h4>
+<h4 id="arguments-78">Arguments<a class="anchor" aria-label="anchor" href="#arguments-78"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>place</code></dt>
 <dd><p>place (required)</p></dd>
 
@@ -2001,12 +2018,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-removeLocation"></a><div class="section">
 <h3 id="method-removelocation-">Method <code>removeLocation()</code><a class="anchor" aria-label="anchor" href="#method-removelocation-"></a></h3>
 <p>Removes a grant from the record metadata.</p><div class="section">
-<h4 id="usage-83">Usage<a class="anchor" aria-label="anchor" href="#usage-83"></a></h4>
+<h4 id="usage-84">Usage<a class="anchor" aria-label="anchor" href="#usage-84"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeLocation</span><span class="op">(</span><span class="va">place</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-78">Arguments<a class="anchor" aria-label="anchor" href="#arguments-78"></a></h4>
+<h4 id="arguments-79">Arguments<a class="anchor" aria-label="anchor" href="#arguments-79"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>place</code></dt>
 <dd><p>place (required)</p></dd>
 
@@ -2021,12 +2038,12 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </div><p></p><hr><a id="method-ZenodoRecord-exportAs"></a><div class="section">
 <h3 id="method-exportas-">Method <code>exportAs()</code><a class="anchor" aria-label="anchor" href="#method-exportas-"></a></h3>
 <p>Exports record to a file by format.</p><div class="section">
-<h4 id="usage-84">Usage<a class="anchor" aria-label="anchor" href="#usage-84"></a></h4>
+<h4 id="usage-85">Usage<a class="anchor" aria-label="anchor" href="#usage-85"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAs</span><span class="op">(</span><span class="va">format</span>, <span class="va">filename</span>, append_format <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-79">Arguments<a class="anchor" aria-label="anchor" href="#arguments-79"></a></h4>
+<h4 id="arguments-80">Arguments<a class="anchor" aria-label="anchor" href="#arguments-80"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>format</code></dt>
 <dd><p>the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
 JSON, JSON-LD, GeoJSON, MARCXML</p></dd>
@@ -2051,12 +2068,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsBibTeX"></a><div class="section">
 <h3 id="method-exportasbibtex-">Method <code>exportAsBibTeX()</code><a class="anchor" aria-label="anchor" href="#method-exportasbibtex-"></a></h3>
 <p>Exports record as BibTeX</p><div class="section">
-<h4 id="usage-85">Usage<a class="anchor" aria-label="anchor" href="#usage-85"></a></h4>
+<h4 id="usage-86">Usage<a class="anchor" aria-label="anchor" href="#usage-86"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsBibTeX</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-80">Arguments<a class="anchor" aria-label="anchor" href="#arguments-80"></a></h4>
+<h4 id="arguments-81">Arguments<a class="anchor" aria-label="anchor" href="#arguments-81"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2071,12 +2088,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsCSL"></a><div class="section">
 <h3 id="method-exportascsl-">Method <code>exportAsCSL()</code><a class="anchor" aria-label="anchor" href="#method-exportascsl-"></a></h3>
 <p>Exports record as CSL</p><div class="section">
-<h4 id="usage-86">Usage<a class="anchor" aria-label="anchor" href="#usage-86"></a></h4>
+<h4 id="usage-87">Usage<a class="anchor" aria-label="anchor" href="#usage-87"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsCSL</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-81">Arguments<a class="anchor" aria-label="anchor" href="#arguments-81"></a></h4>
+<h4 id="arguments-82">Arguments<a class="anchor" aria-label="anchor" href="#arguments-82"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2091,12 +2108,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsDataCite"></a><div class="section">
 <h3 id="method-exportasdatacite-">Method <code>exportAsDataCite()</code><a class="anchor" aria-label="anchor" href="#method-exportasdatacite-"></a></h3>
 <p>Exports record as DataCite</p><div class="section">
-<h4 id="usage-87">Usage<a class="anchor" aria-label="anchor" href="#usage-87"></a></h4>
+<h4 id="usage-88">Usage<a class="anchor" aria-label="anchor" href="#usage-88"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDataCite</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-82">Arguments<a class="anchor" aria-label="anchor" href="#arguments-82"></a></h4>
+<h4 id="arguments-83">Arguments<a class="anchor" aria-label="anchor" href="#arguments-83"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2111,12 +2128,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsDublinCore"></a><div class="section">
 <h3 id="method-exportasdublincore-">Method <code>exportAsDublinCore()</code><a class="anchor" aria-label="anchor" href="#method-exportasdublincore-"></a></h3>
 <p>Exports record as DublinCore</p><div class="section">
-<h4 id="usage-88">Usage<a class="anchor" aria-label="anchor" href="#usage-88"></a></h4>
+<h4 id="usage-89">Usage<a class="anchor" aria-label="anchor" href="#usage-89"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDublinCore</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-83">Arguments<a class="anchor" aria-label="anchor" href="#arguments-83"></a></h4>
+<h4 id="arguments-84">Arguments<a class="anchor" aria-label="anchor" href="#arguments-84"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2131,12 +2148,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsDCAT"></a><div class="section">
 <h3 id="method-exportasdcat-">Method <code>exportAsDCAT()</code><a class="anchor" aria-label="anchor" href="#method-exportasdcat-"></a></h3>
 <p>Exports record as DCAT</p><div class="section">
-<h4 id="usage-89">Usage<a class="anchor" aria-label="anchor" href="#usage-89"></a></h4>
+<h4 id="usage-90">Usage<a class="anchor" aria-label="anchor" href="#usage-90"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDCAT</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-84">Arguments<a class="anchor" aria-label="anchor" href="#arguments-84"></a></h4>
+<h4 id="arguments-85">Arguments<a class="anchor" aria-label="anchor" href="#arguments-85"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2151,12 +2168,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsJSON"></a><div class="section">
 <h3 id="method-exportasjson-">Method <code>exportAsJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasjson-"></a></h3>
 <p>Exports record as JSON</p><div class="section">
-<h4 id="usage-90">Usage<a class="anchor" aria-label="anchor" href="#usage-90"></a></h4>
+<h4 id="usage-91">Usage<a class="anchor" aria-label="anchor" href="#usage-91"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-85">Arguments<a class="anchor" aria-label="anchor" href="#arguments-85"></a></h4>
+<h4 id="arguments-86">Arguments<a class="anchor" aria-label="anchor" href="#arguments-86"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2171,12 +2188,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsJSONLD"></a><div class="section">
 <h3 id="method-exportasjsonld-">Method <code>exportAsJSONLD()</code><a class="anchor" aria-label="anchor" href="#method-exportasjsonld-"></a></h3>
 <p>Exports record as JSONLD</p><div class="section">
-<h4 id="usage-91">Usage<a class="anchor" aria-label="anchor" href="#usage-91"></a></h4>
+<h4 id="usage-92">Usage<a class="anchor" aria-label="anchor" href="#usage-92"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsJSONLD</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-86">Arguments<a class="anchor" aria-label="anchor" href="#arguments-86"></a></h4>
+<h4 id="arguments-87">Arguments<a class="anchor" aria-label="anchor" href="#arguments-87"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2187,12 +2204,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsGeoJSON"></a><div class="section">
 <h3 id="method-exportasgeojson-">Method <code>exportAsGeoJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasgeojson-"></a></h3>
 <p>Exports record as GeoJSON</p><div class="section">
-<h4 id="usage-92">Usage<a class="anchor" aria-label="anchor" href="#usage-92"></a></h4>
+<h4 id="usage-93">Usage<a class="anchor" aria-label="anchor" href="#usage-93"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsGeoJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-87">Arguments<a class="anchor" aria-label="anchor" href="#arguments-87"></a></h4>
+<h4 id="arguments-88">Arguments<a class="anchor" aria-label="anchor" href="#arguments-88"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2207,12 +2224,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsMARCXML"></a><div class="section">
 <h3 id="method-exportasmarcxml-">Method <code>exportAsMARCXML()</code><a class="anchor" aria-label="anchor" href="#method-exportasmarcxml-"></a></h3>
 <p>Exports record as MARCXML</p><div class="section">
-<h4 id="usage-93">Usage<a class="anchor" aria-label="anchor" href="#usage-93"></a></h4>
+<h4 id="usage-94">Usage<a class="anchor" aria-label="anchor" href="#usage-94"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsMARCXML</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-88">Arguments<a class="anchor" aria-label="anchor" href="#arguments-88"></a></h4>
+<h4 id="arguments-89">Arguments<a class="anchor" aria-label="anchor" href="#arguments-89"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2228,12 +2245,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <h3 id="method-exportasallformats-">Method <code>exportAsAllFormats()</code><a class="anchor" aria-label="anchor" href="#method-exportasallformats-"></a></h3>
 <p>Exports record in all Zenodo record export formats. This function will
    create one file per Zenodo metadata formats.</p><div class="section">
-<h4 id="usage-94">Usage<a class="anchor" aria-label="anchor" href="#usage-94"></a></h4>
+<h4 id="usage-95">Usage<a class="anchor" aria-label="anchor" href="#usage-95"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsAllFormats</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-89">Arguments<a class="anchor" aria-label="anchor" href="#arguments-89"></a></h4>
+<h4 id="arguments-90">Arguments<a class="anchor" aria-label="anchor" href="#arguments-90"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2244,12 +2261,12 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div><p></p><hr><a id="method-ZenodoRecord-listFiles"></a><div class="section">
 <h3 id="method-listfiles-">Method <code>listFiles()</code><a class="anchor" aria-label="anchor" href="#method-listfiles-"></a></h3>
 <p>list files attached to the record</p><div class="section">
-<h4 id="usage-95">Usage<a class="anchor" aria-label="anchor" href="#usage-95"></a></h4>
+<h4 id="usage-96">Usage<a class="anchor" aria-label="anchor" href="#usage-96"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">listFiles</span><span class="op">(</span>pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-90">Arguments<a class="anchor" aria-label="anchor" href="#arguments-90"></a></h4>
+<h4 id="arguments-91">Arguments<a class="anchor" aria-label="anchor" href="#arguments-91"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
 <dd><p>whether a pretty output (<code>data.frame</code>) should be returned (default <code>TRUE</code>), otherwise
 the raw list of files is returned.</p></dd>
@@ -2265,7 +2282,7 @@ the raw list of files is returned.</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-downloadFiles"></a><div class="section">
 <h3 id="method-downloadfiles-">Method <code>downloadFiles()</code><a class="anchor" aria-label="anchor" href="#method-downloadfiles-"></a></h3>
 <p>Downloads files attached to the record</p><div class="section">
-<h4 id="usage-96">Usage<a class="anchor" aria-label="anchor" href="#usage-96"></a></h4>
+<h4 id="usage-97">Usage<a class="anchor" aria-label="anchor" href="#usage-97"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">downloadFiles</span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -2280,7 +2297,7 @@ the raw list of files is returned.</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-91">Arguments<a class="anchor" aria-label="anchor" href="#arguments-91"></a></h4>
+<h4 id="arguments-92">Arguments<a class="anchor" aria-label="anchor" href="#arguments-92"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>target download path (by default it will be the current working directory)</p></dd>
 
@@ -2327,12 +2344,12 @@ can be added (eg. <code>mc.cores</code> for <code>mclapply</code>)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Prints a ZenodoRecord</p><div class="section">
-<h4 id="usage-97">Usage<a class="anchor" aria-label="anchor" href="#usage-97"></a></h4>
+<h4 id="usage-98">Usage<a class="anchor" aria-label="anchor" href="#usage-98"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span>, format <span class="op">=</span> <span class="st">"internal"</span>, depth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-92">Arguments<a class="anchor" aria-label="anchor" href="#arguments-92"></a></h4>
+<h4 id="arguments-93">Arguments<a class="anchor" aria-label="anchor" href="#arguments-93"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>any other parameter. Not used</p></dd>
 
@@ -2354,7 +2371,7 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div><p></p><hr><a id="method-ZenodoRecord-toDCEntry"></a><div class="section">
 <h3 id="method-todcentry-">Method <code>toDCEntry()</code><a class="anchor" aria-label="anchor" href="#method-todcentry-"></a></h3>
 <p>Maps to an <span class="pkg">atom4R</span> DCEntry. Note: applies only to published records.</p><div class="section">
-<h4 id="usage-98">Usage<a class="anchor" aria-label="anchor" href="#usage-98"></a></h4>
+<h4 id="usage-99">Usage<a class="anchor" aria-label="anchor" href="#usage-99"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">toDCEntry</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -2366,12 +2383,12 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div><p></p><hr><a id="method-ZenodoRecord-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-99">Usage<a class="anchor" aria-label="anchor" href="#usage-99"></a></h4>
+<h4 id="usage-100">Usage<a class="anchor" aria-label="anchor" href="#usage-100"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-93">Arguments<a class="anchor" aria-label="anchor" href="#arguments-93"></a></h4>
+<h4 id="arguments-94">Arguments<a class="anchor" aria-label="anchor" href="#arguments-94"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
