@@ -497,18 +497,18 @@ ZenodoManager <-  R6Class("ZenodoManager",
             awards <- resp$hits$hits
             hasAwards <- length(awards)>0
           }else{
-            warnMsg = sprintf("Maximum allowed size for list of awars at page %s", page)
+            warnMsg = sprintf("Maximum allowed size for list of awards at page %s", page)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMsg)
             break
           }
         }
-        infoMsg = "Successfully fetched list of grants!"
+        infoMsg = "Successfully fetched list of awards!"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
       }else{
         out <- zenReq$getResponse()
-        errMsg = sprintf("Error while fetching grants: %s", out$message)
+        errMsg = sprintf("Error while fetching awards: %s", out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
         for(error in out$errors){
@@ -586,6 +586,126 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(infoMsg)
       }else{
         errMsg = sprintf("Error while fetching award '%s': %s", id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #Special vocabulary/Affiliations 
+    #------------------------------------------------------------------------------------------
+    
+    #' @description Get Affiliations supported by Zenodo.
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of affiliations as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of affiliations
+    #' @param q an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+    #'  Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+    #'  not all affiliations can be listed from Zenodo, a query has to be specified.
+    #' @param size number of affiliations to be returned. By default equal to 500.
+    #' @return list of affiliations as \code{data.frame} or \code{list}
+    getAffiliations = function(q = "", pretty = TRUE, size = 500){
+      page <- 1
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("affiliations?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                  token = self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        affiliations <- resp$hits$hits
+        total <- resp$hits$total
+        if(total > 10000){
+          warnMsg = sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)
+          cli::cli_alert_warning(warnMsg)
+          self$WARN(warnMsg) 
+        }
+        total_remaining <- total
+        hasAwards <- length(affiliations)>0
+        while(hasAwards){
+          out <- c(out, affiliations)
+          total_remaining <- total_remaining-length(affiliations)
+          if(total_remaining <= size) size = total_remaining
+          if(total_remaining == 0){
+            break
+          }
+          
+          #next page
+          page = page+1
+          zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("affiliations?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                      token = self$getToken(),
+                                      logger = self$loggerType)
+          zenReq$execute()
+          if(zenReq$getStatus() == 200){
+            resp <- zenReq$getResponse()
+            affiliations <- resp$hits$hits
+            hasAwards <- length(affiliations)>0
+          }else{
+            warnMsg = sprintf("Maximum allowed size for list of affiliations at page %s", page)
+            cli::cli_alert_warning(warnMsg)
+            self$WARN(warnMsg)
+            break
+          }
+        }
+        infoMsg = "Successfully fetched list of affiliations!"
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        out <- zenReq$getResponse()
+        errMsg = sprintf("Error while fetching affiliations: %s", out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        for(error in out$errors){
+          errMsg = sprintf("Error: %s - %s", error$field, error$message)
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+        }
+      }
+      
+      if(pretty){
+        out = do.call("rbind", lapply(out,function(x){
+          rec = data.frame(
+            id = x$id,
+            acronym = if(!is.null(x$acronym)) x$acronym else NA,
+            name = if(!is.null(x$name)) x$name else NA,
+            title = x$title[[1]],
+            created = x$created,
+            updated = x$updated,
+            stringsAsFactors = FALSE
+          )
+          return(rec)
+        }))
+      }
+      return(out)
+    },
+    
+    #' @description Get affiliations by name.
+    #' @param name name
+    #' @param pretty Prettify the output. By default the argument \code{pretty} is set to 
+    #'    \code{TRUE} which will returns the list of affiliations as \code{data.frame}.
+    #'    Set \code{pretty = FALSE} to get the raw list of affiliations
+    #' @return list of affiliations as \code{data.frame} or \code{list}
+    getAffiliationByName = function(name, pretty = TRUE){
+      query = sprintf("title.en:%s", URLencode(paste0("\"",name,"\"")))
+      self$getAffiliations(q = query, pretty = pretty)
+    },
+    
+    #' @description Get affiliation by Id. 
+    #' @param id affiliation id
+    #' @return the affiliation
+    getAffiliationById = function(id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("affiliations/%s",id),
+                                  token= self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfully fetched affiliation '%s'",id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while fetching affiliation '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
         out <- NULL

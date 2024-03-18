@@ -106,6 +106,9 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getAwardsByName}{\code{ZenodoManager$getAwardsByName()}}
 \item \href{#method-ZenodoManager-getGrantById}{\code{ZenodoManager$getGrantById()}}
 \item \href{#method-ZenodoManager-getAwardById}{\code{ZenodoManager$getAwardById()}}
+\item \href{#method-ZenodoManager-getAffiliations}{\code{ZenodoManager$getAffiliations()}}
+\item \href{#method-ZenodoManager-getAffiliationByName}{\code{ZenodoManager$getAffiliationByName()}}
+\item \href{#method-ZenodoManager-getAffiliationById}{\code{ZenodoManager$getAffiliationById()}}
 \item \href{#method-ZenodoManager-getFunders}{\code{ZenodoManager$getFunders()}}
 \item \href{#method-ZenodoManager-getFundersByName}{\code{ZenodoManager$getFundersByName()}}
 \item \href{#method-ZenodoManager-getFunderById}{\code{ZenodoManager$getFunderById()}}
@@ -512,6 +515,78 @@ Get award by Id.
 }
 \subsection{Returns}{
 the award
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getAffiliations"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getAffiliations}{}}}
+\subsection{Method \code{getAffiliations()}}{
+Get Affiliations supported by Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getAffiliations(q = "", pretty = TRUE, size = 500)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{an ElasticSearch compliant query, object of class \code{character}. Default is emtpy.
+Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
+not all affiliations can be listed from Zenodo, a query has to be specified.}
+
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of affiliations as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of affiliations}
+
+\item{\code{size}}{number of affiliations to be returned. By default equal to 500.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of affiliations as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getAffiliationByName"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getAffiliationByName}{}}}
+\subsection{Method \code{getAffiliationByName()}}{
+Get affiliations by name.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getAffiliationByName(name, pretty = TRUE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{name}}{name}
+
+\item{\code{pretty}}{Prettify the output. By default the argument \code{pretty} is set to 
+\code{TRUE} which will returns the list of affiliations as \code{data.frame}.
+Set \code{pretty = FALSE} to get the raw list of affiliations}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+list of affiliations as \code{data.frame} or \code{list}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getAffiliationById"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getAffiliationById}{}}}
+\subsection{Method \code{getAffiliationById()}}{
+Get affiliation by Id.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getAffiliationById(id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{affiliation id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the affiliation
 }
 }
 \if{html}{\out{<hr>}}
