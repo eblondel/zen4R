@@ -312,6 +312,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching resourcetype '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out <- NULL
       }
       return(out)
     },
