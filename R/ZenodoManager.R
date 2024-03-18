@@ -186,6 +186,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching language '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out <- NULL
       }
       return(out)
     },
@@ -250,6 +251,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching license '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out <- NULL
       }
       return(out)
     },
