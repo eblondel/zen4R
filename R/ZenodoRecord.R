@@ -284,13 +284,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$publisher = publisher  
     },
     
-    #' @description Set the publication date.
-    #' @param publicationDate object of class \code{Date}
+    #' @description Set the publication date. For more information on the accepted format,
+    #' please check https://inveniordm.docs.cern.ch/reference/metadata/#publication-date-1
+    #' @param publicationDate object of class \code{character}
     setPublicationDate = function(publicationDate){
-      if(!is(publicationDate,"Date")){
-        stop("The publication date should be a 'Date' object")
-      }
-      self$metadata$publication_date <- as(publicationDate, "character")
+      self$metadata$publication_date <- publicationDate
     },
     
     #' @description Set the embargo date.

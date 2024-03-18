@@ -465,7 +465,8 @@ Set the publisher
 \if{html}{\out{<a id="method-ZenodoRecord-setPublicationDate"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setPublicationDate}{}}}
 \subsection{Method \code{setPublicationDate()}}{
-Set the publication date.
+Set the publication date. For more information on the accepted format,
+please check https://inveniordm.docs.cern.ch/reference/metadata/#publication-date-1
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setPublicationDate(publicationDate)}\if{html}{\out{</div>}}
 }
@@ -473,7 +474,7 @@ Set the publication date.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{publicationDate}}{object of class \code{Date}}
+\item{\code{publicationDate}}{object of class \code{character}}
 }
 \if{html}{\out{</div>}}
 }
