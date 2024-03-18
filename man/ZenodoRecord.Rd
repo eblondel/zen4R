@@ -16,6 +16,10 @@ ZenodoRecord
 ZenodoRecord
 }
 \note{
+Internal method. Prefer using \code{addCreator} or \code{addContributor}
+
+Internal method. Prefer using \code{removeCreator} or \code{removeContributor}
+
 See examples in \code{\link{download_zenodo}} utility function.
 }
 \author{
@@ -91,18 +95,22 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-setDescription}{\code{ZenodoRecord$setDescription()}}
 \item \href{#method-ZenodoRecord-setAccessRight}{\code{ZenodoRecord$setAccessRight()}}
 \item \href{#method-ZenodoRecord-setAccessConditions}{\code{ZenodoRecord$setAccessConditions()}}
+\item \href{#method-ZenodoRecord-addPersonOrOrg}{\code{ZenodoRecord$addPersonOrOrg()}}
+\item \href{#method-ZenodoRecord-removePersonOrOrg}{\code{ZenodoRecord$removePersonOrOrg()}}
 \item \href{#method-ZenodoRecord-addCreator}{\code{ZenodoRecord$addCreator()}}
-\item \href{#method-ZenodoRecord-removeCreator}{\code{ZenodoRecord$removeCreator()}}
 \item \href{#method-ZenodoRecord-removeCreatorByName}{\code{ZenodoRecord$removeCreatorByName()}}
 \item \href{#method-ZenodoRecord-removeCreatorByAffiliation}{\code{ZenodoRecord$removeCreatorByAffiliation()}}
 \item \href{#method-ZenodoRecord-removeCreatorByORCID}{\code{ZenodoRecord$removeCreatorByORCID()}}
 \item \href{#method-ZenodoRecord-removeCreatorByGND}{\code{ZenodoRecord$removeCreatorByGND()}}
+\item \href{#method-ZenodoRecord-removeCreatorByISNI}{\code{ZenodoRecord$removeCreatorByISNI()}}
+\item \href{#method-ZenodoRecord-removeCreatorByROR}{\code{ZenodoRecord$removeCreatorByROR()}}
 \item \href{#method-ZenodoRecord-addContributor}{\code{ZenodoRecord$addContributor()}}
-\item \href{#method-ZenodoRecord-removeContributor}{\code{ZenodoRecord$removeContributor()}}
 \item \href{#method-ZenodoRecord-removeContributorByName}{\code{ZenodoRecord$removeContributorByName()}}
 \item \href{#method-ZenodoRecord-removeContributorByAffiliation}{\code{ZenodoRecord$removeContributorByAffiliation()}}
 \item \href{#method-ZenodoRecord-removeContributorByORCID}{\code{ZenodoRecord$removeContributorByORCID()}}
 \item \href{#method-ZenodoRecord-removeContributorByGND}{\code{ZenodoRecord$removeContributorByGND()}}
+\item \href{#method-ZenodoRecord-removeContributorByISNI}{\code{ZenodoRecord$removeContributorByISNI()}}
+\item \href{#method-ZenodoRecord-removeContributorByROR}{\code{ZenodoRecord$removeContributorByROR()}}
 \item \href{#method-ZenodoRecord-setLicense}{\code{ZenodoRecord$setLicense()}}
 \item \href{#method-ZenodoRecord-setVersion}{\code{ZenodoRecord$setVersion()}}
 \item \href{#method-ZenodoRecord-setLanguage}{\code{ZenodoRecord$setLanguage()}}
@@ -537,38 +545,54 @@ set the access conditions.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-addCreator"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-addCreator}{}}}
-\subsection{Method \code{addCreator()}}{
-Add a creator for the record. One approach is to use the \code{firstname} and
-   \code{lastname} arguments, that by default will be concatenated for Zenodo as
-   \code{lastname, firstname}. For more flexibility over this, the \code{name}
-   argument can be directly used.
+\if{html}{\out{<a id="method-ZenodoRecord-addPersonOrOrg"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addPersonOrOrg}{}}}
+\subsection{Method \code{addPersonOrOrg()}}{
+Add a person or organization for the record. For persons, the approach is to use the \code{firstname} and
+   \code{lastname} arguments, that by default will be concatenated for Zenodo as \code{lastname, firstname}.
+   For organizations, use the \code{name} argument.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCreator(
-  firstname,
-  lastname,
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addPersonOrOrg(
+  firstname = NULL,
+  lastname = NULL,
   name = paste(lastname, firstname, sep = ", "),
-  affiliation = NULL,
   orcid = NULL,
-  gnd = NULL
+  gnd = NULL,
+  isni = NULL,
+  ror = NULL,
+  role = NULL,
+  affiliations = NULL,
+  sandbox = FALSE,
+  type
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{firstname}}{creator first name}
+\item{\code{firstname}}{person first name}
 
-\item{\code{lastname}}{creator last name}
+\item{\code{lastname}}{person last name}
 
-\item{\code{name}}{creator name}
+\item{\code{name}}{organization name}
 
-\item{\code{affiliation}}{creator affiliation (optional)}
+\item{\code{orcid}}{person or organization ORCID (optional)}
 
-\item{\code{orcid}}{creator ORCID (optional)}
+\item{\code{gnd}}{person or organization GND (optional)}
 
-\item{\code{gnd}}{creator GND (optional)}
+\item{\code{isni}}{person or organization ISNI (optional)}
+
+\item{\code{ror}}{person or organization ROR (optional)}
+
+\item{\code{role}}{role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
+HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
+RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other}
+
+\item{\code{affiliations}}{person or organization affiliations (optional)}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}}
+
+\item{\code{type}}{type of person or org (creators/contributors)}
 }
 \if{html}{\out{</div>}}
 }
@@ -577,27 +601,81 @@ Add a creator for the record. One approach is to use the \code{firstname} and
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-removeCreator"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreator}{}}}
-\subsection{Method \code{removeCreator()}}{
-Removes a creator by a property. The \code{by} parameter should be the name
-   of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
-   'orcid' or 'gnd').
+\if{html}{\out{<a id="method-ZenodoRecord-removePersonOrOrg"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removePersonOrOrg}{}}}
+\subsection{Method \code{removePersonOrOrg()}}{
+Removes a person or organization by a property. The \code{by} parameter should be the name
+   of the person or organization property ('name', 'affiliation','orcid','gnd','isni','ror').
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreator(by, property)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removePersonOrOrg(by, property, type)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{by}}{property used as criterion to remove the creator}
+\item{\code{by}}{property used as criterion to remove the person or organization}
 
-\item{\code{property}}{property value used to remove the creator}
+\item{\code{property}}{property value used to remove the person or organization}
+
+\item{\code{type}}{type of person or org (creators / contributors)}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
 \code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-addCreator"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addCreator}{}}}
+\subsection{Method \code{addCreator()}}{
+Add a creator for the record. For persons, the approach is to use the \code{firstname} and
+   \code{lastname} arguments, that by default will be concatenated for Zenodo as \code{lastname, firstname}.
+   For organizations, use the \code{name} argument.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCreator(
+  firstname = NULL,
+  lastname = NULL,
+  name = paste(lastname, firstname, sep = ", "),
+  orcid = NULL,
+  gnd = NULL,
+  isni = NULL,
+  ror = NULL,
+  role = NULL,
+  affiliations = NULL,
+  sandbox = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{firstname}}{person first name}
+
+\item{\code{lastname}}{person last name}
+
+\item{\code{name}}{organization name}
+
+\item{\code{orcid}}{creator ORCID (optional)}
+
+\item{\code{gnd}}{creator GND (optional)}
+
+\item{\code{isni}}{creator ISNI (optional)}
+
+\item{\code{ror}}{creator ROR (optional)}
+
+\item{\code{role}}{role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
+HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
+RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other}
+
+\item{\code{affiliations}}{creator affiliations (optional)}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
@@ -681,74 +759,96 @@ Removes a creator by GND.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreatorByISNI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreatorByISNI}{}}}
+\subsection{Method \code{removeCreatorByISNI()}}{
+Removes a creator by ISNI.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreatorByISNI(isni)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{isni}}{creator ISNI}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeCreatorByROR"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCreatorByROR}{}}}
+\subsection{Method \code{removeCreatorByROR()}}{
+Removes a creator by ROR.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCreatorByROR(ror)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ror}}{creator ROR}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-addContributor"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-addContributor}{}}}
 \subsection{Method \code{addContributor()}}{
-Add a contributor for the record. One approach is to use the \code{firstname} and
-   \code{lastname} arguments, that by default will be concatenated for Zenodo as
-   \code{lastname, firstname}. For more flexibility over this, the \code{name}
-   argument can be directly used.
+Add a contributor for the record. For persons, the approach is to use the \code{firstname} and
+   \code{lastname} arguments, that by default will be concatenated for Zenodo as \code{lastname, firstname}.
+   For organizations, use the \code{name} argument.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addContributor(
-  firstname,
-  lastname,
+  firstname = NULL,
+  lastname = NULL,
   name = paste(lastname, firstname, sep = ", "),
-  type,
-  affiliation = NULL,
   orcid = NULL,
-  gnd = NULL
+  gnd = NULL,
+  isni = NULL,
+  ror = NULL,
+  role = NULL,
+  affiliations = NULL,
+  sandbox = FALSE
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{firstname}}{contributor first name}
+\item{\code{firstname}}{person first name}
 
-\item{\code{lastname}}{contributor last name}
+\item{\code{lastname}}{person last name}
 
-\item{\code{name}}{contributor name}
+\item{\code{name}}{organization name}
 
-\item{\code{type}}{contributor type, among values: ContactPerson, 
-DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
-Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
-RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other.}
+\item{\code{orcid}}{contributor ORCID (optional)}
 
-\item{\code{affiliation}}{contributor affiliation (optional)}
+\item{\code{gnd}}{contributor GND (optional)}
 
-\item{\code{orcid}}{contributor orcid (optional)}
+\item{\code{isni}}{contributor ISNI (optional)}
 
-\item{\code{gnd}}{contributor gnd (optional)}
+\item{\code{ror}}{contributor ROR (optional)}
+
+\item{\code{role}}{role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
+HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
+RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other}
+
+\item{\code{affiliations}}{contributor affiliations (optional)}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
 \code{TRUE} if added, \code{FALSE} otherwise
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-removeContributor"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributor}{}}}
-\subsection{Method \code{removeContributor()}}{
-Removes a contributor by a property. The \code{by} parameter should be the name
-   of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
-   'orcid' or 'gnd').
-   \code{FALSE} otherwise.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributor(by, property)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{by}}{property used as criterion to remove the contributor}
-
-\item{\code{property}}{property value used to remove the contributor}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if removed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
@@ -824,6 +924,46 @@ Removes a contributor by GND.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{gnd}}{contributor GND}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributorByISNI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributorByISNI}{}}}
+\subsection{Method \code{removeContributorByISNI()}}{
+Removes a contributor by ISNI.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributorByISNI(isni)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{isni}}{contributor ISNI}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeContributorByROR"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeContributorByROR}{}}}
+\subsection{Method \code{removeContributorByROR()}}{
+Removes a contributor by ROR.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeContributorByROR(ror)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{ror}}{contributor ROR}
 }
 \if{html}{\out{</div>}}
 }

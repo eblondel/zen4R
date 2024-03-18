@@ -10,6 +10,12 @@
 ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
+    allowed_role_types = c("contactperson", "datacollector", "datacurator", "datamanager", 
+                           "distributor", "editor", "funder", "hostinginstitution", "producer", 
+                           "projectleader", "projectmanager", "projectmember", "registrationagency", 
+                           "registrationauthority", "relatedperson", "researcher", "researchgroup", 
+                           "rightsholder", "supervisor", "sponsor", "workpackageleader", 
+                           "other"),
     allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
                   "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
                   "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
@@ -321,151 +327,238 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$access_conditions <- accessConditions
     },
     
-    #' @description Add a creator for the record. One approach is to use the \code{firstname} and
-    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as
-    #'    \code{lastname, firstname}. For more flexibility over this, the \code{name}
-    #'    argument can be directly used.
-    #' @param firstname creator first name
-    #' @param lastname creator last name
-    #' @param name creator name
-    #' @param affiliation creator affiliation (optional)
-    #' @param orcid creator ORCID (optional)
-    #' @param gnd creator GND (optional)
+    # PERSON OR ORG
+    #---------------------------------------------------------------------------
+    
+    #' @description Add a person or organization for the record. For persons, the approach is to use the \code{firstname} and
+    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as \code{lastname, firstname}.
+    #'    For organizations, use the \code{name} argument.
+    #' @param firstname person first name
+    #' @param lastname person last name
+    #' @param name organization name
+    #' @param orcid person or organization ORCID (optional)
+    #' @param gnd person or organization GND (optional)
+    #' @param isni person or organization ISNI (optional)
+    #' @param ror person or organization ROR (optional)
+    #' @param role role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
+    #'  HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
+    #'  RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other
+    #' @param affiliations person or organization affiliations (optional)
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}
+    #' @param type type of person or org (creators/contributors)
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addCreator = function(firstname, lastname, name = paste(lastname, firstname, sep = ", "),
-                          affiliation = NULL, orcid = NULL, gnd = NULL){
-      creator <- list(name = name)
-      if(!is.null(affiliation)) creator <- c(creator, affiliation = affiliation)
-      if(!is.null(orcid)) creator <- c(creator, orcid = orcid)
-      if(!is.null(gnd)) creator <- c(creator, gnd = gnd)
-      if(is.null(self$metadata$creators)) self$metadata$creators <- list()
-      self$metadata$creators[[length(self$metadata$creators)+1]] <- creator
+    #' 
+    #' @note Internal method. Prefer using \code{addCreator} or \code{addContributor}
+    #' 
+    addPersonOrOrg = function(firstname = NULL, lastname = NULL, name = paste(lastname, firstname, sep = ", "),
+                          orcid = NULL, gnd = NULL, isni = NULL, ror = NULL, role = NULL, affiliations = NULL, sandbox = FALSE,
+                          type){
+      personOrOrg <- list(
+        person_or_org = list(
+          type = if(!is.null(firstname)&&!is.null(lastname)) "personal" else "organizational",
+          given_name = firstname,
+          family_name = lastname,
+          name = name,
+          identifiers = list()
+        ),
+        role = NULL,
+        affiliations = list()
+      )
+      #identifiers
+      if(!is.null(orcid)) personOrOrg$person_or_org$identifiers[[length(personOrOrg$person_or_org$identifiers)+1]] = list(scheme = "orcid", identifier = orcid)
+      if(!is.null(gnd)) personOrOrg$person_or_org$identifiers[[length(personOrOrg$person_or_org$identifiers)+1]] = list(scheme = "gnd", identifier = gnd)
+      if(!is.null(isni)) personOrOrg$person_or_org$identifiers[[length(personOrOrg$person_or_org$identifiers)+1]] = list(scheme = "isni", identifier = isni)
+      if(!is.null(ror)) personOrOrg$person_or_org$identifiers[[length(personOrOrg$person_or_org$identifiers)+1]] = list(scheme = "ror", identifier = ror)
+      
+      #role
+      if(!is.null(role)){
+        if(!(role %in% private$allowed_role_types)){
+          stop(sprintf("The role type should be one value among values [%s]",
+                       paste(private$allowed_role_types, collapse=",")))
+        }
+        personOrOrg$role = role
+      }
+        
+      #affiliations
+      if(!is.null(affiliations)) if(personOrOrg$person_or_org$type == "personal"){
+        zen = ZenodoManager$new(sandbox = sandbox)
+        affs = lapply(affiliations, function(affiliation){
+          zen_affiliation <- zen$getAffiliationById(affiliation)
+          if(is.null(zen_affiliation)){
+            warnMsg <- sprintf("Affiliation with id '%s' doesn't exist in Zenodo", affiliation)
+            self$WARN(errorMsg)
+            return(NULL)
+          }
+          return(list(id = zen_affiliation$id))
+        })
+        affs = affs[!sapply(affs,is.null)]
+        personOrOrg$affiliations = affs
+      }
+      
+      if(is.null(self$metadata[[type]])) self$metadata[[type]] <- list()
+      self$metadata[[type]][[length(self$metadata[[type]])+1]] <- personOrOrg
     },
     
-    #' @description Removes a creator by a property. The \code{by} parameter should be the name
-    #'    of the creator property ('name' - in the form 'lastname, firstname', 'affiliation',
-    #'    'orcid' or 'gnd').
-    #' @param by property used as criterion to remove the creator
-    #' @param property property value used to remove the creator
+    #' @description Removes a person or organization by a property. The \code{by} parameter should be the name
+    #'    of the person or organization property ('name', 'affiliation','orcid','gnd','isni','ror').
+    #' @param by property used as criterion to remove the person or organization
+    #' @param property property value used to remove the person or organization
+    #' @param type type of person or org (creators / contributors)
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
-    removeCreator = function(by,property){
+    #' 
+    #' @note Internal method. Prefer using \code{removeCreator} or \code{removeContributor}
+    #'
+    removePersonOrOrg = function(by, property, type){
       removed <- FALSE
-      for(i in 1:length(self$metadata$creators)){
-        creator <- self$metadata$creators[[i]]
-        if(creator[[by]]==property){
-          self$metadata$creators[[i]] <- NULL
+      for(i in 1:length(self$metadata[[type]])){
+        personOrOrg <- self$metadata[[type]][[i]]
+        personOrOrg_map = personOrOrg$person_or_org[names(personOrOrg$person_or_org)!="identifiers"]
+        if(!is.null(personOrOrg$person_or_org$identifiers)) for(identifier in personOrOrg$person_or_org$identifiers){
+          personOrOrg_map = c(personOrOrg_map, scheme = identifier$identifier)
+          names(personOrOrg_map)[names(personOrOrg_map)=="scheme"] = identifier$scheme
+        }
+        if(personOrOrg_map[[by]]==property){
+          self$metadata[[type]][[i]] <- NULL
           removed <- TRUE 
         }
       }
       return(removed)
+    },
+    
+    # CREATORS
+    #---------------------------------------------------------------------------
+    
+    #' @description Add a creator for the record. For persons, the approach is to use the \code{firstname} and
+    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as \code{lastname, firstname}.
+    #'    For organizations, use the \code{name} argument.
+    #' @param firstname person first name
+    #' @param lastname person last name
+    #' @param name organization name
+    #' @param orcid creator ORCID (optional)
+    #' @param gnd creator GND (optional)
+    #' @param isni creator ISNI (optional)
+    #' @param ror creator ROR (optional)
+    #' @param role role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
+    #'  HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
+    #'  RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other
+    #' @param affiliations creator affiliations (optional)
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
+    addCreator = function(firstname = NULL, lastname = NULL, name = paste(lastname, firstname, sep = ", "),
+                              orcid = NULL, gnd = NULL, isni = NULL, ror = NULL, role = NULL, affiliations = NULL, sandbox = FALSE){
+      self$addPersonOrOrg(firstname = firstname, lastname = lastname, name = name, 
+                          orcid = orcid, gnd = gnd, isni = isni, ror = ror, role = role, affiliations = affiliations, sandbox = sandbox,
+                          type = "creators")
     },
     
     #' @description Removes a creator by name.
     #' @param name creator name
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByName = function(name){
-      return(self$removeCreator(by = "name", name))
+      return(self$removePersonOrOrg(by = "name", name, type = "creators"))
     },
 
     #' @description Removes a creator by affiliation.
     #' @param affiliation creator affiliation
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByAffiliation = function(affiliation){
-      return(self$removeCreator(by = "affiliation", affiliation))
+      return(self$removePersonOrOrg(by = "affiliation", affiliation, type = "creators"))
     },
     
     #' @description Removes a creator by ORCID.
     #' @param orcid creator ORCID
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByORCID = function(orcid){
-      return(self$removeCreator(by = "orcid", orcid))
+      return(self$removePersonOrOrg(by = "orcid", orcid, type = "creators"))
     },
     
     #' @description Removes a creator by GND.
     #' @param gnd creator GND
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeCreatorByGND = function(gnd){
-      return(self$removeCreator(by = "gnd", gnd))
+      return(self$removePersonOrOrg(by = "gnd", gnd, type = "creators"))
     },
     
-    #' @description  Add a contributor for the record. One approach is to use the \code{firstname} and
-    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as
-    #'    \code{lastname, firstname}. For more flexibility over this, the \code{name}
-    #'    argument can be directly used.
-    #' @param firstname contributor first name
-    #' @param lastname contributor last name
-    #' @param name contributor name
-    #' @param type contributor type, among values: ContactPerson, 
-    #'    DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, HostingInstitution, 
-    #'    Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority,
-    #'    RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other.
-    #' @param affiliation contributor affiliation (optional)
-    #' @param orcid contributor orcid (optional)
-    #' @param gnd contributor gnd (optional)
-    #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addContributor = function(firstname, lastname, name = paste(lastname, firstname, sep = ", "),
-                              type, affiliation = NULL, orcid = NULL, gnd = NULL){
-      allowedTypes <- c("ContactPerson", "DataCollector", "DataCurator", "DataManager","Distributor",
-                        "Editor", "Funder", "HostingInstitution", "Producer", "ProjectLeader", "ProjectManager",
-                        "ProjectMember", "RegistrationAgency", "RegistrationAuthority", "RelatedPerson",
-                        "Researcher", "ResearchGroup", "RightsHolder","Supervisor", "Sponsor", "WorkPackageLeader", "Other")
-      if(!(type %in% allowedTypes)){
-        stop(sprintf("The contributor type should be one value among values [%s]",
-                      paste(allowedTypes, collapse=",")))
-      }
-      contributor <- list(name = name, type = type)
-      if(!is.null(affiliation)) contributor <- c(contributor, affiliation = affiliation)
-      if(!is.null(orcid)) contributor <- c(contributor, orcid = orcid)
-      if(!is.null(gnd)) contributor <- c(contributor, gnd = gnd)
-      if(is.null(self$metadata$contributors)) self$metadata$contributors <- list()
-      self$metadata$contributors[[length(self$metadata$contributors)+1]] <- contributor
-    },
-    
-    #' @description Removes a contributor by a property. The \code{by} parameter should be the name
-    #'    of the contributor property ('name' - in the form 'lastname, firstname', 'affiliation',
-    #'    'orcid' or 'gnd').
-    #'    \code{FALSE} otherwise.
-    #' @param by property used as criterion to remove the contributor
-    #' @param property property value used to remove the contributor
+    #' @description Removes a creator by ISNI.
+    #' @param isni creator ISNI
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
-    removeContributor = function(by,property){
-      removed <- FALSE
-      for(i in 1:length(self$metadata$contributors)){
-        contributor <- self$metadata$contributors[[i]]
-        if(contributor[[by]]==property){
-          self$metadata$contributors[[i]] <- NULL
-          removed <- TRUE 
-        }
-      }
-      return(removed)
+    removeCreatorByISNI = function(isni){
+      return(self$removePersonOrOrg(by = "isni", isni, type = "creators"))
+    },
+    
+    #' @description Removes a creator by ROR.
+    #' @param ror creator ROR
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeCreatorByROR = function(ror){
+      return(self$removePersonOrOrg(by = "ror", ror, type = "creators"))
+    },
+    
+    # CONTRIBUTORS
+    #---------------------------------------------------------------------------
+    
+    #' @description Add a contributor for the record. For persons, the approach is to use the \code{firstname} and
+    #'    \code{lastname} arguments, that by default will be concatenated for Zenodo as \code{lastname, firstname}.
+    #'    For organizations, use the \code{name} argument.
+    #' @param firstname person first name
+    #' @param lastname person last name
+    #' @param name organization name
+    #' @param orcid contributor ORCID (optional)
+    #' @param gnd contributor GND (optional)
+    #' @param isni contributor ISNI (optional)
+    #' @param ror contributor ROR (optional)
+    #' @param role role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
+    #'  HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
+    #'  RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other
+    #' @param affiliations contributor affiliations (optional)
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
+    addContributor = function(firstname = NULL, lastname = NULL, name = paste(lastname, firstname, sep = ", "),
+                          orcid = NULL, gnd = NULL, isni = NULL, ror = NULL, role = NULL, affiliations = NULL, sandbox = FALSE){
+      self$addPersonOrOrg(firstname = firstname, lastname = lastname, name = name, 
+                          orcid = orcid, gnd = gnd, isni = isni, ror = ror, role = role, affiliations = affiliations, sandbox = sandbox,
+                          type = "contributors")
     },
     
     #' @description Removes a contributor by name.
     #' @param name contributor name
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByName = function(name){
-      return(self$removeContributor(by = "name", name))
+      return(self$removePersonOrOrg(by = "name", name, type = "contributors"))
     },
     
     #' @description Removes a contributor by affiliation.
     #' @param affiliation contributor affiliation
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByAffiliation = function(affiliation){
-      return(self$removeContributor(by = "affiliation", affiliation))
+      return(self$removePersonOrOrg(by = "affiliation", affiliation, type = "contributors"))
     },
     
     #' @description Removes a contributor by ORCID.
     #' @param orcid contributor ORCID
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByORCID = function(orcid){
-      return(self$removeContributor(by = "orcid", orcid))
+      return(self$removePersonOrOrg(by = "orcid", orcid, type = "contributors"))
     },
     
     #' @description Removes a contributor by GND.
     #' @param gnd contributor GND
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeContributorByGND = function(gnd){
-      return(self$removeContributor(by = "gnd", gnd))
+      return(self$removePersonOrOrg(by = "gnd", gnd, type = "contributors"))
+    },
+    
+    #' @description Removes a contributor by ISNI.
+    #' @param isni contributor ISNI
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeContributorByISNI = function(isni){
+      return(self$removePersonOrOrg(by = "isni", isni, type = "contributors"))
+    },
+    
+    #' @description Removes a contributor by ROR.
+    #' @param ror contributor ROR
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeContributorByROR = function(ror){
+      return(self$removePersonOrOrg(by = "ror", ror, type = "contributors"))
     },
     
     #' @description Set license. The license should be set with the Zenodo id of the license. If not
