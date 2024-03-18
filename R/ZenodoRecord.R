@@ -589,10 +589,25 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$version <- version
     },
     
-    #' @description  Set the language.
+    #' @description  Adds a language.
+    #' @param language ISO 639-2 or 639-3 code
+    addLanguage = function(language){
+      zenodo = ZenodoManager$new()
+      zen_language = zenodo$getLanguageById(language)
+      if(is.null(zen_language)){
+        errorMsg <- sprintf("Language with id '%s' doesn't exist in Zenodo", language)
+        self$ERROR(errorMsg)
+        stop(errorMsg)
+      }
+      self$metadata$languages[[length(self$metadata$languages)+1]] <- list(id = language)
+    },
+    
+    #' @description Set the language
     #' @param language ISO 639-2 or 639-3 code
     setLanguage = function(language){
-      self$metadata$language <- language
+      warnMsg = "Method 'setLanguage' is deprecated, please use 'addLanguage'"
+      self$WARN(warnMsg)
+      self$addLanguage(language)
     },
     
     #' @description Adds a related identifier with a given relation.

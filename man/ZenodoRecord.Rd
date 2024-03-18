@@ -114,6 +114,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-removeContributorByROR}{\code{ZenodoRecord$removeContributorByROR()}}
 \item \href{#method-ZenodoRecord-setLicense}{\code{ZenodoRecord$setLicense()}}
 \item \href{#method-ZenodoRecord-setVersion}{\code{ZenodoRecord$setVersion()}}
+\item \href{#method-ZenodoRecord-addLanguage}{\code{ZenodoRecord$addLanguage()}}
 \item \href{#method-ZenodoRecord-setLanguage}{\code{ZenodoRecord$setLanguage()}}
 \item \href{#method-ZenodoRecord-addRelatedIdentifier}{\code{ZenodoRecord$addRelatedIdentifier()}}
 \item \href{#method-ZenodoRecord-removeRelatedIdentifier}{\code{ZenodoRecord$removeRelatedIdentifier()}}
@@ -1028,10 +1029,27 @@ Set record version.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-addLanguage"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addLanguage}{}}}
+\subsection{Method \code{addLanguage()}}{
+Adds a language.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addLanguage(language)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{language}}{ISO 639-2 or 639-3 code}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setLanguage"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setLanguage}{}}}
 \subsection{Method \code{setLanguage()}}{
-Set the language.
+Set the language
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setLanguage(language)}\if{html}{\out{</div>}}
 }
