@@ -112,6 +112,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-removeContributorByGND}{\code{ZenodoRecord$removeContributorByGND()}}
 \item \href{#method-ZenodoRecord-removeContributorByISNI}{\code{ZenodoRecord$removeContributorByISNI()}}
 \item \href{#method-ZenodoRecord-removeContributorByROR}{\code{ZenodoRecord$removeContributorByROR()}}
+\item \href{#method-ZenodoRecord-addRight}{\code{ZenodoRecord$addRight()}}
 \item \href{#method-ZenodoRecord-setLicense}{\code{ZenodoRecord$setLicense()}}
 \item \href{#method-ZenodoRecord-setVersion}{\code{ZenodoRecord$setVersion()}}
 \item \href{#method-ZenodoRecord-addLanguage}{\code{ZenodoRecord$addLanguage()}}
@@ -989,6 +990,37 @@ Removes a contributor by ROR.
 }
 \subsection{Returns}{
 \code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-addRight"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addRight}{}}}
+\subsection{Method \code{addRight()}}{
+Add right/license. Please see https://inveniordm.docs.cern.ch/reference/metadata/#rights-licenses-0-n
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addRight(
+  id = NULL,
+  title = NULL,
+  description = NULL,
+  link = NULL,
+  sandbox = FALSE
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{id}}{license id}
+
+\item{\code{title}}{license title}
+
+\item{\code{description}}{a multi-lingual list}
+
+\item{\code{link}}{license link}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is \code{FALSE}}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}

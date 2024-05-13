@@ -565,20 +565,50 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(self$removePersonOrOrg(by = "ror", ror, type = "contributors"))
     },
     
+    #'@description Add right/license. Please see https://inveniordm.docs.cern.ch/reference/metadata/#rights-licenses-0-n
+    #'@param id license id
+    #'@param title license title
+    #'@param description a multi-lingual list
+    #'@param link license link
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is \code{FALSE}
+    addRight = function(id = NULL, title = NULL, description = NULL, link = NULL,
+                        sandbox = FALSE){
+      added = FALSE
+      if(is.null(self$metadata$rights)) self$metadata$rights = list()
+      zen <- ZenodoManager$new(sandbox = sandbox)
+      if(!is.null(id)){
+        zen_license <- zen$getLicenseById(id)
+        if(is.null(zen_license)){
+          errorMsg <- sprintf("License with id '%s' doesn't exist in Zenodo", id)
+          self$ERROR(errorMsg)
+          stop(errorMsg)
+        }
+        right = list(id = zen_license$id)
+        self$metadata$rights[[length(self$metadata$rights)+1]] = right
+        added = TRUE
+      }else{
+        if(is.null(title)){
+          errMsg <- "At least an 'id' or 'title' must be provided"
+          self$ERROR(errorMsg)
+          stop(errorMsg)
+        }else{
+          right = list(title = title)
+          if(!is.null(description)) right$description = description
+          if(!is.null(link)) right$link = link
+          self$metadata$rights[[length(self$metadata$rights)+1]] = right
+          added = TRUE
+        }
+      }
+      return(added)
+    },
+    
     #' @description Set license. The license should be set with the Zenodo id of the license. If not
     #'    recognized by Zenodo, the function will return an error. The list of licenses can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
     #' @param licenseId a license Id
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is \code{FALSE}
     setLicense = function(licenseId, sandbox = FALSE){
-      zen <- ZenodoManager$new(sandbox = sandbox)
-      zen_license <- zen$getLicenseById(licenseId)
-      if(!is.null(zen_license$status)){
-        errorMsg <- sprintf("License with id '%s' doesn't exist in Zenodo", licenseId)
-        self$ERROR(errorMsg)
-        stop(errorMsg)
-      }
-      self$metadata$license <- licenseId
+      self$addRight(id = licenseId)
     },
     
     #' @description Set record version.
