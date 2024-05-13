@@ -1223,7 +1223,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(zenReq$getStatus() == 204){
         out <- TRUE
         infoMsg = sprintf("Successful deleted record '%s'", recordId)
-        cli::cli_alert_danger(infoMsg)
+        cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
       }else{
         resp <- zenReq$getResponse()
@@ -1786,7 +1786,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(is.null(result)){
         warnMsg = sprintf("No record for id '%s'!",recid)
         cli::cli_alert_warning(warnMsg)
-        self$WARN(warnMSg)
+        self$WARN(warnMsg)
       }
       return(result)
     },
