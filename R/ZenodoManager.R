@@ -1036,20 +1036,29 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param recid the record ID, object of class \code{character}
     #' @return an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
     getDepositionById = function(recid){
-      query <- sprintf("recid:%s", recid)
-      result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
-      if(length(result)>0){
-        result <- result[[1]]
-        if(result$id == recid){
-          infoMsg = sprintf("Successfully fetched record for id '%s'!",recid)
-          cli::cli_alert_success(infoMsg)
-          self$INFO(infoMsg)
-        }else{
-          result <- NULL
-        }
+      request = sprintf("records/%s/draft", recid)
+      zenReq <- ZenodoRequest$new(private$url, "GET", request,
+                                  token = self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      result <- NULL
+      if(zenReq$getStatus() == 200){
+        result = ZenodoRecord$new(obj = zenReq$getResponse())
+        infoMsg = sprintf("Successfuly fetched record ford id %s", recid)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
       }else{
-        result <- NULL
+        out <- zenReq$getResponse()
+        errMsg = sprintf("Error while fetching record: %s", out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        for(error in out$errors){
+          errMsg = sprintf("Error: %s - %s", error$field, error$message)
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+        }
       }
+      
       if(is.null(result)){
         warnMsg = sprintf("No record for id '%s'!",recid)
         cli::cli_alert_warning(warnMsg)
@@ -1100,7 +1109,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() %in% c(200,201)){
-        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+        resp = zenReq$getResponse()
+        out <- self$getDepositionById(resp$id)
         infoMsg = "Successful record deposition"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -1334,7 +1344,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param recordId the ID of the record to be published.
     #' @return an object of class \code{ZenodoRecord}
     publishRecord = function(recordId){
-      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/publish",recordId),
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft/actions/publish",recordId),
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
