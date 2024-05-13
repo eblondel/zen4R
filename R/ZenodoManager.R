@@ -1267,7 +1267,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return \code{TRUE} if all records have been deleted, \code{FALSE} otherwise
     deleteRecords = function(q = "", size = 10){
       records <- self$getDepositions(q = q, size = size)
-      records <- records[sapply(records, function(x){!x$submitted})]
+      records <- records[sapply(records, function(x){x$status == "draft"})]
       hasDraftRecords <- length(records)>0
       if(length(records)>0){
         record_ids <- sapply(records, function(x){x$id})
