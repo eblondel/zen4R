@@ -344,9 +344,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param gnd person or organization GND (optional)
     #' @param isni person or organization ISNI (optional)
     #' @param ror person or organization ROR (optional)
-    #' @param role role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
-    #'  HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
-    #'  RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other
+    #' @param role role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+    #' hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+    #' relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other
     #' @param affiliations person or organization affiliations (optional)
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}
     #' @param type type of person or org (creators/contributors)
@@ -442,9 +442,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param gnd creator GND (optional)
     #' @param isni creator ISNI (optional)
     #' @param ror creator ROR (optional)
-    #' @param role role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
-    #'  HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
-    #'  RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other
+    #' @param role role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+    #' hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+    #' relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other
     #' @param affiliations creator affiliations (optional)
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
@@ -510,9 +510,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param gnd contributor GND (optional)
     #' @param isni contributor ISNI (optional)
     #' @param ror contributor ROR (optional)
-    #' @param role role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
-    #'  HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
-    #'  RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other
+    #' @param role role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+    #' hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+    #' relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other
     #' @param affiliations contributor affiliations (optional)
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available affiliations. Default is \code{FALSE}
     #' @return \code{TRUE} if added, \code{FALSE} otherwise

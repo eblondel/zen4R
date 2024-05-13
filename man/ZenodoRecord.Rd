@@ -604,9 +604,9 @@ Add a person or organization for the record. For persons, the approach is to use
 
 \item{\code{ror}}{person or organization ROR (optional)}
 
-\item{\code{role}}{role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
-HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
-RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other}
+\item{\code{role}}{role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other}
 
 \item{\code{affiliations}}{person or organization affiliations (optional)}
 
@@ -684,9 +684,9 @@ Add a creator for the record. For persons, the approach is to use the \code{firs
 
 \item{\code{ror}}{creator ROR (optional)}
 
-\item{\code{role}}{role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
-HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
-RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other}
+\item{\code{role}}{role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other}
 
 \item{\code{affiliations}}{creator affiliations (optional)}
 
@@ -857,9 +857,9 @@ Add a contributor for the record. For persons, the approach is to use the \code{
 
 \item{\code{ror}}{contributor ROR (optional)}
 
-\item{\code{role}}{role, values among: ContactPerson, DataCollector, DataCurator, DataManager, Distributor, Editor, Funder, 
-HostingInstitution, Producer, ProjectLeader, ProjectManager, ProjectMember, RegistrationAgency, RegistrationAuthority, 
-RelatedPerson, Researcher, ResearchGroup, RightsHolder, Supervisor, Sponsor, WorkPackageLeader, Other}
+\item{\code{role}}{role, values among: contactperson, datacollector, datacurator, datamanager, distributor, editor, funder, 
+hostinginstitution, producer, projectleader, projectmanager, projectmember, registrationagency, registrationauthority, 
+relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, workpackageleader, other}
 
 \item{\code{affiliations}}{contributor affiliations (optional)}
 
