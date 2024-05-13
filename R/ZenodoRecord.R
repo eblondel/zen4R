@@ -43,7 +43,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$created = obj$created
       self$doi = obj$doi
       self$doi_url = obj$doi_url
-      self$files = lapply(obj$files, function(file){
+      self$files = lapply(obj$files$entries, function(file){
         list(
           filename = if(!is.null(file$filename)) file$filename else file$key,
           filesize = if(!is.null(file$filesize)) file$filesize else file$size,

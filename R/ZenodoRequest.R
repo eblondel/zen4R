@@ -63,7 +63,8 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       self$INFO(sprintf("Fetching %s", req))
       headers <- c(
         "User-Agent" = private$agent,
-        "Authorization" = paste("Bearer",private$token)
+        "Authorization" = paste("Bearer",private$token),
+        "Accept" = "application/vnd.inveniordm.v1+json"
       )
       
       responseContent <- NULL
@@ -104,8 +105,9 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       #headers
       headers <- c(
         "User-Agent" = private$agent,
+        "Authorization" = paste("Bearer",private$token),
         "Content-Type" = contentType,
-        "Authorization" = paste("Bearer",private$token)
+        "Accept" = "application/vnd.inveniordm.v1+json"
       )
       
       #send request
@@ -141,8 +143,9 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       #headers
       headers <- c(
         "User-Agent" = private$agent,
+        "Authorization" = paste("Bearer",private$token),
         "Content-Type" = if(regexpr("draft/files", req)>0) "application/octet-stream" else "application/json",
-        "Authorization" = paste("Bearer",private$token)
+        "Accept" = if(regexpr("draft/files", req)>0) NULL else "application/vnd.inveniordm.v1+json"
       )
       
       #send request

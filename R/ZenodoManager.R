@@ -1109,8 +1109,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() %in% c(200,201)){
-        resp = zenReq$getResponse()
-        out <- self$getDepositionById(resp$id)
+        out <- ZenodoRecord$new(obj = zenReq$getResponse())
         infoMsg = "Successful record deposition"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
