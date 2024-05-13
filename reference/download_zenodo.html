@@ -110,12 +110,7 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No record for id '2547036'!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Successfully fetched list of published records - page 1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched list of published records!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched published record for concept DOI '10.5281/zenodo.2547036'!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Download in sequential mode</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Download in sequential mode </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will download 2 files from record '7552287' (doi: '10.5281/zenodo.7552287') - total size: 119.4 KiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '7552287' (doi: '10.5281/zenodo.7552287') - total size: 119.4 KiB </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in FUN(X[[i]], ...):</span> object 'infoMSg' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (result$conceptdoi == conceptdoi) {    infoMsg = sprintf("Successfully fetched published record for concept DOI '%s'!",         conceptdoi)    cli::cli_alert_success(infoMsg)    self$INFO(infoMsg)} else {    result &lt;- NULL}:</span> argument is of length zero</span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">parallel</span><span class="op">)</span></span></span>
 <span class="r-in"><span> <span class="co">#download files as parallel using a cluster approach (for both Unix/Win systems)</span></span></span>
@@ -128,14 +123,7 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No record for id '2547036'!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Successfully fetched list of published records - page 1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched list of published records!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched published record for concept DOI '10.5281/zenodo.2547036'!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Download in parallel mode</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Download in parallel mode </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Using cluster-based parallel handler (cluster 'cl' argument specified)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Using cluster-based parallel handler (cluster 'cl' argument specified) </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will download 2 files from record '7552287' (doi: '10.5281/zenodo.7552287') - total size: 119.4 KiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '7552287' (doi: '10.5281/zenodo.7552287') - total size: 119.4 KiB </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in checkForRemoteErrors(val):</span> 2 nodes produced errors; first error: object 'infoMSg' not found</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (result$conceptdoi == conceptdoi) {    infoMsg = sprintf("Successfully fetched published record for concept DOI '%s'!",         conceptdoi)    cli::cli_alert_success(infoMsg)    self$INFO(infoMsg)} else {    result &lt;- NULL}:</span> argument is of length zero</span>
 <span class="r-in"><span> </span></span>
 <span class="r-in"><span> <span class="co">#download files as parallel using mclapply (for Unix systems)</span></span></span>
 <span class="r-in"><span> <span class="fu">download_zenodo</span><span class="op">(</span><span class="st">"10.5281/zenodo.2547036"</span>,</span></span>
@@ -147,19 +135,7 @@ Do you want to suppress informative messages (not warnings)?</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> No record for id '2547036'!</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Successfully fetched list of published records - page 1</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched list of published records!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched published record for concept DOI '10.5281/zenodo.2547036'!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Download in parallel mode</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Download in parallel mode </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Using non cluster-based (no cluster 'cl' argument specified)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Using non cluster-based (no cluster 'cl' argument specified) </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will download 2 files from record '7552287' (doi: '10.5281/zenodo.7552287') - total size: 119.4 KiB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Will download 2 files from record '7552287' (doi: '10.5281/zenodo.7552287') - total size: 119.4 KiB </span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>all scheduled cores encountered errors in user code</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Files downloaded at '/home/runner/work/zen4R/zen4R/docs/reference'.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] Files downloaded at '/home/runner/work/zen4R/zen4R/docs/reference'.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Verifying file integrity...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoRecord - Verifying file integrity... </span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (target_file_md5sum == file$checksum) {    if (!quiet) {        infoMsg = sprintf("File '%s': integrity verified (md5sum: %s)\n",             file$filename, file$checksum)        cli::cli_alert_info(infoMsg)        cat(paste("[zen4R][INFO]", infoMsg))    }} else {    warnMsg &lt;- sprintf("Download issue: md5sum (%s) of file '%s' does not match Zenodo archive md5sum (%s)\n",         target_file_md5sum, tools::file_path_as_absolute(target_file),         file$checksum)    cli::cli_alert_warning(warnMsg)    cat(paste("[zen4R][WARN]", warnMsg))    warning(warnMsg)}:</span> missing value where TRUE/FALSE needed</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (result$conceptdoi == conceptdoi) {    infoMsg = sprintf("Successfully fetched published record for concept DOI '%s'!",         conceptdoi)    cli::cli_alert_success(infoMsg)    self$INFO(infoMsg)} else {    result &lt;- NULL}:</span> argument is of length zero</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span>                </span></span>
 </code></pre></div>
