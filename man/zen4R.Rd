@@ -10,6 +10,14 @@ Provides an Interface to 'Zenodo' (<https://zenodo.org>) REST API,
   including management of depositions, attribution of DOIs by 'Zenodo', 
   upload and download of files.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/eblondel/zen4R}
+  \item Report bugs at \url{https://github.com/eblondel/zen4R/issues}
+}
+
+}
 \author{
 Emmanuel Blondel \email{emmanuel.blondel1@gmail.com}
 }

@@ -1,8 +1,7 @@
 #' @name zen4R
 #' @aliases zen4R-package
 #' @aliases zen4R
-#' @docType package
-#' 
+#'
 #' @importFrom R6 R6Class
 #' @import cli
 #' @import methods
@@ -24,4 +23,4 @@
 #'  
 #'@author Emmanuel Blondel \email{emmanuel.blondel1@@gmail.com}
 #'
-NULL
+"_PACKAGE"
