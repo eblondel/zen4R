@@ -18,12 +18,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                            "other"),
     allowed_date_types = c("accepted", "available", "collected", "copyrighted", "created", "issued", 
                            "other", "submitted", "updated", "valid", "withdrawn"),
-    allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
-                  "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
-                  "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
-                  "compiles", "isVariantFormOf", "isOriginalFormof", "isIdenticalTo", "isAlternateIdentifier", 
-                  "isReviewedBy", "reviews", "isDerivedFrom", "isSourceOf", "requires", "isRequiredBy", 
-                  "isObsoletedBy", "obsoletes"),
+    allowed_identifier_schemes = c("ark", "arxiv", "bibcode", "doi", "ean13", "eissn", "handle", "igsn", "isbn",
+                                   "issn", "istc", "lissn", "lsid", "pubmed id", "purl", "upc", "url", "urn", "w3id"),
+    allowed_relation_types = c("iscitedby", "cites", "issupplementto", "issupplementedby", 
+                          "iscontinuedby", "continues", "isdescribedby", "describes", "hasmetadata", 
+                          "ismetadatafor", "isnewversionof", "ispreviousversionof", "ispartof", 
+                          "haspart", "isreferencedby", "references", "isdocumentedby", 
+                          "documents", "iscompiledby", "compiles", "isvariantformof", "isoriginalformof", 
+                          "isidenticalto", "isalternateidentifier", "isreviewedby", "reviews", 
+                          "isderivedfrom", "issourceof", "requires", "isrequiredby", "isobsoletedby", 
+                          "obsoletes"),
     export_formats = c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML"),
     getExportFormatExtension = function(format){
       switch(format,
@@ -627,42 +631,57 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$addLanguage(language)
     },
     
-    #' @description Adds a related identifier with a given relation.
-    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
-    #'  isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
-    #'  isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
-    #'  isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
-    #'  isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes
-    #' @param identifier resource identifier
-    #' @param resource_type optional resource type, value among possible publication types, image types, or upload 
-    #'  types (except 'publication' and 'image' for which a publication/image has to be specified). Default is \code{NULL}
-    addRelatedIdentifier = function(relation, identifier, resource_type = NULL){
-      if(!(relation %in% private$allowed_relations)){
-        stop(sprintf("Relation '%s' incorrect. Use a value among the following [%s]", 
-                    relation, paste(private$allowed_relations, collapse=",")))
+    #' @description Adds a related identifier with a given scheme and relation type.
+    #' @param identifier identifier
+    #' @param scheme scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+    #' lsid, pubmed id, purl, upc, url, urn, w3id
+    #' @param relation_type relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+    #' continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+    #' isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+    #' isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes
+    #' @param resource_type optional resource type
+    #'@return \code{TRUE} if added, \code{FALSE} otherwise
+    addRelatedIdentifier = function(identifier, scheme, relation_type, resource_type = NULL){
+      if(!(scheme %in% private$allowed_identifier_schemes)){
+        stop(sprintf("Identifier scheme '%s%' incorrect. Use a value among the following [%s]",
+                     scheme, paste0(private$allowed_identifier_schemes, collapse=",")))
+      }
+      if(!(relation_type %in% private$allowed_relation_types)){
+        stop(sprintf("Relation type '%s' incorrect. Use a value among the following [%s]", 
+                    relation_type, paste(private$allowed_relation_types, collapse=",")))
       }
       added <- FALSE
       if(is.null(self$metadata$related_identifiers)) self$metadata$related_identifiers <- list()
-      ids_df <- data.frame(relation = character(0), identifier = character(0), stringsAsFactors = FALSE)
+      ids_df <- data.frame(
+        identifier = character(0),
+        scheme = character(0),
+        relation_type = character(0),
+        resource_type = character(0),
+        stringsAsFactors = FALSE
+      )
       if(length(self$metadata$related_identifiers)>0){
         ids_df <- do.call("rbind", lapply(self$metadata$related_identifiers, function(x){
-          data.frame(relation = x$relation, identifier = x$identifier, stringsAsFactors = FALSE)
+          data.frame(
+            identifier = x$identifier,
+            scheme = x$scheme,
+            relation_type = x$relation_type$id,
+            resource_type = if(!is.null(x$resource_type$id)) x$resource_type$id else NA,
+            stringsAsFactors = FALSE
+          )
         }))
       }
-      if(nrow(ids_df[ids_df$relation == relation & ids_df$identifier == identifier,])==0){
-        new_rel <- list(relation = relation, identifier = identifier)
+      if(nrow(ids_df[ids_df$relation == relation_type & ids_df$identifier == identifier,])==0){
+        new_rel <- list(
+          identifier = identifier,
+          scheme = scheme,
+          relation_type = list(id = relation_type)
+        )
         if(!is.null(resource_type)) {
-          allowed_resource_types <- c(private$allowed_upload_types, private$allowed_publication_types, private$allowed_image_types)
-          allowed_resource_types <- allowed_resource_types[!(allowed_resource_types %in% c("publication", "image"))]
-          if(!(resource_type %in% allowed_resource_types)){
-            stop(sprintf("Relation resource type '%s' incorrect. Use a value among the following [%s]", 
-                         relation, paste(allowed_resource_types, collapse=",")))
+          zenodo = ZenodoManager$new()
+          res = ZENODO$getResourceTypeById(resource_type)
+          if(!is.null(res)){
+            new_rel$resource_type = list(id = resource_type)
           }
-          resource_type_prefix <- ""
-          if(resource_type %in% private$allowed_publication_types)resource_type_prefix = "publication-"
-          if(resource_type %in% private$allowed_image_types)resource_type_prefix = "image-"
-          
-          new_rel$resource_type <- paste0(resource_type_prefix, resource_type)
         } 
         self$metadata$related_identifiers[[length(self$metadata$related_identifiers)+1]] <- new_rel
         added <- TRUE
@@ -670,23 +689,31 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(added)
     },
     
-    #' @description Removes a related identifier with a given relation.
-    #' @param relation relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
-    #'  isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
-    #'  isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
-    #'  isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
-    #'  isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes
-    #' @param identifier resource identifier
-    removeRelatedIdentifier = function(relation, identifier){
-      if(!(relation %in% private$allowed_relations)){
+    #' @description Removes a related identifier with a given scheme/relation_type
+    #' @param identifier identifier
+    #' @param scheme scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+    #' lsid, pubmed id, purl, upc, url, urn, w3id
+    #' @param relation_type relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+    #' continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+    #' isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+    #' isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes
+    #'@return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeRelatedIdentifier = function(identifier, scheme, relation_type){
+      if(!(scheme %in% private$allowed_identifier_schemes)){
+        stop(sprintf("Identifier scheme '%s%' incorrect. Use a value among the following [%s]",
+                     scheme, paste0(private$allowed_identifier_schemes, collapse=",")))
+      }
+      if(!(relation_type %in% private$allowed_relation_types)){
         stop(sprintf("Relation '%s' incorrect. Use a value among the following [%s]", 
-                     relation, paste(private$allowed_relations, collapse=",")))
+                     relation_type, paste(private$allowed_relation_types, collapse=",")))
       }
       removed <- FALSE
       if(!is.null(self$metadata$related_identifiers)){
         for(i in 1:length(self$metadata$related_identifiers)){
           related_id <- self$metadata$related_identifiers[[i]]
-          if(related_id$relation == relation & related_id$identifier == identifier){
+          if(related_id$identifier == identifier &
+             related_id$scheme == scheme &
+             related_id$relation_type$id == relation_type){
             self$metadata$related_identifiers[[i]] <- NULL
             removed <- TRUE
             break;

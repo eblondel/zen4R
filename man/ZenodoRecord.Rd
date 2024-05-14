@@ -1081,49 +1081,63 @@ Set the language
 \if{html}{\out{<a id="method-ZenodoRecord-addRelatedIdentifier"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-addRelatedIdentifier}{}}}
 \subsection{Method \code{addRelatedIdentifier()}}{
-Adds a related identifier with a given relation.
+Adds a related identifier with a given scheme and relation type.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addRelatedIdentifier(relation, identifier, resource_type = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addRelatedIdentifier(
+  identifier,
+  scheme,
+  relation_type,
+  resource_type = NULL
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
-isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
-isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
-isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
-isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes}
+\item{\code{identifier}}{identifier}
 
-\item{\code{identifier}}{resource identifier}
+\item{\code{scheme}}{scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+lsid, pubmed id, purl, upc, url, urn, w3id}
 
-\item{\code{resource_type}}{optional resource type, value among possible publication types, image types, or upload 
-types (except 'publication' and 'image' for which a publication/image has to be specified). Default is \code{NULL}}
+\item{\code{relation_type}}{relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes}
+
+\item{\code{resource_type}}{optional resource type}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-removeRelatedIdentifier"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-removeRelatedIdentifier}{}}}
 \subsection{Method \code{removeRelatedIdentifier()}}{
-Removes a related identifier with a given relation.
+Removes a related identifier with a given scheme/relation_type
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeRelatedIdentifier(relation, identifier)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeRelatedIdentifier(identifier, scheme, relation_type)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{relation}}{relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
-isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
-isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
-isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
-isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes}
+\item{\code{identifier}}{identifier}
 
-\item{\code{identifier}}{resource identifier}
+\item{\code{scheme}}{scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+lsid, pubmed id, purl, upc, url, urn, w3id}
+
+\item{\code{relation_type}}{relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
