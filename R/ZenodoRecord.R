@@ -42,8 +42,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       #deprecated
       self$conceptdoi = obj$conceptdoi
       self$conceptrecid = obj$conceptrecid
-      self$doi = obj$doi
-      self$doi_url = obj$doi_url
       self$recid = obj$recid
       self$modified = obj$modified
       self$owners = obj$owners
@@ -91,10 +89,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     conceptdoi = NULL,
     #' @field conceptrecid record concept id
     conceptrecid = NULL,
-    #' @field doi record doi
-    doi = NULL,
-    #' @field doi_url record doi URL
-    doi_url = NULL,
     #' @field modified record modification date
     modified = NULL,
     #' @field owners record owners
@@ -1289,7 +1283,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     downloadFiles = function(path = ".", files = list(),
                              parallel = FALSE, parallel_handler = NULL, cl = NULL, quiet = FALSE, overwrite=TRUE, timeout=60, ...){
       if(length(self$files)==0){
-        warnMsg = sprintf("No files to download for record '%s' (doi: '%s')", self$id, self$doi)
+        warnMsg = sprintf("No files to download for record '%s' (doi: '%s')", self$id, self$pids$doi$identifier)
         cli::cli_alert_warning(warnMsg)
         self$WARN(warnMsg)
       }else{
@@ -1305,7 +1299,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         if(length(files)>0) files.list <- files.list[sapply(files.list, function(x){x$filename %in% files})]
         if(length(files.list)==0){
           errMsg <- sprintf("No files available in record '%s' (doi: '%s') for file names [%s]",
-                            self$id, self$doi, paste0(files, collapse=","))
+                            self$id, self$pids$doi$identifier, paste0(files, collapse=","))
           cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
           stop(errMsg)
@@ -1313,14 +1307,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         for(file in files){
           if(!file %in% sapply(files.list, function(x){x$filename})){
             warnMsg = sprintf("No files available in record '%s' (doi: '%s') for file name '%s': ",
-                              self$id, self$doi, file)
+                              self$id, self$pids$doi$identifier, file)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMSg)
           }
         }
 
         files_summary <- sprintf("Will download %s file%s from record '%s' (doi: '%s') - total size: %s",
-                                length(files.list), ifelse(length(files.list)>1,"s",""), self$id, self$doi, 
+                                length(files.list), ifelse(length(files.list)>1,"s",""), self$id, self$pids$doi$identifier, 
                                 human_filesize(sum(sapply(files.list, function(x){x$filesize}))))
         
         #download_file util
