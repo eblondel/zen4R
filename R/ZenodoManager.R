@@ -982,15 +982,16 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_info(infoMsg)
           self$INFO(infoMsg)
           conceptrec <- self$getDepositionByConceptId(conceptrecid)
-          last_doi <- tail(conceptrec$getVersions(),1L)$doi
-          if(length(last_doi)==0) {
-            if(nzchar(conceptrec$metadata$doi)){
-               last_doi = conceptrec$metadata$doi
-            }else{
-              last_doi = conceptrec$metadata$prereserve_doi$doi
-            }
-          }
-          result <- self$getDepositionByDOI(last_doi)
+          result = conceptrec
+          # last_doi <- tail(conceptrec$getVersions(),1L)$doi
+          # if(length(last_doi)==0) {
+          #   if(nzchar(conceptrec$metadata$doi)){
+          #      last_doi = conceptrec$metadata$doi
+          #   }else{
+          #     last_doi = conceptrec$metadata$prereserve_doi$doi
+          #   }
+          # }
+          # result <- self$getDepositionByDOI(last_doi)
         }
       }
       return(result)
