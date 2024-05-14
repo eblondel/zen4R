@@ -1216,55 +1216,75 @@ relatedperson, researcher, researchgroup, rightsholder, supervisor, sponsor, wor
 
 </div><p></p><hr><a id="method-ZenodoRecord-addRelatedIdentifier"></a><div class="section">
 <h3 id="method-addrelatedidentifier-">Method <code>addRelatedIdentifier()</code><a class="anchor" aria-label="anchor" href="#method-addrelatedidentifier-"></a></h3>
-<p>Adds a related identifier with a given relation.</p><div class="section">
+<p>Adds a related identifier with a given scheme and relation type.</p><div class="section">
 <h4 id="usage-42">Usage<a class="anchor" aria-label="anchor" href="#usage-42"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addRelatedIdentifier</span><span class="op">(</span><span class="va">relation</span>, <span class="va">identifier</span>, resource_type <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">addRelatedIdentifier</span><span class="op">(</span></span>
+<span>  <span class="va">identifier</span>,</span>
+<span>  <span class="va">scheme</span>,</span>
+<span>  <span class="va">relation_type</span>,</span>
+<span>  resource_type <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>relation</code></dt>
-<dd><p>relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
-isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
-isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
-isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
-isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes</p></dd>
+<p></p><div class="arguments"><dl><dt><code>identifier</code></dt>
+<dd><p>identifier</p></dd>
 
 
-<dt><code>identifier</code></dt>
-<dd><p>resource identifier</p></dd>
+<dt><code>scheme</code></dt>
+<dd><p>scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+lsid, pubmed id, purl, upc, url, urn, w3id</p></dd>
+
+
+<dt><code>relation_type</code></dt>
+<dd><p>relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes</p></dd>
 
 
 <dt><code>resource_type</code></dt>
-<dd><p>optional resource type, value among possible publication types, image types, or upload 
-types (except 'publication' and 'image' for which a publication/image has to be specified). Default is <code>NULL</code></p></dd>
+<dd><p>optional resource type</p></dd>
 
 
 </dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-23">Returns<a class="anchor" aria-label="anchor" href="#returns-23"></a></h4>
+<p><code>TRUE</code> if added, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-removeRelatedIdentifier"></a><div class="section">
 <h3 id="method-removerelatedidentifier-">Method <code>removeRelatedIdentifier()</code><a class="anchor" aria-label="anchor" href="#method-removerelatedidentifier-"></a></h3>
-<p>Removes a related identifier with a given relation.</p><div class="section">
+<p>Removes a related identifier with a given scheme/relation_type</p><div class="section">
 <h4 id="usage-43">Usage<a class="anchor" aria-label="anchor" href="#usage-43"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeRelatedIdentifier</span><span class="op">(</span><span class="va">relation</span>, <span class="va">identifier</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">removeRelatedIdentifier</span><span class="op">(</span><span class="va">identifier</span>, <span class="va">scheme</span>, <span class="va">relation_type</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>relation</code></dt>
-<dd><p>relation type among following values: isCitedBy, cites, isSupplementTo, isSupplementedBy, 
-isContinuedBy, continues, isDescribedBy, describes, hasMetadata, isMetadataFor, isNewVersionOf, 
-isPreviousVersionOf, isPartOf, hasPart, isReferencedBy, references, isDocumentedBy, documents, 
-isCompiledBy, compiles, isVariantFormOf, isOriginalFormof, isIdenticalTo, isAlternateIdentifier, 
-isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObsoletedBy, obsoletes</p></dd>
+<p></p><div class="arguments"><dl><dt><code>identifier</code></dt>
+<dd><p>identifier</p></dd>
 
 
-<dt><code>identifier</code></dt>
-<dd><p>resource identifier</p></dd>
+<dt><code>scheme</code></dt>
+<dd><p>scheme among following values: ark, arxiv, bibcode, doi, ean13, eissn, handle, igsn, isbn, issn, istc, lissn, 
+lsid, pubmed id, purl, upc, url, urn, w3id</p></dd>
+
+
+<dt><code>relation_type</code></dt>
+<dd><p>relation type among following values: iscitedby, cites, issupplementto, issupplementedby, iscontinuedby, 
+continues, isdescribedby, describes, hasmetadata, ismetadatafor, isnewversionof, ispreviousversionof, ispartof, haspart, 
+isreferencedby, references, isdocumentedby, documents, iscompiledby, compiles, isvariantformof, isoriginalformof, isidenticalto, 
+isalternateidentifier, isreviewedby, reviews, isderivedfrom, issourceof, requires, isrequiredby, isobsoletedby, obsoletes</p></dd>
 
 
 </dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-24">Returns<a class="anchor" aria-label="anchor" href="#returns-24"></a></h4>
+<p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-setReferences"></a><div class="section">
@@ -1299,7 +1319,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-23">Returns<a class="anchor" aria-label="anchor" href="#returns-23"></a></h4>
+<h4 id="returns-25">Returns<a class="anchor" aria-label="anchor" href="#returns-25"></a></h4>
 <p><code>TRUE</code> if added, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1319,7 +1339,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-24">Returns<a class="anchor" aria-label="anchor" href="#returns-24"></a></h4>
+<h4 id="returns-26">Returns<a class="anchor" aria-label="anchor" href="#returns-26"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1371,7 +1391,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-25">Returns<a class="anchor" aria-label="anchor" href="#returns-25"></a></h4>
+<h4 id="returns-27">Returns<a class="anchor" aria-label="anchor" href="#returns-27"></a></h4>
 <p><code>TRUE</code> if added, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1391,7 +1411,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-26">Returns<a class="anchor" aria-label="anchor" href="#returns-26"></a></h4>
+<h4 id="returns-28">Returns<a class="anchor" aria-label="anchor" href="#returns-28"></a></h4>
 <p><code>TRUE</code> if added, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1411,7 +1431,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-27">Returns<a class="anchor" aria-label="anchor" href="#returns-27"></a></h4>
+<h4 id="returns-29">Returns<a class="anchor" aria-label="anchor" href="#returns-29"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1431,7 +1451,7 @@ isReviewedBy, reviews, isDerivedFrom, isSourceOf, requires, isRequiredBy, isObso
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-28">Returns<a class="anchor" aria-label="anchor" href="#returns-28"></a></h4>
+<h4 id="returns-30">Returns<a class="anchor" aria-label="anchor" href="#returns-30"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1495,7 +1515,7 @@ with the <code>ZenodoManager</code> and the function <code>$getCommunities()</co
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-29">Returns<a class="anchor" aria-label="anchor" href="#returns-29"></a></h4>
+<h4 id="returns-31">Returns<a class="anchor" aria-label="anchor" href="#returns-31"></a></h4>
 <p><code>TRUE</code> if added, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1515,7 +1535,7 @@ with the <code>ZenodoManager</code> and the function <code>$getCommunities()</co
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-30">Returns<a class="anchor" aria-label="anchor" href="#returns-30"></a></h4>
+<h4 id="returns-32">Returns<a class="anchor" aria-label="anchor" href="#returns-32"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1563,7 +1583,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-31">Returns<a class="anchor" aria-label="anchor" href="#returns-31"></a></h4>
+<h4 id="returns-33">Returns<a class="anchor" aria-label="anchor" href="#returns-33"></a></h4>
 <p><code>TRUE</code> if added, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1583,7 +1603,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-32">Returns<a class="anchor" aria-label="anchor" href="#returns-32"></a></h4>
+<h4 id="returns-34">Returns<a class="anchor" aria-label="anchor" href="#returns-34"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1919,7 +1939,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-33">Returns<a class="anchor" aria-label="anchor" href="#returns-33"></a></h4>
+<h4 id="returns-35">Returns<a class="anchor" aria-label="anchor" href="#returns-35"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1939,7 +1959,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-34">Returns<a class="anchor" aria-label="anchor" href="#returns-34"></a></h4>
+<h4 id="returns-36">Returns<a class="anchor" aria-label="anchor" href="#returns-36"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1959,7 +1979,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-35">Returns<a class="anchor" aria-label="anchor" href="#returns-35"></a></h4>
+<h4 id="returns-37">Returns<a class="anchor" aria-label="anchor" href="#returns-37"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1979,7 +1999,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-36">Returns<a class="anchor" aria-label="anchor" href="#returns-36"></a></h4>
+<h4 id="returns-38">Returns<a class="anchor" aria-label="anchor" href="#returns-38"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1999,7 +2019,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-37">Returns<a class="anchor" aria-label="anchor" href="#returns-37"></a></h4>
+<h4 id="returns-39">Returns<a class="anchor" aria-label="anchor" href="#returns-39"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -2047,7 +2067,7 @@ fetched with the <code>ZenodoManager</code> and the function <code>$getGrants()<
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-38">Returns<a class="anchor" aria-label="anchor" href="#returns-38"></a></h4>
+<h4 id="returns-40">Returns<a class="anchor" aria-label="anchor" href="#returns-40"></a></h4>
 <p><code>TRUE</code> if removed, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -2077,7 +2097,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-39">Returns<a class="anchor" aria-label="anchor" href="#returns-39"></a></h4>
+<h4 id="returns-41">Returns<a class="anchor" aria-label="anchor" href="#returns-41"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2097,7 +2117,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-40">Returns<a class="anchor" aria-label="anchor" href="#returns-40"></a></h4>
+<h4 id="returns-42">Returns<a class="anchor" aria-label="anchor" href="#returns-42"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2117,7 +2137,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-41">Returns<a class="anchor" aria-label="anchor" href="#returns-41"></a></h4>
+<h4 id="returns-43">Returns<a class="anchor" aria-label="anchor" href="#returns-43"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2137,7 +2157,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-42">Returns<a class="anchor" aria-label="anchor" href="#returns-42"></a></h4>
+<h4 id="returns-44">Returns<a class="anchor" aria-label="anchor" href="#returns-44"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2157,7 +2177,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-43">Returns<a class="anchor" aria-label="anchor" href="#returns-43"></a></h4>
+<h4 id="returns-45">Returns<a class="anchor" aria-label="anchor" href="#returns-45"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2177,7 +2197,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-44">Returns<a class="anchor" aria-label="anchor" href="#returns-44"></a></h4>
+<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2197,7 +2217,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-45">Returns<a class="anchor" aria-label="anchor" href="#returns-45"></a></h4>
+<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2233,7 +2253,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
+<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2253,7 +2273,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
+<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
 <p>the writen file name (with extension)</p>
 </div>
 
@@ -2291,7 +2311,7 @@ the raw list of files is returned.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
+<h4 id="returns-50">Returns<a class="anchor" aria-label="anchor" href="#returns-50"></a></h4>
 <p>the files, as <code>data.frame</code> or <code>list</code></p>
 </div>
 
@@ -2392,7 +2412,7 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div>
 
 <div class="section">
-<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
+<h4 id="returns-51">Returns<a class="anchor" aria-label="anchor" href="#returns-51"></a></h4>
 <p>an object of class <code>DCEntry</code></p>
 </div>
 
@@ -2404,7 +2424,7 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div>
 
 <div class="section">
-<h4 id="returns-50">Returns<a class="anchor" aria-label="anchor" href="#returns-50"></a></h4>
+<h4 id="returns-52">Returns<a class="anchor" aria-label="anchor" href="#returns-52"></a></h4>
 <p>the first DOI, object of class <code>character</code></p>
 </div>
 
@@ -2416,7 +2436,7 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div>
 
 <div class="section">
-<h4 id="returns-51">Returns<a class="anchor" aria-label="anchor" href="#returns-51"></a></h4>
+<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
 <p>the last DOI, object of class <code>character</code></p>
 </div>
 
@@ -2429,7 +2449,7 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div>
 
 <div class="section">
-<h4 id="returns-52">Returns<a class="anchor" aria-label="anchor" href="#returns-52"></a></h4>
+<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
 <p>a <code>data.frame</code> with the record versions</p>
 </div>
 
