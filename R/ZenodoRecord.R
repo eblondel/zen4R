@@ -40,17 +40,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     fromList = function(obj){
       self$created = obj$created
-      
-      #deprecated
-      self$conceptdoi = obj$conceptdoi
-      self$conceptrecid = obj$conceptrecid
-      self$recid = obj$recid
-      self$modified = obj$modified
-      self$owners = obj$owners
+      self$updated = obj$updated
+      self$revision_id = obj$revision_id
       self$status = obj$status
-      self$state = obj$state
-      self$submitted = obj$submitted
-      self$revision = obj$revision
+      self$is_draft = obj$is_draft
+      self$is_published = obj$is_published
+      self$versions = obj$versions
       
       #invenio model
       self$access = obj$access
@@ -80,32 +75,24 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #' @field created record creation date
     created = NULL,
+    #' @field updated record update date
+    updated = NULL,
+    #' @field revision_id revision id
+    revision_id = NULL,
+    #' @field is_draft is draft
+    is_draft = NULL,
+    #' @field is_published is published
+    is_published = NULL,
+    #' @field status record status
+    status = NULL,
+    #' @field versions versions
+    versions = NULL,
+    
     #' @field access access policies
     access = list(
       record = "public", 
       files = "public"
     ),
-    
-    #v LEGACY (TO ANALYZE)
-    #' @field conceptdoi record Concept DOI (common to all record versions)
-    conceptdoi = NULL,
-    #' @field conceptrecid record concept id
-    conceptrecid = NULL,
-    #' @field modified record modification date
-    modified = NULL,
-    #' @field owners record owners
-    owners = NULL,
-    #' @field recid recid
-    recid = NULL,
-    #' @field status record status
-    status = NULL,
-    #' @field state record state
-    state = NULL,
-    #' @field submitted record submission status
-    submitted = FALSE,
-    #' @field revision record revision
-    revision = NULL,
-    #^ LEGACY
     
     #' @field files list of files associated to the record
     files = list(),
@@ -1484,18 +1471,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
     #----------------------------------------------------------------------------
     
-    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
-    #'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
-    #'    on the prereserved DOI of the first record version.
+    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI 
+    #' common to all versions of a Zenodo record.
     #' @return the concept DOI, object of class \code{character}
     getConceptDOI = function(){
-      conceptdoi <- self$conceptdoi
-      if(is.null(conceptdoi)){
-        doi <- self$metadata$prereserve_doi
-        if(!is.null(doi)) {
-          doi_parts <- unlist(strsplit(doi$doi, "zenodo."))
-          conceptdoi <- paste0(doi_parts[1], "zenodo.", self$conceptrecid)
-        }
+      doi <- self$pids$doi$identifier
+      if(!is.null(doi)) {
+        doi_parts <- unlist(strsplit(doi, "zenodo."))
+        conceptrec <- paste0(doi_parts[1], "zenodo.", self$conceptrecid)
       }
       return(conceptdoi)
     },
@@ -1549,9 +1532,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }
       
       return(versions)
-    },
-    
-    
+    }
     
   )
 )
