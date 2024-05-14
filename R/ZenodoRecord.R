@@ -49,16 +49,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       
       #invenio model
       self$access = obj$access
+      self$links = obj$links
       self$files = lapply(obj$files$entries, function(file){
         list(
           filename = if(!is.null(file$filename)) file$filename else file$key,
           filesize = if(!is.null(file$filesize)) file$filesize else file$size,
           checksum = if(!startsWith(file$checksum, "md5:")) file$checksum else unlist(strsplit(file$checksum, "md5:"))[2],
-          download = if(!is.null(file$links$download)) file$links$download else file$links$self
+          download = if(!is.null(file$links$download)) file$links$download else file.path(self$links$self, sprintf("files/%s/content", file$key))
         )
       })
       self$id = obj$id
-      self$links = obj$links
       self$metadata = obj$metadata
       resource_type = self$metadata$resource_type
       if(!is.null(resource_type)){
@@ -1288,7 +1288,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           if (!quiet){
             infoMsg = sprintf("Downloading file '%s' - size: %s\n", 
                               file$filename, human_filesize(file$filesize))
-            cli::cli_alert_info(infoMSg)
+            cli::cli_alert_info(infoMsg)
             cat(paste("[zen4R][INFO]", infoMsg))
           }
           target_file <- file.path(path, file$filename)
@@ -1521,7 +1521,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @return a \code{data.frame} with the record versions
     getVersions = function(){
       
-      record_type <- if(self$state == "done") "record" else if(self$state == "unsubmitted") "deposit"
+      record_type <- if(self$is_published) "record" else if(self$is_draft) "deposit"
       ref_link <- if(record_type == "record") "latest_html" else if(record_type == "deposit") "latest_draft_html"
       zenodo_url <- paste0(unlist(strsplit(self$links[[ref_link]], paste0("/", record_type)))[1],"/api")
       zenodo <- ZenodoManager$new(url = zenodo_url)
