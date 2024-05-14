@@ -41,10 +41,6 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 
 \item{\code{conceptrecid}}{record concept id}
 
-\item{\code{doi}}{record doi}
-
-\item{\code{doi_url}}{record doi URL}
-
 \item{\code{modified}}{record modification date}
 
 \item{\code{owners}}{record owners}
@@ -64,8 +60,6 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item{\code{id}}{record id}
 
 \item{\code{links}}{list of links associated to the record}
-
-\item{\code{media_files}}{media files}
 
 \item{\code{metadata}}{metadata elements associated to the record}
 
@@ -127,13 +121,12 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-setReferences}{\code{ZenodoRecord$setReferences()}}
 \item \href{#method-ZenodoRecord-addReference}{\code{ZenodoRecord$addReference()}}
 \item \href{#method-ZenodoRecord-removeReference}{\code{ZenodoRecord$removeReference()}}
+\item \href{#method-ZenodoRecord-setSubjects}{\code{ZenodoRecord$setSubjects()}}
 \item \href{#method-ZenodoRecord-setKeywords}{\code{ZenodoRecord$setKeywords()}}
-\item \href{#method-ZenodoRecord-addKeyword}{\code{ZenodoRecord$addKeyword()}}
-\item \href{#method-ZenodoRecord-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
 \item \href{#method-ZenodoRecord-addSubject}{\code{ZenodoRecord$addSubject()}}
+\item \href{#method-ZenodoRecord-addKeyword}{\code{ZenodoRecord$addKeyword()}}
 \item \href{#method-ZenodoRecord-removeSubject}{\code{ZenodoRecord$removeSubject()}}
-\item \href{#method-ZenodoRecord-removeSubjectByTerm}{\code{ZenodoRecord$removeSubjectByTerm()}}
-\item \href{#method-ZenodoRecord-removeSubjectByIdentifier}{\code{ZenodoRecord$removeSubjectByIdentifier()}}
+\item \href{#method-ZenodoRecord-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
 \item \href{#method-ZenodoRecord-setNotes}{\code{ZenodoRecord$setNotes()}}
 \item \href{#method-ZenodoRecord-setCommunities}{\code{ZenodoRecord$setCommunities()}}
 \item \href{#method-ZenodoRecord-addCommunity}{\code{ZenodoRecord$addCommunity()}}
@@ -1190,6 +1183,23 @@ Remove a reference
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setSubjects"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setSubjects}{}}}
+\subsection{Method \code{setSubjects()}}{
+Set subjects
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setSubjects(subjects)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{subjects}}{a vector or list of subjects to set for the record}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setKeywords"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setKeywords}{}}}
 \subsection{Method \code{setKeywords()}}{
@@ -1204,6 +1214,26 @@ Set keywords
 \item{\code{keywords}}{a vector or list of keywords to set for the record}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-addSubject"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addSubject}{}}}
+\subsection{Method \code{addSubject()}}{
+Add a subject
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addSubject(subject)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{subject}}{the subject to add}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
@@ -1227,6 +1257,26 @@ Add a keyword
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeSubject"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubject}{}}}
+\subsection{Method \code{removeSubject()}}{
+Remove a subject
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubject(subject)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{subject}}{the subject to remove}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-removeKeyword"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-removeKeyword}{}}}
 \subsection{Method \code{removeKeyword()}}{
@@ -1244,88 +1294,6 @@ Remove a keyword
 }
 \subsection{Returns}{
 \code{TRUE} if removed, \code{FALSE} otherwise
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-addSubject"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-addSubject}{}}}
-\subsection{Method \code{addSubject()}}{
-Adds a subject given a term and identifier
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addSubject(term, identifier)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{term}}{subject term}
-
-\item{\code{identifier}}{subject identifier}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-removeSubject"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubject}{}}}
-\subsection{Method \code{removeSubject()}}{
-Removes subject(s) by a property. The \code{by} parameter should be the name
-   of the subject property ('term' or 'identifier').
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubject(by, property)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{by}}{property used as criterion to remove subjects}
-
-\item{\code{property}}{property value used to remove subjects}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-removeSubjectByTerm"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubjectByTerm}{}}}
-\subsection{Method \code{removeSubjectByTerm()}}{
-Removes subject(s) by term.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubjectByTerm(term)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{term}}{the term to use to remove subject(s)}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-removeSubjectByIdentifier"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeSubjectByIdentifier}{}}}
-\subsection{Method \code{removeSubjectByIdentifier()}}{
-Removes subject(s) by identifier
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeSubjectByIdentifier(identifier)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{identifier}}{the identifier to use to remove subject(s)}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
 }
 }
 \if{html}{\out{<hr>}}

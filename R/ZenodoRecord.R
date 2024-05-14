@@ -751,38 +751,55 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
+    #' @description Set subjects
+    #' @param subjects a vector or list of subjects to set for the record
+    setSubjects = function(subjects){
+      if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
+      for(subject in subjects){
+        self$addSubject(subject)
+      }
+    },
+    
     #' @description Set keywords
     #' @param keywords a vector or list of keywords to set for the record
     setKeywords = function(keywords){
-      if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
-      for(keyword in keywords){
-        self$addKeyword(keyword)
+      warnMsg = "Method 'setKeywords' is deprecated, please use 'setSubjects'"
+      self$WARN(warnMsg)
+      self$setSubjects(keywords)
+    },
+    
+    #' @description Add a subject
+    #' @param subject the subject to add
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
+    addSubject = function(subject){
+      added <- FALSE
+      if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
+      if(!(subject %in% self$metadata$subjects)){
+        self$metadata$subjects[[length(self$metadata$subjects)+1]] <- list(subject = subject)
+        added <- TRUE
       }
+      return(added)
     },
     
     #' @description Add a keyword
     #' @param keyword the keyword to add
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addKeyword = function(keyword){
-      added <- FALSE
-      if(is.null(self$metadata$keywords)) self$metadata$keywords <- list()
-      if(!(keyword %in% self$metadata$keywords)){
-        self$metadata$keywords[[length(self$metadata$keywords)+1]] <- keyword
-        added <- TRUE
-      }
-      return(added)
+      warnMsg = "Method 'addKeyword' is deprecated, please use 'addSubject'"
+      self$WARN(warnMsg)
+      self$addSubject(keyword)
     },
     
-    #' @description Remove a keyword
-    #' @param keyword the keyword to remove
+    #' @description Remove a subject
+    #' @param subject the subject to remove
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
-    removeKeyword = function(keyword){
+    removeSubject = function(subject){
       removed <- FALSE
-      if(!is.null(self$metadata$keywords)){
-        for(i in 1:length(self$metadata$keywords)){
-          kwd <- self$metadata$keywords[[i]]
-          if(kwd == keyword){
-            self$metadata$keywords[[i]] <- NULL
+      if(!is.null(self$metadata$subjects)){
+        for(i in 1:length(self$metadata$subjects)){
+          sbj <- self$metadata$subjects[[i]]
+          if(sbj$subject == subject){
+            self$metadata$subjects[[i]] <- NULL
             removed <- TRUE
             break;
           }
@@ -791,44 +808,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
-    #' @description Adds a subject given a term and identifier
-    #' @param term subject term
-    #' @param identifier subject identifier
-    addSubject = function(term, identifier){
-      subject <- list(term = term, identifier = identifier)
-      if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
-      self$metadata$subjects[[length(self$metadata$subjects)+1]] <- subject
-    },
-    
-    #' @description Removes subject(s) by a property. The \code{by} parameter should be the name
-    #'    of the subject property ('term' or 'identifier').
-    #' @param by property used as criterion to remove subjects
-    #' @param property property value used to remove subjects
-    #' @return \code{TRUE} if at least one subject is removed, \code{FALSE} otherwise.
-    removeSubject = function(by, property){
-      removed <- FALSE
-      for(i in 1:length(self$metadata$subjects)){
-        subject <- self$metadata$subjects[[i]]
-        if(subject[[by]]==property){
-          self$metadata$subjects[[i]] <- NULL
-          removed <- TRUE 
-        }
-      }
-      return(removed)
-    },
-    
-    #' @description Removes subject(s) by term.
-    #' @param term the term to use to remove subject(s)
-    #' @return \code{TRUE} if at least one subject is removed, \code{FALSE} otherwise. 
-    removeSubjectByTerm = function(term){
-      return(self$removeSubject(by = "term", property = term))
-    },
-    
-    #' @description Removes subject(s) by identifier
-    #' @param identifier the identifier to use to remove subject(s)
-    #' @return \code{TRUE} if at least one subject is removed, \code{FALSE} otherwise. 
-    removeSubjectByIdentifier = function(identifier){
-      return(self$removeSubject(by = "identifier", property = identifier))
+    #' @description Remove a keyword
+    #' @param keyword the keyword to remove
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeKeyword = function(keyword){
+      self$removeSubject(keyword)
     },
     
     #' @description Set notes. HTML is not allowed
