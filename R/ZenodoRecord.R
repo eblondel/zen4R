@@ -1505,7 +1505,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(atom4R::DCEntry$new(xml = XML::xmlParse(dcfile)))
     },
     
-    #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
+    #DOI versioning
     #----------------------------------------------------------------------------
     
     #' @description Get DOI of the first record version.
