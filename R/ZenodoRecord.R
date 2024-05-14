@@ -174,77 +174,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$pids = list(doi = list(identifier = doi, provider = provider, client = client))
     },
     
-    #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
-    #----------------------------------------------------------------------------
-
-    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
-    #'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
-    #'    on the prereserved DOI of the first record version.
-    #' @return the concept DOI, object of class \code{character}
-    getConceptDOI = function(){
-      conceptdoi <- self$conceptdoi
-      if(is.null(conceptdoi)){
-        doi <- self$metadata$prereserve_doi
-        if(!is.null(doi)) {
-          doi_parts <- unlist(strsplit(doi$doi, "zenodo."))
-          conceptdoi <- paste0(doi_parts[1], "zenodo.", self$conceptrecid)
-        }
-      }
-      return(conceptdoi)
-    },
-    
-    #' @description Get DOI of the first record version.
-    #' @return the first DOI, object of class \code{character}
-    getFirstDOI = function(){
-      versions <- self$getVersions()
-      return(versions[1,"doi"])
-    },
-    
-    #' @description Get DOI of the latest record version.
-    #' @return the last DOI, object of class \code{character}
-    getLastDOI = function(){
-      versions <- self$getVersions()
-      return(versions[nrow(versions),"doi"])
-    },
-    
-    #' @description Get record versions with creation/publication date, 
-    #'   version (ordering number) and DOI.
-    #' @return a \code{data.frame} with the record versions
-    getVersions = function(){
-      
-      record_type <- if(self$state == "done") "record" else if(self$state == "unsubmitted") "deposit"
-      ref_link <- if(record_type == "record") "latest_html" else if(record_type == "deposit") "latest_draft_html"
-      zenodo_url <- paste0(unlist(strsplit(self$links[[ref_link]], paste0("/", record_type)))[1],"/api")
-      zenodo <- ZenodoManager$new(url = zenodo_url)
-      
-      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$conceptrecid), all_versions = T)
-      
-      versions <- data.frame(
-        created = character(0),
-        date = character(0),
-        version = character(0),
-        doi = character(0),
-        stringsAsFactors = FALSE
-      )
-      if(length(records)>0){
-        versions = do.call("rbind", lapply(records, function(version){
-          return(data.frame(
-            created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
-            date = as.Date(version$metadata$publication_date),
-            version = if(!is.null(version$metadata$version)) version$metadata$version else NA,
-            doi = version$doi,
-            stringsAsFactors = FALSE
-          ))
-        }))
-        versions <- versions[order(versions$created),]
-        row.names(versions) <- 1:nrow(versions)
-        if(all(is.na(versions$version))) versions$version <- 1:nrow(versions)
-      }
-      
-      return(versions)
-    },
-
-    
     #' @description Set the resource type (mandatory). 
     #' @param resourceType record resource type
     setResourceType = function(resourceType){
@@ -844,6 +773,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param keyword the keyword to remove
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeKeyword = function(keyword){
+      warnMsg = "Method 'removeKeyword' is deprecated, please use 'removeSubject'"
+      self$WARN(warnMsg)
       self$removeSubject(keyword)
     },
     
@@ -1548,7 +1479,79 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       tmp <- tempfile()
       dcfile <- self$exportAsDublinCore(filename = tmp)
       return(atom4R::DCEntry$new(xml = XML::xmlParse(dcfile)))
-    }
+    },
+    
+    #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
+    #----------------------------------------------------------------------------
+    
+    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
+    #'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
+    #'    on the prereserved DOI of the first record version.
+    #' @return the concept DOI, object of class \code{character}
+    getConceptDOI = function(){
+      conceptdoi <- self$conceptdoi
+      if(is.null(conceptdoi)){
+        doi <- self$metadata$prereserve_doi
+        if(!is.null(doi)) {
+          doi_parts <- unlist(strsplit(doi$doi, "zenodo."))
+          conceptdoi <- paste0(doi_parts[1], "zenodo.", self$conceptrecid)
+        }
+      }
+      return(conceptdoi)
+    },
+    
+    #' @description Get DOI of the first record version.
+    #' @return the first DOI, object of class \code{character}
+    getFirstDOI = function(){
+      versions <- self$getVersions()
+      return(versions[1,"doi"])
+    },
+    
+    #' @description Get DOI of the latest record version.
+    #' @return the last DOI, object of class \code{character}
+    getLastDOI = function(){
+      versions <- self$getVersions()
+      return(versions[nrow(versions),"doi"])
+    },
+    
+    #' @description Get record versions with creation/publication date, 
+    #'   version (ordering number) and DOI.
+    #' @return a \code{data.frame} with the record versions
+    getVersions = function(){
+      
+      record_type <- if(self$state == "done") "record" else if(self$state == "unsubmitted") "deposit"
+      ref_link <- if(record_type == "record") "latest_html" else if(record_type == "deposit") "latest_draft_html"
+      zenodo_url <- paste0(unlist(strsplit(self$links[[ref_link]], paste0("/", record_type)))[1],"/api")
+      zenodo <- ZenodoManager$new(url = zenodo_url)
+      
+      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$conceptrecid), all_versions = T)
+      
+      versions <- data.frame(
+        created = character(0),
+        date = character(0),
+        version = character(0),
+        doi = character(0),
+        stringsAsFactors = FALSE
+      )
+      if(length(records)>0){
+        versions = do.call("rbind", lapply(records, function(version){
+          return(data.frame(
+            created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
+            date = as.Date(version$metadata$publication_date),
+            version = if(!is.null(version$metadata$version)) version$metadata$version else NA,
+            doi = version$doi,
+            stringsAsFactors = FALSE
+          ))
+        }))
+        versions <- versions[order(versions$created),]
+        row.names(versions) <- 1:nrow(versions)
+        if(all(is.na(versions$version))) versions$version <- 1:nrow(versions)
+      }
+      
+      return(versions)
+    },
+    
+    
     
   )
 )
