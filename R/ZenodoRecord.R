@@ -16,6 +16,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                            "registrationauthority", "relatedperson", "researcher", "researchgroup", 
                            "rightsholder", "supervisor", "sponsor", "workpackageleader", 
                            "other"),
+    allowed_date_types = c("accepted", "available", "collected", "copyrighted", "created", "issued", 
+                           "other", "submitted", "updated", "valid", "withdrawn"),
     allowed_relations = c("isCitedBy", "cites", "isSupplementTo", "isSupplementedBy", "isContinuedBy", "continues", 
                   "isDescribedBy", "describes", "hasMetadata", "isMetadataFor", "isNewVersionOf", "isPreviousVersionOf", 
                   "isPartOf", "hasPart", "isReferencedBy", "references", "isDocumentedBy", "documents", "isCompiledBy", 
@@ -295,13 +297,43 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$publication_date <- publicationDate
     },
     
-    #' @description Set the embargo date.
-    #' @param embargoDate object of class \code{Date}
-    setEmbargoDate = function(embargoDate){
-      if(!is(embargoDate,"Date")){
-        stop("The embargo date should be a 'Date' object")
+    #' @description Add date
+    #' @param date date
+    #' @param type type of date, among following values: 'accepted', 'available', 'collected', 'copyrighted', 
+    #' 'created', 'issued', 'other', 'submitted', 'updated', 'valid', 'withdrawn'
+    #' @param description free text, specific information about the date
+    addDate = function(date, type, description = NULL){
+      if(!type %in% private$allowed_date_types){
+        errMsg = sprintf("Date type should be among following possible values: %s",
+                         paste0(private$allowed_date_types, collapse=", "))
+        self$ERROR(errMsg)
+        stop(errMsg)
       }
-      self$metadata$embargo_date <- as(embargoDate, "character")
+      if(is.null(self$metadata$dates)) self$metadata$dates = list()
+      self$metadata$dates[[length(self$metadata$dates)+1]] = list(
+        date = date, 
+        type = list(id = type), 
+        description = description
+      )
+    },
+    
+    #' @description Remove a date
+    #' @param date the date to remove
+    #' @param type the date type of the date to be removed
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeDate = function(date, type){
+      removed <- FALSE
+      if(!is.null(self$metadata$dates)){
+        for(i in 1:length(self$metadata$dates)){
+          dat <- self$metadata$dates[[i]]
+          if(dat$date == date & dat$type$id == type){
+            self$metadata$dates[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
     },
     
     #' @description Set the record title.

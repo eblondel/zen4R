@@ -90,7 +90,8 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-setImageType}{\code{ZenodoRecord$setImageType()}}
 \item \href{#method-ZenodoRecord-setPublisher}{\code{ZenodoRecord$setPublisher()}}
 \item \href{#method-ZenodoRecord-setPublicationDate}{\code{ZenodoRecord$setPublicationDate()}}
-\item \href{#method-ZenodoRecord-setEmbargoDate}{\code{ZenodoRecord$setEmbargoDate()}}
+\item \href{#method-ZenodoRecord-addDate}{\code{ZenodoRecord$addDate()}}
+\item \href{#method-ZenodoRecord-removeDate}{\code{ZenodoRecord$removeDate()}}
 \item \href{#method-ZenodoRecord-setTitle}{\code{ZenodoRecord$setTitle()}}
 \item \href{#method-ZenodoRecord-setDescription}{\code{ZenodoRecord$setDescription()}}
 \item \href{#method-ZenodoRecord-setAccessRight}{\code{ZenodoRecord$setAccessRight()}}
@@ -462,20 +463,47 @@ please check https://inveniordm.docs.cern.ch/reference/metadata/#publication-dat
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-setEmbargoDate"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-setEmbargoDate}{}}}
-\subsection{Method \code{setEmbargoDate()}}{
-Set the embargo date.
+\if{html}{\out{<a id="method-ZenodoRecord-addDate"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addDate}{}}}
+\subsection{Method \code{addDate()}}{
+Add date
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setEmbargoDate(embargoDate)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addDate(date, type, description = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{embargoDate}}{object of class \code{Date}}
+\item{\code{date}}{date}
+
+\item{\code{type}}{type of date, among following values: 'accepted', 'available', 'collected', 'copyrighted', 
+'created', 'issued', 'other', 'submitted', 'updated', 'valid', 'withdrawn'}
+
+\item{\code{description}}{free text, specific information about the date}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeDate"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeDate}{}}}
+\subsection{Method \code{removeDate()}}{
+Remove a date
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeDate(date, type)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{date}}{the date to remove}
+
+\item{\code{type}}{the date type of the date to be removed}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
