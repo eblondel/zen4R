@@ -384,7 +384,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           stop(sprintf("The role type should be one value among values [%s]",
                        paste(private$allowed_role_types, collapse=",")))
         }
-        personOrOrg$role = role
+        personOrOrg$role = list(id = role)
       }
         
       #affiliations
