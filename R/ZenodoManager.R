@@ -1775,7 +1775,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
-        if(result$conceptdoi == conceptdoi){
+        if(result$getConceptDOI() == conceptdoi){
           infoMsg = sprintf("Successfully fetched published record for concept DOI '%s'!", conceptdoi)
           cli::cli_alert_success(infoMsg)
           self$INFO(infoMsg)
@@ -1818,7 +1818,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
-        if(result$doi == doi){
+        if(result$getDOI() == doi){
           infoMsg = sprintf("Successfully fetched record for DOI '%s'!",doi)
           cli::cli_alert_success(infoMsg)
           self$INFO(infoMsg)
@@ -1880,7 +1880,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
-        if(result$conceptrecid == conceptrecid){
+        if(result$getConceptId() == conceptrecid){
           infoMSg = sprintf("Successfully fetched record for concept id '%s'!",conceptrecid)
           cli::cli_alert_success(infoMsg)
           self$INFO(infoMsg)
