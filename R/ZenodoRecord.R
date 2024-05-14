@@ -66,6 +66,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         self$metadata$resource_type = list(id = resource_type_id)
       }
       self$pids = obj$pids
+      self$parent = obj$parent
       
       #zen4R specific fields
       if(!is.null(obj$stats)) self$stats = data.frame(obj$stats)
@@ -141,11 +142,16 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(self$id)
     },
     
+    #'@description Get the parent record Id
+    #'@return the parent Id, object of class \code{character}
+    getParentId = function(){
+      return(self$parent$id)
+    },
+    
     #'@description Get the concept record Id
     #'@return the concept Id, object of class \code{character}
     getConceptId = function(){
-      conceptid = as(self$getId(), "integer") - self$versions$index
-      return(as.character(conceptid))
+      self$getParentId()
     },
     
     #DOI methods
@@ -1520,16 +1526,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'   version (ordering number) and DOI.
     #' @return a \code{data.frame} with the record versions
     getVersions = function(){
-      
-      record_type <- if(self$is_published) "record" else if(self$is_draft) "deposit"
-      ref_link <- if(record_type == "record") "latest_html" else if(record_type == "deposit") "latest_draft_html"
-      zenodo_url <- paste0(unlist(strsplit(self$links[[ref_link]], paste0("/", record_type)))[1],"/api")
-      zenodo <- ZenodoManager$new(url = zenodo_url)
-      
-      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$conceptrecid), all_versions = T)
+      zenodo <- ZenodoManager$new(url = paste0(unlist(strsplit(self$links$self, "/api"))[1], "/api"))
+      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$getConceptId()), all_versions = T, size = 1000)
       
       versions <- data.frame(
         created = character(0),
+        updated = character(0),
         date = character(0),
         version = character(0),
         doi = character(0),
@@ -1539,9 +1541,10 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         versions = do.call("rbind", lapply(records, function(version){
           return(data.frame(
             created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
+            updated = as.POSIXct(version$updated, format = "%Y-%m-%dT%H:%M:%OS"),
             date = as.Date(version$metadata$publication_date),
             version = if(!is.null(version$metadata$version)) version$metadata$version else NA,
-            doi = version$doi,
+            doi = version$pids$doi$identifier,
             stringsAsFactors = FALSE
           ))
         }))

@@ -71,6 +71,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-new}{\code{ZenodoRecord$new()}}
 \item \href{#method-ZenodoRecord-getStats}{\code{ZenodoRecord$getStats()}}
 \item \href{#method-ZenodoRecord-getId}{\code{ZenodoRecord$getId()}}
+\item \href{#method-ZenodoRecord-getParentId}{\code{ZenodoRecord$getParentId()}}
 \item \href{#method-ZenodoRecord-getConceptId}{\code{ZenodoRecord$getConceptId()}}
 \item \href{#method-ZenodoRecord-setDOI}{\code{ZenodoRecord$setDOI()}}
 \item \href{#method-ZenodoRecord-getDOI}{\code{ZenodoRecord$getDOI()}}
@@ -229,6 +230,19 @@ Get the record Id
 
 \subsection{Returns}{
 the Id, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getParentId"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getParentId}{}}}
+\subsection{Method \code{getParentId()}}{
+Get the parent record Id
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getParentId()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the parent Id, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
