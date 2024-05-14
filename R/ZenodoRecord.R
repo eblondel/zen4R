@@ -37,12 +37,23 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       )
     },
     fromList = function(obj){
-      self$access = obj$access
+      self$created = obj$created
+      
+      #deprecated
       self$conceptdoi = obj$conceptdoi
       self$conceptrecid = obj$conceptrecid
-      self$created = obj$created
       self$doi = obj$doi
       self$doi_url = obj$doi_url
+      self$recid = obj$recid
+      self$modified = obj$modified
+      self$owners = obj$owners
+      self$status = obj$status
+      self$state = obj$state
+      self$submitted = obj$submitted
+      self$revision = obj$revision
+      
+      #invenio model
+      self$access = obj$access
       self$files = lapply(obj$files$entries, function(file){
         list(
           filename = if(!is.null(file$filename)) file$filename else file$key,
@@ -52,7 +63,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         )
       })
       self$id = obj$id
-      self$recid = obj$recid
       self$links = obj$links
       self$metadata = obj$metadata
       resource_type = self$metadata$resource_type
@@ -60,12 +70,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         resource_type_id = resource_type$id
         self$metadata$resource_type = list(id = resource_type_id)
       }
-      self$modified = obj$modified
-      self$owners = obj$owners
-      self$status = obj$status
-      self$state = obj$state
-      self$submitted = obj$submitted
-      self$revision = obj$revision
+      self$pids = obj$pids
+      
+      #zen4R specific fields
       if(!is.null(obj$stats)) self$stats = data.frame(obj$stats)
     }
   ),
