@@ -132,6 +132,55 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #Invenio RDM API new methods
     #---------------------------------------------------------------------------
+    #ID methods
+    #---------------------------------------------------------------------------
+    
+    #'@description Get the record Id
+    #'@return the Id, object of class \code{character}
+    getId = function(){
+      return(self$id)
+    },
+    
+    #'@description Get the concept record Id
+    #'@return the concept Id, object of class \code{character}
+    getConceptId = function(){
+      conceptid = as(self$getId(), "integer") - self$versions$index
+      return(as.character(conceptid))
+    },
+    
+    #DOI methods
+    #---------------------------------------------------------------------------
+    
+    #' @description Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+    #' @param doi DOI to set for the record
+    #' @param provider DOI provider
+    #' @param client DOI client
+    setDOI = function(doi, provider = NULL, client = NULL){
+      self$pids = list(doi = list(identifier = doi, provider = provider, client = client))
+    },
+    
+    #'@description Get the record DOI.
+    #'@return the DOI, object of class \code{character}
+    getDOI = function(){
+      return(self$pids$doi$identifier)
+    },
+    
+    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI 
+    #' common to all versions of a Zenodo record.
+    #' @return the concept DOI, object of class \code{character}
+    getConceptDOI = function(){
+      conceptdoi = NULL
+      doi <- self$pids$doi$identifier
+      if(!is.null(doi)) if(regexpr("zenodo", doi)>0){
+        doi_parts <- unlist(strsplit(doi, "zenodo."))
+        conceptdoi <- paste0(doi_parts[1], "zenodo.", self$getConceptId())
+      }
+      return(conceptdoi)
+    },
+    
+    #Access methods
+    #---------------------------------------------------------------------------
+    
     #'@description Set the access policy for record, among values "public" (default) or "restricted"
     #'@param access access policy ('public' or 'restricted')
     setAccessPolicyRecord = function(access = c("public","resticted")){
@@ -153,13 +202,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$access$embargo = list(active = active, until = until, reason = reason)
     },
     
-    #' @description Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
-    #' @param doi DOI to set for the record
-    #' @param provider DOI provider
-    #' @param client DOI client
-    setDOI = function(doi, provider = NULL, client = NULL){
-      self$pids = list(doi = list(identifier = doi, provider = provider, client = client))
-    },
+    #Resource type methods
+    #---------------------------------------------------------------------------
     
     #' @description Set the resource type (mandatory). 
     #' @param resourceType record resource type
@@ -199,6 +243,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       warnMsg = "Method 'setImageType' is deprecated, please use 'setImageType'"
       self$WARN(warnMsg)
     },
+    
+    #Publication-related methods
+    #---------------------------------------------------------------------------
     
     #' @description Set the publisher
     #' @param publisher publisher object of class \code{character}
@@ -252,6 +299,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       return(removed)
     },
     
+    #Description methods
+    #---------------------------------------------------------------------------
+    
     #' @description Set the record title.
     #' @param title object of class \code{character}
     setTitle = function(title){
@@ -262,25 +312,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @param description object of class \code{character}
     setDescription = function(description){
       self$metadata$description <- description
-    },
-    
-    #' @description Set the access right. 
-    #' @param accessRight record access right among the following values: 'open','embargoed', 'restricted','closed'
-    setAccessRight = function(accessRight){
-      accessRightValues <- c("open","embargoed","restricted","closed")
-      if(!(accessRight %in% accessRightValues)){
-        errorMsg <- sprintf("The access right should be among the values [%s",
-                            paste(accessRightValues, collapse=","))
-        self$ERROR(errorMsg)
-        stop(errorMsg)
-      }
-      self$metadata$access_right <- accessRight
-    },
-    
-    #' @description set the access conditions.
-    #' @param accessConditions object of class \code{character}
-    setAccessConditions = function(accessConditions){
-      self$metadata$access_conditions <- accessConditions
     },
     
     # PERSON OR ORG
@@ -1470,18 +1501,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
     #----------------------------------------------------------------------------
-    
-    #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI 
-    #' common to all versions of a Zenodo record.
-    #' @return the concept DOI, object of class \code{character}
-    getConceptDOI = function(){
-      doi <- self$pids$doi$identifier
-      if(!is.null(doi)) {
-        doi_parts <- unlist(strsplit(doi, "zenodo."))
-        conceptrec <- paste0(doi_parts[1], "zenodo.", self$conceptrecid)
-      }
-      return(conceptdoi)
-    },
     
     #' @description Get DOI of the first record version.
     #' @return the first DOI, object of class \code{character}

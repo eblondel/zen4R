@@ -1075,7 +1075,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
-        if(result$conceptrecid == conceptrecid){
+        if(result$getConceptId() == conceptrecid){
           infoMsg = sprintf("Successfully fetched record for concept id '%s'!",conceptrecid)
           cli::cli_alert_success(infoMsg)
           self$INFO(infoMsg)

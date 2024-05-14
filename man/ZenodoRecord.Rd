@@ -35,25 +35,19 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \describe{
 \item{\code{created}}{record creation date}
 
-\item{\code{access}}{access policies}
+\item{\code{updated}}{record update date}
 
-\item{\code{conceptdoi}}{record Concept DOI (common to all record versions)}
+\item{\code{revision_id}}{revision id}
 
-\item{\code{conceptrecid}}{record concept id}
+\item{\code{is_draft}}{is draft}
 
-\item{\code{modified}}{record modification date}
-
-\item{\code{owners}}{record owners}
-
-\item{\code{recid}}{recid}
+\item{\code{is_published}}{is published}
 
 \item{\code{status}}{record status}
 
-\item{\code{state}}{record state}
+\item{\code{versions}}{versions}
 
-\item{\code{submitted}}{record submission status}
-
-\item{\code{revision}}{record revision}
+\item{\code{access}}{access policies}
 
 \item{\code{files}}{list of files associated to the record}
 
@@ -76,14 +70,14 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \itemize{
 \item \href{#method-ZenodoRecord-new}{\code{ZenodoRecord$new()}}
 \item \href{#method-ZenodoRecord-getStats}{\code{ZenodoRecord$getStats()}}
+\item \href{#method-ZenodoRecord-getId}{\code{ZenodoRecord$getId()}}
+\item \href{#method-ZenodoRecord-getConceptId}{\code{ZenodoRecord$getConceptId()}}
+\item \href{#method-ZenodoRecord-setDOI}{\code{ZenodoRecord$setDOI()}}
+\item \href{#method-ZenodoRecord-getDOI}{\code{ZenodoRecord$getDOI()}}
+\item \href{#method-ZenodoRecord-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
 \item \href{#method-ZenodoRecord-setAccessPolicyRecord}{\code{ZenodoRecord$setAccessPolicyRecord()}}
 \item \href{#method-ZenodoRecord-setAccessPolicyFiles}{\code{ZenodoRecord$setAccessPolicyFiles()}}
 \item \href{#method-ZenodoRecord-setAccessPolicyEmbargo}{\code{ZenodoRecord$setAccessPolicyEmbargo()}}
-\item \href{#method-ZenodoRecord-setDOI}{\code{ZenodoRecord$setDOI()}}
-\item \href{#method-ZenodoRecord-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
-\item \href{#method-ZenodoRecord-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
-\item \href{#method-ZenodoRecord-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
-\item \href{#method-ZenodoRecord-getVersions}{\code{ZenodoRecord$getVersions()}}
 \item \href{#method-ZenodoRecord-setResourceType}{\code{ZenodoRecord$setResourceType()}}
 \item \href{#method-ZenodoRecord-setUploadType}{\code{ZenodoRecord$setUploadType()}}
 \item \href{#method-ZenodoRecord-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
@@ -94,8 +88,6 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-removeDate}{\code{ZenodoRecord$removeDate()}}
 \item \href{#method-ZenodoRecord-setTitle}{\code{ZenodoRecord$setTitle()}}
 \item \href{#method-ZenodoRecord-setDescription}{\code{ZenodoRecord$setDescription()}}
-\item \href{#method-ZenodoRecord-setAccessRight}{\code{ZenodoRecord$setAccessRight()}}
-\item \href{#method-ZenodoRecord-setAccessConditions}{\code{ZenodoRecord$setAccessConditions()}}
 \item \href{#method-ZenodoRecord-addPersonOrOrg}{\code{ZenodoRecord$addPersonOrOrg()}}
 \item \href{#method-ZenodoRecord-removePersonOrOrg}{\code{ZenodoRecord$removePersonOrOrg()}}
 \item \href{#method-ZenodoRecord-addCreator}{\code{ZenodoRecord$addCreator()}}
@@ -175,6 +167,9 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-downloadFiles}{\code{ZenodoRecord$downloadFiles()}}
 \item \href{#method-ZenodoRecord-print}{\code{ZenodoRecord$print()}}
 \item \href{#method-ZenodoRecord-toDCEntry}{\code{ZenodoRecord$toDCEntry()}}
+\item \href{#method-ZenodoRecord-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
+\item \href{#method-ZenodoRecord-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
+\item \href{#method-ZenodoRecord-getVersions}{\code{ZenodoRecord$getVersions()}}
 \item \href{#method-ZenodoRecord-clone}{\code{ZenodoRecord$clone()}}
 }
 }
@@ -221,6 +216,80 @@ Get record statistics
 
 \subsection{Returns}{
 statistics as \code{data.frame}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getId"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getId}{}}}
+\subsection{Method \code{getId()}}{
+Get the record Id
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getId()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the Id, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getConceptId"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getConceptId}{}}}
+\subsection{Method \code{getConceptId()}}{
+Get the concept record Id
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getConceptId()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the concept Id, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setDOI}{}}}
+\subsection{Method \code{setDOI()}}{
+Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setDOI(doi, provider = NULL, client = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{doi}}{DOI to set for the record}
+
+\item{\code{provider}}{DOI provider}
+
+\item{\code{client}}{DOI client}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getDOI}{}}}
+\subsection{Method \code{getDOI()}}{
+Get the record DOI.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the DOI, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getConceptDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getConceptDOI}{}}}
+\subsection{Method \code{getConceptDOI()}}{
+Get the concept (generic) DOI. The concept DOI is a generic DOI 
+common to all versions of a Zenodo record.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getConceptDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the concept DOI, object of class \code{character}
 }
 }
 \if{html}{\out{<hr>}}
@@ -276,82 +345,6 @@ Set access policy embargo options
 \item{\code{reason}}{embargo reason, object of class \code{character}. Default is an empty string}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-setDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-setDOI}{}}}
-\subsection{Method \code{setDOI()}}{
-Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setDOI(doi, provider = NULL, client = NULL)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{doi}}{DOI to set for the record}
-
-\item{\code{provider}}{DOI provider}
-
-\item{\code{client}}{DOI client}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-getConceptDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-getConceptDOI}{}}}
-\subsection{Method \code{getConceptDOI()}}{
-Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
-   of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
-   on the prereserved DOI of the first record version.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getConceptDOI()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-the concept DOI, object of class \code{character}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-getFirstDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-getFirstDOI}{}}}
-\subsection{Method \code{getFirstDOI()}}{
-Get DOI of the first record version.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getFirstDOI()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-the first DOI, object of class \code{character}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-getLastDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-getLastDOI}{}}}
-\subsection{Method \code{getLastDOI()}}{
-Get DOI of the latest record version.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getLastDOI()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-the last DOI, object of class \code{character}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-getVersions"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-getVersions}{}}}
-\subsection{Method \code{getVersions()}}{
-Get record versions with creation/publication date, 
-  version (ordering number) and DOI.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getVersions()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-a \code{data.frame} with the record versions
 }
 }
 \if{html}{\out{<hr>}}
@@ -536,40 +529,6 @@ Set the record description
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{description}}{object of class \code{character}}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-setAccessRight"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessRight}{}}}
-\subsection{Method \code{setAccessRight()}}{
-Set the access right.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessRight(accessRight)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{accessRight}}{record access right among the following values: 'open','embargoed', 'restricted','closed'}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-setAccessConditions"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessConditions}{}}}
-\subsection{Method \code{setAccessConditions()}}{
-set the access conditions.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessConditions(accessConditions)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{accessConditions}}{object of class \code{character}}
 }
 \if{html}{\out{</div>}}
 }
@@ -2262,6 +2221,46 @@ Maps to an \pkg{atom4R} \link{DCEntry}. Note: applies only to published records.
 
 \subsection{Returns}{
 an object of class \code{DCEntry}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getFirstDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getFirstDOI}{}}}
+\subsection{Method \code{getFirstDOI()}}{
+Get DOI of the first record version.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getFirstDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the first DOI, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getLastDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getLastDOI}{}}}
+\subsection{Method \code{getLastDOI()}}{
+Get DOI of the latest record version.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getLastDOI()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+the last DOI, object of class \code{character}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getVersions"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getVersions}{}}}
+\subsection{Method \code{getVersions()}}{
+Get record versions with creation/publication date, 
+  version (ordering number) and DOI.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getVersions()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+a \code{data.frame} with the record versions
 }
 }
 \if{html}{\out{<hr>}}
