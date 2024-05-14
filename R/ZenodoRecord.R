@@ -70,29 +70,24 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     }
   ),
   public = list(
+    
+    #' @field created record creation date
+    created = NULL,
     #' @field access access policies
     access = list(
       record = "public", 
       files = "public"
     ),
+    
+    #v LEGACY (TO ANALYZE)
     #' @field conceptdoi record Concept DOI (common to all record versions)
     conceptdoi = NULL,
     #' @field conceptrecid record concept id
     conceptrecid = NULL,
-    #' @field created record creation date
-    created = NULL,
     #' @field doi record doi
     doi = NULL,
     #' @field doi_url record doi URL
     doi_url = NULL,
-    #' @field files list of files associated to the record
-    files = list(),
-    #' @field id record id
-    id = NULL,
-    #' @field links list of links associated to the record
-    links = list(),
-    #' @field metadata metadata elements associated to the record
-    metadata = list(),
     #' @field modified record modification date
     modified = NULL,
     #' @field owners record owners
@@ -107,6 +102,25 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     submitted = FALSE,
     #' @field revision record revision
     revision = NULL,
+    #^ LEGACY
+    
+    #' @field files list of files associated to the record
+    files = list(),
+    #' @field id record id
+    id = NULL,
+    #' @field links list of links associated to the record
+    links = list(),
+    #' @field media_files media files
+    media_files = list(),
+    #' @field metadata metadata elements associated to the record
+    metadata = list(),
+    #' @field parent parent record
+    parent = NULL,
+    #' @field pids pids
+    pids = list(),
+    
+    #zen4R specific fields
+    
     #' @field stats stats
     stats = NULL,
     
@@ -117,6 +131,15 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     initialize = function(obj = NULL, logger = "INFO"){
       super$initialize(logger = logger)
       if(!is.null(obj)) private$fromList(obj)
+    },
+    
+    #zen4R specific methods
+    #---------------------------------------------------------------------------
+    
+    #' @description Get record statistics
+    #' @return statistics as \code{data.frame}
+    getStats = function(){
+      return(self$stats)
     },
     
     #Invenio RDM API new methods
@@ -142,29 +165,17 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$access$embargo = list(active = active, until = until, reason = reason)
     },
     
+    #' @description Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
+    #' @param doi DOI to set for the record
+    #' @param provider DOI provider
+    #' @param client DOI client
+    setDOI = function(doi, provider = NULL, client = NULL){
+      self$pids = list(doi = list(identifier = doi, provider = provider, client = client))
+    },
+    
     #legacy REST API methods (to be evaluated under Zenodo Invenio RDM migration)
     #----------------------------------------------------------------------------
-    
-    #' @description Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
-    #'    prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
-    #'    the record created doesn't yet handle a DOI. To avoid prereserving a DOI call \code{$prereserveDOI(FALSE)} 
-    #'    on your record.
-    #' @param prereserve whether a DOI has to be pre-reserved by Zenodo
-    prereserveDOI = function(prereserve){
-      if(!is(prereserve,"logical")){
-        stop("The argument should be 'logical' (TRUE/FALSE)")
-      }
-      self$metadata$prereserve_doi <- prereserve
-    },
- 
-    #' @description Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
-    #'    This method will call the method \code{$prereserveDOI(FALSE)}.
-    #' @param doi DOI to set for the record
-    setDOI = function(doi){
-      self$metadata$doi <- doi
-      self$prereserveDOI(FALSE)
-    },
-    
+
     #' @description Get the concept (generic) DOI. The concept DOI is a generic DOI common to all versions
     #'    of a Zenodo record. When a deposit is unsubmitted, this concept DOI is inherited based
     #'    on the prereserved DOI of the first record version.
@@ -231,12 +242,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       
       return(versions)
     },
-    
-    #' @description Get record statistics
-    #' @return statistics as \code{data.frame}
-    getStats = function(){
-      return(self$stats)
-    },
+
     
     #' @description Set the resource type (mandatory). 
     #' @param resourceType record resource type

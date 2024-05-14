@@ -118,6 +118,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getDepositionById}{\code{ZenodoManager$getDepositionById()}}
 \item \href{#method-ZenodoManager-getDepositionByConceptId}{\code{ZenodoManager$getDepositionByConceptId()}}
 \item \href{#method-ZenodoManager-depositRecord}{\code{ZenodoManager$depositRecord()}}
+\item \href{#method-ZenodoManager-reserveDOI}{\code{ZenodoManager$reserveDOI()}}
 \item \href{#method-ZenodoManager-depositRecordVersion}{\code{ZenodoManager$depositRecordVersion()}}
 \item \href{#method-ZenodoManager-deleteRecord}{\code{ZenodoManager$deleteRecord()}}
 \item \href{#method-ZenodoManager-deleteRecordByDOI}{\code{ZenodoManager$deleteRecordByDOI()}}
@@ -788,7 +789,7 @@ an object of class \code{ZenodoRecord} if record does exist, NULL otherwise
 \subsection{Method \code{depositRecord()}}{
 Deposits a record on Zenodo.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$depositRecord(record, publish = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$depositRecord(record, reserveDOI = TRUE, publish = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -796,13 +797,35 @@ Deposits a record on Zenodo.
 \describe{
 \item{\code{record}}{the record to deposit, object of class \code{ZenodoRecord}}
 
+\item{\code{reserveDOI}}{reserve DOI. By default \code{TRUE}}
+
 \item{\code{publish}}{object of class \code{logical} indicating if record has to be published (default \code{FALSE}). 
 Can be set to \code{TRUE} (to use CAUTIOUSLY, only if you want to publish your record)}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-\code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
+object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-reserveDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-reserveDOI}{}}}
+\subsection{Method \code{reserveDOI()}}{
+Reserves a DOI for a deposition (draft record)
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$reserveDOI(record)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{the record to deposit, object of class \code{ZenodoRecord}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+object of class \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}

@@ -33,25 +33,17 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \section{Public fields}{
 \if{html}{\out{<div class="r6-fields">}}
 \describe{
+\item{\code{created}}{record creation date}
+
 \item{\code{access}}{access policies}
 
 \item{\code{conceptdoi}}{record Concept DOI (common to all record versions)}
 
 \item{\code{conceptrecid}}{record concept id}
 
-\item{\code{created}}{record creation date}
-
 \item{\code{doi}}{record doi}
 
 \item{\code{doi_url}}{record doi URL}
-
-\item{\code{files}}{list of files associated to the record}
-
-\item{\code{id}}{record id}
-
-\item{\code{links}}{list of links associated to the record}
-
-\item{\code{metadata}}{metadata elements associated to the record}
 
 \item{\code{modified}}{record modification date}
 
@@ -67,6 +59,20 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 
 \item{\code{revision}}{record revision}
 
+\item{\code{files}}{list of files associated to the record}
+
+\item{\code{id}}{record id}
+
+\item{\code{links}}{list of links associated to the record}
+
+\item{\code{media_files}}{media files}
+
+\item{\code{metadata}}{metadata elements associated to the record}
+
+\item{\code{parent}}{parent record}
+
+\item{\code{pids}}{pids}
+
 \item{\code{stats}}{stats}
 }
 \if{html}{\out{</div>}}
@@ -75,16 +81,15 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-ZenodoRecord-new}{\code{ZenodoRecord$new()}}
+\item \href{#method-ZenodoRecord-getStats}{\code{ZenodoRecord$getStats()}}
 \item \href{#method-ZenodoRecord-setAccessPolicyRecord}{\code{ZenodoRecord$setAccessPolicyRecord()}}
 \item \href{#method-ZenodoRecord-setAccessPolicyFiles}{\code{ZenodoRecord$setAccessPolicyFiles()}}
 \item \href{#method-ZenodoRecord-setAccessPolicyEmbargo}{\code{ZenodoRecord$setAccessPolicyEmbargo()}}
-\item \href{#method-ZenodoRecord-prereserveDOI}{\code{ZenodoRecord$prereserveDOI()}}
 \item \href{#method-ZenodoRecord-setDOI}{\code{ZenodoRecord$setDOI()}}
 \item \href{#method-ZenodoRecord-getConceptDOI}{\code{ZenodoRecord$getConceptDOI()}}
 \item \href{#method-ZenodoRecord-getFirstDOI}{\code{ZenodoRecord$getFirstDOI()}}
 \item \href{#method-ZenodoRecord-getLastDOI}{\code{ZenodoRecord$getLastDOI()}}
 \item \href{#method-ZenodoRecord-getVersions}{\code{ZenodoRecord$getVersions()}}
-\item \href{#method-ZenodoRecord-getStats}{\code{ZenodoRecord$getStats()}}
 \item \href{#method-ZenodoRecord-setResourceType}{\code{ZenodoRecord$setResourceType()}}
 \item \href{#method-ZenodoRecord-setUploadType}{\code{ZenodoRecord$setUploadType()}}
 \item \href{#method-ZenodoRecord-setPublicationType}{\code{ZenodoRecord$setPublicationType()}}
@@ -212,6 +217,19 @@ or "DEBUG" (for complete curl http calls logs)}
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getStats"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getStats}{}}}
+\subsection{Method \code{getStats()}}{
+Get record statistics
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getStats()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+statistics as \code{data.frame}
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setAccessPolicyRecord"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessPolicyRecord}{}}}
 \subsection{Method \code{setAccessPolicyRecord()}}{
@@ -267,39 +285,22 @@ Set access policy embargo options
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-prereserveDOI"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-prereserveDOI}{}}}
-\subsection{Method \code{prereserveDOI()}}{
-Set prereserve_doi if \code{TRUE}, \code{FALSE} otherwise to create a record without
-   prereserved DOI by Zenodo. By default, this method will be called to prereserve a DOI assuming 
-   the record created doesn't yet handle a DOI. To avoid prereserving a DOI call \code{$prereserveDOI(FALSE)} 
-   on your record.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$prereserveDOI(prereserve)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{prereserve}}{whether a DOI has to be pre-reserved by Zenodo}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setDOI"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setDOI}{}}}
 \subsection{Method \code{setDOI()}}{
 Set the DOI. This method can be used if a DOI has been already assigned outside Zenodo.
-   This method will call the method \code{$prereserveDOI(FALSE)}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setDOI(doi)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setDOI(doi, provider = NULL, client = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{doi}}{DOI to set for the record}
+
+\item{\code{provider}}{DOI provider}
+
+\item{\code{client}}{DOI client}
 }
 \if{html}{\out{</div>}}
 }
@@ -357,19 +358,6 @@ Get record versions with creation/publication date,
 
 \subsection{Returns}{
 a \code{data.frame} with the record versions
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-getStats"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-getStats}{}}}
-\subsection{Method \code{getStats()}}{
-Get record statistics
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getStats()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-statistics as \code{data.frame}
 }
 }
 \if{html}{\out{<hr>}}

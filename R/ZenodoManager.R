@@ -1095,10 +1095,11 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #' @description Deposits a record on Zenodo.
     #' @param record the record to deposit, object of class \code{ZenodoRecord}
+    #' @param reserveDOI reserve DOI. By default \code{TRUE}
     #' @param publish object of class \code{logical} indicating if record has to be published (default \code{FALSE}). 
     #'   Can be set to \code{TRUE} (to use CAUTIOUSLY, only if you want to publish your record)
-    #' @return \code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
-    depositRecord = function(record, publish = FALSE){
+    #' @return object of class \code{ZenodoRecord}
+    depositRecord = function(record, reserveDOI = TRUE, publish = FALSE){
       data <- record
       type <- ifelse(is.null(record$id), "POST", "PUT")
       request <- ifelse(is.null(record$id), "records", 
@@ -1113,6 +1114,18 @@ ZenodoManager <-  R6Class("ZenodoManager",
         infoMsg = "Successful record deposition"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
+        
+        if(reserveDOI){
+          if(is.null(record$pids$doi)){
+            out <- self$reserveDOI(out)
+          }else{
+            warnMsg = sprintf("Existing DOI (%s) for record %s. Aborting DOI reservation!", record$pids$doi$identifier, out$id)
+            cli::cli_alert_warning(warnMsg)
+            self$WARN(warnMsg)
+          }
+          
+        }
+        
       }else{
         out <- zenReq$getResponse()
         errMsg = sprintf("Error while depositing record: %s", out$message)
@@ -1129,6 +1142,35 @@ ZenodoManager <-  R6Class("ZenodoManager",
         out <- self$publishRecord(record$id)
       }
       
+      return(out)
+    },
+    
+    #'@description Reserves a DOI for a deposition (draft record)
+    #' @param record the record to deposit, object of class \code{ZenodoRecord}
+    #'@return object of class \code{ZenodoRecord}
+    reserveDOI = function(record){
+      request <- sprintf("records/%s/draft/pids/doi", record$id)
+      zenReq <- ZenodoRequest$new(private$url, "POST", request, data = NULL,
+                                  token = self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 201){
+        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+        infoMsg = sprintf("Successful reserved DOI for record %s", record$id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        out <- zenReq$getResponse()
+        errMsg = sprintf("Error while reserving DOI for record %s: %s", record$id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        for(error in out$errors){
+          errMsg = sprintf("Error: %s - %s", error$field, error$message)
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+        }
+      }
       return(out)
     },
     
