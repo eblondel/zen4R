@@ -119,6 +119,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getDepositionByConceptId}{\code{ZenodoManager$getDepositionByConceptId()}}
 \item \href{#method-ZenodoManager-depositRecord}{\code{ZenodoManager$depositRecord()}}
 \item \href{#method-ZenodoManager-reserveDOI}{\code{ZenodoManager$reserveDOI()}}
+\item \href{#method-ZenodoManager-deleteDOI}{\code{ZenodoManager$deleteDOI()}}
 \item \href{#method-ZenodoManager-depositRecordVersion}{\code{ZenodoManager$depositRecordVersion()}}
 \item \href{#method-ZenodoManager-deleteRecord}{\code{ZenodoManager$deleteRecord()}}
 \item \href{#method-ZenodoManager-deleteRecordByDOI}{\code{ZenodoManager$deleteRecordByDOI()}}
@@ -821,6 +822,26 @@ Reserves a DOI for a deposition (draft record)
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{record}}{the record to deposit, object of class \code{ZenodoRecord}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-deleteDOI"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-deleteDOI}{}}}
+\subsection{Method \code{deleteDOI()}}{
+Reserves a DOI for a deposition (draft record)
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteDOI(record)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{the record for which DOI has to be deleted, object of class \code{ZenodoRecord}}
 }
 \if{html}{\out{</div>}}
 }

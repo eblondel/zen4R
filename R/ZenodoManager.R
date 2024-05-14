@@ -1174,6 +1174,35 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #'@description Reserves a DOI for a deposition (draft record)
+    #' @param record the record for which DOI has to be deleted, object of class \code{ZenodoRecord}
+    #'@return object of class \code{ZenodoRecord}
+    deleteDOI = function(record){
+      request <- sprintf("records/%s/draft/pids/doi", record$id)
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", request, data = NULL,
+                                  token = self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+        infoMsg = sprintf("Successful deleted DOI for record %s", record$id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        out <- zenReq$getResponse()
+        errMsg = sprintf("Error while deleting DOI for record %s: %s", record$id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        for(error in out$errors){
+          errMsg = sprintf("Error: %s - %s", error$field, error$message)
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+        }
+      }
+      return(out)
+    },
+    
     #' @description Deposits a record version on Zenodo. For details about the behavior of this function, 
     #'   see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
     #' @param record the record version to deposit, object of class \code{ZenodoRecord}
