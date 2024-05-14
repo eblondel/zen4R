@@ -117,8 +117,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     id = NULL,
     #' @field links list of links associated to the record
     links = list(),
-    #' @field media_files media files
-    media_files = list(),
     #' @field metadata metadata elements associated to the record
     metadata = list(),
     #' @field parent parent record
@@ -734,8 +732,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     addReference = function(reference){
       added <- FALSE
       if(is.null(self$metadata$references)) self$metadata$references <- list()
-      if(!(reference %in% self$metadata$references)){
-        self$metadata$references[[length(self$metadata$references)+1]] <- reference
+      if(!(reference %in% sapply(self$metadata$references, function(x){x$reference}))){
+        self$metadata$references[[length(self$metadata$references)+1]] <- list(reference = reference)
         added <- TRUE
       }
       return(added)
@@ -749,7 +747,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       if(!is.null(self$metadata$references)){
         for(i in 1:length(self$metadata$references)){
           ref <- self$metadata$references[[i]]
-          if(ref == reference){
+          if(ref$reference == reference){
             self$metadata$references[[i]] <- NULL
             removed <- TRUE
             break;
