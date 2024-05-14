@@ -1,6 +1,6 @@
 Package: zen4R
-Version: 1.0
-Date: 2024-03-11
+Version: 0.10
+Date: 2024-05-14
 Title: Interface to 'Zenodo' REST API
 Authors@R: c(
   person("Emmanuel", "Blondel", role = c("aut", "cre"), email = "emmanuel.blondel1@gmail.com", comment = c(ORCID = "0000-0002-5870-5762")),
@@ -20,6 +20,6 @@ License: MIT + file LICENSE
 URL: https://github.com/eblondel/zen4R
 BugReports: https://github.com/eblondel/zen4R/issues
 LazyLoad: yes
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Encoding: UTF-8
 VignetteBuilder: knitr
