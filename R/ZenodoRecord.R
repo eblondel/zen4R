@@ -57,8 +57,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata = obj$metadata
       resource_type = self$metadata$resource_type
       if(!is.null(resource_type)){
-        resource_type_id = resource_type$type
-        if(!is.null(resource_type$subtype)) resource_type_id = paste(resource_type_id, resource_type$subtype,sep="-")
+        resource_type_id = resource_type$id
         self$metadata$resource_type = list(id = resource_type_id)
       }
       self$modified = obj$modified

@@ -64,7 +64,8 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       headers <- c(
         "User-Agent" = private$agent,
         "Authorization" = paste("Bearer",private$token),
-        "Accept" = "application/vnd.inveniordm.v1+json"
+        "Content-Type" = "application/json",
+        "Accept" = if(regexpr("draft/files", req)>0) "application/json" else "application/vnd.inveniordm.v1+json"
       )
       
       responseContent <- NULL
@@ -96,9 +97,11 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       req <- paste(url, request, sep="/")
       if(!is.null(file)){
         contentType <- "multipart/form-data"
+        accept <- "application/json"
         data <- list(file = file, filename = data)
       }else{
         contentType <- "application/json"
+        accept = "application/vnd.inveniordm.v1+json"
         data <- private$prepareData(data)
       }
       
@@ -107,7 +110,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         "User-Agent" = private$agent,
         "Authorization" = paste("Bearer",private$token),
         "Content-Type" = contentType,
-        "Accept" = "application/vnd.inveniordm.v1+json"
+        "Accept" = accept
       )
       
       #send request
