@@ -66,11 +66,21 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       })
       self$id = obj$id
       self$metadata = obj$metadata
+      #special metadata treatments
       resource_type = self$metadata$resource_type
       if(!is.null(resource_type)){
         resource_type_id = resource_type$id
         self$metadata$resource_type = list(id = resource_type_id)
       }
+      self$metadata$related_identifiers = lapply(self$metadata$related_identifiers, function(identifier){
+        #map DataCite term to zenodo lowercase term
+        #TODO investigate this is needed
+        id = identifier
+        if(is.null(identifier$relation_type) && !is.null(identifier$relation)){
+          id$relation_type = list(id = tolower(identifier$relation))
+        }
+        return(id)
+      })
       self$pids = obj$pids
       self$parent = obj$parent
       

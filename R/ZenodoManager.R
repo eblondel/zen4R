@@ -1023,7 +1023,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- self$getDepositions(q = query, all_versions = TRUE, exact = TRUE)
       if(length(result)>0){
         result <- result[[1]]
-        if(result$pids$doi$identifier == doi){
+        if(result$getDOI() == doi){
           infoMsg = sprintf("Successfully fetched record for DOI '%s'!",doi)
           cli::cli_alert_success(infoMsg)
           self$INFO(infoMsg)
@@ -1467,8 +1467,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
-      if(zenReq$getStatus() == 201){
-        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        out <- resp$entries
         infoMsg = sprintf("Successful fetched file(s) for record '%s'", recordId)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)

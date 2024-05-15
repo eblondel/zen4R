@@ -26,6 +26,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     exception = NA,
     result = NA,
     token = NULL,
+    accept = "application/vnd.inveniordm.v1+json",
     agent = paste0("zen4R_", as(packageVersion("zen4R"),"character")),
     
     prepareData = function(data){
@@ -224,6 +225,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       private$file = file
       private$progress = progress
       private$token = token
+      private$accept = accept
      
     },
     
