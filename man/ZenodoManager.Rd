@@ -954,9 +954,16 @@ Creates an empty record in the Zenodo deposit. Returns the record
    newly created in Zenodo, as an object of class \code{ZenodoRecord} with an 
    assigned identifier.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$createEmptyRecord()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$createEmptyRecord(reserveDOI = TRUE)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{reserveDOI}}{reserve DOI. By default \code{TRUE}}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 an object of class \code{ZenodoRecord}
 }
@@ -985,7 +992,9 @@ an object of class \code{ZenodoRecord}
 \if{html}{\out{<a id="method-ZenodoManager-discardChanges"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-discardChanges}{}}}
 \subsection{Method \code{discardChanges()}}{
-Discards changes on a Zenodo record.
+Discards changes on a Zenodo record. Deleting a draft for an unpublished 
+record will remove the draft and associated files from the system. Deleting a draft for 
+a published record will remove the draft but not the published record.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$discardChanges(recordId)}\if{html}{\out{</div>}}
 }

@@ -1360,16 +1360,17 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @description Creates an empty record in the Zenodo deposit. Returns the record
     #'    newly created in Zenodo, as an object of class \code{ZenodoRecord} with an 
     #'    assigned identifier.
+    #' @param reserveDOI reserve DOI. By default \code{TRUE}
     #' @return an object of class \code{ZenodoRecord}
-    createEmptyRecord = function(){
-      return(self$depositRecord(NULL))
+    createEmptyRecord = function(reserveDOI = TRUE){
+      return(self$depositRecord(NULL, reserveDOI = reserveDOI))
     },
     
     #' @description Unlocks a record already submitted. Required to edit metadata of a Zenodo record already published.
     #' @param recordId the ID of the record to unlock and set in editing mode.
     #' @return an object of class \code{ZenodoRecord}
     editRecord = function(recordId){
-      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/edit", recordId),
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft", recordId),
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -1388,23 +1389,24 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #' @description Discards changes on a Zenodo record.
+    #' @description Discards changes on a Zenodo record. Deleting a draft for an unpublished 
+    #' record will remove the draft and associated files from the system. Deleting a draft for 
+    #' a published record will remove the draft but not the published record.
     #' @param recordId the ID of the record for which changes have to be discarded.
     #' @return an object of class \code{ZenodoRecord}
     discardChanges = function(recordId){
-      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("deposit/depositions/%s/actions/discard", recordId),
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/draft", recordId),
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
-      out <- NULL
-      if(zenReq$getStatus() == 201){
-        out <- ZenodoRecord$new(obj = zenReq$getResponse())
+      out <- FALSE
+      if(zenReq$getStatus() == 204){
+        out <- TRUE
         infoMsg = sprintf("Successful discarded changes for record '%s' for edition", recordId)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
       }else{
-        out <- zenReq$getResponse()
-        errMsg = sprintf("Error while discarding record '%s' changes: %s", recordId, out$message)
+        errMsg = sprintf("Error while discarding record '%s' changes", recordId)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
       }
