@@ -1006,9 +1006,17 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
    newly created in Zenodo, as an object of class <code>ZenodoRecord</code> with an 
    assigned identifier.</p><div class="section">
 <h4 id="usage-34">Usage<a class="anchor" aria-label="anchor" href="#usage-34"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">createEmptyRecord</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">createEmptyRecord</span><span class="op">(</span>reserveDOI <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
+<div class="section">
+<h4 id="arguments-33">Arguments<a class="anchor" aria-label="anchor" href="#arguments-33"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>reserveDOI</code></dt>
+<dd><p>reserve DOI. By default <code>TRUE</code></p></dd>
+
+
+</dl><p></p></div>
+</div>
 <div class="section">
 <h4 id="returns-33">Returns<a class="anchor" aria-label="anchor" href="#returns-33"></a></h4>
 <p>an object of class <code>ZenodoRecord</code></p>
@@ -1022,7 +1030,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </div>
 
 <div class="section">
-<h4 id="arguments-33">Arguments<a class="anchor" aria-label="anchor" href="#arguments-33"></a></h4>
+<h4 id="arguments-34">Arguments<a class="anchor" aria-label="anchor" href="#arguments-34"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record to unlock and set in editing mode.</p></dd>
 
@@ -1036,13 +1044,15 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 
 </div><p></p><hr><a id="method-ZenodoManager-discardChanges"></a><div class="section">
 <h3 id="method-discardchanges-">Method <code>discardChanges()</code><a class="anchor" aria-label="anchor" href="#method-discardchanges-"></a></h3>
-<p>Discards changes on a Zenodo record.</p><div class="section">
+<p>Discards changes on a Zenodo record. Deleting a draft for an unpublished 
+record will remove the draft and associated files from the system. Deleting a draft for 
+a published record will remove the draft but not the published record.</p><div class="section">
 <h4 id="usage-36">Usage<a class="anchor" aria-label="anchor" href="#usage-36"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">discardChanges</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-34">Arguments<a class="anchor" aria-label="anchor" href="#arguments-34"></a></h4>
+<h4 id="arguments-35">Arguments<a class="anchor" aria-label="anchor" href="#arguments-35"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record for which changes have to be discarded.</p></dd>
 
@@ -1062,7 +1072,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </div>
 
 <div class="section">
-<h4 id="arguments-35">Arguments<a class="anchor" aria-label="anchor" href="#arguments-35"></a></h4>
+<h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record to be published.</p></dd>
 
@@ -1082,7 +1092,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </div>
 
 <div class="section">
-<h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
+<h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record.</p></dd>
 
@@ -1102,7 +1112,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </div>
 
 <div class="section">
-<h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
+<h4 id="arguments-38">Arguments<a class="anchor" aria-label="anchor" href="#arguments-38"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record.</p></dd>
 
@@ -1128,7 +1138,7 @@ for user convenience and for backward compatibility with the legacy Zenodo API.<
 </div>
 
 <div class="section">
-<h4 id="arguments-38">Arguments<a class="anchor" aria-label="anchor" href="#arguments-38"></a></h4>
+<h4 id="arguments-39">Arguments<a class="anchor" aria-label="anchor" href="#arguments-39"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
 
@@ -1150,7 +1160,7 @@ for user convenience and for backward compatibility with the legacy Zenodo API.<
 </div>
 
 <div class="section">
-<h4 id="arguments-39">Arguments<a class="anchor" aria-label="anchor" href="#arguments-39"></a></h4>
+<h4 id="arguments-40">Arguments<a class="anchor" aria-label="anchor" href="#arguments-40"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
 
@@ -1173,7 +1183,7 @@ the function calls <code>completeFileUpload</code> to commit the file which stat
 </div>
 
 <div class="section">
-<h4 id="arguments-40">Arguments<a class="anchor" aria-label="anchor" href="#arguments-40"></a></h4>
+<h4 id="arguments-41">Arguments<a class="anchor" aria-label="anchor" href="#arguments-41"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
 
@@ -1200,7 +1210,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-41">Arguments<a class="anchor" aria-label="anchor" href="#arguments-41"></a></h4>
+<h4 id="arguments-42">Arguments<a class="anchor" aria-label="anchor" href="#arguments-42"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>ID of the record</p></dd>
 
@@ -1227,7 +1237,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-42">Arguments<a class="anchor" aria-label="anchor" href="#arguments-42"></a></h4>
+<h4 id="arguments-43">Arguments<a class="anchor" aria-label="anchor" href="#arguments-43"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>Elastic-Search-compliant query, as object of class <code>character</code>. Default is ""</p></dd>
 
@@ -1263,7 +1273,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-43">Arguments<a class="anchor" aria-label="anchor" href="#arguments-43"></a></h4>
+<h4 id="arguments-44">Arguments<a class="anchor" aria-label="anchor" href="#arguments-44"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>conceptdoi</code></dt>
 <dd><p>the concept DOI</p></dd>
 
@@ -1283,7 +1293,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-44">Arguments<a class="anchor" aria-label="anchor" href="#arguments-44"></a></h4>
+<h4 id="arguments-45">Arguments<a class="anchor" aria-label="anchor" href="#arguments-45"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>doi</code></dt>
 <dd><p>the DOI</p></dd>
 
@@ -1303,7 +1313,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-45">Arguments<a class="anchor" aria-label="anchor" href="#arguments-45"></a></h4>
+<h4 id="arguments-46">Arguments<a class="anchor" aria-label="anchor" href="#arguments-46"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recid</code></dt>
 <dd><p>the record ID</p></dd>
 
@@ -1323,7 +1333,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-46">Arguments<a class="anchor" aria-label="anchor" href="#arguments-46"></a></h4>
+<h4 id="arguments-47">Arguments<a class="anchor" aria-label="anchor" href="#arguments-47"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>conceptrecid</code></dt>
 <dd><p>the concept ID</p></dd>
 
@@ -1343,7 +1353,7 @@ the file record is deleted.</p><div class="section">
 </div>
 
 <div class="section">
-<h4 id="arguments-47">Arguments<a class="anchor" aria-label="anchor" href="#arguments-47"></a></h4>
+<h4 id="arguments-48">Arguments<a class="anchor" aria-label="anchor" href="#arguments-48"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
