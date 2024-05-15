@@ -88,7 +88,11 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-addDate}{\code{ZenodoRecord$addDate()}}
 \item \href{#method-ZenodoRecord-removeDate}{\code{ZenodoRecord$removeDate()}}
 \item \href{#method-ZenodoRecord-setTitle}{\code{ZenodoRecord$setTitle()}}
+\item \href{#method-ZenodoRecord-addAdditionalTitle}{\code{ZenodoRecord$addAdditionalTitle()}}
+\item \href{#method-ZenodoRecord-removeAdditionalTitle}{\code{ZenodoRecord$removeAdditionalTitle()}}
 \item \href{#method-ZenodoRecord-setDescription}{\code{ZenodoRecord$setDescription()}}
+\item \href{#method-ZenodoRecord-addAdditionalDescription}{\code{ZenodoRecord$addAdditionalDescription()}}
+\item \href{#method-ZenodoRecord-removeAdditionalDescription}{\code{ZenodoRecord$removeAdditionalDescription()}}
 \item \href{#method-ZenodoRecord-addPersonOrOrg}{\code{ZenodoRecord$addPersonOrOrg()}}
 \item \href{#method-ZenodoRecord-removePersonOrOrg}{\code{ZenodoRecord$removePersonOrOrg()}}
 \item \href{#method-ZenodoRecord-addCreator}{\code{ZenodoRecord$addCreator()}}
@@ -531,6 +535,55 @@ Set the record title.
 }
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-addAdditionalTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addAdditionalTitle}{}}}
+\subsection{Method \code{addAdditionalTitle()}}{
+Add additional record title
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addAdditionalTitle(title, type, lang = "eng")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{title}}{title free text}
+
+\item{\code{type}}{type of title, among following values: alternative-title, subtitle, translated-title, other}
+
+\item{\code{lang}}{language id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeAdditionalTitle"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeAdditionalTitle}{}}}
+\subsection{Method \code{removeAdditionalTitle()}}{
+Removes additional record title.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeAdditionalTitle(title, type, lang = "eng")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{title}}{title free text}
+
+\item{\code{type}}{type of title, among following values: abstract, methods, 
+series-information, table-of-contents, technical-info, other}
+
+\item{\code{lang}}{language id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setDescription"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setDescription}{}}}
 \subsection{Method \code{setDescription()}}{
@@ -545,6 +598,56 @@ Set the record description
 \item{\code{description}}{object of class \code{character}}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-addAdditionalDescription"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addAdditionalDescription}{}}}
+\subsection{Method \code{addAdditionalDescription()}}{
+Add additional record description
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addAdditionalDescription(description, type, lang = "eng")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{description}}{description free text}
+
+\item{\code{type}}{type of description, among following values: abstract, methods, 
+series-information, table-of-contents, technical-info, other}
+
+\item{\code{lang}}{language id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-removeAdditionalDescription"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeAdditionalDescription}{}}}
+\subsection{Method \code{removeAdditionalDescription()}}{
+Removes additional record description
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeAdditionalDescription(description, type, lang = "eng")}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{description}}{description free text}
+
+\item{\code{type}}{type of description, among following values: abstract, methods, 
+series-information, table-of-contents, technical-info, other}
+
+\item{\code{lang}}{language id}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}

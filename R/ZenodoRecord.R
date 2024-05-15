@@ -10,6 +10,8 @@
 ZenodoRecord <-  R6Class("ZenodoRecord",
   inherit = zen4RLogger,
   private = list(
+    allowed_additional_title_types = c("alternative-title", "subtitle", "translated-title", "other"),
+    allowed_additional_description_types = c("abstract", "methods", "series-information", "table-of-contents", "technical-info", "other"),
     allowed_role_types = c("contactperson", "datacollector", "datacurator", "datamanager", 
                            "distributor", "editor", "funder", "hostinginstitution", "producer", 
                            "projectleader", "projectmanager", "projectmember", "registrationagency", 
@@ -318,10 +320,147 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$title <- title
     },
     
+    #' @description Add additional record title
+    #' @param title title free text
+    #' @param type type of title, among following values: alternative-title, subtitle, translated-title, other
+    #' @param lang language id
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
+    addAdditionalTitle = function(title, type, lang = "eng"){
+      added = FALSE
+      if(!(type %in% private$allowed_additional_title_types)){
+        errMsg = sprintf("Additional title type '%s' incorrect. Possible values are: %s",
+                         type, paste0(private$allowed_additional_title_types, collapse=","))
+        self$ERROR(errMsg)
+        stop(errMsg)
+      }
+      
+      if(is.null(self$metadata$additional_titles)) self$metadata$additional_titles = list()
+      ids_df <- data.frame(
+        title = character(0),
+        type = character(0),
+        lang = character(0),
+        stringsAsFactors = FALSE
+      )
+      if(length(self$metadata$additional_titles)>0){
+        ids_df <- do.call("rbind", lapply(self$metadata$additional_titles, function(x){
+          data.frame(
+            title = x$title,
+            type = x$type$id,
+            lang = x$lang$id,
+            stringsAsFactors = FALSE
+          )
+        }))
+      }
+      if(nrow(ids_df[ids_df$title == title & 
+                     ids_df$type == type &
+                     ids_df$lang == lang,])==0){
+        new_title = list(
+          title = title,
+          type = list(id = type),
+          lang = list(id = lang)
+        )
+        self$metadata$additional_titles[[length(self$metadata$additional_titles)+1]] <- new_title
+        added = TRUE
+      }
+      return(added)
+    },
+    
+    #' @description Removes additional record title.
+    #' @param title title free text
+    #' @param type type of title, among following values: abstract, methods, 
+    #' series-information, table-of-contents, technical-info, other
+    #' @param lang language id
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeAdditionalTitle = function(title, type, lang = "eng"){
+      removed <- FALSE
+      if(!is.null(self$metadata$additional_titles)){
+        for(i in 1:length(self$metadata$additional_titles)){
+          desc <- self$metadata$additional_titles[[i]]
+          if(desc$title == title &&
+             desc$type$id == type &&
+             desc$lang$id == lang){
+            self$metadata$additional_titles[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
+    },
+    
     #' @description Set the record description
     #' @param description object of class \code{character}
     setDescription = function(description){
       self$metadata$description <- description
+    },
+    
+    #' @description Add additional record description
+    #' @param description description free text
+    #' @param type type of description, among following values: abstract, methods, 
+    #' series-information, table-of-contents, technical-info, other
+    #' @param lang language id
+    #' @return \code{TRUE} if added, \code{FALSE} otherwise
+    addAdditionalDescription = function(description, type, lang = "eng"){
+      added = FALSE
+      if(!(type %in% private$allowed_additional_description_types)){
+        errMsg = sprintf("Additional description type '%s' incorrect. Possible values are: %s",
+                         type, paste0(private$allowed_additional_description_types, collapse=","))
+        self$ERROR(errMsg)
+        stop(errMsg)
+      }
+      
+      if(is.null(self$metadata$additional_descriptions)) self$metadata$additional_descriptions = list()
+      ids_df <- data.frame(
+        description = character(0),
+        type = character(0),
+        lang = character(0),
+        stringsAsFactors = FALSE
+      )
+      if(length(self$metadata$additional_descriptions)>0){
+        ids_df <- do.call("rbind", lapply(self$metadata$additional_descriptions, function(x){
+          data.frame(
+            description = x$description,
+            type = x$type$id,
+            lang = x$lang$id,
+            stringsAsFactors = FALSE
+          )
+        }))
+      }
+      if(nrow(ids_df[ids_df$description == description & 
+                     ids_df$type == type &
+                     ids_df$lang == lang,])==0){
+        new_desc = list(
+          description = description,
+          type = list(id = type),
+          lang = list(id = lang)
+        )
+        self$metadata$additional_descriptions[[length(self$metadata$additional_descriptions)+1]] <- new_desc
+        added = TRUE
+      }
+      return(added)
+    },
+    
+    #' @description Removes additional record description
+    #' @param description description free text
+    #' @param type type of description, among following values: abstract, methods, 
+    #' series-information, table-of-contents, technical-info, other
+    #' @param lang language id
+    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeAdditionalDescription = function(description, type, lang = "eng"){
+      removed <- FALSE
+      if(!is.null(self$metadata$additional_descriptions)){
+        for(i in 1:length(self$metadata$additional_descriptions)){
+          desc <- self$metadata$additional_descriptions[[i]]
+          if(desc$description == description &&
+             desc$type$id == type &&
+             desc$lang$id == lang){
+            self$metadata$additional_descriptions[[i]] <- NULL
+            removed <- TRUE
+            break;
+          }
+        }
+      }
+      return(removed)
     },
     
     # PERSON OR ORG
