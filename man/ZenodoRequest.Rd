@@ -66,6 +66,7 @@ Initializes a \code{ZenodoRequest}
   data = NULL,
   file = NULL,
   progress = FALSE,
+  accept = "application/vnd.inveniordm.v1+json",
   token,
   logger = NULL,
   ...
@@ -86,6 +87,8 @@ Initializes a \code{ZenodoRequest}
 \item{\code{file}}{to be uploaded (optional)}
 
 \item{\code{progress}}{whether a progress status has to be displayed for download/upload}
+
+\item{\code{accept}}{accept header. Default is "application/vnd.inveniordm.v1+json"}
 
 \item{\code{token}}{user token}
 

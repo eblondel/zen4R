@@ -519,13 +519,14 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       if(!is.null(affiliations)) if(personOrOrg$person_or_org$type == "personal"){
         zen = ZenodoManager$new(sandbox = sandbox)
         affs = lapply(affiliations, function(affiliation){
-          zen_affiliation <- zen$getAffiliationById(affiliation)
+          zen_affiliation <- if(grepl(" ",affiliation)) zen$getAffiliationByName(affiliation) else zen$getAffiliationById(affiliation)
           if(is.null(zen_affiliation)){
-            warnMsg <- sprintf("Affiliation with id '%s' doesn't exist in Zenodo", affiliation)
-            self$WARN(errorMsg)
-            return(NULL)
+            warnMsg <- sprintf("Affiliation with id or name '%s' doesn't exist in Zenodo", affiliation)
+            self$WARN(warnMsg)
           }
-          return(list(id = zen_affiliation$id))
+          aff = list(name = affiliation)
+          if(!is.null(zen_affiliation)) aff = list(id = zen_affiliation$id)
+          return(aff)
         })
         affs = affs[!sapply(affs,is.null)]
         personOrOrg$affiliations = affs
