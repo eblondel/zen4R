@@ -140,6 +140,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return list of languages as \code{data.frame} or \code{list}
     getLanguages = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "vocabularies/languages?q=&size=1000",
+                                  accept = "application/json",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -174,6 +175,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the license
     getLanguageById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("vocabularies/languages/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -201,6 +203,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return list of licenses as \code{data.frame} or \code{list}
     getLicenses = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "vocabularies/licenses?q=&size=1000",
+                                  accept = "application/json",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -239,6 +242,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the license
     getLicenseById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("vocabularies/licenses/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -266,6 +270,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return list of resource types as \code{data.frame} or \code{list}
     getResourceTypes = function(pretty = TRUE){
       zenReq <- ZenodoRequest$new(private$url, "GET", "vocabularies/resourcetypes?q=&size=1000",
+                                  accept = "application/json",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -300,6 +305,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the resource type
     getResourceTypeById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("vocabularies/resourcetypes/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -332,6 +338,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getCommunities = function(pretty = TRUE, q = "", size = 500){
       page <- 1
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                  accept = "application/json",
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -361,6 +368,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           #next page
           page <- page+1
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                      accept = "application/json",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
@@ -418,6 +426,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the community
     getCommunityById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("communities/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -466,6 +475,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getAwards = function(q = "", pretty = TRUE, size = 500){
       page <- 1
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("awards?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                  accept = "application/json",
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -492,6 +502,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           #next page
           page = page+1
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("awards?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                      accept = "application/json",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
@@ -579,6 +590,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the award
     getAwardById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("awards/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -611,6 +623,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getAffiliations = function(q = "", pretty = TRUE, size = 500){
       page <- 1
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("affiliations?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                  accept = "application/json",
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -637,6 +650,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           #next page
           page = page+1
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("affiliations?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                      accept = "application/json",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
@@ -699,6 +713,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the affiliation
     getAffiliationById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("affiliations/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -731,6 +746,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getFunders = function(q = "", pretty = TRUE, size = 500){
       page <- 1
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                  accept = "application/json",
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -758,6 +774,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           #next page
           page <- page+1
           zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders?q=%s&size=%s&page=%s", URLencode(q), size, page), 
+                                      accept = "application/json",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
@@ -827,6 +844,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return the funder
     getFunderById = function(id){
       zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("funders/%s",id),
+                                  accept = "application/json",
                                   token= self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -1443,7 +1461,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param recordId the ID of the record.
     #' @return list of files
     getFiles = function(recordId){
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/files", recordId), 
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/files", recordId),
+                                  accept = "application/json",
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
@@ -1467,7 +1486,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param filename filename
     #' @return the file metadata
     getFile = function(recordId, filename){
-      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/files/%s", recordId, filename), 
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/files/%s", recordId, filename),
+                                  accept = "application/json",
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()

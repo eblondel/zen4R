@@ -58,14 +58,14 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(data)
     },
     
-    GET = function(url, request, progress, use_curl = FALSE){
+    GET = function(url, request, progress, use_curl = FALSE, accept = "application/vnd.inveniordm.v1+json"){
       req <- paste(url, request, sep="/")
       self$INFO(sprintf("Fetching %s", req))
       headers <- c(
         "User-Agent" = private$agent,
         "Authorization" = paste("Bearer",private$token),
         "Content-Type" = "application/json",
-        "Accept" = if(regexpr("draft/files", req)>0) "application/json" else "application/vnd.inveniordm.v1+json"
+        "Accept" = accept
       )
       
       responseContent <- NULL
@@ -209,10 +209,12 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     #' @param data payload (optional)
     #' @param file to be uploaded (optional)
     #' @param progress whether a progress status has to be displayed for download/upload
+    #' @param accept accept header. Default is "application/vnd.inveniordm.v1+json"
     #' @param token user token
     #' @param logger the logger type
     #' @param ... any other arg
-    initialize = function(url, type, request, data = NULL, file = NULL, progress = FALSE,
+    initialize = function(url, type, request, data = NULL, file = NULL, progress = FALSE, 
+                          accept = "application/vnd.inveniordm.v1+json",
                           token, logger = NULL, ...) {
       super$initialize(logger = logger)
       private$url = url
@@ -229,8 +231,8 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     execute = function(){
       
       req <- switch(private$type,
-        "GET" = private$GET(private$url, private$request, private$progress),
-        "GET_WITH_CURL" = private$GET(private$url, private$request, private$progress, use_curl = TRUE),
+        "GET" = private$GET(private$url, private$request, private$progress, accept = private$accept),
+        "GET_WITH_CURL" = private$GET(private$url, private$request, private$progress, use_curl = TRUE, accept = private$accept),
         "POST" = private$POST(private$url, private$request, private$data, private$file, private$progress),
         "PUT" = private$PUT(private$url, private$request, private$data, private$progress),
         "DELETE" = private$DELETE(private$url, private$request, private$data)
