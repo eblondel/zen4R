@@ -194,14 +194,15 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #---------------------------------------------------------------------------
     
     #'@description Set the access policy for record, among values "public" (default) or "restricted"
+    #'In Zenodo, in principle, the access policy 'restricted' is not available for records.
     #'@param access access policy ('public' or 'restricted')
-    setAccessPolicyRecord = function(access = c("public","resticted")){
+    setAccessPolicyRecord = function(access = c("public","restricted")){
       self$access$record = access
     },
     
     #'@description Set the access policy for files, among values "public" (default) or "restricted"
     #'@param access access policy ('public' or 'restricted')
-    setAccessPolicyFiles = function(access = c("public","resticted")){
+    setAccessPolicyFiles = function(access = c("public","restricted")){
       self$access$files = access
     },
     

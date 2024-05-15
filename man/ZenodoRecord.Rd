@@ -315,8 +315,9 @@ the concept DOI, object of class \code{character}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-setAccessPolicyRecord}{}}}
 \subsection{Method \code{setAccessPolicyRecord()}}{
 Set the access policy for record, among values "public" (default) or "restricted"
+In Zenodo, in principle, the access policy 'restricted' is not available for records.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyRecord(access = c("public", "resticted"))}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyRecord(access = c("public", "restricted"))}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -333,7 +334,7 @@ Set the access policy for record, among values "public" (default) or "restricted
 \subsection{Method \code{setAccessPolicyFiles()}}{
 Set the access policy for files, among values "public" (default) or "restricted"
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyFiles(access = c("public", "resticted"))}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setAccessPolicyFiles(access = c("public", "restricted"))}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
