@@ -20,7 +20,7 @@ test_that("funders are retrieved",{
 
 test_that("funder is retrieved by id",{
   zenodo <- ZenodoManager$new(logger = "INFO")
-  zen_funder <- zenodo$getFunderById("10.13039/100000863")
-  expect_equal(zen_funder$metadata$doi, "10.13039/100000863")
+  zen_funder <- zenodo$getFunderById("0553w5c95")
+  expect_equal(zen_funder$identifiers[[1]]$identifier, "0553w5c95")
   Sys.sleep(2)
 })
