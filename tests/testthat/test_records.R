@@ -82,8 +82,10 @@ test_that("create and deposit record",{
   expect_equal(length(deposit$metadata$contributors), 3L)
   
   #add files
-  ZENODO$uploadFile("README.md", record = deposit)
-  ZENODO$uploadFile("NEWS.md", record = deposit)
+  writeLines("# README", "my_README.md")
+  ZENODO$uploadFile("my_README.md", record = deposit)
+  writeLines("# NEWS", "my_NEWS.md")
+  ZENODO$uploadFile("my_NEWS.md", record = deposit)
   Sys.sleep(5)
   
   #delete record
@@ -146,8 +148,10 @@ test_that("create, deposit and publish record",{
   deposit = ZENODO$depositRecord(deposit)
   
   #add files
-  ZENODO$uploadFile("README.md", record = deposit)
-  ZENODO$uploadFile("NEWS.md", record = deposit)
+  writeLines("# README", "my_README.md")
+  ZENODO$uploadFile("my_README.md", record = deposit)
+  writeLines("# NEWS", "my_NEWS.md")
+  ZENODO$uploadFile("my_NEWS.md", record = deposit)
   Sys.sleep(5)
   
   #publish record
