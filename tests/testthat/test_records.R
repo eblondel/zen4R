@@ -175,8 +175,7 @@ test_that("get by record DOI",{
 })
 
 test_that("list & downloading files",{
-  zenodo <- ZenodoManager$new(logger = "INFO")
-  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+  rec <- ZENODO$getRecordByDOI("10.5072/zenodo.54894")
   expect_is(rec$listFiles(pretty = FALSE), "list")
   files <- rec$listFiles(pretty = TRUE)
   expect_is(files, "data.frame")
@@ -193,10 +192,9 @@ test_that("list & downloading files",{
 })
 
 test_that("list & downloading files - using wrapper",{
-  zenodo <- ZenodoManager$new(logger = "INFO")
-  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+  rec <- ZENODO$getRecordByDOI("10.5072/zenodo.54894")
   dir.create("download_zenodo")
-  download_zenodo(path = "download_zenodo", "10.5281/zenodo.3378733")
+  download_zenodo(doi = "10.5072/zenodo.54894", path = "download_zenodo", sandbox = TRUE)
   downloaded_files <- list.files("download_zenodo")
   expect_equal(length(downloaded_files), length(rec$files))
   unlink("download_zenodo", recursive = T)
@@ -204,8 +202,7 @@ test_that("list & downloading files - using wrapper",{
 })
 
 test_that("versioning",{
-  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
-  rec$setTitle(paste("My publication title -", Sys.time()))
+  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.54893")
   rec$setPublicationDate(Sys.Date())
   publication_filename <- paste0("publication_", format(Sys.time(), "%Y%m%d%H%M%S"), ".csv")
   write.csv(data.frame(title = rec$metadata$title, stringsAsFactors = FALSE), row.names = FALSE, publication_filename)
@@ -214,17 +211,15 @@ test_that("versioning",{
 })
 
 test_that("mapping to atom4R",{
-  zenodo <- ZenodoManager$new(logger = "INFO")
-  rec <- zenodo$getRecordByConceptDOI("10.5281/zenodo.2547036")
+  rec <- ZENODO$getRecordByDOI("10.5072/zenodo.54894")
   dcentry <- rec$toDCEntry()
   expect_is(dcentry, "DCEntry")
   xml <- dcentry$encode()
   expect_is(xml, "XMLInternalNode")
 })
 
-test_that("get record by ID",{
-  zenodo <- ZenodoManager$new(logger = "INFO")
-  rec <- zenodo$getRecordByDOI("10.5281/zenodo.3378733")
+test_that("get record by DOI",{
+  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.54894")
   expect_is(rec, "ZenodoRecord")
 })
 
