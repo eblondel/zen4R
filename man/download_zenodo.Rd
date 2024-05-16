@@ -8,6 +8,7 @@ download_zenodo(
   doi,
   path = ".",
   files = list(),
+  sandbox = FALSE,
   logger = NULL,
   quiet = FALSE,
   ...
@@ -19,6 +20,8 @@ download_zenodo(
 \item{path}{the target directory where to download files}
 
 \item{files}{subset of filenames to restrain to download. If ignored, all files will be downloaded.}
+
+\item{sandbox}{Use the sandbox infrastructure. Default is \code{FALSE}}
 
 \item{logger}{a logger to print Zenodo API-related messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}

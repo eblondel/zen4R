@@ -4,10 +4,12 @@
 \alias{get_zenodo}
 \title{get_zenodo}
 \usage{
-get_zenodo(doi, logger = NULL)
+get_zenodo(doi, sandbox = FALSE, logger = NULL)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
+
+\item{sandbox}{Use the sandbox infrastructure. Default is \code{FALSE}}
 
 \item{logger}{a logger to print messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}

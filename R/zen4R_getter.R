@@ -10,6 +10,7 @@
 #' }
 #'                 
 #' @param doi a Zenodo DOI or concept DOI
+#' @param sandbox Use the sandbox infrastructure. Default is \code{FALSE}
 #' @param logger a logger to print messages. The logger can be either NULL, 
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
 #' @return an object of class \code{data.frame} giving the record versions
@@ -18,8 +19,8 @@
 #' 
 #' @export
 #' 
-get_zenodo = function(doi, logger = NULL){
-  zenodo <- suppressWarnings(ZenodoManager$new(logger = logger))
+get_zenodo = function(doi, sandbox = FALSE, logger = NULL){
+  zenodo <- suppressWarnings(ZenodoManager$new(sandbox = sandbox, logger = logger))
   rec <- zenodo$getRecordByDOI(doi)
   if(is.null(rec)){
     #try to get it as concept DOI

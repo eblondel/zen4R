@@ -4,7 +4,14 @@
 \alias{export_zenodo}
 \title{export_zenodo}
 \usage{
-export_zenodo(doi, filename, format, append_format = TRUE, logger = NULL)
+export_zenodo(
+  doi,
+  filename,
+  format,
+  append_format = TRUE,
+  sandbox = FALSE,
+  logger = NULL
+)
 }
 \arguments{
 \item{doi}{a Zenodo DOI or concept DOI}
@@ -16,6 +23,8 @@ DCAT, JSON, JSON-LD, GeoJSON, MARCXML.}
 
 \item{append_format}{wether format name has to be appended to the filename. Default is \code{TRUE} (for
 backward compatibility reasons). Set it to \code{FALSE} if you want to use only the \code{filename}.}
+
+\item{sandbox}{Use the sandbox infrastructure. Default is \code{FALSE}}
 
 \item{logger}{a logger to print Zenodo API-related messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}

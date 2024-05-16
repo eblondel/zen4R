@@ -4,10 +4,12 @@
 \alias{get_licenses}
 \title{get_licenses}
 \usage{
-get_licenses(pretty = TRUE)
+get_licenses(pretty = TRUE, sandbox = FALSE)
 }
 \arguments{
 \item{pretty}{output delivered as \code{data.frame}}
+
+\item{sandbox}{Use the sandbox infrastructure. Default is \code{FALSE}}
 }
 \value{
 the licenses as \code{list} or \code{data.frame}

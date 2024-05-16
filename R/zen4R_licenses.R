@@ -9,10 +9,11 @@
 #' }
 #'                 
 #' @param pretty output delivered as \code{data.frame}
+#' @param sandbox Use the sandbox infrastructure. Default is \code{FALSE}
 #' @return the licenses as \code{list} or \code{data.frame}
 #' @export
 #'
-get_licenses <- function(pretty = TRUE){
-  zenodo = ZenodoManager$new()
+get_licenses <- function(pretty = TRUE, sandbox = FALSE){
+  zenodo = ZenodoManager$new(sandbox = sandbox)
   return(zenodo$getLicenses(pretty = pretty))
 }
