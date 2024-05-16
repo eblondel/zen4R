@@ -853,8 +853,7 @@ object of class \code{ZenodoRecord}
 \if{html}{\out{<a id="method-ZenodoManager-depositRecordVersion"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-depositRecordVersion}{}}}
 \subsection{Method \code{depositRecordVersion()}}{
-Deposits a record version on Zenodo. For details about the behavior of this function, 
-  see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
+Deposits a record version on Zenodo.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$depositRecordVersion(
   record,

@@ -1222,8 +1222,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #' @description Deposits a record version on Zenodo. For details about the behavior of this function, 
-    #'   see \href{https://developers.zenodo.org/#new-version}{https://developers.zenodo.org/#new-version}
+    #' @description Deposits a record version on Zenodo.
     #' @param record the record version to deposit, object of class \code{ZenodoRecord}
     #' @param delete_latest_files object of class \code{logical} indicating if latest files have to be deleted. Default is \code{TRUE}
     #' @param files a list of files to be uploaded with the new record version
@@ -1231,13 +1230,13 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @return \code{TRUE} if deposited (and eventually published), \code{FALSE} otherwise
     depositRecordVersion = function(record, delete_latest_files = TRUE, files = list(), publish = FALSE){
       type <- "POST"
-      if(is.null(record$conceptrecid)){
+      if(is.null(record$getConceptId())){
         errMsg = "The record concept id cannot be null for creating a new version"
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
         stop(errMsg)
       }
-      if(is.null(record$conceptdoi)){
+      if(is.null(record$getConceptDOI())){
         errMsg = "Concept DOI is null: a new version can only be added to a published record"
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
@@ -1245,29 +1244,27 @@ ZenodoManager <-  R6Class("ZenodoManager",
       }
       
       #id of the last record
-      record_id <- unlist(strsplit(record$links$latest,"records/"))[[2]] 
+      record_id <- record$id
       
       infoMsg = sprintf("Creating new version for record '%s' (concept DOI: '%s')", record_id, record$getConceptDOI())
       cli::cli_alert_info(infoMsg)
       self$INFO(infoMsg)
-      request <- sprintf("deposit/depositions/%s/actions/newversion", record_id)
+      request <- sprintf("records/%s/versions", record_id)
       zenReq <- ZenodoRequest$new(private$url, type, request, data = NULL,
                                   token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
       out_id <- NULL
-      if(zenReq$getStatus() %in% c(200,201)){
-        out <- zenReq$getResponse()
-        out_id <- unlist(strsplit(out$links$latest_draft,"depositions/"))[[2]]
-        out <-  self$getDepositionById(out_id)
+      if(zenReq$getStatus() == 201){
+        out <- ZenodoRecord$new(obj =zenReq$getResponse())
+        out <-  self$getDepositionById(out$id)
         infoMsg = sprintf("Successful new version record created for concept DOI '%s'", record$getConceptDOI())
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
         record$id <- out$id
         record$metadata$doi <- NULL
-        record$doi <- NULL
-        record$prereserveDOI(TRUE)
+        record$pids = list()
         out <- self$depositRecord(record)
         
         if(delete_latest_files){
