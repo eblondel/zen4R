@@ -21,7 +21,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     allowed_date_types = c("accepted", "available", "collected", "copyrighted", "created", "issued", 
                            "other", "submitted", "updated", "valid", "withdrawn"),
     allowed_identifier_schemes = c("ark", "arxiv", "bibcode", "doi", "ean13", "eissn", "handle", "igsn", "isbn",
-                                   "issn", "istc", "lissn", "lsid", "pubmed id", "purl", "upc", "url", "urn", "w3id"),
+                                   "issn", "istc", "lissn", "lsid", "pubmed id", "purl", "upc", "url", "urn", "w3id", "other"),
     allowed_relation_types = c("iscitedby", "cites", "issupplementto", "issupplementedby", 
                           "iscontinuedby", "continues", "isdescribedby", "describes", "hasmetadata", 
                           "ismetadatafor", "isnewversionof", "ispreviousversionof", "ispartof", 
@@ -785,7 +785,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'@return \code{TRUE} if added, \code{FALSE} otherwise
     addRelatedIdentifier = function(identifier, scheme, relation_type, resource_type = NULL){
       if(!(scheme %in% private$allowed_identifier_schemes)){
-        stop(sprintf("Identifier scheme '%s%' incorrect. Use a value among the following [%s]",
+        stop(sprintf("Identifier scheme '%s' incorrect. Use a value among the following [%s]",
                      scheme, paste0(private$allowed_identifier_schemes, collapse=",")))
       }
       if(!(relation_type %in% private$allowed_relation_types)){
