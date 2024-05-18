@@ -8,17 +8,24 @@ require(testthat)
 
 context("records")
 
-test_that("create empty record - with pre-reserved DOI",{
+test_that("create empty record - with reserved DOI",{
+  #=> This test creates an empty record with reserved DOI, delete DOI, and finally deletes the record 
   newRec <- ZENODO$createEmptyRecord()
   expect_is(newRec, "ZenodoRecord")
-  
-  #expect_is(newRec$metadata$prereserve_doi, "list")
-  #expect_true(nchar(newRec$metadata$prereserve_doi$doi)>0)
-  #expect_true(!is.null(newRec$recid))
+  expect_true(!is.null(newRec$pids$doi))
+  newRec_without_doi = ZENODO$deleteDOI(newRec)
+  expect_is(newRec_without_doi, "ZenodoRecord")
+  expect_true(is.null(newRec_without_doi$pids$doi))
+  expect_true(ZENODO$deleteRecord(recordId = newRec$id))
   Sys.sleep(5)
 })
 
-test_that("create and deposit record",{
+test_that("create, deposit and delete record",{
+  #=> This test includes the following sequences
+  #- creates a record, deposit it on Zenodo
+  #- updates a record, deposit it on Zenodo
+  #- uploads files to the record
+  #and finally deletes the record
   myrec <- ZenodoRecord$new()
   myrec$setTitle("zen4R")
   expect_true(myrec$addAdditionalTitle("This is an alternative title", type = "alternative-title"))
@@ -95,8 +102,13 @@ test_that("create and deposit record",{
 })
 
 test_that("create, deposit and publish record",{
+  #=> This test includes the following sequences
+  #- creates a record, deposit it on Zenodo
+  #- updates a record, deposit it on Zenodo
+  #- uploads files to the record
+  #and finally publish the record
   myrec <- ZenodoRecord$new()
-  myrec$setTitle("zen4R")
+  myrec$setTitle(paste0("zen4R - ", Sys.time()))
   myrec$setDescription("Interface to 'Zenodo' REST API")
   myrec$setPublicationDate(Sys.Date())
   myrec$setResourceType("software")
@@ -111,7 +123,7 @@ test_that("create, deposit and publish record",{
   myrec$addReference("Fulano et al., 2018. Título")
   myrec$setPublisher("CRAN")
   #myrec$addGrant("675680", sandbox = TRUE)
-  expect_true(myrec$addRelatedIdentifier("my-record-id", scheme = "urn", relation_type = "isidenticalto"))
+  expect_true(myrec$addRelatedIdentifier("my-record-id", scheme = "other", relation_type = "isidenticalto"))
   expect_true(myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#41-how-to-install-zen4r-in-r", scheme = "url", relation_type = "haspart"))
   expect_false(myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#41-how-to-install-zen4r-in-r", scheme = "url", relation_type = "haspart"))
   expect_true(myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#42-connect-to-zenodo-rest-api", scheme = "url", relation_type = "haspart"))
@@ -128,7 +140,6 @@ test_that("create, deposit and publish record",{
     expect_true(myrec$addRelatedIdentifier(paste("http://chapter", i), scheme = "url", "haspart"))
   }
   
-  expect_equal(myrec$metadata$title, "zen4R")
   expect_equal(myrec$metadata$description, "Interface to 'Zenodo' REST API")
   expect_equal(myrec$metadata$resource_type$id, "software")
   expect_is(myrec$metadata$creators, "list")
@@ -206,6 +217,10 @@ test_that("list & downloading files - using wrapper",{
 })
 
 test_that("versioning",{
+  #=> This test includes the following sequences
+  #- get record from concept DOI
+  #- edit its publication date and upload a new file
+  #- deposit and publish a record version with new file
   rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.54893")
   rec$setPublicationDate(Sys.Date())
   publication_filename <- paste0("publication_", format(Sys.time(), "%Y%m%d%H%M%S"), ".csv")
@@ -227,34 +242,17 @@ test_that("get record by DOI",{
   expect_is(rec, "ZenodoRecord")
 })
 
-#test_that("versions & DOIs",{
-#  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.523362")
-#  Sys.sleep(5)
-#  expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
-#  Sys.sleep(5)
-#  expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
-#  Sys.sleep(5)
-#  versions <- rec$getVersions()
-#  expect_is(versions, "data.frame")
-#  Sys.sleep(5)
-#  
-#  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.523363")
-#  Sys.sleep(5)
-#  expect_equal(rec$getConceptDOI(), "10.5072/zenodo.523362")
-#  Sys.sleep(5)
-#  expect_equal(rec$getFirstDOI(), "10.5072/zenodo.523363")
-#  Sys.sleep(5)
-#  versions <- rec$getVersions()
-#  expect_is(versions, "data.frame")
-#  Sys.sleep(5)
-#  
-#  rec <- ZENODO$getDepositionByDOI(rec$getLastDOI())
-#  expect_is(rec, "ZenodoRecord")
-#  Sys.sleep(5)
-#})
+test_that("versions & DOIs",{
+  rec <- ZENODO$getDepositionByConceptDOI("10.5072/zenodo.54893")
+  expect_equal(rec$getConceptDOI(), "10.5072/zenodo.54893")
+  expect_equal(rec$getFirstDOI(), "10.5072/zenodo.54894")
+  versions <- rec$getVersions()
+  expect_is(versions, "data.frame")
+  ys.sleep(5)
+})
 
-#test_that("versions & DOIS - using wrapper",{
-#  df <- get_versions("10.5281/zenodo.2547036")
-#  expect_is(df, "data.frame")
-#  Sys.sleep(5)
-#})
+test_that("versions & DOIS - using wrapper",{
+  df <- get_versions("10.5072/zenodo.54894", sandbox = TRUE)
+  expect_is(df, "data.frame")
+  Sys.sleep(5)
+})
