@@ -251,7 +251,7 @@ test_that("versions & DOIs",{
   expect_equal(rec$getFirstDOI(), "10.5072/zenodo.54894")
   versions <- rec$getVersions()
   expect_is(versions, "data.frame")
-  ys.sleep(5)
+  Sys.sleep(5)
 })
 
 test_that("versions & DOIS - using wrapper",{
