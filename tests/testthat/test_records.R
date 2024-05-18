@@ -9,7 +9,10 @@ require(testthat)
 context("records")
 
 test_that("create empty record - with reserved DOI",{
-  #=> This test creates an empty record with reserved DOI, delete DOI, and finally deletes the record 
+  #=> This test includes the following sequences
+  #- creates an empty record with reserved DOI, 
+  #- delete DOI
+  #and finally deletes the record 
   newRec <- ZENODO$createEmptyRecord()
   expect_is(newRec, "ZenodoRecord")
   expect_true(!is.null(newRec$pids$doi))
