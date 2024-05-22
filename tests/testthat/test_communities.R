@@ -25,3 +25,18 @@ test_that("community is retrieved by id",{
   expect_equal(zen_community$metadata$title, "Fisheries and aquaculture")
   Sys.sleep(2)
 })
+
+test_that("record is submitted to a community, with cancel and review actions (decline, accept) performed",{
+  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.54894")
+  req = ZENODO$submitRecordToCommunities(record = rec, communities = "openfair")
+  #cancel request (for user that submitted the record)
+  canceled = ZENODO$cancelRequest(req$processed[[1]]$request_id)
+  expect_true(canceled)
+  #submit again (new review)
+  req = ZENODO$submitRecordToCommunities(record = rec, communities = "openfair")
+  declined = ZENODO$declineRequest(req$processed[[1]]$request_id, message = "Please explain why you want to add zen4R to 'Open Fair' community")
+  expect_true(declined)
+  #submit again (new review)
+  req = ZENODO$submitRecordToCommunities(record = rec, communities = "openfair", message = "zen4R supports FAIR principles")
+  accepted = ZENODO$acceptRequest(req$processed[[1]]$request_id, message = "Thank you, welcome to the Open FAIR community")
+})
