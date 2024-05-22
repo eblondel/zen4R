@@ -94,7 +94,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       return(response)
     },
     
-    POST = function(url, request, data, file = NULL, progress){
+    POST = function(url, request, data, file = NULL, progress, accept = "application/vnd.inveniordm.v1+json"){
       req <- paste(url, request, sep="/")
       if(!is.null(file)){
         contentType <- "multipart/form-data"
@@ -102,7 +102,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
         data <- list(file = file, filename = data)
       }else{
         contentType <- "application/json"
-        accept = "application/vnd.inveniordm.v1+json"
+        accept = accept
         data <- private$prepareData(data)
       }
       
@@ -235,7 +235,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       req <- switch(private$type,
         "GET" = private$GET(private$url, private$request, private$progress, accept = private$accept),
         "GET_WITH_CURL" = private$GET(private$url, private$request, private$progress, use_curl = TRUE, accept = private$accept),
-        "POST" = private$POST(private$url, private$request, private$data, private$file, private$progress),
+        "POST" = private$POST(private$url, private$request, private$data, private$file, private$progress, accept = private$accept),
         "PUT" = private$PUT(private$url, private$request, private$data, private$progress),
         "DELETE" = private$DELETE(private$url, private$request, private$data)
       )

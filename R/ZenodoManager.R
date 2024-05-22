@@ -28,7 +28,6 @@
 #'   myrec$setLicense("mit")
 #'   myrec$setAccessRight("open")
 #'   myrec$setDOI("mydoi") #use this method if your DOI has been assigned elsewhere, outside Zenodo
-#'   myrec$addCommunity("ecfunded")
 #'   
 #'   #deposit the record 
 #'   myrec <- ZENODO$depositRecord(myrec)
@@ -437,6 +436,84 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(infoMsg)
       }else{
         errMsg = sprintf("Error while fetching community '%s': %s", id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #'@description Submit a record to one or more community
+    #'@param record an object of class \link{ZenodoRecord}
+    #'@param communities communities to which the record will be submitted
+    #'@param message message to send to the community curator(s), either a text or a named list
+    #'for each community in case a community-specific message should be sent
+    #'@return a submission object of class \code{list}, or NULL if nothing was submitted
+    submitRecordToCommunities = function(record, communities = list(), message = NULL){
+      out = NULL
+      if(length(communities)==0){
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+        return(out)
+      }
+      if(!is.null(message)) if(is.list(message)){
+        if(!all(communities %in% names(message))){
+          errMsg = paste0("Message list is inconsistent with the list of communities provided.",
+                          "Please verify that the message is a list named with community names,",
+                          "e.g. ZENODO$dsubmitRecordToCommunities(record, communities = c('com1','com2'), message = list(com1 = 'message to com1', com2 = 'msg to com2'))")
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+          stop(errMsg)
+        }
+      }
+      coms = lapply(communities, function(x){self$getCommunityById(x)})
+      if(any(sapply(coms, is.null))){
+        unk_coms = communities[sapply(coms, is.null)]
+        warnMsg = sprintf("Communities [%s] do not exist in Zenodo, they will be ignored!", paste(unk_coms, collapse=","))
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+      }
+      #check if community exists
+      existing_coms = coms[!sapply(coms, is.null)]
+      existing_com_names = communities[!sapply(coms, is.null)]
+      if(length(existing_coms)==0){
+        warnMsg = "No existing community specified! Aborting record submission to community"
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+        return(NULL)
+      }
+      coms_payload = list(
+        communities = lapply(existing_coms, function(x){
+          com_payload = list(
+            id = x$id
+          )
+          if(!is.null(message)){
+            if(is.character(message)){
+              com_payload$comment = list(payload = list(content = message, format = "html"))
+            }else if(is.list(message)){
+              if(x$slug %in% names(message)){
+                com_payload$comment = list(payload = list(content = message[[x$slug]], format = "html"))
+              }
+            }
+          }
+          return(com_payload)
+        })
+      )
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/communities",record$id),
+                                  accept = "application/json", data = coms_payload,
+                                  token= self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfully submitted request to associate record %s to communities [%s]",
+                          record$id, paste0(existing_com_names, collapse=","))
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while submitting record %s to communities [%s]:", 
+                         record$id, paste0(existing_com_names, collapse=","))
+        print(out)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
         out <- NULL

@@ -977,59 +977,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$notes <- notes
     },
     
-    #' @description Set a vector of character strings identifying communities
-    #' @param communities a vector or list of communities. Values should among known communities. The list of communities can
-    #'    fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}. Each community should be set with 
-    #'    the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.
-    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}
-    setCommunities = function(communities, sandbox = FALSE){
-      if(is.null(self$metadata$communities)) self$metadata$communities <- list()
-      for(community in communities){
-        self$addCommunity(community, sandbox = sandbox)
-      }
-    },
-    
-    #' @description Adds a community to the record metadata. 
-    #' @param community community to add. The community should be set with the Zenodo id of the community. 
-    #'   If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
-    #'   with the \code{ZenodoManager} and the function \code{$getCommunities()}.
-    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}
-    #' @return \code{TRUE} if added, \code{FALSE} otherwise
-    addCommunity = function(community, sandbox = FALSE){
-      added <- FALSE
-      zen <- ZenodoManager$new(sandbox = sandbox)
-      if(is.null(self$metadata$communities)) self$metadata$communities <- list()
-      if(!(community %in% sapply(self$metadata$communities, function(x){x$identifier}))){
-        zen_community <- zen$getCommunityById(community)
-        if(is.null(zen_community)){
-          errorMsg <- sprintf("Community with id '%s' doesn't exist in Zenodo", community)
-          self$ERROR(errorMsg)
-          stop(errorMsg)
-        }
-        self$metadata$communities[[length(self$metadata$communities)+1]] <- list(identifier = community)
-        added <- TRUE
-      }
-      return(added)
-    },
-    
-    #' @description Removes a community from the record metadata. 
-    #' @param community community to remove. The community should be set with the Zenodo id of the community.
-    #' @return \code{TRUE} if removed, \code{FALSE} otherwise
-    removeCommunity = function(community){
-      removed <- FALSE
-      if(!is.null(self$metadata$communities)){
-        for(i in 1:length(self$metadata$communities)){
-          com <- self$metadata$communities[[i]]
-          if(com == community){
-            self$metadata$communities[[i]] <- NULL
-            removed <- TRUE
-            break;
-          }
-        }
-      }
-      return(removed)
-    },
-    
     #' @description Set a vector of character strings identifying grants
     #' @param grants a vector or list of grants Values should among known grants The list of grants can
     #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 

@@ -41,7 +41,6 @@ Main user class to be used with \pkg{zen4R}
   myrec$setLicense("mit")
   myrec$setAccessRight("open")
   myrec$setDOI("mydoi") #use this method if your DOI has been assigned elsewhere, outside Zenodo
-  myrec$addCommunity("ecfunded")
   
   #deposit the record 
   myrec <- ZENODO$depositRecord(myrec)
@@ -100,6 +99,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getResourceTypeById}{\code{ZenodoManager$getResourceTypeById()}}
 \item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
 \item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
+\item \href{#method-ZenodoManager-submitRecordToCommunities}{\code{ZenodoManager$submitRecordToCommunities()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
 \item \href{#method-ZenodoManager-getAwards}{\code{ZenodoManager$getAwards()}}
 \item \href{#method-ZenodoManager-getGrantsByName}{\code{ZenodoManager$getGrantsByName()}}
@@ -373,6 +373,35 @@ Get community by Id.
 }
 \subsection{Returns}{
 the community
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-submitRecordToCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-submitRecordToCommunities}{}}}
+\subsection{Method \code{submitRecordToCommunities()}}{
+Submit a record to one or more community
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$submitRecordToCommunities(
+  record,
+  communities = list(),
+  message = NULL
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{an object of class \link{ZenodoRecord}}
+
+\item{\code{communities}}{communities to which the record will be submitted}
+
+\item{\code{message}}{message to send to the community curator(s), either a text or a named list
+for each community in case a community-specific message should be sent}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a submission object of class \code{list}, or NULL if nothing was submitted
 }
 }
 \if{html}{\out{<hr>}}

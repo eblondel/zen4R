@@ -126,9 +126,6 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-removeSubject}{\code{ZenodoRecord$removeSubject()}}
 \item \href{#method-ZenodoRecord-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
 \item \href{#method-ZenodoRecord-setNotes}{\code{ZenodoRecord$setNotes()}}
-\item \href{#method-ZenodoRecord-setCommunities}{\code{ZenodoRecord$setCommunities()}}
-\item \href{#method-ZenodoRecord-addCommunity}{\code{ZenodoRecord$addCommunity()}}
-\item \href{#method-ZenodoRecord-removeCommunity}{\code{ZenodoRecord$removeCommunity()}}
 \item \href{#method-ZenodoRecord-setGrants}{\code{ZenodoRecord$setGrants()}}
 \item \href{#method-ZenodoRecord-addGrant}{\code{ZenodoRecord$addGrant()}}
 \item \href{#method-ZenodoRecord-removeGrant}{\code{ZenodoRecord$removeGrant()}}
@@ -1430,71 +1427,6 @@ Set notes. HTML is not allowed
 \item{\code{notes}}{object of class \code{character}}
 }
 \if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-setCommunities"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-setCommunities}{}}}
-\subsection{Method \code{setCommunities()}}{
-Set a vector of character strings identifying communities
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setCommunities(communities, sandbox = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{communities}}{a vector or list of communities. Values should among known communities. The list of communities can
-fetched with the \code{ZenodoManager} and the function \code{$getCommunities()}. Each community should be set with 
-the Zenodo id of the community. If not recognized by Zenodo, the function will return an error.}
-
-\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}}
-}
-\if{html}{\out{</div>}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-addCommunity"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-addCommunity}{}}}
-\subsection{Method \code{addCommunity()}}{
-Adds a community to the record metadata.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addCommunity(community, sandbox = FALSE)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{community}}{community to add. The community should be set with the Zenodo id of the community. 
-If not recognized by Zenodo, the function will return an error. The list of communities can fetched 
-with the \code{ZenodoManager} and the function \code{$getCommunities()}.}
-
-\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available communities. Default is \code{FALSE}}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if added, \code{FALSE} otherwise
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-removeCommunity"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-removeCommunity}{}}}
-\subsection{Method \code{removeCommunity()}}{
-Removes a community from the record metadata.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$removeCommunity(community)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{community}}{community to remove. The community should be set with the Zenodo id of the community.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-\code{TRUE} if removed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
