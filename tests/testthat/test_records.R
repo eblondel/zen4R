@@ -117,8 +117,6 @@ test_that("create, deposit and publish record",{
   myrec$addContributor(firstname = "Peter", lastname = "Lead", role = "workpackageleader")
   myrec$addContributor(firstname = "Frank", "Super", role = "supervisor")
   myrec$setLicense("mit", sandbox = TRUE)
-  #expect_true(myrec$addCommunity("openfair", sandbox = TRUE))
-  #expect_false(myrec$addCommunity("openfair", sandbox = TRUE))
   myrec$setKeywords(c("R","package","software"))
   myrec$addReference("Author et al., 2019. Title")
   myrec$addReference("Fulano et al., 2018. Título")
