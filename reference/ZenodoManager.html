@@ -148,6 +148,11 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 <li><p><a href="#method-ZenodoManager-getRecordByDOI"><code>ZenodoManager$getRecordByDOI()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-getRecordById"><code>ZenodoManager$getRecordById()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-getRecordByConceptId"><code>ZenodoManager$getRecordByConceptId()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-getRequest"><code>ZenodoManager$getRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-isActionableRequest"><code>ZenodoManager$isActionableRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-acceptRequest"><code>ZenodoManager$acceptRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-declineRequest"><code>ZenodoManager$declineRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-cancelRequest"><code>ZenodoManager$cancelRequest()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-clone"><code>ZenodoManager$clone()</code></a></p></li>
 </ul></div><p><details><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="ERROR"><a href="zen4RLogger.html#method-ERROR"><code>zen4R::zen4RLogger$ERROR()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="zen4R" data-topic="zen4RLogger" data-id="INFO"><a href="zen4RLogger.html#method-INFO"><code>zen4R::zen4RLogger$INFO()</code></a></span></li>
@@ -1378,15 +1383,128 @@ the file record is deleted.</p><div class="section">
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoManager-clone"></a><div class="section">
-<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
-<p>The objects of this class are cloneable with this method.</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoManager-getRequest"></a><div class="section">
+<h3 id="method-getrequest-">Method <code>getRequest()</code><a class="anchor" aria-label="anchor" href="#method-getrequest-"></a></h3>
+<p>Get a request</p><div class="section">
 <h4 id="usage-50">Usage<a class="anchor" aria-label="anchor" href="#usage-50"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRequest</span><span class="op">(</span><span class="va">request_id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-49">Arguments<a class="anchor" aria-label="anchor" href="#arguments-49"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
+<dd><p>the request ID</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-45">Returns<a class="anchor" aria-label="anchor" href="#returns-45"></a></h4>
+<p>the request <code>list</code> object, NULL otherwise</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-isActionableRequest"></a><div class="section">
+<h3 id="method-isactionablerequest-">Method <code>isActionableRequest()</code><a class="anchor" aria-label="anchor" href="#method-isactionablerequest-"></a></h3>
+<p>Checks if the request can be subject to an operation (accept, decline, cancel)
+depending on its status. To be subject to an operation, a request should not be closed or expired</p><div class="section">
+<h4 id="usage-51">Usage<a class="anchor" aria-label="anchor" href="#usage-51"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">isActionableRequest</span><span class="op">(</span><span class="va">request_id</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-50">Arguments<a class="anchor" aria-label="anchor" href="#arguments-50"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
+<dd><p>the request ID</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
+<p><code>TRUE</code> if</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-acceptRequest"></a><div class="section">
+<h3 id="method-acceptrequest-">Method <code>acceptRequest()</code><a class="anchor" aria-label="anchor" href="#method-acceptrequest-"></a></h3>
+<p>Accepts a request</p><div class="section">
+<h4 id="usage-52">Usage<a class="anchor" aria-label="anchor" href="#usage-52"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">acceptRequest</span><span class="op">(</span><span class="va">request_id</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-51">Arguments<a class="anchor" aria-label="anchor" href="#arguments-51"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
+<dd><p>the request ID</p></dd>
+
+
+<dt><code>message</code></dt>
+<dd><p>optional message reason for acceptance</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
+<p><code>TRUE</code> if accepted, <code>FALSE</code> otherwise</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-declineRequest"></a><div class="section">
+<h3 id="method-declinerequest-">Method <code>declineRequest()</code><a class="anchor" aria-label="anchor" href="#method-declinerequest-"></a></h3>
+<p>Declines a request</p><div class="section">
+<h4 id="usage-53">Usage<a class="anchor" aria-label="anchor" href="#usage-53"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">declineRequest</span><span class="op">(</span><span class="va">request_id</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-52">Arguments<a class="anchor" aria-label="anchor" href="#arguments-52"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
+<dd><p>the request ID</p></dd>
+
+
+<dt><code>message</code></dt>
+<dd><p>optional message reason for declination</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
+<p><code>TRUE</code> if declined, <code>FALSE</code> otherwise</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-cancelRequest"></a><div class="section">
+<h3 id="method-cancelrequest-">Method <code>cancelRequest()</code><a class="anchor" aria-label="anchor" href="#method-cancelrequest-"></a></h3>
+<p>Cancels a request</p><div class="section">
+<h4 id="usage-54">Usage<a class="anchor" aria-label="anchor" href="#usage-54"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">cancelRequest</span><span class="op">(</span><span class="va">request_id</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-53">Arguments<a class="anchor" aria-label="anchor" href="#arguments-53"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
+<dd><p>the request ID</p></dd>
+
+
+<dt><code>message</code></dt>
+<dd><p>optional message reason for cancelation</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
+<p><code>TRUE</code> if canceled, <code>FALSE</code> otherwise</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-clone"></a><div class="section">
+<h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
+<p>The objects of this class are cloneable with this method.</p><div class="section">
+<h4 id="usage-55">Usage<a class="anchor" aria-label="anchor" href="#usage-55"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-54">Arguments<a class="anchor" aria-label="anchor" href="#arguments-54"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
