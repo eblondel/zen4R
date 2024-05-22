@@ -100,6 +100,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getCommunities}{\code{ZenodoManager$getCommunities()}}
 \item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
 \item \href{#method-ZenodoManager-submitRecordToCommunities}{\code{ZenodoManager$submitRecordToCommunities()}}
+\item \href{#method-ZenodoManager-removeRecordFromCommunities}{\code{ZenodoManager$removeRecordFromCommunities()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
 \item \href{#method-ZenodoManager-getAwards}{\code{ZenodoManager$getAwards()}}
 \item \href{#method-ZenodoManager-getGrantsByName}{\code{ZenodoManager$getGrantsByName()}}
@@ -407,6 +408,28 @@ for each community in case a community-specific message should be sent}
 }
 \subsection{Returns}{
 a submission object of class \code{list}, or NULL if nothing was submitted
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-removeRecordFromCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-removeRecordFromCommunities}{}}}
+\subsection{Method \code{removeRecordFromCommunities()}}{
+Remove a record from one or more community
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$removeRecordFromCommunities(record, communities = list())}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{an object of class \link{ZenodoRecord}}
+
+\item{\code{communities}}{communities to which the record will be submitted}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if removed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}

@@ -27,7 +27,9 @@ test_that("community is retrieved by id",{
 })
 
 test_that("record is submitted to a community, with cancel and review actions (decline, accept) performed",{
-  rec <- ZENODO$getDepositionByDOI("10.5072/zenodo.54894")
+  rec = ZENODO$getDepositionByDOI("10.5072/zenodo.54894")
+  removed = ZENODO$removeRecordFromCommunities(record = rec, communities = "openfair")
+  expect_true(removed)
   req = ZENODO$submitRecordToCommunities(record = rec, communities = "openfair")
   #cancel request (for user that submitted the record)
   canceled = ZENODO$cancelRequest(req$processed[[1]]$request_id)

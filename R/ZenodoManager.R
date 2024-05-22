@@ -521,6 +521,57 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #'@description Remove a record from one or more community
+    #'@param record an object of class \link{ZenodoRecord}
+    #'@param communities communities to which the record will be submitted
+    #'@return \code{TRUE} if removed, \code{FALSE} otherwise
+    removeRecordFromCommunities = function(record, communities = list()){
+      
+      coms = lapply(communities, function(x){self$getCommunityById(x)})
+      if(any(sapply(coms, is.null))){
+        unk_coms = communities[sapply(coms, is.null)]
+        warnMsg = sprintf("Communities [%s] do not exist in Zenodo, they will be ignored!", paste(unk_coms, collapse=","))
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+      }
+      #check if community exists
+      existing_coms = coms[!sapply(coms, is.null)]
+      existing_com_names = communities[!sapply(coms, is.null)]
+      if(length(existing_coms)==0){
+        warnMsg = "No existing community specified! Aborting record removal from community"
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+        return(NULL)
+      }
+      
+      payload = list(
+        communities = lapply(existing_coms, function(x){
+          list(id = x$id)
+        })
+      )
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/communities",record$id),
+                                  data = payload,
+                                  token= self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successful removed record %s from communities [%s]",
+                          record$id, paste0(existing_com_names, collapse=","))
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        out = TRUE
+      }else{
+        errMsg = sprintf("Error while removing record %s from communities [%s]:", 
+                         record$id, paste0(existing_com_names, collapse=","))
+        print(out)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- FALSE
+      }
+      return(out)
+    },
+    
     #Special vocabulary/Awards (former Grants)
     #------------------------------------------------------------------------------------------
     
@@ -1740,8 +1791,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param recordId ID of the record
     #' @param filename name of the file to be deleted
     deleteFile = function(recordId, filename){
-      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/draft/files", recordId), 
-                                  data = filename, token = self$getToken(),
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/draft/files/%s", recordId, filename), 
+                                  token = self$getToken(),
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE

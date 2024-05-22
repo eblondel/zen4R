@@ -177,21 +177,26 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     
     DELETE = function(url, request, data){
       req <- paste(url, request, sep="/")
-      if(!is.null(data)) req <- paste(req, data, sep = "/")
       #headers
       headers <- c(
         "User-Agent" = private$agent,
-        "Authorization" = paste("Bearer",private$token)
+        "Authorization" = paste("Bearer",private$token),
+        "Content-Type" = "application/json"
       )
       if(self$verbose.debug){
+        print(data)
         r <- with_verbose(httr::DELETE(
           url = req,
-          add_headers(headers)
+          add_headers(headers),
+          encode = "json",
+          body = data
         ))
       }else{
         r <- httr::DELETE(
           url = req,
-          add_headers(headers)
+          add_headers(headers),
+          encode = "json",
+          body = data
         )
       }
       responseContent <- content(r, type = "application/json", encoding = "UTF-8")

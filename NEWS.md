@@ -27,6 +27,7 @@
 * [#148](https://github.com/eblondel/zen4R/issues/148) Zenodo to InvenioRDM - Support publisher
 * [#152](https://github.com/eblondel/zen4R/issues/152) Zenodo To InvenioRDM - New method to associate a record to a community
 * [#153](https://github.com/eblondel/zen4R/issues/153) Support API 'requests' methods
+* [#157](https://github.com/eblondel/zen4R/issues/157) Support method to delete records from communities
 
 ## [zen4R 0.9](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
