@@ -1,5 +1,22 @@
 # Change log
 
+## [zen4R 0.10](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
+
+* [#127](https://github.com/eblondel/zen4R/issues/127) Migration to new Zenodo API (based on InvenioRDM)
+
+**Enhancements**
+
+* [#129](https://github.com/eblondel/zen4R/issues/129) Zenodo to InvenioRDM - communities API endpoint
+* [#130](https://github.com/eblondel/zen4R/issues/130) Zenodo to InvenioRDM - funders API endpoint
+* [#131](https://github.com/eblondel/zen4R/issues/131) Zenodo to InvenioRDM - licenses API endpoint
+* [#132](https://github.com/eblondel/zen4R/issues/132) Zenodo to InvenioRDM - add `languages` vocabulary getters
+* [#133](https://github.com/eblondel/zen4R/issues/133) Zenodo to InvenioRDM - update record management methods with new API endpoint
+* [#134](https://github.com/eblondel/zen4R/issues/134) Zenodo to InvenioRDM - grants API endpoint (replaced by awards)
+* [#135](https://github.com/eblondel/zen4R/issues/135) Zenodo to InvenioRDM - update file management methods
+* [#136](https://github.com/eblondel/zen4R/issues/136) Zenodo to InvenioRDM - citation export methods
+* [#137](https://github.com/eblondel/zen4R/issues/137) Zenodo to InvenioRDM - ZenodoRecord model adjustments
+
+
 ## [zen4R 0.9](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **New features**
@@ -22,7 +39,7 @@
 
 * [#125](https://github.com/eblondel/zen4R/issues/125) Ensure null stats with deposition decoding (regression that relates to #123)
 
-## [zen4R 0.8](https://cran.r-project.org/package=zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.8](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.8.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.8.tar.gz)
 
 **Enhancements**
 
