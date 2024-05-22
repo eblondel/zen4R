@@ -1993,6 +1993,154 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$WARN(warnMsg)
       }
       return(result)
+    },
+    
+    #Requests management
+    #---------------------------------------------------------------------------
+    
+    #' @description Get a request
+    #' @param request_id the request ID
+    #' @return the request \code{list} object, NULL otherwise
+    getRequest = function(request_id){
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("requests/%s", request_id),
+                                  accept = "application/json",
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfuly fetched request with id '%s'", request_id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while fetching request with id  '%s': %s", request_id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #' @description Checks if the request can be subject to an operation (accept, decline, cancel)
+    #' depending on its status. To be subject to an operation, a request should not be closed or expired 
+    #' @param request_id the request ID
+    #' @return \code{TRUE} if
+    isActionableRequest = function(request_id){
+      req = self$getRequest(request_id)
+      if(is.null(req)){
+        warnMsg = sprintf("No request with id '%s'to cancel, aborting request...", request_id)
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+        return(FALSE)
+      }else{
+        if(req$is_closed | req$is_expired){
+          warnMsg = sprintf("Request with id '%s' is already %s, aborting request...", request_id, req$status)
+          cli::cli_alert_warning(warnMsg)
+          self$WARN(warnMsg)
+          return(FALSE)
+        }
+      }
+      return(TRUE)
+    },
+
+    
+    #' @description Accepts a request
+    #' @param request_id the request ID
+    #' @param message optional message reason for acceptance
+    #' @return \code{TRUE} if accepted, \code{FALSE} otherwise
+    acceptRequest = function(request_id, message = NULL){
+      
+      if(!self$isActionableRequest(request_id)) return(FALSE);
+      
+      accept_payload = NULL
+      if(!is.null(message)){
+        accept_payload = list(payload = list(content = message, format = "html"))
+      }
+      
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("requests/%s/actions/accept", request_id),
+                                  accept = "application/json", data = accept_payload,
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfuly accepted request with id '%s'", request_id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        out <- TRUE
+      }else{
+        errMsg = sprintf("Error while accepting request with id  '%s': %s", request_id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- FALSE
+      }
+      return(out)
+    },
+    
+    #' @description Declines a request
+    #' @param request_id the request ID
+    #' @param message optional message reason for declination
+    #' @return \code{TRUE} if declined, \code{FALSE} otherwise
+    declineRequest = function(request_id, message = NULL){
+      
+      if(!self$isActionableRequest(request_id)) return(FALSE);
+      
+      decline_payload = NULL
+      if(!is.null(message)){
+        decline_payload = list(payload = list(content = message, format = "html"))
+      }
+      
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("requests/%s/actions/decline", request_id),
+                                  accept = "application/json", data = decline_payload,
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfuly declined request with id '%s'", request_id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        out <- TRUE
+      }else{
+        errMsg = sprintf("Error while declining request with id  '%s': %s", request_id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- FALSE
+      }
+      return(out)
+    },
+    
+    #' @description Cancels a request
+    #' @param request_id the request ID
+    #' @param message optional message reason for cancelation
+    #' @return \code{TRUE} if canceled, \code{FALSE} otherwise
+    cancelRequest = function(request_id, message = NULL){
+      
+      if(!self$isActionableRequest(request_id)) return(FALSE);
+      
+      cancel_payload = NULL
+      if(!is.null(message)){
+        cancel_payload = list(payload = list(content = message, format = "html"))
+      }
+      
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("requests/%s/actions/cancel", request_id),
+                                  accept = "application/json", data = cancel_payload,
+                                  token= self$getToken(), 
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfuly canceled request with id '%s'", request_id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        out <- TRUE
+      }else{
+        errMsg = sprintf("Error while canceling request with id  '%s': %s", request_id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- FALSE
+      }
+      return(out)
     }
     
   )

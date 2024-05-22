@@ -139,6 +139,11 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getRecordByDOI}{\code{ZenodoManager$getRecordByDOI()}}
 \item \href{#method-ZenodoManager-getRecordById}{\code{ZenodoManager$getRecordById()}}
 \item \href{#method-ZenodoManager-getRecordByConceptId}{\code{ZenodoManager$getRecordByConceptId()}}
+\item \href{#method-ZenodoManager-getRequest}{\code{ZenodoManager$getRequest()}}
+\item \href{#method-ZenodoManager-isActionableRequest}{\code{ZenodoManager$isActionableRequest()}}
+\item \href{#method-ZenodoManager-acceptRequest}{\code{ZenodoManager$acceptRequest()}}
+\item \href{#method-ZenodoManager-declineRequest}{\code{ZenodoManager$declineRequest()}}
+\item \href{#method-ZenodoManager-cancelRequest}{\code{ZenodoManager$cancelRequest()}}
 \item \href{#method-ZenodoManager-clone}{\code{ZenodoManager$clone()}}
 }
 }
@@ -1301,6 +1306,113 @@ Get Record by concept ID
 }
 \subsection{Returns}{
 a object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRequest}{}}}
+\subsection{Method \code{getRequest()}}{
+Get a request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRequest(request_id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{request_id}}{the request ID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the request \code{list} object, NULL otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-isActionableRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-isActionableRequest}{}}}
+\subsection{Method \code{isActionableRequest()}}{
+Checks if the request can be subject to an operation (accept, decline, cancel)
+depending on its status. To be subject to an operation, a request should not be closed or expired
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$isActionableRequest(request_id)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{request_id}}{the request ID}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-acceptRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-acceptRequest}{}}}
+\subsection{Method \code{acceptRequest()}}{
+Accepts a request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$acceptRequest(request_id, message = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{request_id}}{the request ID}
+
+\item{\code{message}}{optional message reason for acceptance}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if accepted, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-declineRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-declineRequest}{}}}
+\subsection{Method \code{declineRequest()}}{
+Declines a request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$declineRequest(request_id, message = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{request_id}}{the request ID}
+
+\item{\code{message}}{optional message reason for declination}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if declined, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-cancelRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-cancelRequest}{}}}
+\subsection{Method \code{cancelRequest()}}{
+Cancels a request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$cancelRequest(request_id, message = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{request_id}}{the request ID}
+
+\item{\code{message}}{optional message reason for cancelation}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if canceled, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
