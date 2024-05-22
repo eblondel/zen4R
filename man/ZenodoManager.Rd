@@ -65,7 +65,7 @@ Main user class to be used with \pkg{zen4R}
   zen_files <- ZENODO$getFiles(myrec$id)
   
   #delete a file?
-  ZENODO$deleteFile(myrec$id, zen_files[[1]]$id)
+  ZENODO$deleteFile(myrec$id, zen_files[[1]]$filename)
 }
 
 }

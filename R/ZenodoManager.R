@@ -52,7 +52,7 @@
 #'   zen_files <- ZENODO$getFiles(myrec$id)
 #'   
 #'   #delete a file?
-#'   ZENODO$deleteFile(myrec$id, zen_files[[1]]$id)
+#'   ZENODO$deleteFile(myrec$id, zen_files[[1]]$filename)
 #' }
 #' 
 #' @note Main user class to be used with \pkg{zen4R}
@@ -1400,7 +1400,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_info(infoMsg)
           self$INFO(infoMsg)
           invisible(lapply(out$files, function(x){ 
-            self$deleteFile(out$id, x$id)
+            self$deleteFile(out$id, x$filename)
             Sys.sleep(0.6)
           }))
         }
