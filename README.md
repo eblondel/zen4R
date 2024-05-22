@@ -14,8 +14,8 @@ Please check the [online documentation](https://github.com/eblondel/zen4R/wiki) 
 Many thanks to the following organizations that have provided fundings for strenghtening the ``zen4R`` package:
 
 <div>
+  <a href="https://en.ird.fr/"><img src="https://en.ird.fr/sites/ird_fr/files/2019-08/logo_IRD_2016_BLOC_UK_COUL.png" height=200 width=200/></a>
   <a href="https://www.fao.org/home/en/"><img height=200 width=200 src="https://www.fao.org/fileadmin/templates/family-farming-decade/images/FAO-IFAD-Logos/FAO-Logo-EN.svg">
-<a href="https://en.ird.fr/"><img src="https://en.ird.fr/sites/ird_fr/files/2019-08/logo_IRD_2016_BLOC_UK_COUL.png" height=200 width=200/></a>
 </div>
 
 <br>
