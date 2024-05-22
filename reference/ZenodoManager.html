@@ -1622,8 +1622,8 @@ depending on its status. To be subject to an operation, a request should not be 
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#delete a file?</span></span></span>
-<span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">deleteFile</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span>, <span class="va">zen_files</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in zen_files[[1]]$id:</span> $ operator is invalid for atomic vectors</span>
+<span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">deleteFile</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span>, <span class="va">zen_files</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">filename</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in zen_files[[1]]$filename:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
