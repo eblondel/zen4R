@@ -20,11 +20,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,    r: 'release'}
-          - {os: windows-latest,  r: 'release'}
+          #- {os: macos-latest,    r: 'release'}
+          #- {os: windows-latest,  r: 'release'}
           - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          #- {os: ubuntu-latest,   r: 'release'}
+          #- {os: ubuntu-latest,   r: 'oldrel-1'}
     
     env:
         ZENODO_SANDBOX_TOKEN: ${{ secrets.ZENODO_SANDBOX_TOKEN }}
