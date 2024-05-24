@@ -572,6 +572,32 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
+    #' @description Get record communities
+    #' @param record object of class \code{ZenodoRecord}
+    #' @return the list of communities in which the record was included
+    getRecordCommunities = function(record){
+      out <- NULL
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/communities", record$id), 
+                                  accept = "application/json",
+                                  token = self$getToken(),
+                                  logger = self$loggerType)
+      out <- NULL
+      zenReq$execute()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfully fetched communities for record '%s'",record$id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        resp <- zenReq$getResponse()
+        print(resp)
+        out <- resp$hits$hits
+      }else{
+        errMsg = sprintf("Error while fetching communities for record '%s':", record$id, out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+      }
+      return(out)
+    },
+    
     #Special vocabulary/Awards (former Grants)
     #------------------------------------------------------------------------------------------
     
@@ -2048,6 +2074,88 @@ ZenodoManager <-  R6Class("ZenodoManager",
     
     #Requests management
     #---------------------------------------------------------------------------
+    
+    #' @description Search requests
+    #' @param q Search query used to filter results based on ElasticSearch's query string syntax. 
+    #' e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax
+    #' @param sort Sort search results. Built-in options are "bestmatch", "name", "newest", "oldest" (default: "bestmatch" or "newest").
+    #' @param size number of records to be retrieved per request (paginated). Default is 10
+    #' @return a list of \code{ZenodoRecord}
+    getRequests = function(q = "", sort = "bestmatch", size = 10){
+      page <- 1
+      req <- sprintf("requests/?q=%s&size=10page=%s&sort=%s", URLencode(q), page, sort)
+      zenReq <- ZenodoRequest$new(private$url, "GET", req, accept = "application/json",
+                                  token = self$getToken(),
+                                  logger = NULL)
+      zenReq$execute()
+      total = 0
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        total <- resp$hits$total
+        if(total > 10000){
+          warnMsg = sprintf("Total of %s requests found: the Zenodo API limits to a maximum of 10,000 records!", total)
+          cli::cli_alert_warning(warnMsg)
+          self$WARN(warnMSg) 
+        }
+      }
+      
+      req <- sprintf("requests/?q=%s&size=%s&page=%s&sort=%s", URLencode(q), size, page, sort)
+      zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", req, accept = "application/json",
+                                  token = self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 200){
+        resp <- zenReq$getResponse()
+        total_remaining <- total
+        requests = resp
+        hasRecords <- length(requests)>0
+        while(hasRecords){
+          out <- c(out, requests)
+          infoMsg = sprintf("Successfully fetched list of requests - page %s", page)
+          cli::cli_alert_info(infoMsg)
+          self$INFO(infoMsg)
+          total_remaining <- total_remaining-length(requests)
+          if(total_remaining <= size) size = total_remaining
+          if(total_remaining == 0){
+            break
+          }
+
+          #next
+          page <- page+1
+          nextreq <- sprintf("requests/?q=%s&size=%s&page=%s&sort=%s", URLencode(q), size, page, sort)
+          zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", nextreq, accept = "application/json",
+                                      token = self$getToken(),
+                                      logger = self$loggerType)
+          zenReq$execute()
+          if(zenReq$getStatus() == 200){
+            resp <- zenReq$getResponse()
+            requests <- resp$hits$hits
+            hasRecords <- length(requests)>0
+          }else{
+            warnMsg = sprintf("Maximum allowed size for list of requests at page %s", page)
+            cli::cli_alert_warning(warnMsg)
+            self$WARN(warnMsg)
+            break
+          }
+        }
+        infoMsg = "Successfully fetched list of requests!"
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        out <- zenReq$getResponse()
+        print(out)
+        errMsg = sprintf("Error while fetching requests: %s", out$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        for(error in out$errors){
+          errMsg = sprintf("Error: %s - %s", error$field, error$message)
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+        }
+      }
+      return(out)
+    },
     
     #' @description Get a request
     #' @param request_id the request ID

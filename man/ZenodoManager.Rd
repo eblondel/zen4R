@@ -101,6 +101,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getCommunityById}{\code{ZenodoManager$getCommunityById()}}
 \item \href{#method-ZenodoManager-submitRecordToCommunities}{\code{ZenodoManager$submitRecordToCommunities()}}
 \item \href{#method-ZenodoManager-removeRecordFromCommunities}{\code{ZenodoManager$removeRecordFromCommunities()}}
+\item \href{#method-ZenodoManager-getRecordCommunities}{\code{ZenodoManager$getRecordCommunities()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
 \item \href{#method-ZenodoManager-getAwards}{\code{ZenodoManager$getAwards()}}
 \item \href{#method-ZenodoManager-getGrantsByName}{\code{ZenodoManager$getGrantsByName()}}
@@ -140,6 +141,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-getRecordByDOI}{\code{ZenodoManager$getRecordByDOI()}}
 \item \href{#method-ZenodoManager-getRecordById}{\code{ZenodoManager$getRecordById()}}
 \item \href{#method-ZenodoManager-getRecordByConceptId}{\code{ZenodoManager$getRecordByConceptId()}}
+\item \href{#method-ZenodoManager-getRequests}{\code{ZenodoManager$getRequests()}}
 \item \href{#method-ZenodoManager-getRequest}{\code{ZenodoManager$getRequest()}}
 \item \href{#method-ZenodoManager-isActionableRequest}{\code{ZenodoManager$isActionableRequest()}}
 \item \href{#method-ZenodoManager-acceptRequest}{\code{ZenodoManager$acceptRequest()}}
@@ -430,6 +432,26 @@ Remove a record from one or more community
 }
 \subsection{Returns}{
 \code{TRUE} if removed, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getRecordCommunities"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRecordCommunities}{}}}
+\subsection{Method \code{getRecordCommunities()}}{
+Get record communities
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRecordCommunities(record)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{object of class \code{ZenodoRecord}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the list of communities in which the record was included
 }
 }
 \if{html}{\out{<hr>}}
@@ -1329,6 +1351,31 @@ Get Record by concept ID
 }
 \subsection{Returns}{
 a object of class \code{ZenodoRecord}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getRequests"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getRequests}{}}}
+\subsection{Method \code{getRequests()}}{
+Search requests
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getRequests(q = "", sort = "bestmatch", size = 10)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{q}}{Search query used to filter results based on ElasticSearch's query string syntax. 
+e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax}
+
+\item{\code{sort}}{Sort search results. Built-in options are "bestmatch", "name", "newest", "oldest" (default: "bestmatch" or "newest").}
+
+\item{\code{size}}{number of records to be retrieved per request (paginated). Default is 10}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a list of \code{ZenodoRecord}
 }
 }
 \if{html}{\out{<hr>}}
