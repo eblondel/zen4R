@@ -588,7 +588,6 @@ ZenodoManager <-  R6Class("ZenodoManager",
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
         resp <- zenReq$getResponse()
-        print(resp)
         out <- resp$hits$hits
       }else{
         errMsg = sprintf("Error while fetching communities for record '%s':", record$id, out$message)
