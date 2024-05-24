@@ -41,4 +41,7 @@ test_that("record is submitted to a community, with cancel and review actions (d
   #submit again (new review)
   req = ZENODO$submitRecordToCommunities(record = rec, communities = "openfair", message = "zen4R supports FAIR principles")
   accepted = ZENODO$acceptRequest(req$processed[[1]]$request_id, message = "Thank you, welcome to the Open FAIR community")
+  #get record communities
+  req_coms = ZENODO$getRecordCommunities(record = rec)
+  expect_true(length(req_coms)>0)
 })
