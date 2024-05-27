@@ -443,7 +443,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
       return(out)
     },
     
-    #'@description Submit a record to one or more community
+    
+    #'@description Submit a published record to one or more community
     #'@param record an object of class \link{ZenodoRecord}
     #'@param communities communities to which the record will be submitted
     #'@param message message to send to the community curator(s), either a text or a named list
@@ -593,6 +594,127 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching communities for record '%s':", record$id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+      }
+      return(out)
+    },
+    
+    #Reviews
+    #---------------------------------------------------------------------------
+    #'@description Creates a record review request in a community
+    #'@param record an object of class \link{ZenodoRecord}
+    #'@param community a community to which the record is submitted for review and publication
+    #'@return a review request object of class \code{list}, or NULL if nothing was submitted
+    createReviewRequest = function(record, community){
+      
+      zen_com = self$getCommunityById(community)
+      if(is.null(zen_com)){
+        warnMsg = sprintf("Community '%s' does not exist in Zenodo! Aborting review request...", community)
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+        return(NULL)
+      }
+      
+      review_payload = list(receiver = list(community = zen_com$id), type = "community-submission")
+      zenReq <- ZenodoRequest$new(private$url, "PUT", sprintf("records/%s/draft/review",record$id),
+                                  accept = "application/json", data = review_payload,
+                                  token= self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfully created request to review record %s in community '%s'",
+                          record$id, community)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while creating request to review record %s in comunity '%s':", 
+                         record$id, community)
+        print(out)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #'@description Get a record review request
+    #'@param record an object of class \link{ZenodoRecord}
+    #'@return a review request object of class \code{list}, or NULL if nothing exists
+    getReviewRequest = function(record){
+      
+      zenReq <- ZenodoRequest$new(private$url, "GET", sprintf("records/%s/draft/review",record$id),
+                                  accept = "application/json",
+                                  token= self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- zenReq$getResponse()
+      if(zenReq$getStatus() == 200){
+        infoMsg = sprintf("Successfully fetched request to review record %s", record$id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }else{
+        errMsg = sprintf("Error while fetching request to review record %s:", record$id)
+        print(out)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- NULL
+      }
+      return(out)
+    },
+    
+    #'@description Deletes a review request
+    #'@param record an object of class \link{ZenodoRecord}
+    #'@return \code{TRUE} if deleted, \code{FALSE} otherwise
+    deleteReviewRequest = function(record){
+      
+      zenReq <- ZenodoRequest$new(private$url, "DELETE", sprintf("records/%s/draft/review",record$id),
+                                  accept = "application/json",
+                                  token= self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out <- NULL
+      if(zenReq$getStatus() == 204){
+        infoMsg = sprintf("Successfully deleted request to review record %s", record$id)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        out <- TRUE
+      }else{
+        errMsg = sprintf("Error while deleting request to review record %s:", record$id)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- FALSE
+      }
+      return(out)
+    },
+    
+    #'@description Submits a record for review. Prior to this submission, a community
+    #'has to be selected for a record. This is done by using the method \code{createReviewRequest(record, community)}.
+    #'@param recordId the ID of a Zenodo record
+    #'@param message message content for the submission. Optional
+    #'@return \code{TRUE} if submitted, \code{FALSE} otherwise
+    submitRecordForReview = function(recordId, message = NULL){
+      out = NULL
+      submit_payload = list()
+      if(!is.null(message)){
+        submit_payload = list(payload = list(content = message, format = "html"))
+      }
+      zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft/actions/submit-review", recordId), 
+                                  accept = "application/json", data = submit_payload,
+                                  token = self$getToken(),
+                                  logger = self$loggerType)
+      zenReq$execute()
+      out = FALSE
+      if(zenReq$getStatus() == 202){
+        infoMsg = sprintf("Successfully submitted record %s for review", recordId)
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+        out = TRUE
+      }else{
+        errMsg = sprintf("Error while submitting record %s for review:",recordId)
+        print(out)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out <- FALSE
       }
       return(out)
     },

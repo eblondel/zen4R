@@ -102,6 +102,10 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoManager-submitRecordToCommunities}{\code{ZenodoManager$submitRecordToCommunities()}}
 \item \href{#method-ZenodoManager-removeRecordFromCommunities}{\code{ZenodoManager$removeRecordFromCommunities()}}
 \item \href{#method-ZenodoManager-getRecordCommunities}{\code{ZenodoManager$getRecordCommunities()}}
+\item \href{#method-ZenodoManager-createReviewRequest}{\code{ZenodoManager$createReviewRequest()}}
+\item \href{#method-ZenodoManager-getReviewRequest}{\code{ZenodoManager$getReviewRequest()}}
+\item \href{#method-ZenodoManager-deleteReviewRequest}{\code{ZenodoManager$deleteReviewRequest()}}
+\item \href{#method-ZenodoManager-submitRecordForReview}{\code{ZenodoManager$submitRecordForReview()}}
 \item \href{#method-ZenodoManager-getGrants}{\code{ZenodoManager$getGrants()}}
 \item \href{#method-ZenodoManager-getAwards}{\code{ZenodoManager$getAwards()}}
 \item \href{#method-ZenodoManager-getGrantsByName}{\code{ZenodoManager$getGrantsByName()}}
@@ -387,7 +391,7 @@ the community
 \if{html}{\out{<a id="method-ZenodoManager-submitRecordToCommunities"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoManager-submitRecordToCommunities}{}}}
 \subsection{Method \code{submitRecordToCommunities()}}{
-Submit a record to one or more community
+Submit a published record to one or more community
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$submitRecordToCommunities(
   record,
@@ -452,6 +456,91 @@ Get record communities
 }
 \subsection{Returns}{
 the list of communities in which the record was included
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-createReviewRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-createReviewRequest}{}}}
+\subsection{Method \code{createReviewRequest()}}{
+Creates a record review request in a community
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$createReviewRequest(record, community)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{an object of class \link{ZenodoRecord}}
+
+\item{\code{community}}{a community to which the record is submitted for review and publication}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a review request object of class \code{list}, or NULL if nothing was submitted
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-getReviewRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-getReviewRequest}{}}}
+\subsection{Method \code{getReviewRequest()}}{
+Get a record review request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$getReviewRequest(record)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{an object of class \link{ZenodoRecord}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+a review request object of class \code{list}, or NULL if nothing exists
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-deleteReviewRequest"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-deleteReviewRequest}{}}}
+\subsection{Method \code{deleteReviewRequest()}}{
+Deletes a review request
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$deleteReviewRequest(record)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{record}}{an object of class \link{ZenodoRecord}}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if deleted, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-submitRecordForReview"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-submitRecordForReview}{}}}
+\subsection{Method \code{submitRecordForReview()}}{
+Submits a record for review. Prior to this submission, a community
+has to be selected for a record. This is done by using the method \code{createReviewRequest(record, community)}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$submitRecordForReview(recordId, message = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{recordId}}{the ID of a Zenodo record}
+
+\item{\code{message}}{message content for the submission. Optional}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if submitted, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}
