@@ -111,6 +111,10 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 <li><p><a href="#method-ZenodoManager-submitRecordToCommunities"><code>ZenodoManager$submitRecordToCommunities()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-removeRecordFromCommunities"><code>ZenodoManager$removeRecordFromCommunities()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-getRecordCommunities"><code>ZenodoManager$getRecordCommunities()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-createReviewRequest"><code>ZenodoManager$createReviewRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-getReviewRequest"><code>ZenodoManager$getReviewRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-deleteReviewRequest"><code>ZenodoManager$deleteReviewRequest()</code></a></p></li>
+<li><p><a href="#method-ZenodoManager-submitRecordForReview"><code>ZenodoManager$submitRecordForReview()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-getGrants"><code>ZenodoManager$getGrants()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-getAwards"><code>ZenodoManager$getAwards()</code></a></p></li>
 <li><p><a href="#method-ZenodoManager-getGrantsByName"><code>ZenodoManager$getGrantsByName()</code></a></p></li>
@@ -396,7 +400,7 @@ not all communities can be listed from Zenodo, a query has to be specified.</p><
 
 </div><p></p><hr><a id="method-ZenodoManager-submitRecordToCommunities"></a><div class="section">
 <h3 id="method-submitrecordtocommunities-">Method <code>submitRecordToCommunities()</code><a class="anchor" aria-label="anchor" href="#method-submitrecordtocommunities-"></a></h3>
-<p>Submit a record to one or more community</p><div class="section">
+<p>Submit a published record to one or more community</p><div class="section">
 <h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">submitRecordToCommunities</span><span class="op">(</span></span>
 <span>  <span class="va">record</span>,</span>
@@ -471,15 +475,104 @@ for each community in case a community-specific message should be sent</p></dd>
 <p>the list of communities in which the record was included</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoManager-getGrants"></a><div class="section">
-<h3 id="method-getgrants-">Method <code>getGrants()</code><a class="anchor" aria-label="anchor" href="#method-getgrants-"></a></h3>
-<p>Get Grants supported by Zenodo. DEPRECATED: replaced by <code>getAwards</code></p><div class="section">
+</div><p></p><hr><a id="method-ZenodoManager-createReviewRequest"></a><div class="section">
+<h3 id="method-createreviewrequest-">Method <code>createReviewRequest()</code><a class="anchor" aria-label="anchor" href="#method-createreviewrequest-"></a></h3>
+<p>Creates a record review request in a community</p><div class="section">
 <h4 id="usage-13">Usage<a class="anchor" aria-label="anchor" href="#usage-13"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getGrants</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">createReviewRequest</span><span class="op">(</span><span class="va">record</span>, <span class="va">community</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-12">Arguments<a class="anchor" aria-label="anchor" href="#arguments-12"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>record</code></dt>
+<dd><p>an object of class <a href="ZenodoRecord.html">ZenodoRecord</a></p></dd>
+
+
+<dt><code>community</code></dt>
+<dd><p>a community to which the record is submitted for review and publication</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-12">Returns<a class="anchor" aria-label="anchor" href="#returns-12"></a></h4>
+<p>a review request object of class <code>list</code>, or NULL if nothing was submitted</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-getReviewRequest"></a><div class="section">
+<h3 id="method-getreviewrequest-">Method <code>getReviewRequest()</code><a class="anchor" aria-label="anchor" href="#method-getreviewrequest-"></a></h3>
+<p>Get a record review request</p><div class="section">
+<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getReviewRequest</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>record</code></dt>
+<dd><p>an object of class <a href="ZenodoRecord.html">ZenodoRecord</a></p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-13">Returns<a class="anchor" aria-label="anchor" href="#returns-13"></a></h4>
+<p>a review request object of class <code>list</code>, or NULL if nothing exists</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-deleteReviewRequest"></a><div class="section">
+<h3 id="method-deletereviewrequest-">Method <code>deleteReviewRequest()</code><a class="anchor" aria-label="anchor" href="#method-deletereviewrequest-"></a></h3>
+<p>Deletes a review request</p><div class="section">
+<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteReviewRequest</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>record</code></dt>
+<dd><p>an object of class <a href="ZenodoRecord.html">ZenodoRecord</a></p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-14">Returns<a class="anchor" aria-label="anchor" href="#returns-14"></a></h4>
+<p><code>TRUE</code> if deleted, <code>FALSE</code> otherwise</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-submitRecordForReview"></a><div class="section">
+<h3 id="method-submitrecordforreview-">Method <code>submitRecordForReview()</code><a class="anchor" aria-label="anchor" href="#method-submitrecordforreview-"></a></h3>
+<p>Submits a record for review. Prior to this submission, a community
+has to be selected for a record. This is done by using the method <code>createReviewRequest(record, community)</code>.</p><div class="section">
+<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">submitRecordForReview</span><span class="op">(</span><span class="va">recordId</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
+<dd><p>the ID of a Zenodo record</p></dd>
+
+
+<dt><code>message</code></dt>
+<dd><p>message content for the submission. Optional</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-15">Returns<a class="anchor" aria-label="anchor" href="#returns-15"></a></h4>
+<p><code>TRUE</code> if submitted, <code>FALSE</code> otherwise</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoManager-getGrants"></a><div class="section">
+<h3 id="method-getgrants-">Method <code>getGrants()</code><a class="anchor" aria-label="anchor" href="#method-getgrants-"></a></h3>
+<p>Get Grants supported by Zenodo. DEPRECATED: replaced by <code>getAwards</code></p><div class="section">
+<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getGrants</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
 Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
@@ -499,19 +592,19 @@ Set <code>pretty = FALSE</code> to get the raw list of grants</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-12">Returns<a class="anchor" aria-label="anchor" href="#returns-12"></a></h4>
+<h4 id="returns-16">Returns<a class="anchor" aria-label="anchor" href="#returns-16"></a></h4>
 <p>list of grants as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getAwards"></a><div class="section">
 <h3 id="method-getawards-">Method <code>getAwards()</code><a class="anchor" aria-label="anchor" href="#method-getawards-"></a></h3>
 <p>Get Awards supported by Zenodo.</p><div class="section">
-<h4 id="usage-14">Usage<a class="anchor" aria-label="anchor" href="#usage-14"></a></h4>
+<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getAwards</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-13">Arguments<a class="anchor" aria-label="anchor" href="#arguments-13"></a></h4>
+<h4 id="arguments-17">Arguments<a class="anchor" aria-label="anchor" href="#arguments-17"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
 Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
@@ -531,19 +624,19 @@ Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-13">Returns<a class="anchor" aria-label="anchor" href="#returns-13"></a></h4>
+<h4 id="returns-17">Returns<a class="anchor" aria-label="anchor" href="#returns-17"></a></h4>
 <p>list of awards as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getGrantsByName"></a><div class="section">
 <h3 id="method-getgrantsbyname-">Method <code>getGrantsByName()</code><a class="anchor" aria-label="anchor" href="#method-getgrantsbyname-"></a></h3>
 <p>Get grants by name. DEPRECATED: replaced by <code>getAwardByName</code></p><div class="section">
-<h4 id="usage-15">Usage<a class="anchor" aria-label="anchor" href="#usage-15"></a></h4>
+<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getGrantsByName</span><span class="op">(</span><span class="va">name</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-14">Arguments<a class="anchor" aria-label="anchor" href="#arguments-14"></a></h4>
+<h4 id="arguments-18">Arguments<a class="anchor" aria-label="anchor" href="#arguments-18"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>name</p></dd>
 
@@ -557,19 +650,19 @@ Set <code>pretty = FALSE</code> to get the raw list of grants</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-14">Returns<a class="anchor" aria-label="anchor" href="#returns-14"></a></h4>
+<h4 id="returns-18">Returns<a class="anchor" aria-label="anchor" href="#returns-18"></a></h4>
 <p>list of grants as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getAwardsByName"></a><div class="section">
 <h3 id="method-getawardsbyname-">Method <code>getAwardsByName()</code><a class="anchor" aria-label="anchor" href="#method-getawardsbyname-"></a></h3>
 <p>Get awards by name.</p><div class="section">
-<h4 id="usage-16">Usage<a class="anchor" aria-label="anchor" href="#usage-16"></a></h4>
+<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getAwardsByName</span><span class="op">(</span><span class="va">name</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-15">Arguments<a class="anchor" aria-label="anchor" href="#arguments-15"></a></h4>
+<h4 id="arguments-19">Arguments<a class="anchor" aria-label="anchor" href="#arguments-19"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>name</p></dd>
 
@@ -583,19 +676,19 @@ Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-15">Returns<a class="anchor" aria-label="anchor" href="#returns-15"></a></h4>
+<h4 id="returns-19">Returns<a class="anchor" aria-label="anchor" href="#returns-19"></a></h4>
 <p>list of awards as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getGrantById"></a><div class="section">
 <h3 id="method-getgrantbyid-">Method <code>getGrantById()</code><a class="anchor" aria-label="anchor" href="#method-getgrantbyid-"></a></h3>
 <p>Get grant by Id.DEPRECATED: replaced by <code>getAwardById</code></p><div class="section">
-<h4 id="usage-17">Usage<a class="anchor" aria-label="anchor" href="#usage-17"></a></h4>
+<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getGrantById</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-16">Arguments<a class="anchor" aria-label="anchor" href="#arguments-16"></a></h4>
+<h4 id="arguments-20">Arguments<a class="anchor" aria-label="anchor" href="#arguments-20"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>grant id</p></dd>
 
@@ -603,19 +696,19 @@ Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-16">Returns<a class="anchor" aria-label="anchor" href="#returns-16"></a></h4>
+<h4 id="returns-20">Returns<a class="anchor" aria-label="anchor" href="#returns-20"></a></h4>
 <p>the grant</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getAwardById"></a><div class="section">
 <h3 id="method-getawardbyid-">Method <code>getAwardById()</code><a class="anchor" aria-label="anchor" href="#method-getawardbyid-"></a></h3>
 <p>Get award by Id.</p><div class="section">
-<h4 id="usage-18">Usage<a class="anchor" aria-label="anchor" href="#usage-18"></a></h4>
+<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getAwardById</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-17">Arguments<a class="anchor" aria-label="anchor" href="#arguments-17"></a></h4>
+<h4 id="arguments-21">Arguments<a class="anchor" aria-label="anchor" href="#arguments-21"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>award id</p></dd>
 
@@ -623,19 +716,19 @@ Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-17">Returns<a class="anchor" aria-label="anchor" href="#returns-17"></a></h4>
+<h4 id="returns-21">Returns<a class="anchor" aria-label="anchor" href="#returns-21"></a></h4>
 <p>the award</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getAffiliations"></a><div class="section">
 <h3 id="method-getaffiliations-">Method <code>getAffiliations()</code><a class="anchor" aria-label="anchor" href="#method-getaffiliations-"></a></h3>
 <p>Get Affiliations supported by Zenodo.</p><div class="section">
-<h4 id="usage-19">Usage<a class="anchor" aria-label="anchor" href="#usage-19"></a></h4>
+<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getAffiliations</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-18">Arguments<a class="anchor" aria-label="anchor" href="#arguments-18"></a></h4>
+<h4 id="arguments-22">Arguments<a class="anchor" aria-label="anchor" href="#arguments-22"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
 Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
@@ -655,19 +748,19 @@ Set <code>pretty = FALSE</code> to get the raw list of affiliations</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-18">Returns<a class="anchor" aria-label="anchor" href="#returns-18"></a></h4>
+<h4 id="returns-22">Returns<a class="anchor" aria-label="anchor" href="#returns-22"></a></h4>
 <p>list of affiliations as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getAffiliationByName"></a><div class="section">
 <h3 id="method-getaffiliationbyname-">Method <code>getAffiliationByName()</code><a class="anchor" aria-label="anchor" href="#method-getaffiliationbyname-"></a></h3>
 <p>Get affiliations by name.</p><div class="section">
-<h4 id="usage-20">Usage<a class="anchor" aria-label="anchor" href="#usage-20"></a></h4>
+<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getAffiliationByName</span><span class="op">(</span><span class="va">name</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-19">Arguments<a class="anchor" aria-label="anchor" href="#arguments-19"></a></h4>
+<h4 id="arguments-23">Arguments<a class="anchor" aria-label="anchor" href="#arguments-23"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>name</p></dd>
 
@@ -681,19 +774,19 @@ Set <code>pretty = FALSE</code> to get the raw list of affiliations</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-19">Returns<a class="anchor" aria-label="anchor" href="#returns-19"></a></h4>
+<h4 id="returns-23">Returns<a class="anchor" aria-label="anchor" href="#returns-23"></a></h4>
 <p>list of affiliations as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getAffiliationById"></a><div class="section">
 <h3 id="method-getaffiliationbyid-">Method <code>getAffiliationById()</code><a class="anchor" aria-label="anchor" href="#method-getaffiliationbyid-"></a></h3>
 <p>Get affiliation by Id.</p><div class="section">
-<h4 id="usage-21">Usage<a class="anchor" aria-label="anchor" href="#usage-21"></a></h4>
+<h4 id="usage-25">Usage<a class="anchor" aria-label="anchor" href="#usage-25"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getAffiliationById</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-20">Arguments<a class="anchor" aria-label="anchor" href="#arguments-20"></a></h4>
+<h4 id="arguments-24">Arguments<a class="anchor" aria-label="anchor" href="#arguments-24"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>affiliation id</p></dd>
 
@@ -701,19 +794,19 @@ Set <code>pretty = FALSE</code> to get the raw list of affiliations</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-20">Returns<a class="anchor" aria-label="anchor" href="#returns-20"></a></h4>
+<h4 id="returns-24">Returns<a class="anchor" aria-label="anchor" href="#returns-24"></a></h4>
 <p>the affiliation</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getFunders"></a><div class="section">
 <h3 id="method-getfunders-">Method <code>getFunders()</code><a class="anchor" aria-label="anchor" href="#method-getfunders-"></a></h3>
 <p>Get Funders supported by Zenodo based on a query.</p><div class="section">
-<h4 id="usage-22">Usage<a class="anchor" aria-label="anchor" href="#usage-22"></a></h4>
+<h4 id="usage-26">Usage<a class="anchor" aria-label="anchor" href="#usage-26"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getFunders</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span>, size <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-21">Arguments<a class="anchor" aria-label="anchor" href="#arguments-21"></a></h4>
+<h4 id="arguments-25">Arguments<a class="anchor" aria-label="anchor" href="#arguments-25"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>an ElasticSearch compliant query, object of class <code>character</code>. Default is emtpy.
 Note that the Zenodo API restrains a maximum number of 10,000 records to be retrieved. Consequently,
@@ -733,19 +826,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-21">Returns<a class="anchor" aria-label="anchor" href="#returns-21"></a></h4>
+<h4 id="returns-25">Returns<a class="anchor" aria-label="anchor" href="#returns-25"></a></h4>
 <p>list of funders as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getFundersByName"></a><div class="section">
 <h3 id="method-getfundersbyname-">Method <code>getFundersByName()</code><a class="anchor" aria-label="anchor" href="#method-getfundersbyname-"></a></h3>
 <p>Get funders by name.</p><div class="section">
-<h4 id="usage-23">Usage<a class="anchor" aria-label="anchor" href="#usage-23"></a></h4>
+<h4 id="usage-27">Usage<a class="anchor" aria-label="anchor" href="#usage-27"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getFundersByName</span><span class="op">(</span><span class="va">name</span>, pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-22">Arguments<a class="anchor" aria-label="anchor" href="#arguments-22"></a></h4>
+<h4 id="arguments-26">Arguments<a class="anchor" aria-label="anchor" href="#arguments-26"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>name</code></dt>
 <dd><p>name</p></dd>
 
@@ -759,19 +852,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-22">Returns<a class="anchor" aria-label="anchor" href="#returns-22"></a></h4>
+<h4 id="returns-26">Returns<a class="anchor" aria-label="anchor" href="#returns-26"></a></h4>
 <p>list of funders as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getFunderById"></a><div class="section">
 <h3 id="method-getfunderbyid-">Method <code>getFunderById()</code><a class="anchor" aria-label="anchor" href="#method-getfunderbyid-"></a></h3>
 <p>Get funder by Id.</p><div class="section">
-<h4 id="usage-24">Usage<a class="anchor" aria-label="anchor" href="#usage-24"></a></h4>
+<h4 id="usage-28">Usage<a class="anchor" aria-label="anchor" href="#usage-28"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getFunderById</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-23">Arguments<a class="anchor" aria-label="anchor" href="#arguments-23"></a></h4>
+<h4 id="arguments-27">Arguments<a class="anchor" aria-label="anchor" href="#arguments-27"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>funder id</p></dd>
 
@@ -779,7 +872,7 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-23">Returns<a class="anchor" aria-label="anchor" href="#returns-23"></a></h4>
+<h4 id="returns-27">Returns<a class="anchor" aria-label="anchor" href="#returns-27"></a></h4>
 <p>the funder</p>
 </div>
 
@@ -793,7 +886,7 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
    specifies that an exact matching is wished, in which case paginated search will be disabled (only the first 
    search page will be returned).
    Examples of ElasticSearch queries for Zenodo can be found at <a href="https://help.zenodo.org/guides/search/" class="external-link">https://help.zenodo.org/guides/search/</a>.</p><div class="section">
-<h4 id="usage-25">Usage<a class="anchor" aria-label="anchor" href="#usage-25"></a></h4>
+<h4 id="usage-29">Usage<a class="anchor" aria-label="anchor" href="#usage-29"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getDepositions</span><span class="op">(</span></span>
 <span>  q <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  size <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -804,7 +897,7 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-24">Arguments<a class="anchor" aria-label="anchor" href="#arguments-24"></a></h4>
+<h4 id="arguments-28">Arguments<a class="anchor" aria-label="anchor" href="#arguments-28"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>Elastic-Search-compliant query, as object of class <code>character</code>. Default is ""</p></dd>
 
@@ -828,19 +921,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-24">Returns<a class="anchor" aria-label="anchor" href="#returns-24"></a></h4>
+<h4 id="returns-28">Returns<a class="anchor" aria-label="anchor" href="#returns-28"></a></h4>
 <p>a list of <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getDepositionByConceptDOI"></a><div class="section">
 <h3 id="method-getdepositionbyconceptdoi-">Method <code>getDepositionByConceptDOI()</code><a class="anchor" aria-label="anchor" href="#method-getdepositionbyconceptdoi-"></a></h3>
 <p>Get a Zenodo deposition record by concept DOI (generic DOI common to all deposition record versions).</p><div class="section">
-<h4 id="usage-26">Usage<a class="anchor" aria-label="anchor" href="#usage-26"></a></h4>
+<h4 id="usage-30">Usage<a class="anchor" aria-label="anchor" href="#usage-30"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getDepositionByConceptDOI</span><span class="op">(</span><span class="va">conceptdoi</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-25">Arguments<a class="anchor" aria-label="anchor" href="#arguments-25"></a></h4>
+<h4 id="arguments-29">Arguments<a class="anchor" aria-label="anchor" href="#arguments-29"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>conceptdoi</code></dt>
 <dd><p>the concept DOI, object of class <code>character</code></p></dd>
 
@@ -848,19 +941,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-25">Returns<a class="anchor" aria-label="anchor" href="#returns-25"></a></h4>
+<h4 id="returns-29">Returns<a class="anchor" aria-label="anchor" href="#returns-29"></a></h4>
 <p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getDepositionByDOI"></a><div class="section">
 <h3 id="method-getdepositionbydoi-">Method <code>getDepositionByDOI()</code><a class="anchor" aria-label="anchor" href="#method-getdepositionbydoi-"></a></h3>
 <p>Get a Zenodo deposition record by DOI.</p><div class="section">
-<h4 id="usage-27">Usage<a class="anchor" aria-label="anchor" href="#usage-27"></a></h4>
+<h4 id="usage-31">Usage<a class="anchor" aria-label="anchor" href="#usage-31"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getDepositionByDOI</span><span class="op">(</span><span class="va">doi</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-26">Arguments<a class="anchor" aria-label="anchor" href="#arguments-26"></a></h4>
+<h4 id="arguments-30">Arguments<a class="anchor" aria-label="anchor" href="#arguments-30"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>doi</code></dt>
 <dd><p>the DOI, object of class <code>character</code></p></dd>
 
@@ -868,19 +961,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-26">Returns<a class="anchor" aria-label="anchor" href="#returns-26"></a></h4>
+<h4 id="returns-30">Returns<a class="anchor" aria-label="anchor" href="#returns-30"></a></h4>
 <p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getDepositionById"></a><div class="section">
 <h3 id="method-getdepositionbyid-">Method <code>getDepositionById()</code><a class="anchor" aria-label="anchor" href="#method-getdepositionbyid-"></a></h3>
 <p>Get a Zenodo deposition record by ID.</p><div class="section">
-<h4 id="usage-28">Usage<a class="anchor" aria-label="anchor" href="#usage-28"></a></h4>
+<h4 id="usage-32">Usage<a class="anchor" aria-label="anchor" href="#usage-32"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getDepositionById</span><span class="op">(</span><span class="va">recid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-27">Arguments<a class="anchor" aria-label="anchor" href="#arguments-27"></a></h4>
+<h4 id="arguments-31">Arguments<a class="anchor" aria-label="anchor" href="#arguments-31"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recid</code></dt>
 <dd><p>the record ID, object of class <code>character</code></p></dd>
 
@@ -888,19 +981,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-27">Returns<a class="anchor" aria-label="anchor" href="#returns-27"></a></h4>
+<h4 id="returns-31">Returns<a class="anchor" aria-label="anchor" href="#returns-31"></a></h4>
 <p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getDepositionByConceptId"></a><div class="section">
 <h3 id="method-getdepositionbyconceptid-">Method <code>getDepositionByConceptId()</code><a class="anchor" aria-label="anchor" href="#method-getdepositionbyconceptid-"></a></h3>
 <p>Get a Zenodo deposition record by concept ID.</p><div class="section">
-<h4 id="usage-29">Usage<a class="anchor" aria-label="anchor" href="#usage-29"></a></h4>
+<h4 id="usage-33">Usage<a class="anchor" aria-label="anchor" href="#usage-33"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getDepositionByConceptId</span><span class="op">(</span><span class="va">conceptrecid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-28">Arguments<a class="anchor" aria-label="anchor" href="#arguments-28"></a></h4>
+<h4 id="arguments-32">Arguments<a class="anchor" aria-label="anchor" href="#arguments-32"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>conceptrecid</code></dt>
 <dd><p>the record concept ID, object of class <code>character</code></p></dd>
 
@@ -908,19 +1001,19 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-28">Returns<a class="anchor" aria-label="anchor" href="#returns-28"></a></h4>
+<h4 id="returns-32">Returns<a class="anchor" aria-label="anchor" href="#returns-32"></a></h4>
 <p>an object of class <code>ZenodoRecord</code> if record does exist, NULL otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-depositRecord"></a><div class="section">
 <h3 id="method-depositrecord-">Method <code>depositRecord()</code><a class="anchor" aria-label="anchor" href="#method-depositrecord-"></a></h3>
 <p>Deposits a record on Zenodo.</p><div class="section">
-<h4 id="usage-30">Usage<a class="anchor" aria-label="anchor" href="#usage-30"></a></h4>
+<h4 id="usage-34">Usage<a class="anchor" aria-label="anchor" href="#usage-34"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">depositRecord</span><span class="op">(</span><span class="va">record</span>, reserveDOI <span class="op">=</span> <span class="cn">TRUE</span>, publish <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-29">Arguments<a class="anchor" aria-label="anchor" href="#arguments-29"></a></h4>
+<h4 id="arguments-33">Arguments<a class="anchor" aria-label="anchor" href="#arguments-33"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>record</code></dt>
 <dd><p>the record to deposit, object of class <code>ZenodoRecord</code></p></dd>
 
@@ -937,19 +1030,19 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-29">Returns<a class="anchor" aria-label="anchor" href="#returns-29"></a></h4>
+<h4 id="returns-33">Returns<a class="anchor" aria-label="anchor" href="#returns-33"></a></h4>
 <p>object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-reserveDOI"></a><div class="section">
 <h3 id="method-reservedoi-">Method <code>reserveDOI()</code><a class="anchor" aria-label="anchor" href="#method-reservedoi-"></a></h3>
 <p>Reserves a DOI for a deposition (draft record)</p><div class="section">
-<h4 id="usage-31">Usage<a class="anchor" aria-label="anchor" href="#usage-31"></a></h4>
+<h4 id="usage-35">Usage<a class="anchor" aria-label="anchor" href="#usage-35"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">reserveDOI</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-30">Arguments<a class="anchor" aria-label="anchor" href="#arguments-30"></a></h4>
+<h4 id="arguments-34">Arguments<a class="anchor" aria-label="anchor" href="#arguments-34"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>record</code></dt>
 <dd><p>the record to deposit, object of class <code>ZenodoRecord</code></p></dd>
 
@@ -957,19 +1050,19 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-30">Returns<a class="anchor" aria-label="anchor" href="#returns-30"></a></h4>
+<h4 id="returns-34">Returns<a class="anchor" aria-label="anchor" href="#returns-34"></a></h4>
 <p>object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-deleteDOI"></a><div class="section">
 <h3 id="method-deletedoi-">Method <code>deleteDOI()</code><a class="anchor" aria-label="anchor" href="#method-deletedoi-"></a></h3>
 <p>Reserves a DOI for a deposition (draft record)</p><div class="section">
-<h4 id="usage-32">Usage<a class="anchor" aria-label="anchor" href="#usage-32"></a></h4>
+<h4 id="usage-36">Usage<a class="anchor" aria-label="anchor" href="#usage-36"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteDOI</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-31">Arguments<a class="anchor" aria-label="anchor" href="#arguments-31"></a></h4>
+<h4 id="arguments-35">Arguments<a class="anchor" aria-label="anchor" href="#arguments-35"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>record</code></dt>
 <dd><p>the record for which DOI has to be deleted, object of class <code>ZenodoRecord</code></p></dd>
 
@@ -977,14 +1070,14 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-31">Returns<a class="anchor" aria-label="anchor" href="#returns-31"></a></h4>
+<h4 id="returns-35">Returns<a class="anchor" aria-label="anchor" href="#returns-35"></a></h4>
 <p>object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-depositRecordVersion"></a><div class="section">
 <h3 id="method-depositrecordversion-">Method <code>depositRecordVersion()</code><a class="anchor" aria-label="anchor" href="#method-depositrecordversion-"></a></h3>
 <p>Deposits a record version on Zenodo.</p><div class="section">
-<h4 id="usage-33">Usage<a class="anchor" aria-label="anchor" href="#usage-33"></a></h4>
+<h4 id="usage-37">Usage<a class="anchor" aria-label="anchor" href="#usage-37"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">depositRecordVersion</span><span class="op">(</span></span>
 <span>  <span class="va">record</span>,</span>
 <span>  delete_latest_files <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -994,7 +1087,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </div>
 
 <div class="section">
-<h4 id="arguments-32">Arguments<a class="anchor" aria-label="anchor" href="#arguments-32"></a></h4>
+<h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>record</code></dt>
 <dd><p>the record version to deposit, object of class <code>ZenodoRecord</code></p></dd>
 
@@ -1014,19 +1107,19 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-32">Returns<a class="anchor" aria-label="anchor" href="#returns-32"></a></h4>
+<h4 id="returns-36">Returns<a class="anchor" aria-label="anchor" href="#returns-36"></a></h4>
 <p><code>TRUE</code> if deposited (and eventually published), <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-deleteRecord"></a><div class="section">
 <h3 id="method-deleterecord-">Method <code>deleteRecord()</code><a class="anchor" aria-label="anchor" href="#method-deleterecord-"></a></h3>
 <p>Deletes a record given its ID</p><div class="section">
-<h4 id="usage-34">Usage<a class="anchor" aria-label="anchor" href="#usage-34"></a></h4>
+<h4 id="usage-38">Usage<a class="anchor" aria-label="anchor" href="#usage-38"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteRecord</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-33">Arguments<a class="anchor" aria-label="anchor" href="#arguments-33"></a></h4>
+<h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record to be deleted</p></dd>
 
@@ -1034,19 +1127,19 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-33">Returns<a class="anchor" aria-label="anchor" href="#returns-33"></a></h4>
+<h4 id="returns-37">Returns<a class="anchor" aria-label="anchor" href="#returns-37"></a></h4>
 <p><code>TRUE</code> if deleted, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-deleteRecordByDOI"></a><div class="section">
 <h3 id="method-deleterecordbydoi-">Method <code>deleteRecordByDOI()</code><a class="anchor" aria-label="anchor" href="#method-deleterecordbydoi-"></a></h3>
 <p>Deletes a record by DOI</p><div class="section">
-<h4 id="usage-35">Usage<a class="anchor" aria-label="anchor" href="#usage-35"></a></h4>
+<h4 id="usage-39">Usage<a class="anchor" aria-label="anchor" href="#usage-39"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteRecordByDOI</span><span class="op">(</span><span class="va">doi</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-34">Arguments<a class="anchor" aria-label="anchor" href="#arguments-34"></a></h4>
+<h4 id="arguments-38">Arguments<a class="anchor" aria-label="anchor" href="#arguments-38"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>doi</code></dt>
 <dd><p>the DOI of the record to be deleted</p></dd>
 
@@ -1054,7 +1147,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-34">Returns<a class="anchor" aria-label="anchor" href="#returns-34"></a></h4>
+<h4 id="returns-38">Returns<a class="anchor" aria-label="anchor" href="#returns-38"></a></h4>
 <p><code>TRUE</code> if deleted, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1064,12 +1157,12 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
   The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions (default query 
    is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo  can be found at 
    <a href="https://help.zenodo.org/guides/search/" class="external-link">https://help.zenodo.org/guides/search/</a>.</p><div class="section">
-<h4 id="usage-36">Usage<a class="anchor" aria-label="anchor" href="#usage-36"></a></h4>
+<h4 id="usage-40">Usage<a class="anchor" aria-label="anchor" href="#usage-40"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteRecords</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-35">Arguments<a class="anchor" aria-label="anchor" href="#arguments-35"></a></h4>
+<h4 id="arguments-39">Arguments<a class="anchor" aria-label="anchor" href="#arguments-39"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>an ElasticSearch compliant query, object of class <code>character</code></p></dd>
 
@@ -1081,7 +1174,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-35">Returns<a class="anchor" aria-label="anchor" href="#returns-35"></a></h4>
+<h4 id="returns-39">Returns<a class="anchor" aria-label="anchor" href="#returns-39"></a></h4>
 <p><code>TRUE</code> if all records have been deleted, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1090,12 +1183,12 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 <p>Creates an empty record in the Zenodo deposit. Returns the record
    newly created in Zenodo, as an object of class <code>ZenodoRecord</code> with an 
    assigned identifier.</p><div class="section">
-<h4 id="usage-37">Usage<a class="anchor" aria-label="anchor" href="#usage-37"></a></h4>
+<h4 id="usage-41">Usage<a class="anchor" aria-label="anchor" href="#usage-41"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">createEmptyRecord</span><span class="op">(</span>reserveDOI <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-36">Arguments<a class="anchor" aria-label="anchor" href="#arguments-36"></a></h4>
+<h4 id="arguments-40">Arguments<a class="anchor" aria-label="anchor" href="#arguments-40"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>reserveDOI</code></dt>
 <dd><p>reserve DOI. By default <code>TRUE</code></p></dd>
 
@@ -1103,19 +1196,19 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-36">Returns<a class="anchor" aria-label="anchor" href="#returns-36"></a></h4>
+<h4 id="returns-40">Returns<a class="anchor" aria-label="anchor" href="#returns-40"></a></h4>
 <p>an object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-editRecord"></a><div class="section">
 <h3 id="method-editrecord-">Method <code>editRecord()</code><a class="anchor" aria-label="anchor" href="#method-editrecord-"></a></h3>
 <p>Unlocks a record already submitted. Required to edit metadata of a Zenodo record already published.</p><div class="section">
-<h4 id="usage-38">Usage<a class="anchor" aria-label="anchor" href="#usage-38"></a></h4>
+<h4 id="usage-42">Usage<a class="anchor" aria-label="anchor" href="#usage-42"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">editRecord</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-37">Arguments<a class="anchor" aria-label="anchor" href="#arguments-37"></a></h4>
+<h4 id="arguments-41">Arguments<a class="anchor" aria-label="anchor" href="#arguments-41"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record to unlock and set in editing mode.</p></dd>
 
@@ -1123,7 +1216,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-37">Returns<a class="anchor" aria-label="anchor" href="#returns-37"></a></h4>
+<h4 id="returns-41">Returns<a class="anchor" aria-label="anchor" href="#returns-41"></a></h4>
 <p>an object of class <code>ZenodoRecord</code></p>
 </div>
 
@@ -1132,12 +1225,12 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 <p>Discards changes on a Zenodo record. Deleting a draft for an unpublished 
 record will remove the draft and associated files from the system. Deleting a draft for 
 a published record will remove the draft but not the published record.</p><div class="section">
-<h4 id="usage-39">Usage<a class="anchor" aria-label="anchor" href="#usage-39"></a></h4>
+<h4 id="usage-43">Usage<a class="anchor" aria-label="anchor" href="#usage-43"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">discardChanges</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-38">Arguments<a class="anchor" aria-label="anchor" href="#arguments-38"></a></h4>
+<h4 id="arguments-42">Arguments<a class="anchor" aria-label="anchor" href="#arguments-42"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record for which changes have to be discarded.</p></dd>
 
@@ -1145,19 +1238,19 @@ a published record will remove the draft but not the published record.</p><div c
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-38">Returns<a class="anchor" aria-label="anchor" href="#returns-38"></a></h4>
+<h4 id="returns-42">Returns<a class="anchor" aria-label="anchor" href="#returns-42"></a></h4>
 <p>an object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-publishRecord"></a><div class="section">
 <h3 id="method-publishrecord-">Method <code>publishRecord()</code><a class="anchor" aria-label="anchor" href="#method-publishrecord-"></a></h3>
 <p>Publishes a Zenodo record.</p><div class="section">
-<h4 id="usage-40">Usage<a class="anchor" aria-label="anchor" href="#usage-40"></a></h4>
+<h4 id="usage-44">Usage<a class="anchor" aria-label="anchor" href="#usage-44"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">publishRecord</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-39">Arguments<a class="anchor" aria-label="anchor" href="#arguments-39"></a></h4>
+<h4 id="arguments-43">Arguments<a class="anchor" aria-label="anchor" href="#arguments-43"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record to be published.</p></dd>
 
@@ -1165,19 +1258,19 @@ a published record will remove the draft but not the published record.</p><div c
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-39">Returns<a class="anchor" aria-label="anchor" href="#returns-39"></a></h4>
+<h4 id="returns-43">Returns<a class="anchor" aria-label="anchor" href="#returns-43"></a></h4>
 <p>an object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getFiles"></a><div class="section">
 <h3 id="method-getfiles-">Method <code>getFiles()</code><a class="anchor" aria-label="anchor" href="#method-getfiles-"></a></h3>
 <p>Get list of files attached to a Zenodo record.</p><div class="section">
-<h4 id="usage-41">Usage<a class="anchor" aria-label="anchor" href="#usage-41"></a></h4>
+<h4 id="usage-45">Usage<a class="anchor" aria-label="anchor" href="#usage-45"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getFiles</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-40">Arguments<a class="anchor" aria-label="anchor" href="#arguments-40"></a></h4>
+<h4 id="arguments-44">Arguments<a class="anchor" aria-label="anchor" href="#arguments-44"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record.</p></dd>
 
@@ -1185,19 +1278,19 @@ a published record will remove the draft but not the published record.</p><div c
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-40">Returns<a class="anchor" aria-label="anchor" href="#returns-40"></a></h4>
+<h4 id="returns-44">Returns<a class="anchor" aria-label="anchor" href="#returns-44"></a></h4>
 <p>list of files</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getFile"></a><div class="section">
 <h3 id="method-getfile-">Method <code>getFile()</code><a class="anchor" aria-label="anchor" href="#method-getfile-"></a></h3>
 <p>Get a file record metadata.</p><div class="section">
-<h4 id="usage-42">Usage<a class="anchor" aria-label="anchor" href="#usage-42"></a></h4>
+<h4 id="usage-46">Usage<a class="anchor" aria-label="anchor" href="#usage-46"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getFile</span><span class="op">(</span><span class="va">recordId</span>, <span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-41">Arguments<a class="anchor" aria-label="anchor" href="#arguments-41"></a></h4>
+<h4 id="arguments-45">Arguments<a class="anchor" aria-label="anchor" href="#arguments-45"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>the ID of the record.</p></dd>
 
@@ -1209,7 +1302,7 @@ a published record will remove the draft but not the published record.</p><div c
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-41">Returns<a class="anchor" aria-label="anchor" href="#returns-41"></a></h4>
+<h4 id="returns-45">Returns<a class="anchor" aria-label="anchor" href="#returns-45"></a></h4>
 <p>the file metadata</p>
 </div>
 
@@ -1218,12 +1311,12 @@ a published record will remove the draft but not the published record.</p><div c
 <p>Start a file upload. The method will create a key for the file to be uploaded
 This method is essentially for internal purpose, and is called directly in <code>uploadFile</code>
 for user convenience and for backward compatibility with the legacy Zenodo API.</p><div class="section">
-<h4 id="usage-43">Usage<a class="anchor" aria-label="anchor" href="#usage-43"></a></h4>
+<h4 id="usage-47">Usage<a class="anchor" aria-label="anchor" href="#usage-47"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">startFileUpload</span><span class="op">(</span><span class="va">path</span>, <span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-42">Arguments<a class="anchor" aria-label="anchor" href="#arguments-42"></a></h4>
+<h4 id="arguments-46">Arguments<a class="anchor" aria-label="anchor" href="#arguments-46"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
 
@@ -1240,12 +1333,12 @@ for user convenience and for backward compatibility with the legacy Zenodo API.<
 <p>Completes a file upload. The method will complete a file upload through a commit operation
 This method is essentially for internal purpose, and is called directly in <code>uploadFile</code>
 for user convenience and for backward compatibility with the legacy Zenodo API.</p><div class="section">
-<h4 id="usage-44">Usage<a class="anchor" aria-label="anchor" href="#usage-44"></a></h4>
+<h4 id="usage-48">Usage<a class="anchor" aria-label="anchor" href="#usage-48"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">completeFileUpload</span><span class="op">(</span><span class="va">path</span>, <span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-43">Arguments<a class="anchor" aria-label="anchor" href="#arguments-43"></a></h4>
+<h4 id="arguments-47">Arguments<a class="anchor" aria-label="anchor" href="#arguments-47"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
 
@@ -1263,12 +1356,12 @@ for user convenience and for backward compatibility with the legacy Zenodo API.<
 internally calls <code>startFileUpload</code> to create a file record (with a filename key) at start, followed
 by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
 the function calls <code>completeFileUpload</code> to commit the file which status becomes "completed".</p><div class="section">
-<h4 id="usage-45">Usage<a class="anchor" aria-label="anchor" href="#usage-45"></a></h4>
+<h4 id="usage-49">Usage<a class="anchor" aria-label="anchor" href="#usage-49"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">uploadFile</span><span class="op">(</span><span class="va">path</span>, recordId <span class="op">=</span> <span class="cn">NULL</span>, record <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-44">Arguments<a class="anchor" aria-label="anchor" href="#arguments-44"></a></h4>
+<h4 id="arguments-48">Arguments<a class="anchor" aria-label="anchor" href="#arguments-48"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
 
@@ -1290,12 +1383,12 @@ the function calls <code>completeFileUpload</code> to commit the file which stat
 deleted although its status was pending, only the upload content is deleted, and the file upload
 record (identified by a filename key) is kept. If the status was completed (with a file commit),
 the file record is deleted.</p><div class="section">
-<h4 id="usage-46">Usage<a class="anchor" aria-label="anchor" href="#usage-46"></a></h4>
+<h4 id="usage-50">Usage<a class="anchor" aria-label="anchor" href="#usage-50"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteFile</span><span class="op">(</span><span class="va">recordId</span>, <span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-45">Arguments<a class="anchor" aria-label="anchor" href="#arguments-45"></a></h4>
+<h4 id="arguments-49">Arguments<a class="anchor" aria-label="anchor" href="#arguments-49"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recordId</code></dt>
 <dd><p>ID of the record</p></dd>
 
@@ -1317,12 +1410,12 @@ the file record is deleted.</p><div class="section">
     The argument <code>exact</code> specifies that an exact matching is wished, in which case 
     paginated search will be disabled (only the first search page will be returned).
     Examples of ElasticSearch queries for Zenodo can be found at <a href="https://help.zenodo.org/guides/search/" class="external-link">https://help.zenodo.org/guides/search/</a>.</p><div class="section">
-<h4 id="usage-47">Usage<a class="anchor" aria-label="anchor" href="#usage-47"></a></h4>
+<h4 id="usage-51">Usage<a class="anchor" aria-label="anchor" href="#usage-51"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRecords</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, size <span class="op">=</span> <span class="fl">10</span>, all_versions <span class="op">=</span> <span class="cn">FALSE</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-46">Arguments<a class="anchor" aria-label="anchor" href="#arguments-46"></a></h4>
+<h4 id="arguments-50">Arguments<a class="anchor" aria-label="anchor" href="#arguments-50"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>Elastic-Search-compliant query, as object of class <code>character</code>. Default is ""</p></dd>
 
@@ -1346,19 +1439,19 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-42">Returns<a class="anchor" aria-label="anchor" href="#returns-42"></a></h4>
+<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
 <p>a list of <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getRecordByConceptDOI"></a><div class="section">
 <h3 id="method-getrecordbyconceptdoi-">Method <code>getRecordByConceptDOI()</code><a class="anchor" aria-label="anchor" href="#method-getrecordbyconceptdoi-"></a></h3>
 <p>Get Record by concept DOI</p><div class="section">
-<h4 id="usage-48">Usage<a class="anchor" aria-label="anchor" href="#usage-48"></a></h4>
+<h4 id="usage-52">Usage<a class="anchor" aria-label="anchor" href="#usage-52"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRecordByConceptDOI</span><span class="op">(</span><span class="va">conceptdoi</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-47">Arguments<a class="anchor" aria-label="anchor" href="#arguments-47"></a></h4>
+<h4 id="arguments-51">Arguments<a class="anchor" aria-label="anchor" href="#arguments-51"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>conceptdoi</code></dt>
 <dd><p>the concept DOI</p></dd>
 
@@ -1366,19 +1459,19 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-43">Returns<a class="anchor" aria-label="anchor" href="#returns-43"></a></h4>
+<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getRecordByDOI"></a><div class="section">
 <h3 id="method-getrecordbydoi-">Method <code>getRecordByDOI()</code><a class="anchor" aria-label="anchor" href="#method-getrecordbydoi-"></a></h3>
 <p>Get Record by DOI</p><div class="section">
-<h4 id="usage-49">Usage<a class="anchor" aria-label="anchor" href="#usage-49"></a></h4>
+<h4 id="usage-53">Usage<a class="anchor" aria-label="anchor" href="#usage-53"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRecordByDOI</span><span class="op">(</span><span class="va">doi</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-48">Arguments<a class="anchor" aria-label="anchor" href="#arguments-48"></a></h4>
+<h4 id="arguments-52">Arguments<a class="anchor" aria-label="anchor" href="#arguments-52"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>doi</code></dt>
 <dd><p>the DOI</p></dd>
 
@@ -1386,19 +1479,19 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-44">Returns<a class="anchor" aria-label="anchor" href="#returns-44"></a></h4>
+<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getRecordById"></a><div class="section">
 <h3 id="method-getrecordbyid-">Method <code>getRecordById()</code><a class="anchor" aria-label="anchor" href="#method-getrecordbyid-"></a></h3>
 <p>Get Record by ID</p><div class="section">
-<h4 id="usage-50">Usage<a class="anchor" aria-label="anchor" href="#usage-50"></a></h4>
+<h4 id="usage-54">Usage<a class="anchor" aria-label="anchor" href="#usage-54"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRecordById</span><span class="op">(</span><span class="va">recid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-49">Arguments<a class="anchor" aria-label="anchor" href="#arguments-49"></a></h4>
+<h4 id="arguments-53">Arguments<a class="anchor" aria-label="anchor" href="#arguments-53"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>recid</code></dt>
 <dd><p>the record ID</p></dd>
 
@@ -1406,19 +1499,19 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-45">Returns<a class="anchor" aria-label="anchor" href="#returns-45"></a></h4>
+<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getRecordByConceptId"></a><div class="section">
 <h3 id="method-getrecordbyconceptid-">Method <code>getRecordByConceptId()</code><a class="anchor" aria-label="anchor" href="#method-getrecordbyconceptid-"></a></h3>
 <p>Get Record by concept ID</p><div class="section">
-<h4 id="usage-51">Usage<a class="anchor" aria-label="anchor" href="#usage-51"></a></h4>
+<h4 id="usage-55">Usage<a class="anchor" aria-label="anchor" href="#usage-55"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRecordByConceptId</span><span class="op">(</span><span class="va">conceptrecid</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-50">Arguments<a class="anchor" aria-label="anchor" href="#arguments-50"></a></h4>
+<h4 id="arguments-54">Arguments<a class="anchor" aria-label="anchor" href="#arguments-54"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>conceptrecid</code></dt>
 <dd><p>the concept ID</p></dd>
 
@@ -1426,19 +1519,19 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
+<h4 id="returns-50">Returns<a class="anchor" aria-label="anchor" href="#returns-50"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getRequests"></a><div class="section">
 <h3 id="method-getrequests-">Method <code>getRequests()</code><a class="anchor" aria-label="anchor" href="#method-getrequests-"></a></h3>
 <p>Search requests</p><div class="section">
-<h4 id="usage-52">Usage<a class="anchor" aria-label="anchor" href="#usage-52"></a></h4>
+<h4 id="usage-56">Usage<a class="anchor" aria-label="anchor" href="#usage-56"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRequests</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, sort <span class="op">=</span> <span class="st">"bestmatch"</span>, size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-51">Arguments<a class="anchor" aria-label="anchor" href="#arguments-51"></a></h4>
+<h4 id="arguments-55">Arguments<a class="anchor" aria-label="anchor" href="#arguments-55"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
 <dd><p>Search query used to filter results based on ElasticSearch's query string syntax. 
 e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax</p></dd>
@@ -1455,19 +1548,19 @@ e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-q
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
+<h4 id="returns-51">Returns<a class="anchor" aria-label="anchor" href="#returns-51"></a></h4>
 <p>a list of <code>ZenodoRecord</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-getRequest"></a><div class="section">
 <h3 id="method-getrequest-">Method <code>getRequest()</code><a class="anchor" aria-label="anchor" href="#method-getrequest-"></a></h3>
 <p>Get a request</p><div class="section">
-<h4 id="usage-53">Usage<a class="anchor" aria-label="anchor" href="#usage-53"></a></h4>
+<h4 id="usage-57">Usage<a class="anchor" aria-label="anchor" href="#usage-57"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">getRequest</span><span class="op">(</span><span class="va">request_id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-52">Arguments<a class="anchor" aria-label="anchor" href="#arguments-52"></a></h4>
+<h4 id="arguments-56">Arguments<a class="anchor" aria-label="anchor" href="#arguments-56"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
 <dd><p>the request ID</p></dd>
 
@@ -1475,7 +1568,7 @@ e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-q
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
+<h4 id="returns-52">Returns<a class="anchor" aria-label="anchor" href="#returns-52"></a></h4>
 <p>the request <code>list</code> object, NULL otherwise</p>
 </div>
 
@@ -1483,12 +1576,12 @@ e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-q
 <h3 id="method-isactionablerequest-">Method <code>isActionableRequest()</code><a class="anchor" aria-label="anchor" href="#method-isactionablerequest-"></a></h3>
 <p>Checks if the request can be subject to an operation (accept, decline, cancel)
 depending on its status. To be subject to an operation, a request should not be closed or expired</p><div class="section">
-<h4 id="usage-54">Usage<a class="anchor" aria-label="anchor" href="#usage-54"></a></h4>
+<h4 id="usage-58">Usage<a class="anchor" aria-label="anchor" href="#usage-58"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">isActionableRequest</span><span class="op">(</span><span class="va">request_id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-53">Arguments<a class="anchor" aria-label="anchor" href="#arguments-53"></a></h4>
+<h4 id="arguments-57">Arguments<a class="anchor" aria-label="anchor" href="#arguments-57"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
 <dd><p>the request ID</p></dd>
 
@@ -1496,19 +1589,19 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
+<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
 <p><code>TRUE</code> if</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-acceptRequest"></a><div class="section">
 <h3 id="method-acceptrequest-">Method <code>acceptRequest()</code><a class="anchor" aria-label="anchor" href="#method-acceptrequest-"></a></h3>
 <p>Accepts a request</p><div class="section">
-<h4 id="usage-55">Usage<a class="anchor" aria-label="anchor" href="#usage-55"></a></h4>
+<h4 id="usage-59">Usage<a class="anchor" aria-label="anchor" href="#usage-59"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">acceptRequest</span><span class="op">(</span><span class="va">request_id</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-54">Arguments<a class="anchor" aria-label="anchor" href="#arguments-54"></a></h4>
+<h4 id="arguments-58">Arguments<a class="anchor" aria-label="anchor" href="#arguments-58"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
 <dd><p>the request ID</p></dd>
 
@@ -1520,19 +1613,19 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-50">Returns<a class="anchor" aria-label="anchor" href="#returns-50"></a></h4>
+<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
 <p><code>TRUE</code> if accepted, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-declineRequest"></a><div class="section">
 <h3 id="method-declinerequest-">Method <code>declineRequest()</code><a class="anchor" aria-label="anchor" href="#method-declinerequest-"></a></h3>
 <p>Declines a request</p><div class="section">
-<h4 id="usage-56">Usage<a class="anchor" aria-label="anchor" href="#usage-56"></a></h4>
+<h4 id="usage-60">Usage<a class="anchor" aria-label="anchor" href="#usage-60"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">declineRequest</span><span class="op">(</span><span class="va">request_id</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-55">Arguments<a class="anchor" aria-label="anchor" href="#arguments-55"></a></h4>
+<h4 id="arguments-59">Arguments<a class="anchor" aria-label="anchor" href="#arguments-59"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
 <dd><p>the request ID</p></dd>
 
@@ -1544,19 +1637,19 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-51">Returns<a class="anchor" aria-label="anchor" href="#returns-51"></a></h4>
+<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
 <p><code>TRUE</code> if declined, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-cancelRequest"></a><div class="section">
 <h3 id="method-cancelrequest-">Method <code>cancelRequest()</code><a class="anchor" aria-label="anchor" href="#method-cancelrequest-"></a></h3>
 <p>Cancels a request</p><div class="section">
-<h4 id="usage-57">Usage<a class="anchor" aria-label="anchor" href="#usage-57"></a></h4>
+<h4 id="usage-61">Usage<a class="anchor" aria-label="anchor" href="#usage-61"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">cancelRequest</span><span class="op">(</span><span class="va">request_id</span>, message <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-56">Arguments<a class="anchor" aria-label="anchor" href="#arguments-56"></a></h4>
+<h4 id="arguments-60">Arguments<a class="anchor" aria-label="anchor" href="#arguments-60"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>request_id</code></dt>
 <dd><p>the request ID</p></dd>
 
@@ -1568,19 +1661,19 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-52">Returns<a class="anchor" aria-label="anchor" href="#returns-52"></a></h4>
+<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
 <p><code>TRUE</code> if canceled, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-58">Usage<a class="anchor" aria-label="anchor" href="#usage-58"></a></h4>
+<h4 id="usage-62">Usage<a class="anchor" aria-label="anchor" href="#usage-62"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-57">Arguments<a class="anchor" aria-label="anchor" href="#arguments-57"></a></h4>
+<h4 id="arguments-61">Arguments<a class="anchor" aria-label="anchor" href="#arguments-61"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
