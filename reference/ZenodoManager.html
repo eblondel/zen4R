@@ -1357,17 +1357,13 @@ internally calls <code>startFileUpload</code> to create a file record (with a fi
 by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
 the function calls <code>completeFileUpload</code> to commit the file which status becomes "completed".</p><div class="section">
 <h4 id="usage-49">Usage<a class="anchor" aria-label="anchor" href="#usage-49"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">uploadFile</span><span class="op">(</span><span class="va">path</span>, recordId <span class="op">=</span> <span class="cn">NULL</span>, record <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">uploadFile</span><span class="op">(</span><span class="va">path</span>, record <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-48">Arguments<a class="anchor" aria-label="anchor" href="#arguments-48"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>Local path of the file</p></dd>
-
-
-<dt><code>recordId</code></dt>
-<dd><p>ID of the record. Deprecated, use <code>record</code> instead to take advantage of the new Zenodo bucket upload API.</p></dd>
 
 
 <dt><code>record</code></dt>
@@ -1757,8 +1753,8 @@ depending on its status. To be subject to an operation, a request should not be 
 <span class="r-in"><span>  <span class="co">#upload a file</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">uploadFile</span><span class="op">(</span><span class="st">"path/to/your/file"</span>, record <span class="op">=</span> <span class="va">myrec</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in upload_file(path):</span> file.exists(path) is not TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][INFO] ZenodoManager - Start upload procedure for file 'path/to/your/file' </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in out$message:</span> $ operator is invalid for atomic vectors</span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#list files</span></span></span>
 <span class="r-in"><span>  <span class="va">zen_files</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">getFiles</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
