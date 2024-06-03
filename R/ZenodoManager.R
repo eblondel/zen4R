@@ -1788,7 +1788,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       filename <- fileparts[length(fileparts)]
     
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft/files", recordId),
-                                  data = list(list(key = filename)),
+                                  data = list(list(key = filename)), accept = "application/json",
                                   token = self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
@@ -1820,7 +1820,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       filename <- fileparts[length(fileparts)]
 
       zenReq <- ZenodoRequest$new(private$url, "POST", sprintf("records/%s/draft/files/%s/commit", recordId, filename),
-                                  token = self$getToken(), 
+                                  token = self$getToken(), accept = "application/json",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- FALSE
@@ -1843,89 +1843,55 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
     #' the function calls \code{completeFileUpload} to commit the file which status becomes "completed".
     #' @param path Local path of the file
-    #' @param recordId ID of the record. Deprecated, use \code{record} instead to take advantage of the new Zenodo bucket upload API.
     #' @param record object of class \code{ZenodoRecord}
-    uploadFile = function(path, recordId = NULL, record = NULL){
-      newapi = TRUE
-      if(!is.null(recordId)){
-        warnMsg = "'recordId' argument is deprecated, please consider using 'record' argument giving an object of class 'ZenodoRecord'"
-        cli::cli_alert_warning(warnMsg)
-        self$WARN(warnMsg)
-        warnMsg = "'recordId' is used, cannot determine new API record bucket, switch to old upload API..."
-        cli::cli_alert_warning(warnMsg)
-        self$WARN(warnMsg)
-        newapi <- FALSE
-      }
-      if(!is.null(record)) recordId <- record$id
+    uploadFile = function(path, record = NULL){
       fileparts <- unlist(strsplit(path,"/"))
       filename <- fileparts[length(fileparts)]
       if(!"bucket" %in% names(record$links)){
-        warnMsg = sprintf("No bucket link for record id = %s. Revert to old file upload API", recordId)
+        warnMsg = sprintf("No bucket link for record id = %s.", record$id)
         cli::cli_alert_warning(warnMsg)
         self$WARN(warnMsg)
-        newapi <- FALSE
       }
       
       #start upload (needed with new Invenio RDM API)
-      if(newapi){
-        started = self$startFileUpload(path = path, recordId = recordId)
-        if(!started){
-          return(NULL)
-        }
+      started = self$startFileUpload(path = path, recordId = record$id)
+      if(!started){
+        return(NULL)
       }
         
       #proceed with upload
-      method <- if(newapi) "PUT"  else "POST"
-      if(newapi){
-        infoMsg = "Using new file upload API with bucket"
-        cli::cli_alert_info(infoMsg)
-        self$INFO(infoMsg)
-      }
-      method_url <- if(newapi) sprintf("records/%s/draft/files/%s/content", recordId, URLencode(filename)) else sprintf("deposit/depositions/%s/files", recordId)
-      print(method_url)
-      zenReq <- if(newapi){
-        ZenodoRequest$new(
-          private$url, method, method_url, 
-          data = upload_file(path),
-          progress = TRUE,
-          token = self$getToken(),
-          logger = self$loggerType
-        )
-      }else{
-        ZenodoRequest$new(
-          private$url, method, method_url, 
-          data = filename, file = upload_file(path),
-          progress = TRUE,
-          token = self$getToken(),
-          logger = self$loggerType
-        )
-      }
+      method_url <- sprintf("records/%s/draft/files/%s/content", record$id, URLencode(filename))
+      zenReq <- ZenodoRequest$new(
+        private$url, "PUT", method_url, 
+        data = upload_file(path),
+        progress = TRUE,
+        token = self$getToken(),
+        logger = self$loggerType
+      )
       zenReq$execute()
       out <- NULL
       if(zenReq$getStatus() == 201){
-        infoMsg = sprintf("Successful uploaded file to record '%s'", recordId)
+        infoMsg = sprintf("Successful uploaded file to record '%s'", record$id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
-        rec_files = self$getFiles(recordId = recordId)
+        rec_files = self$getFiles(recordId = record$id)
         out = rec_files$entries[sapply(rec_files$entries, function(x){x$key == filename})][[1]]
         return(out)
       }else{
         out <- zenReq$getResponse()
-        errMsg = sprintf("Error while uploading file to record '%s': %s", recordId, out$message)
+        errMsg = sprintf("Error while uploading file to record '%s': %s", record$id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
       }
       
       #complete upload (needed with new Invenio RDM API)
-      if(newapi){
-        completed = self$completeFileUpload(path = path, recordId = recordId)
-        if(!completed){
-          warnMsg = "File upload procedure completion failed, file is uploaded but remains in 'pending' status!"
-          cli::cli_alert_warning(warnMsg)
-          self$WARN(warnMsg)
-        }else{
-          out$status = "completed"
-        }
+      completed = self$completeFileUpload(path = path, recordId = record$id)
+      if(!completed){
+        warnMsg = "File upload procedure completion failed, file is uploaded but remains in 'pending' status!"
+        cli::cli_alert_warning(warnMsg)
+        self$WARN(warnMsg)
+      }else{
+        out$status = "completed"
       }
 
       return(out)

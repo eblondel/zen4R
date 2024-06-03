@@ -1290,15 +1290,13 @@ internally calls \code{startFileUpload} to create a file record (with a filename
 by the actual file content upload. At this stage, the file upload is in "pending" status. At the end,
 the function calls \code{completeFileUpload} to commit the file which status becomes "completed".
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$uploadFile(path, recordId = NULL, record = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$uploadFile(path, record = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{path}}{Local path of the file}
-
-\item{\code{recordId}}{ID of the record. Deprecated, use \code{record} instead to take advantage of the new Zenodo bucket upload API.}
 
 \item{\code{record}}{object of class \code{ZenodoRecord}}
 }
