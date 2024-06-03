@@ -1338,7 +1338,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       result <- NULL
       if(zenReq$getStatus() == 200){
         result = ZenodoRecord$new(obj = zenReq$getResponse())
-        infoMsg = sprintf("Successfuly fetched record ford id %s", recid)
+        infoMsg = sprintf("Successfuly fetched record for id %s", recid)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
       }else{
