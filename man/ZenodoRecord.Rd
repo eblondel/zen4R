@@ -126,8 +126,9 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-removeSubject}{\code{ZenodoRecord$removeSubject()}}
 \item \href{#method-ZenodoRecord-removeKeyword}{\code{ZenodoRecord$removeKeyword()}}
 \item \href{#method-ZenodoRecord-setNotes}{\code{ZenodoRecord$setNotes()}}
-\item \href{#method-ZenodoRecord-setGrants}{\code{ZenodoRecord$setGrants()}}
+\item \href{#method-ZenodoRecord-addFunding}{\code{ZenodoRecord$addFunding()}}
 \item \href{#method-ZenodoRecord-addGrant}{\code{ZenodoRecord$addGrant()}}
+\item \href{#method-ZenodoRecord-setGrants}{\code{ZenodoRecord$setGrants()}}
 \item \href{#method-ZenodoRecord-removeGrant}{\code{ZenodoRecord$removeGrant()}}
 \item \href{#method-ZenodoRecord-setJournalTitle}{\code{ZenodoRecord$setJournalTitle()}}
 \item \href{#method-ZenodoRecord-setJournalVolume}{\code{ZenodoRecord$setJournalVolume()}}
@@ -1430,20 +1431,20 @@ Set notes. HTML is not allowed
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ZenodoRecord-setGrants"></a>}}
-\if{latex}{\out{\hypertarget{method-ZenodoRecord-setGrants}{}}}
-\subsection{Method \code{setGrants()}}{
-Set a vector of character strings identifying grants
+\if{html}{\out{<a id="method-ZenodoRecord-addFunding"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-addFunding}{}}}
+\subsection{Method \code{addFunding()}}{
+Adds funding. Used internally, prefer using \code{addGrant} instead.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setGrants(grants, sandbox = FALSE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$addFunding(funder = NULL, grant = NULL, sandbox = FALSE)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{grants}}{a vector or list of grants Values should among known grants The list of grants can
-fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 
-the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.}
+\item{\code{funder}}{funder id or name}
+
+\item{\code{grant}}{grant id or title}
 
 \item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}}
 }
@@ -1464,7 +1465,7 @@ Adds a grant to the record metadata.
 \describe{
 \item{\code{grant}}{grant to add. The grant should be set with the id of the grant. If not
 recognized by Zenodo, the function will return an warning only. The list of grants can
-fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.}
+fetched with the \code{ZenodoManager} and the function \code{$getAwards()}.}
 
 \item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}}
 }
@@ -1472,6 +1473,27 @@ fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.}
 }
 \subsection{Returns}{
 \code{TRUE} if added, \code{FALSE} otherwise
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-setGrants"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-setGrants}{}}}
+\subsection{Method \code{setGrants()}}{
+Set a vector of character strings identifying grants
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$setGrants(grants, sandbox = FALSE)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{grants}}{a vector or list of grants Values should among known grants The list of grants can
+fetched with the \code{ZenodoManager} and the function \code{$getAwards()}. Each grant should be set with 
+the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.}
+
+\item{\code{sandbox}}{Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}}
+}
+\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}

@@ -18,6 +18,8 @@
 * [#146](https://github.com/eblondel/zen4R/issues/146) Zenodo to InvenioRDM - Refactor record creator/contributor model
 * [#149](https://github.com/eblondel/zen4R/issues/149) Zenodo to InvenioRDM - Refactor record languages management
 * [#150](https://github.com/eblondel/zen4R/issues/151) Zenodo To InvenioRDM - Refactor record license / rights handling
+* [#159](https://github.com/eblondel/zen4R/issues/159) Zenodo To InvenioRDM - New method to associate a draft record to a community (review support)
+* [#160](https://github.com/eblondel/zen4R/issues/160) Zenodo To InvenioRDM - Support addition of funders/awards in ZenodoRecord
 
 **New features**
 

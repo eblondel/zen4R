@@ -977,40 +977,89 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$metadata$notes <- notes
     },
     
-    #' @description Set a vector of character strings identifying grants
-    #' @param grants a vector or list of grants Values should among known grants The list of grants can
-    #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}. Each grant should be set with 
-    #'    the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.
+    #' @description Adds funding. Used internally, prefer using \code{addGrant} instead.
+    #' @param funder funder id or name
+    #' @param grant grant id or title
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}
-    setGrants = function(grants, sandbox = FALSE){
-      if(is.null(self$metadata$grants)) self$metadata$grants <- list()
-      for(grant in grants){
-        self$addGrant(grant, sandbox = sandbox)
+    addFunding = function(funder = NULL, grant = NULL, sandbox = FALSE){
+      zen <- ZenodoManager$new(sandbox = sandbox)
+      if(is.null(self$metadata$funding)) self$metadata$funding <- list()
+      #funder
+      funder_item = NULL
+      if(!is.null(funder)){
+        funder_id = NULL
+        zen_funder = zen$getFunderById(URLencode(funder))
+        if(is.null(zen_funder)){
+          warnMsg <- sprintf("Funder with id '%s' doesn't exist in Zenodo", funder)
+          self$WARN(warnMsg)
+          funders = zen$getFundersByName(name = funder)
+          if(!is.null(funders)) if(any(funders$name == funder)){
+            zen_funder = funders[funders$name == funder,][1,]
+            funder_id = zen_funder$id
+          }
+        }else{
+          funder_id = zen_funder$id
+        }
+        if(!is.null(funder_id)){
+          funder_item = list(id = funder_id)
+        }else{
+          # funder_item = list(name = funder)
+        }
       }
+      #grant
+      grant_item = NULL
+      if(!is.null(grant)){
+        if(regexpr("::", grant)>0){
+          zen_grant <- zen$getAwardById(URLencode(grant))
+          if(is.null(zen_grant)){
+            warnMsg <- sprintf("Grant with id '%s' doesn't exist in Zenodo", grant)
+            self$WARN(warnMsg)
+          }else{
+            grant_item = list(id = zen_grant$id)
+          }
+        }else{
+          grants = zen$getAwardsByName(grant)
+          if(!is.null(grants)) if(any(grants$title == grant)){
+            zen_grant = grants[grants$title == grant,][1,]
+            grant_item = list(id = zen_grant$id)
+          }
+        }
+        # if(is.null(grant_item)){
+        #   grant_item = list(title = list(en = grant))
+        # }
+      }
+      
+      funding = list()
+      if(!is.null(funder_item)) funding$funder = funder_item
+      if(!is.null(grant_item)) funding$award = grant_item
+      added = FALSE
+      if(length(funding)>0){
+        self$metadata$funding[[length(self$metadata$funding)+1]] = funding
+        added = TRUE
+      }
+      return(added)
     },
     
     #' @description Adds a grant to the record metadata.
     #' @param grant grant to add. The grant should be set with the id of the grant. If not
     #'    recognized by Zenodo, the function will return an warning only. The list of grants can
-    #'    fetched with the \code{ZenodoManager} and the function \code{$getGrants()}.
+    #'    fetched with the \code{ZenodoManager} and the function \code{$getAwards()}.
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}
     #' @return \code{TRUE} if added, \code{FALSE} otherwise
     addGrant = function(grant, sandbox = FALSE){
-      added <- FALSE
-      zen <- ZenodoManager$new(sandbox = sandbox)
-      if(is.null(self$metadata$grants)) self$metadata$grants <- list()
-      if(!(grant %in% self$metadata$grants)){
-        if(regexpr("::", grant)>0){
-          zen_grant <- zen$getGrantById(grant)
-          if(is.null(zen_grant)){
-            warnMsg <- sprintf("Grant with id '%s' doesn't exist in Zenodo", grant)
-            self$WARN(warnMsg)
-          }
-        }
-        self$metadata$grants[[length(self$metadata$grants)+1]] <- list(id = grant)
-        added <- TRUE
+      self$addFunding(grant = grant, sandbox = sandbox)
+    },
+    
+    #' @description Set a vector of character strings identifying grants
+    #' @param grants a vector or list of grants Values should among known grants The list of grants can
+    #'    fetched with the \code{ZenodoManager} and the function \code{$getAwards()}. Each grant should be set with 
+    #'    the Zenodo id of the grant If not recognized by Zenodo, the function will raise a warning only.
+    #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available grants. Default is \code{FALSE}
+    setGrants = function(grants, sandbox = FALSE){
+      if(is.null(self$metadata$funding)) self$metadata$funding <- list()
+      for(grant in grants){
+        self$addGrant(grant = grant, sandbox = sandbox)
       }
-      return(added)
     },
     
     #' @description Removes a grant from the record metadata. 
@@ -1018,11 +1067,11 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @return \code{TRUE} if removed, \code{FALSE} otherwise
     removeGrant = function(grant){
       removed <- FALSE
-      if(!is.null(self$metadata$grants)){
-        for(i in 1:length(self$metadata$grants)){
-          grt <- self$metadata$grants[[i]]
-          if(grt == grant){
-            self$metadata$grants[[i]] <- NULL
+      if(!is.null(self$metadata$funding)){
+        if(length(self$metadata$funding)>0) for(i in 1:length(self$metadata$funding)){
+          grt <- self$metadata$funding[[i]]
+          if(grt$award$id == grant){
+            self$metadata$funding[[i]] <- NULL
             removed <- TRUE
             break;
           }
