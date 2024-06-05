@@ -742,8 +742,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #'    fetched with the \code{ZenodoManager} and the function \code{$getLicenses()}.
     #' @param licenseId a license Id
     #' @param sandbox Use the Zenodo sandbox infrastructure as basis to control available licenses. Default is \code{FALSE}
+    #' @return \code{TRUE} if set, \code{FALSE} otherwise
     setLicense = function(licenseId, sandbox = FALSE){
-      self$addRight(id = licenseId)
+      self$addRight(id = licenseId, sandbox = sandbox)
     },
     
     #' @description Set record version.

@@ -1127,6 +1127,9 @@ Set license. The license should be set with the Zenodo id of the license. If not
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+\code{TRUE} if set, \code{FALSE} otherwise
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRecord-setVersion"></a>}}
