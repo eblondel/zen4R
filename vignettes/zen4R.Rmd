@@ -25,15 +25,13 @@ For zen4R sponsoring/funding new developments, enhancements, support requests, p
 Many thanks to the following organizations that have provided fundings for strenghtening the ``zen4R`` package:
 
 <div style="float:left;">
-  <a href="https://www.fao.org/home/en/"><img height=200 width=200 src="https://www.fao.org/fileadmin/templates/family-farming-decade/images/FAO-IFAD-Logos/FAO-Logo-EN.svg">
-<a href="https://en.ird.fr/"><img src="https://en.ird.fr/sites/ird_fr/files/2019-08/logo_IRD_2016_BLOC_UK_COUL.png" height=200 width=200/></a>
+  <a href="https://en.ird.fr/"><img src="https://en.ird.fr/sites/ird_fr/files/2019-08/logo_IRD_2016_BLOC_UK_COUL.png" height=200 width=200/></a>
+  <a href="https://www.fao.org/home/en/"><img height=200 width=200 src="https://www.fao.org/fileadmin/templates/family-farming-decade/images/FAO-IFAD-Logos/FAO-Logo-EN.svg"></a>
 </div>
 
 The following projects have contributed to strenghten ``zen4R``:
 
-<a href="https://blue-cloud.org/"><img height=100 width=300 src="https://www.blue-cloud.org/sites/all/themes/arcadia/logo.png"/></a>
-
-_Blue-Cloud has received funding from the European Union's Horizon programme call BG-07-2019-2020, topic: [A] 2019 - Blue Cloud services, Grant Agreement No.862409._
+* <a href="https://blue-cloud.org/">Blue-Cloud</a>: _Blue-Cloud has received funding from the European Union's Horizon programme call BG-07-2019-2020, topic: [A] 2019 - Blue Cloud services, Grant Agreement No.862409._
 
 ***
 
@@ -64,21 +62,27 @@ _Blue-Cloud has received funding from the European Union's Horizon programme cal
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.1 Upload file](#ZenodoDepositFile-upload)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.2 Get files](#ZenodoDepositFile-get)<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.5.3 Delete file](#ZenodoDepositFile-delete)<br/>
-&nbsp;&nbsp;&nbsp;[4.6 Export Zenodo record metadata](#ZenodoDepositMetadata)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1 Export Zenodo record metadata by format](#ZenodoDepositMetadata-byformat)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.6.2 Export Zenodo record metadata - all formats](#ZenodoDepositMetadata-allformats)<br/>
-&nbsp;&nbsp;&nbsp;[4.7 Browse Zenodo controlled vocabularies](#ZenodoVocabularies)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1 Communities](#ZenodoVocabularies-communities)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.7.2 Licenses](#ZenodoVocabularies-licenses)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.7.3 Funders](#ZenodoVocabularies-funders)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.7.4 Grants](#ZenodoVocabularies-grants)<br/>
-&nbsp;&nbsp;&nbsp;[4.8 Query Zenodo published records](#ZenodoRecord-query)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.1 Get Records](#ZenodoRecord-getrecords)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.2 Get Record By Concept DOI](#ZenodoRecord-getrecordbyconceptdoi)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.3 Get Record By DOI](#ZenodoRecord-getrecordbydoi)<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.4 Get Record By ID](#ZenodoRecord-getrecordbyid)<br/>
-&nbsp;&nbsp;&nbsp;[4.9 Download files from Zenodo records](#ZenodoRecord-download)<br/>
+&nbsp;&nbsp;&nbsp;[4.6 Manage Zenodo record communities](#ZenodoDeposit-communities)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.6.1 Submit a published record to communities](#ZenodoDeposit-communities-published)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.6.2 Submit a draft record to a community](#ZenodoDeposit-communities-draft)<br/>
+&nbsp;&nbsp;&nbsp;[4.7 Export Zenodo record metadata](#ZenodoDepositMetadata)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.7.1 Export Zenodo record metadata by format](#ZenodoDepositMetadata-byformat)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.7.2 Export Zenodo record metadata - all formats](#ZenodoDepositMetadata-allformats)<br/>
+&nbsp;&nbsp;&nbsp;[4.8 Browse Zenodo controlled vocabularies](#ZenodoVocabularies)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.1 Communities](#ZenodoVocabularies-communities)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.2 Licenses](#ZenodoVocabularies-licenses)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.3 Funders](#ZenodoVocabularies-funders)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.8.4 Grants](#ZenodoVocabularies-grants)<br/>
+&nbsp;&nbsp;&nbsp;[4.9 Query Zenodo published records](#ZenodoRecord-query)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.9.1 Get Records](#ZenodoRecord-getrecords)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.9.2 Get Record By Concept DOI](#ZenodoRecord-getrecordbyconceptdoi)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.9.3 Get Record By DOI](#ZenodoRecord-getrecordbydoi)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[4.9.4 Get Record By ID](#ZenodoRecord-getrecordbyid)<br/>
+&nbsp;&nbsp;&nbsp;[4.10 Download files from Zenodo records](#ZenodoRecord-download)<br/>
+&nbsp;&nbsp;&nbsp;[4.11 Manage requests](#Zenodo-requests)<br/>
 [**5. Issue reporting**](#package_issues)<br/>
+[**6. User support**](#user_support)<br/>
+
 
 <a name="package_overview"/>
 
@@ -86,7 +90,7 @@ _Blue-Cloud has received funding from the European Union's Horizon programme cal
 
 ***
 
-The [zen4R](https://doi.org/10.5281/zenodo.2547036) package offers an R interface to the [Zenodo](https://zenodo.org) e-infrastructure. It supports the creation of metadata records (including versioning), upload of files, and assignment of Digital Object Identifier(s) (DOIs).
+The [zen4R](https://doi.org/10.5281/zenodo.2547036) package offers an R interface to the [Zenodo](https://zenodo.org) e-infrastructure. It supports most of the Zenodo features including the management of metadata records (including versioning), upload/download of files, and assignment of Digital Object Identifier(s) (DOIs), statistics, community management.
 
 [zen4R](https://doi.org/10.5281/zenodo.2547036) is jointly developed together with the [geoflow](https://github.com/r-geoflow/geoflow) which intends to facilitate and automate the production of geographic metadata documents and their associated datasources, where [zen4R](https://doi.org/10.5281/zenodo.2547036) is used to assign DOIs and cross-reference these DOIs in other metadata documents such as geographic metadata (ISO 19115/19139) hosted in metadata catalogues and open data portals.
 
@@ -96,8 +100,9 @@ The [zen4R](https://doi.org/10.5281/zenodo.2547036) package offers an R interfac
 
 ***
 
-* January 2019: Inception. Code source managed on GitHub. 
-* June 2019: Published on CRAN.
+* January 2019: Inception. Code source managed on GitHub 
+* June 2019: 1st publication on CRAN
+* Oct 2023/June 2024: upgrade to follow the move of Zenodo to Invenio RDM
 
 <a name="package_credits"/>
 
@@ -164,7 +169,7 @@ By default, the ``zen4R`` **logger** is deactivated. To enable the logger, speci
 * ``INFO``: will print the ``zen4R`` logs. Three types of messages can be distinguished: ``INFO``, ``WARN``, ``ERROR``. The latter is generally associated with a ``stop`` and indicate an blocking error for the R method executed.
 * ``DEBUG`` will print the above ``zen4R`` logs, and report all logs from HTTP requests performed with ``cURL``
 
-If you want to use the [Zenodo sandbox](https://sandbox.zenodo.org) to test record management before going with the production Zenodo e-infrastructure, you can specify the Zenodo sandbox URL (https://sandbox.zenodo.org/api) in the ``ZenodoManager``.
+If you want to use the [Zenodo sandbox](https://sandbox.zenodo.org) to test record management before going with the production Zenodo e-infrastructure, you can specify `sandbox = TRUE` in the ``ZenodoManager``. 
 
 **Important: To use the Zenodo sandbox, you need to set up a sandbox account separately from Zenodo, create a separate personal access token to the sandbox API, and you must confirm via the confirmation link this account separately in order to be able to test your record management on this clone of Zenodo.**
 
@@ -172,8 +177,8 @@ The below code instructs how to connect to the Sandbox Zenodo e-infrastructure:
 
 ```R
 zenodo <- ZenodoManager$new(
-   url = "https://sandbox.zenodo.org/api",
-   token = <your_zenodo_sandbox_token>, 
+   token = <your_zenodo_sandbox_token>,
+   sandbox = TRUE,
    logger = "INFO"
 )
 ```
@@ -281,14 +286,33 @@ Example of record filling with metadata elements:
 
 ```r
 myrec <- ZenodoRecord$new()
-myrec$setTitle("my R package")
-myrec$setDescription("A description of my R package")
-myrec$setUploadType("software")
-myrec$addCreator(firstname = "John", lastname = "Doe", affiliation = "Independent", orcid = "0000-0000-0000-0000")
-myrec$setLicense("mit")
-myrec$setAccessRight("open")
-myrec$setDOI("mydoi") #use this method if your DOI has been assigned elsewhere, outside Zenodo
-myrec$addCommunity("ecfunded")
+myrec$setTitle("zen4R")
+myrec$addAdditionalTitle("This is an alternative title", type = "alternative-title")
+myrec$setDescription("Interface to 'Zenodo' REST API")
+myrec$addAdditionalDescription("This is an abstract", type = "abstract")
+myrec$setPublicationDate(Sys.Date())
+myrec$setResourceType("software")
+myrec$addCreator(firstname = "Emmanuel", lastname = "Blondel", role = "datamanager", orcid = "0000-0002-5870-5762")
+myrec$addContributor(firstname = "Peter", lastname = "Lead", role = "workpackageleader")
+myrec$addContributor(firstname = "Frank", "Super", role = "supervisor")
+myrec$setLicense("mit", sandbox = TRUE)
+myrec$setKeywords(c("R","package","software"))
+myrec$addReference("Author et al., 2019. Title")
+myrec$addReference("Fulano et al., 2018. Título")
+myrec$setPublisher("CRAN")
+myrec$setVersion("0.10")
+myrec$addGrant("00k4n6c32::862409", sandbox = TRUE)
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#41-how-to-install-zen4r-in-r", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#42-connect-to-zenodo-rest-api", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#43-query-zenodo-deposited-records", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#44-manage-zenodo-record-depositions", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#45-manage-zenodo-record-deposition-files", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#46-export-zenodo-record-metadata", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#47-browse-zenodo-controlled-vocabularies", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#48-query-zenodo-published-records", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#49-download-files-from-zenodo-records", scheme = "url", relation_type = "haspart")
+myrec$addRelatedIdentifier("https://github.com/eblondel/zen4R/wiki#user_guide", scheme = "url", "ispartof", "publication-book")
+
 ```
 
 <a name="ZenodoDeposit-deposit"/>
@@ -417,9 +441,63 @@ The following example shows how to delete the first file attached to the record 
 zenodo$deleteFile(myrec$id, zen_files[[1]]$id)
 ```
 
+<a name="ZenodoDeposit-communities"/>
+
+#### 4.6 Manage Zenodo record deposition files
+
+With the move to Invenio, the addition of a record to a community is not anymore managed as part of the metadata. The way to manage communities will differ depending on the status of the record you want to add to a community.
+
+<a name="ZenodoDeposit-communities-published"/>
+
+##### 4.6.1 Submit a published record to communities
+
+For a record already published (with a DOI), it is very straighforward to submit it to communities (whether or not you are the manager of these communities). To do so, run the following code over your `record`:
+
+```r
+communities = c("openfair", "test")
+zenodo$submitRecordToCommunities(record, communities)
+```
+
+In case a community name doesn't match an existing community, some warning wil be raised without any blocking error.
+
+As submitter of a record to a community, you have privileges to _cancel_ this request. As manager of a community, you have privileges either to _accept_ or _decline_ a request to add a record to a community. If you want to learn about requests management, please see section 4.11.
+
+<a name="ZenodoDeposit-communities-draft"/>
+
+##### 4.6.2 Submit a draft record to a community
+
+Adding a draft record to a community is possible with the new Zenodo platform. This method is 'kind of' analog of what was possible with the legacy Zenodo and zen4R version < 0.10. Before, the addition of a draft record to a community was part of the metadata elements. With the new Zenodo, thi action is done with 2 different methods:
+
+* a first method that will "attach" the record the community: 
+
+```r
+my_community = "openfair"
+ZENODO$createReviewRequest(record, my_community)
+```
+
+* a second method that allows to *submit* the record for review by this community manager: 
+
+```r
+ZENODO$submitRecordForReview(record$id)
+```
+
+Indeed, adding a draft deposit/record to a community means now that you are requesting a record to be *reviewed* for publication in a community. The latter `submitRecordForReview` adds a review step before the record publication. This is materialized by a request for addition to the community (as above), but with a review to be performed by the manager. This action has several implications:
+
+* you can't anymore publish by yourself the record, this is delegated to the community manager.
+* the community manager has editing rights over your draft deposit
+
+Note that:
+
+- you can create a review request to *only one community*
+- in case you want to cancel the review, you have to search for the community requests (see section 4.11), and cancel you request. After this only, you will be able to delete the community attachment by doing:
+
+```r
+ZENODO$deleteReviewRequest(record)
+```
+
 <a name="ZenodoDepositMetadata"/>
 
-#### 4.6 Export Zenodo record metadata
+#### 4.7 Export Zenodo record metadata
 
 For a given Zenodo record, [zen4R](https://doi.org/10.5281/zenodo.2547036) let you export the metadata in a metadata file, with a series of ``exportAs*`` methods. 
 
@@ -427,7 +505,7 @@ The metadata formats supported are: ``BibTeX``, ``CSL``, ``DataCite``, ``DublinC
 
 <a name="ZenodoDepositMetadata-byformat"/>
 
-##### 4.6.1 Export Zenodo record metadata by format
+##### 4.7.1 Export Zenodo record metadata by format
 
 To export a record in a given format, they are two ways:
 
@@ -443,7 +521,7 @@ The ``filename`` provided should not include the file extension that is managed 
 
 <a name="ZenodoDepositMetadata-allformats"/>
 
-##### 4.6.2 Export Zenodo record metadata - all formats
+##### 4.7.2 Export Zenodo record metadata - all formats
 
 To export a record in all above metadata formats:
 
@@ -456,51 +534,60 @@ The ``filename`` provided should not include the file extension that is managed 
 
 <a name="ZenodoVocabularies"/>
 
-#### 4.7 Browse Zenodo controlled vocabularies
+#### 4.8 Browse Zenodo controlled vocabularies
 
 
 <a name="ZenodoVocabularies-communities"/>
 
-##### 4.7.1 Communities
+##### 4.8.1 Communities
 
 ```
 communities <- zenodo$getCommunities()
+com <- zenodo$getCommunity("openfair")
 ```
 
 <a name="ZenodoVocabularies-licenses"/>
 
-##### 4.7.2 Licenses
+##### 4.8.2 Licenses
 
 ```
 licenses <- zenodo$getLicenses()
+lic <- zenodo$getLicenseById("mit")
 ```
 
 <a name="ZenodoVocabularies-funders"/>
 
-##### 4.7.3 Funders
+##### 4.8.3 Funders
 
 ```
 funders <- zenodo$getFunders()
+some_funders <- ZENODO$getFundersByName("EU")
+some_funder <-ZENODO$getFunderById("04facnr46")
 ```
 
 <a name="ZenodoVocabularies-grants"/>
 
-##### 4.7.4 Grants
+##### 4.8.4 Grants / Awards
+
+With the move to Invenio, grants are generally referred to awards. For backward-compatibility, methods
+referring to "grants" are still supported with warning.
 
 ```
-grants <- zenodo$getGrants()
+grants <- zenodo$getAwards()
+some_grant <- zenodo$getAwardById("00k4n6c32::862409")
+
 ```
 
 <a name="ZenodoRecord-query"/>
 
-#### 4.8 Query Zenodo published records
+#### 4.9 Query Zenodo published records
 
 [zen4R](https://doi.org/10.5281/zenodo.2547036) offers several methods to query Zenodo records.
 
 
 <a name="ZenodoRecord-getrecords"/>
 
-##### 4.8.1 Get Records
+##### 4.9.1 Get Records
 
 The generic way to query records is to use the method ``getRecords``
 
@@ -517,7 +604,7 @@ By default, the Zenodo API will return only the latest versions of a record. It 
 
 <a name="ZenodoRecord-getrecordbyconceptdoi"/>
 
-##### 4.8.2 Get Record By Concept DOI
+##### 4.9.2 Get Record By Concept DOI
 
 It is possible to interrogate and get a Zenodo record with its concept DOI (generic DOI common to all versions of a record):
 
@@ -527,7 +614,7 @@ my_rec <- zenodo$getRecordByConceptDOI("<my_concept_doi>")
 
 <a name="ZenodoRecord-getrecordbydoi"/>
 
-##### 4.8.3 Get Record By DOI
+##### 4.9.3 Get Record By DOI
 
 It is possible to interrogate and get a Zenodo record with its DOI (record version-specific DOI):
 
@@ -537,7 +624,7 @@ my_rec <- zenodo$getRecordByDOI("<my_doi>")
 
 <a name="ZenodoRecord-getrecordbyid"/>
 
-##### 4.8.4 Get Record By Zenodo ID
+##### 4.9.4 Get Record By Zenodo ID
 
 It is possible to interrogate and get a Zenodo record with its internal ID:
 
@@ -547,7 +634,7 @@ my_rec <- zenodo$getRecordById(id)
 
 <a name="ZenodoRecord-download"/>
 
-#### 4.9 Download files from Zenodo records
+#### 4.10 Download files from Zenodo records
 
 [zen4R](https://doi.org/10.5281/zenodo.2547036) offers methods to download files Zenodo published records.
 
@@ -594,6 +681,48 @@ Download can be also be done in parallel with `parallel` package, depending on t
   download_zenodo("10.5281/zenodo.2547036", parallel = TRUE, parallel_handler = mclapply, mc.cores = 2)
 ```
 
+<a name="Zenodo-requests"/>
+
+#### 4.11 Manage requests
+
+In Zenodo, requests refer essentially to requests made to add records to a community. Depending on your privileges, you will be able to perform different kind of operations over requests:
+
+* as submitter of a record to a community, you will be able to list the requests you made and _cancel_ (eventually) a request
+* as manager of a community, you will be able to see your requests but also requests made by users to add records to your community, in which case you will be able to _accept_ or _decline_ a request.
+
+The operations on requests (`cancel`, `accept`, `decline`) require to get the request ID. To get such ID, you first need to search over requests.
+
+1. Let's suppose that as user, you submitted one of your record to a community. You wish to cancel this request. You can search over the request that is in 'submitted' status for this particular community targeting your record:
+
+```r
+zen_com = zenodo$getCommunityById("openfair)
+reqs = zenodo$getRequests(q = sprintf("status:submitted AND receiver.community:%s AND topic.record:%s", zen_com$id, record$id))
+```
+
+The above query returned only one request, that you can now cancel:
+
+```r
+zenodo$cancelRequest(reqs[[1]]$id) #return TRUE if canceled
+```
+
+2. Let's suppose that as manager, you want to manage incoming requests from users to add their records to your community. You can search over the requests:
+
+```r
+zen_com = zenodo$getCommunityById("openfair)
+reqs = zenodo$getRequests(q = sprintf("status:submitted AND receiver.community:%s", zen_com$id))
+```
+
+and then decided whether you want to _accept_ or _decline_ the requests. The code below assumes we got 2 requests, let's accept the first, and decline the second:
+
+```r
+ZENODO$acceptRequest(reqs[[1]]$id, message = "Thank you for your request, your record has been added to 'openfair' community")
+ZENODO$deleteRequest(reqs[[2]]$id, message = "Unfortunately your record doesn't fulfill our community standards")
+
+```
+
+In the case of a request to community made on a draft record (see section 4.6.2), if the community manager accepts the request, the record will be published. If the request is _declined_ , you may want to review/edit the record and resubmit it again (see section 4.6.2 with method `submitRecordForReview`).
+
+
 <a name="package_issues"/>
 
 ### 5. Issue reporting
@@ -602,3 +731,8 @@ Download can be also be done in parallel with `parallel` package, depending on t
 
 Issues can be reported at https://github.com/eblondel/zen4R/issues
 
+<a name="user_support"/>
+
+### 6. User support
+
+Do not hesitate to ask your question at https://github.com/eblondel/zen4R/discussions
