@@ -909,7 +909,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @description Set subjects
     #' @param subjects a vector or list of subjects to set for the record
     setSubjects = function(subjects){
-      if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
+      self$metadata$subjects <- list()
       for(subject in subjects){
         self$addSubject(subject)
       }
