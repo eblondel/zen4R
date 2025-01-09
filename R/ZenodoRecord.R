@@ -821,7 +821,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         )
         if(!is.null(resource_type)) {
           zenodo = ZenodoManager$new()
-          res = ZENODO$getResourceTypeById(resource_type)
+          res = zenodo$getResourceTypeById(resource_type)
           if(!is.null(res)){
             new_rel$resource_type = list(id = resource_type)
           }
