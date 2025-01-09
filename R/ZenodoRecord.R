@@ -1282,7 +1282,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     exportAs = function(format, filename, append_format = TRUE){
       zenodo_url <- self$links$record_html
       if(is.null(zenodo_url)) zenodo_url <- self$links$self_html
-      if(is.null(zenodo_url)){
+      if(self$is_draft){
         stop("Ups, this record seems a draft, can't export metadata until it is published!")
       }
       metadata_export_url <- switch(format,
