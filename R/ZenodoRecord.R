@@ -821,7 +821,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         )
         if(!is.null(resource_type)) {
           zenodo = ZenodoManager$new()
-          res = ZENODO$getResourceTypeById(resource_type)
+          res = zenodo$getResourceTypeById(resource_type)
           if(!is.null(res)){
             new_rel$resource_type = list(id = resource_type)
           }
@@ -909,7 +909,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @description Set subjects
     #' @param subjects a vector or list of subjects to set for the record
     setSubjects = function(subjects){
-      if(is.null(self$metadata$subjects)) self$metadata$subjects <- list()
+      self$metadata$subjects <- list()
       for(subject in subjects){
         self$addSubject(subject)
       }
@@ -1282,7 +1282,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     exportAs = function(format, filename, append_format = TRUE){
       zenodo_url <- self$links$record_html
       if(is.null(zenodo_url)) zenodo_url <- self$links$self_html
-      if(is.null(zenodo_url)){
+      if(self$is_draft){
         stop("Ups, this record seems a draft, can't export metadata until it is published!")
       }
       metadata_export_url <- switch(format,
