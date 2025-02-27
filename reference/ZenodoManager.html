@@ -4,7 +4,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -18,7 +18,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.1</span>
       </span>
     </div>
 
@@ -35,20 +35,20 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/eblondel/zen4R/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>ZenodoManager</h1>
-    <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/HEAD/R/ZenodoManager.R" class="external-link"><code>R/ZenodoManager.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/master/R/ZenodoManager.R" class="external-link"><code>R/ZenodoManager.R</code></a></small>
     <div class="hidden name"><code>ZenodoManager.Rd</code></div>
     </div>
 
@@ -64,9 +64,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     </div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>Object of <code>R6Class</code> for modelling an ZenodoManager</p>
+    <p>Object of <code>R6Class</code> for modelling an ZenodoManager</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -94,7 +92,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
     </div>
     <div id="methods">
     <h2>Methods</h2>
-    
+
 <div class="section">
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
@@ -183,7 +181,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>url</code></dt>
-<dd><p>Zenodo API URL. By default, the url is set to "https://zenodo.org/api". For tests, 
+<dd><p>Zenodo API URL. By default, the url is set to "https://zenodo.org/api". For tests,
 the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api</p></dd>
 
 
@@ -196,12 +194,12 @@ the Zenodo sandbox API URL can be used: https://sandbox.zenodo.org/api</p></dd>
 
 
 <dt><code>logger</code></dt>
-<dd><p>logger type. The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG" 
+<dd><p>logger type. The logger can be either NULL, "INFO" (with minimum logs), or "DEBUG"
 (for complete curl http calls logs)</p></dd>
 
 
 <dt><code>keyring_backend</code></dt>
-<dd><p>The <span class="pkg">keyring</span> backend used to store user token. The <code>keyring_backend</code> 
+<dd><p>The <span class="pkg">keyring</span> backend used to store user token. The <code>keyring_backend</code>
 can be set to use a different backend for storing the Zenodo token with <span class="pkg">keyring</span> (Default value is 'env').</p></dd>
 
 
@@ -230,7 +228,7 @@ can be set to use a different backend for storing the Zenodo token with <span cl
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of languages as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of languages</p></dd>
 
@@ -272,7 +270,7 @@ Set <code>pretty = FALSE</code> to get the raw list of languages</p></dd>
 <div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of licenses as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of licenses.</p></dd>
 
@@ -314,7 +312,7 @@ Set <code>pretty = FALSE</code> to get the raw list of licenses.</p></dd>
 <div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of resource types as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of resource types</p></dd>
 
@@ -356,7 +354,7 @@ Set <code>pretty = FALSE</code> to get the raw list of resource types</p></dd>
 <div class="section">
 <h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of communities as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of communities</p></dd>
 
@@ -580,7 +578,7 @@ not all grants can be listed from Zenodo, a query has to be specified.</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of grants as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of grants</p></dd>
 
@@ -612,7 +610,7 @@ not all awards can be listed from Zenodo, a query has to be specified.</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of awards as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 
@@ -642,7 +640,7 @@ Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of grants as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of grants</p></dd>
 
@@ -668,7 +666,7 @@ Set <code>pretty = FALSE</code> to get the raw list of grants</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of awards as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of awards</p></dd>
 
@@ -736,7 +734,7 @@ not all affiliations can be listed from Zenodo, a query has to be specified.</p>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of affiliations as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of affiliations</p></dd>
 
@@ -766,7 +764,7 @@ Set <code>pretty = FALSE</code> to get the raw list of affiliations</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of affiliations as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of affiliations</p></dd>
 
@@ -814,7 +812,7 @@ not all funders can be listed from Zenodo, a query has to be specified.</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of funders as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 
@@ -844,7 +842,7 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 
 
 <dt><code>pretty</code></dt>
-<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to 
+<dd><p>Prettify the output. By default the argument <code>pretty</code> is set to
 <code>TRUE</code> which will returns the list of funders as <code>data.frame</code>.
 Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 
@@ -879,11 +877,11 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 </div><p></p><hr><a id="method-ZenodoManager-getDepositions"></a><div class="section">
 <h3 id="method-getdepositions-">Method <code>getDepositions()</code><a class="anchor" aria-label="anchor" href="#method-getdepositions-"></a></h3>
 <p>Get the list of Zenodo records deposited in your Zenodo workspace (user records). By default
-   the list of depositions will be returned by page with a size of 10 results per page (default size of 
-   the Zenodo API). The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter 
-   depositions (default query is empty to retrieve all records). The argument <code>all_versions</code>, if set 
+   the list of depositions will be returned by page with a size of 10 results per page (default size of
+   the Zenodo API). The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter
+   depositions (default query is empty to retrieve all records). The argument <code>all_versions</code>, if set
    to TRUE allows to get all versions of records as part of the depositions list. The argument <code>exact</code>
-   specifies that an exact matching is wished, in which case paginated search will be disabled (only the first 
+   specifies that an exact matching is wished, in which case paginated search will be disabled (only the first
    search page will be returned).
    Examples of ElasticSearch queries for Zenodo can be found at <a href="https://help.zenodo.org/guides/search/" class="external-link">https://help.zenodo.org/guides/search/</a>.</p><div class="section">
 <h4 id="usage-29">Usage<a class="anchor" aria-label="anchor" href="#usage-29"></a></h4>
@@ -1023,7 +1021,7 @@ Set <code>pretty = FALSE</code> to get the raw list of funders</p></dd>
 
 
 <dt><code>publish</code></dt>
-<dd><p>object of class <code>logical</code> indicating if record has to be published (default <code>FALSE</code>). 
+<dd><p>object of class <code>logical</code> indicating if record has to be published (default <code>FALSE</code>).
 Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish your record)</p></dd>
 
 
@@ -1153,9 +1151,9 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 
 </div><p></p><hr><a id="method-ZenodoManager-deleteRecords"></a><div class="section">
 <h3 id="method-deleterecords-">Method <code>deleteRecords()</code><a class="anchor" aria-label="anchor" href="#method-deleterecords-"></a></h3>
-<p>Deletes all Zenodo deposited (unpublished) records. 
-  The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions (default query 
-   is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo  can be found at 
+<p>Deletes all Zenodo deposited (unpublished) records.
+  The parameter <code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions (default query
+   is empty to retrieve all records). Examples of ElasticSearch queries for Zenodo  can be found at
    <a href="https://help.zenodo.org/guides/search/" class="external-link">https://help.zenodo.org/guides/search/</a>.</p><div class="section">
 <h4 id="usage-40">Usage<a class="anchor" aria-label="anchor" href="#usage-40"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">deleteRecords</span><span class="op">(</span>q <span class="op">=</span> <span class="st">""</span>, size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -1181,7 +1179,7 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 </div><p></p><hr><a id="method-ZenodoManager-createEmptyRecord"></a><div class="section">
 <h3 id="method-createemptyrecord-">Method <code>createEmptyRecord()</code><a class="anchor" aria-label="anchor" href="#method-createemptyrecord-"></a></h3>
 <p>Creates an empty record in the Zenodo deposit. Returns the record
-   newly created in Zenodo, as an object of class <code>ZenodoRecord</code> with an 
+   newly created in Zenodo, as an object of class <code>ZenodoRecord</code> with an
    assigned identifier.</p><div class="section">
 <h4 id="usage-41">Usage<a class="anchor" aria-label="anchor" href="#usage-41"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">createEmptyRecord</span><span class="op">(</span>reserveDOI <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -1222,8 +1220,8 @@ Can be set to <code>TRUE</code> (to use CAUTIOUSLY, only if you want to publish 
 
 </div><p></p><hr><a id="method-ZenodoManager-discardChanges"></a><div class="section">
 <h3 id="method-discardchanges-">Method <code>discardChanges()</code><a class="anchor" aria-label="anchor" href="#method-discardchanges-"></a></h3>
-<p>Discards changes on a Zenodo record. Deleting a draft for an unpublished 
-record will remove the draft and associated files from the system. Deleting a draft for 
+<p>Discards changes on a Zenodo record. Deleting a draft for an unpublished
+record will remove the draft and associated files from the system. Deleting a draft for
 a published record will remove the draft but not the published record.</p><div class="section">
 <h4 id="usage-43">Usage<a class="anchor" aria-label="anchor" href="#usage-43"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoManager</span><span class="op">$</span><span class="fu">discardChanges</span><span class="op">(</span><span class="va">recordId</span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -1399,11 +1397,11 @@ the file record is deleted.</p><div class="section">
 </div><p></p><hr><a id="method-ZenodoManager-getRecords"></a><div class="section">
 <h3 id="method-getrecords-">Method <code>getRecords()</code><a class="anchor" aria-label="anchor" href="#method-getrecords-"></a></h3>
 <p>Get the list of Zenodo records. By defaut the list of records will be returned by
-    page with a size of 10 results per page (default size of the Zenodo API). The parameter 
-    <code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions 
-    (default query is empty to retrieve all records). The argument <code>all_versions</code>, 
-    if set to TRUE allows to get all versions of records as part of the depositions list. 
-    The argument <code>exact</code> specifies that an exact matching is wished, in which case 
+    page with a size of 10 results per page (default size of the Zenodo API). The parameter
+    <code>q</code> allows to specify an ElasticSearch-compliant query to filter depositions
+    (default query is empty to retrieve all records). The argument <code>all_versions</code>,
+    if set to TRUE allows to get all versions of records as part of the depositions list.
+    The argument <code>exact</code> specifies that an exact matching is wished, in which case
     paginated search will be disabled (only the first search page will be returned).
     Examples of ElasticSearch queries for Zenodo can be found at <a href="https://help.zenodo.org/guides/search/" class="external-link">https://help.zenodo.org/guides/search/</a>.</p><div class="section">
 <h4 id="usage-51">Usage<a class="anchor" aria-label="anchor" href="#usage-51"></a></h4>
@@ -1529,7 +1527,7 @@ the file record is deleted.</p><div class="section">
 <div class="section">
 <h4 id="arguments-55">Arguments<a class="anchor" aria-label="anchor" href="#arguments-55"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>q</code></dt>
-<dd><p>Search query used to filter results based on ElasticSearch's query string syntax. 
+<dd><p>Search query used to filter results based on ElasticSearch's query string syntax.
 e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax</p></dd>
 
 
@@ -1692,8 +1690,8 @@ depending on its status. To be subject to an operation, a request should not be 
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#create (deposit) an empty record</span></span></span>
 <span class="r-in"><span>  <span class="va">newRec</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">createEmptyRecord</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Error while depositing record: Referer checking failed - no Referer.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Referer checking failed - no Referer. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Error while depositing record: Permission denied.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Permission denied. </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#create and fill a local (not yet deposited) record</span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span> <span class="op">&lt;-</span> <span class="va"><a href="ZenodoRecord.html">ZenodoRecord</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -1711,31 +1709,31 @@ depending on its status. To be subject to an operation, a request should not be 
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Successfully fetched license 'mit'</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span>  <span class="va">myrec</span><span class="op">$</span><span class="fu">setAccessRight</span><span class="op">(</span><span class="st">"open"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> attempt to apply non-function</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> attempt to apply non-function</span>
 <span class="r-in"><span>  <span class="va">myrec</span><span class="op">$</span><span class="fu">setDOI</span><span class="op">(</span><span class="st">"mydoi"</span><span class="op">)</span> <span class="co">#use this method if your DOI has been assigned elsewhere, outside Zenodo</span></span></span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#deposit the record </span></span></span>
 <span class="r-in"><span>  <span class="va">myrec</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">depositRecord</span><span class="op">(</span><span class="va">myrec</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Error while depositing record: Referer checking failed - no Referer.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Referer checking failed - no Referer. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Error while depositing record: CSRF token missing or incorrect.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: CSRF token missing or incorrect. </span>
 <span class="r-in"><span>  </span></span>
 <span class="r-in"><span>  <span class="co">#publish a record (with caution!!)</span></span></span>
 <span class="r-in"><span>  <span class="co">#this method will PUBLISH the deposition done earlier</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">publishRecord</span><span class="op">(</span><span class="va">myrec</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Referer checking failed - no Referer."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "CSRF token missing or incorrect."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $status</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span>  <span class="co">#With even more caution the publication can be done with a shortcut argument at deposit time</span></span></span>
 <span class="r-in"><span>  <span class="va">ZENODO</span><span class="op">$</span><span class="fu">depositRecord</span><span class="op">(</span><span class="va">myrec</span>, publish <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Error while depositing record: Referer checking failed - no Referer.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: Referer checking failed - no Referer. </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Error while depositing record: CSRF token missing or incorrect.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [zen4R][ERROR] ZenodoManager - Error while depositing record: CSRF token missing or incorrect. </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $message</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Referer checking failed - no Referer."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "CSRF token missing or incorrect."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $status</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 400</span>
@@ -1780,15 +1778,15 @@ depending on its status. To be subject to an operation, a request should not be 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
