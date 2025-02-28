@@ -1,0 +1,48 @@
+<svg width="200" height="200" viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Define gradients for the sky background -->
+    <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" style="stop-color:lightblue;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:blue;stop-opacity:1" />
+    </linearGradient>
+    <!-- Import Font Awesome and Google Fonts style -->
+    <style type="text/css">
+      @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+      @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&family=Montserrat:wght@900&display=swap');
+      .fa {
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+      }
+      .modern-font {
+        font-family: 'Roboto', sans-serif;
+      }
+      .handwritten-font {
+        font-family: 'Pacifico', cursive;
+      }
+      .zenodo-font {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+      }
+    </style>
+    <!-- Define clip path to crop the Zenodo logo -->
+    <clipPath id="clip-zen">
+      <rect x="0" y="0" width="98" height="1000" />
+    </clipPath>
+  </defs>
+  <!-- Hexagon background with shaded lightblue to blue gradient -->
+  <polygon points="100,10 180,60 180,160 100,210 20,160 20,60" fill="url(#skyGradient)" stroke="lightpink" stroke-width="5"/>
+
+  <!-- LOD cloud icon as background -->
+  <text x="100" y="150" font-size="120" fill="white" text-anchor="middle" opacity="0.1" class="fa">&#xf0c2;</text>
+
+  <text x="100" y="200" font-size="50" fill="white" text-anchor="middle" opacity="0.1" class="fa">&#xf5bb;</text>
+  
+  <!-- Cropped Zenodo icon centered and enlarged -->
+  <image href="https://raw.githubusercontent.com/zenodo/zenodo/refs/heads/master/zenodo/modules/theme/static/img/logos/zenodo-white-1000.png" x="12" y="60" width="176" height="100" clip-path="url(#clip-zen)" />
+  <image href="https://raw.githubusercontent.com/zenodo/zenodo/refs/heads/master/zenodo/modules/theme/static/img/logos/zenodo-white-200.png" x="25" y="130" width="150" height="25" />
+
+  <!-- Text "zen4R" in the middle with modern and zenodo font-family -->
+  <text x="127" y="126" font-size="38" text-anchor="middle" class="modern-font" fill="gray">
+    <tspan fill="gray" font-weight="bold" class="zenodo-font">4</tspan><tspan fill="blue" font-size="44" font-weight="bold" class="zenodo-font">R</tspan>
+  </text>
+</svg>
