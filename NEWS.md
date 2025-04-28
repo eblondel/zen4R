@@ -1,11 +1,12 @@
 # Change log
 
 ## [zen4R 0.10.1](https://github.com/eblondel/zen4R)
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
+[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Bug fixes**
 
 * [#174](https://github.com/eblondel/zen4R/issues/174) Change in communities endpoint response breaks getCommunities method
+* [#175](https://github.com/eblondel/zen4R/issues/175) getRecordByConceptDOI returns the first record and not the latest one
 
 ## [zen4R 0.10](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
