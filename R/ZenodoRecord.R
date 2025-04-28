@@ -2,8 +2,8 @@
 #' @docType class
 #' @export
 #' @keywords zenodo record
-#' @return Object of \code{\link{R6Class}} for modelling an ZenodoRecord
-#' @format \code{\link{R6Class}} object.
+#' @return Object of \code{\link[R6]{R6Class}} for modelling an ZenodoRecord
+#' @format \code{\link[R6]{R6Class}} object.
 #' 
 #' @author Emmanuel Blondel <emmanuel.blondel1@@gmail.com>
 #' 
@@ -1663,7 +1663,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       invisible(self)
     },
     
-    #'@description Maps to an \pkg{atom4R} \link{DCEntry}. Note: applies only to published records.
+    #'@description Maps to an \pkg{atom4R} \link[atom4R]{DCEntry}. Note: applies only to published records.
     #'@return an object of class \code{DCEntry}
     toDCEntry = function(){
       tmp <- tempfile()

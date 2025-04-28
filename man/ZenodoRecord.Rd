@@ -5,10 +5,10 @@
 \alias{ZenodoRecord}
 \title{ZenodoRecord}
 \format{
-\code{\link{R6Class}} object.
+\code{\link[R6]{R6Class}} object.
 }
 \value{
-Object of \code{\link{R6Class}} for modelling an ZenodoRecord
+Object of \code{\link[R6]{R6Class}} for modelling an ZenodoRecord
 }
 \description{
 ZenodoRecord
@@ -2303,7 +2303,7 @@ for a record will raise a warning message and revert to "internal" format}
 \if{html}{\out{<a id="method-ZenodoRecord-toDCEntry"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-toDCEntry}{}}}
 \subsection{Method \code{toDCEntry()}}{
-Maps to an \pkg{atom4R} \link{DCEntry}. Note: applies only to published records.
+Maps to an \pkg{atom4R} \link[atom4R]{DCEntry}. Note: applies only to published records.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$toDCEntry()}\if{html}{\out{</div>}}
 }
