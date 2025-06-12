@@ -27,7 +27,7 @@
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
 #' @param quiet Logical (\code{FALSE} by default).
 #' Do you want to suppress informative messages (not warnings)?
-#' @param ... any other arguments for parallel downloading (more information at
+#' @param ... any other arguments for downloading (more information at
 #'\link{ZenodoRecord}, \code{downloadFiles()} documentation)
 #' 
 #' @export

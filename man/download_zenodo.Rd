@@ -29,7 +29,7 @@ download_zenodo(
 \item{quiet}{Logical (\code{FALSE} by default).
 Do you want to suppress informative messages (not warnings)?}
 
-\item{...}{any other arguments for parallel downloading (more information at
+\item{...}{any other arguments for downloading (more information at
 \link{ZenodoRecord}, \code{downloadFiles()} documentation)}
 }
 \description{
