@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/eblondel/zen4R/actions/workflows/r-cmd-check.yml/badge.svg?branch=master)](https://github.com/eblondel/zen4R/actions/workflows/r-cmd-check.yml)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/zen4R)](https://cran.r-project.org/package=zen4R)
-[![Github_Status_Badge](https://img.shields.io/badge/Github-0.10.1-blue.svg)](https://github.com/eblondel/zen4R)
+[![Github_Status_Badge](https://img.shields.io/badge/Github-0.10.2-blue.svg)](https://github.com/eblondel/zen4R)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2547036.svg)](https://doi.org/10.5281/zenodo.2547036)
 
 **R Interface to Zenodo REST API**

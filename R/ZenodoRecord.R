@@ -1466,9 +1466,25 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           target_file <- file.path(path, file$filename)
           timeout_cache <- getOption("timeout")
           options(timeout = timeout)
-          download.file(url = file$download, destfile = target_file, 
-                        quiet = quiet, mode = "wb")
+          download_try = try(
+            download.file(
+              url = file$download, 
+              destfile = target_file, 
+              quiet = quiet, 
+              mode = "wb"
+            ), silent = TRUE
+          )
+          if(is(download_try, "try-error")){
+            print(download_try)
+            if (!quiet){
+              errMsg = sprintf("Error while downloading file '%s' (size: %s): %s\n", 
+                                file$filename, human_filesize(file$filesize), download_try[1])
+              cli::cli_alert_info(errMsg)
+              cat(paste("[zen4R][ERROR]", errMsg))
+            }
+          }
           options(timeout = timeout_cache)
+          return(download_try)
         }
         #check_integrity util
         check_integrity <- function(file){
@@ -1492,6 +1508,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           }
         }
         
+        download_results = list()
+        
+        #files download
         if(parallel){
           if (!quiet){
             infoMsg = "Download in parallel mode"
@@ -1519,7 +1538,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                 cli::cli_alert_info(files_summary)
                 self$INFO(files_summary)
               }
-              invisible(parallel_handler(cl, files.list, download_file, ...))
+              download_results <- invisible(parallel_handler(cl, files.list, download_file, ...))
               try(parallel::stopCluster(cl))
             }else{
               if (!quiet){
@@ -1529,7 +1548,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                 cli::cli_alert_info(files_summary)
                 self$INFO(files_summary)
               }
-              invisible(parallel_handler(files.list, download_file, ...))
+              download_results <- invisible(parallel_handler(files.list, download_file, ...))
             }
           }
         }else{
@@ -1540,25 +1559,41 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
             cli::cli_alert_info(files_summary)
             self$INFO(files_summary)
           }
-          invisible(lapply(files.list, download_file))
+          download_results <- invisible(lapply(files.list, download_file))
         }
+        
+        download_files_with_success <- download_results[!sapply(download_results, is, "try-error")]
+        download_files_with_error <- files.list[sapply(download_results, is, "try-error")]
+        
+        #files integrity check
         if (!quiet){
-          infoMsg = sprintf("File%s downloaded at '%s'.\n",
-                            ifelse(length(files.list)>1,"s",""), tools::file_path_as_absolute(path))
-          cli::cli_alert_info(infoMsg)
-          cat(paste("[zen4R][INFO]", infoMsg))
+          if(length(download_files_with_success)>0){
+            infoMsg = sprintf("File%s downloaded at '%s'.\n",
+                              ifelse(length(download_files_with_success)>1,"s",""), tools::file_path_as_absolute(path))
+            cli::cli_alert_info(infoMsg)
+            cat(paste("[zen4R][INFO]", infoMsg))
+          }
+          if(length(download_files_with_error)>0){
+            errMsg = sprintf("File%s download failed!\n",
+                              ifelse(length(download_files_with_error)>1,"s",""))
+            cli::cli_alert_info(errMsg)
+            cat(paste("[zen4R][ERROR]", errMsg))
+          }
         }
-        if (!quiet){
-          infoMsg = "Verifying file integrity..."
-          cli::cli_alert_info(infoMsg)
-          self$INFO(infoMsg)
+        if(length(download_files_with_success)>0){
+          if (!quiet){
+            infoMsg = "Verifying file integrity..."
+            cli::cli_alert_info(infoMsg)
+            self$INFO(infoMsg)
+          }
+          invisible(lapply(files.list, check_integrity))
+          if (!quiet){
+            infoMsg = "End of download"
+            cli::cli_alert_success(infoMsg)
+            self$INFO(infoMsg)
+          }
         }
-        invisible(lapply(files.list, check_integrity))
-        if (!quiet){
-          infoMsg = "End of download"
-          cli::cli_alert_success(infoMsg)
-          self$INFO(infoMsg)
-        }
+        
       }
     },
     
