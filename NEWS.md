@@ -1,5 +1,12 @@
 # Change log
 
+## [zen4R 0.10.2](https://github.com/eblondel/zen4R)
+[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+
+**Enhancements**
+
+* [#171](https://github.com/eblondel/zen4R/issues/171) Improve download timeout management/log
+
 ## [zen4R 0.10.1](https://github.com/eblondel/zen4R)
 [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
@@ -8,7 +15,7 @@
 * [#174](https://github.com/eblondel/zen4R/issues/174) Change in communities endpoint response breaks getCommunities method
 * [#175](https://github.com/eblondel/zen4R/issues/175) getRecordByConceptDOI returns the first record and not the latest one
 
-## [zen4R 0.10](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.tar.gz)
 
 **Enhancements**
 
@@ -40,7 +47,7 @@
 * [#156](https://github.com/eblondel/zen4R/issues/156) Support method to get list of communities associated with a record
 * [#157](https://github.com/eblondel/zen4R/issues/157) Support method to delete records from communities
 
-## [zen4R 0.9](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.9](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.9.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.9.tar.gz)
 
 **New features**
 
