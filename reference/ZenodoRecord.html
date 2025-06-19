@@ -18,7 +18,7 @@ ZenodoRecord"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.3</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@ ZenodoRecord"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>ZenodoRecord</h1>
-    <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/v0.10.2/R/ZenodoRecord.R" class="external-link"><code>R/ZenodoRecord.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/master/R/ZenodoRecord.R" class="external-link"><code>R/ZenodoRecord.R</code></a></small>
     <div class="hidden name"><code>ZenodoRecord.Rd</code></div>
     </div>
 
@@ -248,6 +248,7 @@ ZenodoRecord"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
 <li><p><a href="#method-ZenodoRecord-exportAsGeoJSON"><code>ZenodoRecord$exportAsGeoJSON()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsMARCXML"><code>ZenodoRecord$exportAsMARCXML()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsAllFormats"><code>ZenodoRecord$exportAsAllFormats()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-getCitation"><code>ZenodoRecord$getCitation()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-listFiles"><code>ZenodoRecord$listFiles()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-downloadFiles"><code>ZenodoRecord$downloadFiles()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-print"><code>ZenodoRecord$print()</code></a></p></li>
@@ -2370,15 +2371,39 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-listFiles"></a><div class="section">
-<h3 id="method-listfiles-">Method <code>listFiles()</code><a class="anchor" aria-label="anchor" href="#method-listfiles-"></a></h3>
-<p>list files attached to the record</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-getCitation"></a><div class="section">
+<h3 id="method-getcitation-">Method <code>getCitation()</code><a class="anchor" aria-label="anchor" href="#method-getcitation-"></a></h3>
+<p>Get record citation</p><div class="section">
 <h4 id="usage-98">Usage<a class="anchor" aria-label="anchor" href="#usage-98"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">listFiles</span><span class="op">(</span>pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getCitation</span><span class="op">(</span></span>
+<span>  style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"havard-cite-them-right"</span>, <span class="st">"apa"</span>, <span class="st">"modern-language-association"</span>, <span class="st">"vancouver"</span>,</span>
+<span>    <span class="st">"chicago-fullnote-bibliography"</span>, <span class="st">"ieee"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-92">Arguments<a class="anchor" aria-label="anchor" href="#arguments-92"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>style</code></dt>
+<dd><p>the style character string among. Possible values "havard-cite-them-right", "apa",
+"modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
+<p>the citation text</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-listFiles"></a><div class="section">
+<h3 id="method-listfiles-">Method <code>listFiles()</code><a class="anchor" aria-label="anchor" href="#method-listfiles-"></a></h3>
+<p>list files attached to the record</p><div class="section">
+<h4 id="usage-99">Usage<a class="anchor" aria-label="anchor" href="#usage-99"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">listFiles</span><span class="op">(</span>pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-93">Arguments<a class="anchor" aria-label="anchor" href="#arguments-93"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
 <dd><p>whether a pretty output (<code>data.frame</code>) should be returned (default <code>TRUE</code>), otherwise
 the raw list of files is returned.</p></dd>
@@ -2387,14 +2412,14 @@ the raw list of files is returned.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
+<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
 <p>the files, as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-downloadFiles"></a><div class="section">
 <h3 id="method-downloadfiles-">Method <code>downloadFiles()</code><a class="anchor" aria-label="anchor" href="#method-downloadfiles-"></a></h3>
 <p>Downloads files attached to the record</p><div class="section">
-<h4 id="usage-99">Usage<a class="anchor" aria-label="anchor" href="#usage-99"></a></h4>
+<h4 id="usage-100">Usage<a class="anchor" aria-label="anchor" href="#usage-100"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">downloadFiles</span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -2409,7 +2434,7 @@ the raw list of files is returned.</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-93">Arguments<a class="anchor" aria-label="anchor" href="#arguments-93"></a></h4>
+<h4 id="arguments-94">Arguments<a class="anchor" aria-label="anchor" href="#arguments-94"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>target download path (by default it will be the current working directory)</p></dd>
 
@@ -2456,12 +2481,12 @@ can be added (eg. <code>mc.cores</code> for <code>mclapply</code>)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Prints a ZenodoRecord</p><div class="section">
-<h4 id="usage-100">Usage<a class="anchor" aria-label="anchor" href="#usage-100"></a></h4>
+<h4 id="usage-101">Usage<a class="anchor" aria-label="anchor" href="#usage-101"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span>, format <span class="op">=</span> <span class="st">"internal"</span>, depth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-94">Arguments<a class="anchor" aria-label="anchor" href="#arguments-94"></a></h4>
+<h4 id="arguments-95">Arguments<a class="anchor" aria-label="anchor" href="#arguments-95"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>any other parameter. Not used</p></dd>
 
@@ -2483,36 +2508,36 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div><p></p><hr><a id="method-ZenodoRecord-toDCEntry"></a><div class="section">
 <h3 id="method-todcentry-">Method <code>toDCEntry()</code><a class="anchor" aria-label="anchor" href="#method-todcentry-"></a></h3>
 <p>Maps to an <span class="pkg">atom4R</span> <a href="https://rdrr.io/pkg/atom4R/man/DCEntry.html" class="external-link">DCEntry</a>. Note: applies only to published records.</p><div class="section">
-<h4 id="usage-101">Usage<a class="anchor" aria-label="anchor" href="#usage-101"></a></h4>
+<h4 id="usage-102">Usage<a class="anchor" aria-label="anchor" href="#usage-102"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">toDCEntry</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
+<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
 <p>an object of class <code>DCEntry</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-getFirstDOI"></a><div class="section">
 <h3 id="method-getfirstdoi-">Method <code>getFirstDOI()</code><a class="anchor" aria-label="anchor" href="#method-getfirstdoi-"></a></h3>
 <p>Get DOI of the first record version.</p><div class="section">
-<h4 id="usage-102">Usage<a class="anchor" aria-label="anchor" href="#usage-102"></a></h4>
+<h4 id="usage-103">Usage<a class="anchor" aria-label="anchor" href="#usage-103"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getFirstDOI</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
+<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
 <p>the first DOI, object of class <code>character</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-getLastDOI"></a><div class="section">
 <h3 id="method-getlastdoi-">Method <code>getLastDOI()</code><a class="anchor" aria-label="anchor" href="#method-getlastdoi-"></a></h3>
 <p>Get DOI of the latest record version.</p><div class="section">
-<h4 id="usage-103">Usage<a class="anchor" aria-label="anchor" href="#usage-103"></a></h4>
+<h4 id="usage-104">Usage<a class="anchor" aria-label="anchor" href="#usage-104"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getLastDOI</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
+<h4 id="returns-57">Returns<a class="anchor" aria-label="anchor" href="#returns-57"></a></h4>
 <p>the last DOI, object of class <code>character</code></p>
 </div>
 
@@ -2520,24 +2545,24 @@ for a record will raise a warning message and revert to "internal" format</p></d
 <h3 id="method-getversions-">Method <code>getVersions()</code><a class="anchor" aria-label="anchor" href="#method-getversions-"></a></h3>
 <p>Get record versions with creation/publication date,
   version (ordering number) and DOI.</p><div class="section">
-<h4 id="usage-104">Usage<a class="anchor" aria-label="anchor" href="#usage-104"></a></h4>
+<h4 id="usage-105">Usage<a class="anchor" aria-label="anchor" href="#usage-105"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getVersions</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-57">Returns<a class="anchor" aria-label="anchor" href="#returns-57"></a></h4>
+<h4 id="returns-58">Returns<a class="anchor" aria-label="anchor" href="#returns-58"></a></h4>
 <p>a <code>data.frame</code> with the record versions</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-105">Usage<a class="anchor" aria-label="anchor" href="#usage-105"></a></h4>
+<h4 id="usage-106">Usage<a class="anchor" aria-label="anchor" href="#usage-106"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-95">Arguments<a class="anchor" aria-label="anchor" href="#arguments-95"></a></h4>
+<h4 id="arguments-96">Arguments<a class="anchor" aria-label="anchor" href="#arguments-96"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
