@@ -166,6 +166,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-exportAsGeoJSON}{\code{ZenodoRecord$exportAsGeoJSON()}}
 \item \href{#method-ZenodoRecord-exportAsMARCXML}{\code{ZenodoRecord$exportAsMARCXML()}}
 \item \href{#method-ZenodoRecord-exportAsAllFormats}{\code{ZenodoRecord$exportAsAllFormats()}}
+\item \href{#method-ZenodoRecord-getCitation}{\code{ZenodoRecord$getCitation()}}
 \item \href{#method-ZenodoRecord-listFiles}{\code{ZenodoRecord$listFiles()}}
 \item \href{#method-ZenodoRecord-downloadFiles}{\code{ZenodoRecord$downloadFiles()}}
 \item \href{#method-ZenodoRecord-print}{\code{ZenodoRecord$print()}}
@@ -2205,6 +2206,30 @@ Exports record in all Zenodo record export formats. This function will
 \item{\code{filename}}{the target filename (without extension)}
 }
 \if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-getCitation"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-getCitation}{}}}
+\subsection{Method \code{getCitation()}}{
+Get record citation
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getCitation(
+  style = c("havard-cite-them-right", "apa", "modern-language-association", "vancouver",
+    "chicago-fullnote-bibliography", "ieee")
+)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{style}}{the style character string among. Possible values "havard-cite-them-right", "apa",
+"modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the citation text
 }
 }
 \if{html}{\out{<hr>}}

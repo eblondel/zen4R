@@ -1380,6 +1380,22 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       invisible(lapply(private$export_formats, self$exportAs, filename))
     },
     
+    #'@description Get record citation
+    #'@param style the style character string among. Possible values "havard-cite-them-right", "apa",
+    #' "modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"
+    #'@return the citation text
+    getCitation = function(style = c("havard-cite-them-right",
+                                     "apa",
+                                     "modern-language-association",
+                                     "vancouver",
+                                     "chicago-fullnote-bibliography",
+                                     "ieee")){
+      style = match.arg(style)
+      citation_content <- httr::GET(paste0(self$links$self,"?style=", style), httr::accept("text/x-bibliography"))
+      citation_text <- httr::content(citation_content,type = "text/x-bibliography")
+      return(citation_text)
+    },
+    
     #' @description list files attached to the record
     #' @param pretty whether a pretty output (\code{data.frame}) should be returned (default \code{TRUE}), otherwise
     #'   the raw list of files is returned.
