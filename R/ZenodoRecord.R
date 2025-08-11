@@ -1442,13 +1442,6 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       }else{
         files.list <- self$files
 
-        if(!overwrite){
-          files.list <- files.list[
-            which(sapply(files.list, function(x){
-            !file.exists(file.path(path, x$filename))}))
-          ]
-        }
-
         if(length(files)>0) files.list <- files.list[sapply(files.list, function(x){x$filename %in% files})]
         if(length(files.list)==0){
           errMsg <- sprintf("No files available in record '%s' (doi: '%s') for file names [%s]",
@@ -1459,16 +1452,27 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         }
         for(file in files){
           if(!file %in% sapply(files.list, function(x){x$filename})){
-            warnMsg = sprintf("No files available in record '%s' (doi: '%s') for file name '%s': ",
+            warnMsg = sprintf("No file available in record '%s' (doi: '%s') with name '%s': ",
                               self$id, self$pids$doi$identifier, file)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMSg)
           }
         }
 
+        if(!overwrite){
+          warnMsg = sprintf("Overwrite is 'false', aborting download of existing files")
+          cli::cli_alert_warning(warnMsg)
+          files.list <- files.list[
+            which(sapply(files.list, function(x){
+              !file.exists(file.path(path, x$filename))}))
+          ]
+        }
+        
+        if(length(files.list)==0) return()
+
         files_summary <- sprintf("Will download %s file%s from record '%s' (doi: '%s') - total size: %s",
-                                length(files.list), ifelse(length(files.list)>1,"s",""), self$id, self$pids$doi$identifier, 
-                                human_filesize(sum(sapply(files.list, function(x){x$filesize}))))
+                                 length(files.list), ifelse(length(files.list)>1,"s",""), self$id, self$pids$doi$identifier, 
+                                 human_filesize(sum(sapply(files.list, function(x){x$filesize})))) 
         
         #download_file util
         download_file <- function(file){
