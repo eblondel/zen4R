@@ -12,7 +12,6 @@
 #' @import keyring
 #' @importFrom tools file_path_as_absolute
 #' @importFrom tools md5sum
-#' @import atom4R
 #' @importFrom utf8 utf8_encode
 #' @importFrom plyr rbind.fill
 #' 
