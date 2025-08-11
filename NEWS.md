@@ -3,6 +3,10 @@
 ## [zen4R 0.10.3](https://github.com/eblondel/zen4R) |
 [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
 
+**Corrections**
+
+* [#181](https://github.com/eblondel/zen4R/issues/181) Fix file download behavior with `overwrite` argument
+
 **New features**
 
 * [#179](https://github.com/eblondel/zen4R/issues/179) Support method to get a record citation
