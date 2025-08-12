@@ -1512,7 +1512,9 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           target_file <-file.path(path, file$filename)
           #check md5sum
           target_file_md5sum <- tools::md5sum(target_file)
-          if(target_file_md5sum==file$checksum){
+          # need unname() as it is a named vector, we just want the md5sum
+          md5sum_match <- identical(unname(target_file_md5sum), file$checksum)
+          if(md5sum_match){
             if (!quiet){
               infoMsg = sprintf("File '%s': integrity verified (md5sum: %s)\n",
                                 file$filename, file$checksum)
