@@ -11,6 +11,10 @@
 
 * [#179](https://github.com/eblondel/zen4R/issues/179) Support method to get a record citation
 
+**Enhancements**
+
+* [#180](https://github.com/eblondel/zen4R/issues/180) Put `atom4R` as `Suggests` instead of `Imports` (only one R function)
+
 ## [zen4R 0.10.2](https://github.com/eblondel/zen4R) |
 [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
