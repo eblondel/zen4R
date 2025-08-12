@@ -1488,7 +1488,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           options(timeout = timeout)
           download_try = try(
             download.file(
-              url = file$download, 
+              url = URLencode(file$download), 
               destfile = target_file, 
               quiet = quiet, 
               mode = "wb"
