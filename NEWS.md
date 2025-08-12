@@ -6,6 +6,7 @@
 **Corrections**
 
 * [#181](https://github.com/eblondel/zen4R/issues/181) Fix file download behavior with `overwrite` argument
+* [#183](https://github.com/eblondel/zen4R/issues/183) URLs with spaces result in downstream failures
 
 **New features**
 
