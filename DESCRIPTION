@@ -1,6 +1,6 @@
 Package: zen4R
 Version: 0.10.3
-Date: 2025-08-11
+Date: 2025-08-13
 Title: Interface to 'Zenodo' REST API
 Authors@R: c(
   person("Emmanuel", "Blondel", role = c("aut", "cre"), email = "emmanuel.blondel1@gmail.com", comment = c(ORCID = "0000-0002-5870-5762")),
@@ -9,7 +9,8 @@ Authors@R: c(
   person("Hans", "Van Calster", role = c("ctb"), comment = c(ORCID = "0000-0001-8595-8426")),
   person("Floris", "Vanderhaeghe", role = c("ctb"), comment = c(ORCID = "0000-0002-6378-6229")),
   person("Jemma", "Stachelek", role = c("ctb"), comment = c(ORCID = "0000-0002-5924-2464")),
-  person("Collin", "Schwantes", role = c("ctb"), comment = c(ORCID = "0000-0002-9882-941X")))
+  person("Collin", "Schwantes", role = c("ctb"), comment = c(ORCID = "0000-0002-9882-941X")),
+  person("Nicholas", "Tierney", role = c("ctb"), comment = c(ORCID = "0000-0003-1460-8722")))
 Maintainer: Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 Depends: R (>= 3.3.0), methods
 Imports: R6, cli, httr, jsonlite, XML, xml2, keyring, tools, utf8, plyr
