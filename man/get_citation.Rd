@@ -8,7 +8,7 @@ get_citation(
   doi,
   sandbox = FALSE,
   style = c("havard-cite-them-right", "apa", "modern-language-association", "vancouver",
-    "chicago-fullnote-bibliography", "ieee"),
+    "chicago-fullnote-bibliography", "ieee", "bibtex"),
   logger = NULL
 )
 }
