@@ -1382,7 +1382,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #'@description Get record citation
     #'@param style the style character string among. Possible values "havard-cite-them-right", "apa",
-    #' "modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"
+    #' "modern-language-association","vancouver","chicago-fullnote-bibliography", "ieee", or "bibtex"
     #'@return the citation text
     getCitation = function(style = c("havard-cite-them-right",
                                      "apa",

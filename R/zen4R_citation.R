@@ -12,7 +12,7 @@
 #' @param doi a Zenodo DOI or concept DOI
 #' @param sandbox Use the sandbox infrastructure. Default is \code{FALSE}
 #' @param style the style character string among. Possible values "havard-cite-them-right", "apa",
-#' "modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"
+#' "modern-language-association","vancouver","chicago-fullnote-bibliography", "ieee", or "bibtex".
 #' @param logger a logger to print messages. The logger can be either NULL, 
 #' "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)
 #' @return an object of class \code{data.frame} giving the record versions

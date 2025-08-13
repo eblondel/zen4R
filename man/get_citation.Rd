@@ -18,7 +18,7 @@ get_citation(
 \item{sandbox}{Use the sandbox infrastructure. Default is \code{FALSE}}
 
 \item{style}{the style character string among. Possible values "havard-cite-them-right", "apa",
-"modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"}
+"modern-language-association","vancouver","chicago-fullnote-bibliography", "ieee", or "bibtex".}
 
 \item{logger}{a logger to print messages. The logger can be either NULL, 
 "INFO" (with minimum logs), or "DEBUG" (for complete curl http calls logs)}
