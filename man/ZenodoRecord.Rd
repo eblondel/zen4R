@@ -2216,7 +2216,7 @@ Get record citation
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$getCitation(
   style = c("havard-cite-them-right", "apa", "modern-language-association", "vancouver",
-    "chicago-fullnote-bibliography", "ieee")
+    "chicago-fullnote-bibliography", "ieee", "bibtex")
 )}\if{html}{\out{</div>}}
 }
 
@@ -2224,7 +2224,7 @@ Get record citation
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{style}}{the style character string among. Possible values "havard-cite-them-right", "apa",
-"modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"}
+"modern-language-association","vancouver","chicago-fullnote-bibliography", "ieee", or "bibtex"}
 }
 \if{html}{\out{</div>}}
 }

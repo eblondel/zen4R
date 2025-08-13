@@ -1382,17 +1382,22 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     
     #'@description Get record citation
     #'@param style the style character string among. Possible values "havard-cite-them-right", "apa",
-    #' "modern-language-association","vancouver","chicago-fullnote-bibliography", or "ieee"
+    #' "modern-language-association","vancouver","chicago-fullnote-bibliography", "ieee", or "bibtex"
     #'@return the citation text
     getCitation = function(style = c("havard-cite-them-right",
                                      "apa",
                                      "modern-language-association",
                                      "vancouver",
                                      "chicago-fullnote-bibliography",
-                                     "ieee")){
-      style = match.arg(style)
-      citation_content <- httr::GET(paste0(self$links$self,"?style=", style), httr::accept("text/x-bibliography"))
-      citation_text <- httr::content(citation_content,type = "text/x-bibliography")
+                                     "ieee",
+                                     "bibtex")){
+      style <- match.arg(style)
+      if (style == "bibtex"){
+        citation_content <- httr::GET(paste0(self$links$self,"?style=", style), httr::accept("application/x-bibtex"))
+      } else {
+        citation_content <- httr::GET(paste0(self$links$self,"?style=", style), httr::accept("text/x-bibliography"))
+      }
+        citation_text <- httr::content(citation_content,type = "text/x-bibliography")
       return(citation_text)
     },
     
