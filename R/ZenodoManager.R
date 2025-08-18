@@ -1767,7 +1767,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       out <- zenReq$getResponse()
       if(zenReq$getStatus() == 200){
         infoMsg = sprintf("Successful fetched file metadata for record '%s' - filename '%s'", recordId, filename)
-        cli::cli_alert_success(infoMSg)
+        cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
       }else{
         errMsg = sprintf("Error while fetching file(s) for record '%s': %s", recordId, out$message)
@@ -2139,7 +2139,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       if(length(result)>0){
         result <- result[[1]]
         if(result$getConceptId() == conceptrecid){
-          infoMSg = sprintf("Successfully fetched record for concept id '%s'!",conceptrecid)
+          infoMsg = sprintf("Successfully fetched record for concept id '%s'!",conceptrecid)
           cli::cli_alert_success(infoMsg)
           self$INFO(infoMsg)
         }else{
