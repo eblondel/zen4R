@@ -159,12 +159,17 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRecord-exportAsBibTeX}{\code{ZenodoRecord$exportAsBibTeX()}}
 \item \href{#method-ZenodoRecord-exportAsCSL}{\code{ZenodoRecord$exportAsCSL()}}
 \item \href{#method-ZenodoRecord-exportAsDataCite}{\code{ZenodoRecord$exportAsDataCite()}}
+\item \href{#method-ZenodoRecord-exportAsDataCiteXML}{\code{ZenodoRecord$exportAsDataCiteXML()}}
+\item \href{#method-ZenodoRecord-exportAsDataCiteJSON}{\code{ZenodoRecord$exportAsDataCiteJSON()}}
 \item \href{#method-ZenodoRecord-exportAsDublinCore}{\code{ZenodoRecord$exportAsDublinCore()}}
 \item \href{#method-ZenodoRecord-exportAsDCAT}{\code{ZenodoRecord$exportAsDCAT()}}
 \item \href{#method-ZenodoRecord-exportAsJSON}{\code{ZenodoRecord$exportAsJSON()}}
 \item \href{#method-ZenodoRecord-exportAsJSONLD}{\code{ZenodoRecord$exportAsJSONLD()}}
 \item \href{#method-ZenodoRecord-exportAsGeoJSON}{\code{ZenodoRecord$exportAsGeoJSON()}}
 \item \href{#method-ZenodoRecord-exportAsMARCXML}{\code{ZenodoRecord$exportAsMARCXML()}}
+\item \href{#method-ZenodoRecord-exportAsCodeMeta}{\code{ZenodoRecord$exportAsCodeMeta()}}
+\item \href{#method-ZenodoRecord-exportAsCFF}{\code{ZenodoRecord$exportAsCFF()}}
+\item \href{#method-ZenodoRecord-exportAsDataPackage}{\code{ZenodoRecord$exportAsDataPackage()}}
 \item \href{#method-ZenodoRecord-exportAsAllFormats}{\code{ZenodoRecord$exportAsAllFormats()}}
 \item \href{#method-ZenodoRecord-getCitation}{\code{ZenodoRecord$getCitation()}}
 \item \href{#method-ZenodoRecord-listFiles}{\code{ZenodoRecord$listFiles()}}
@@ -1999,8 +2004,8 @@ Exports record to a file by format.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{format}}{the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
-JSON, JSON-LD, GeoJSON, MARCXML}
+\item{\code{format}}{a valid Zenodo export format among the following: BibTeX, CSL, DataCite (or DataCiteXML), DublinCore, 
+DCAT, JSON, JSON-LD, GeoJSON, MARCXML, DataCiteJSON, CodeMeta, DataPackage, CFF.}
 
 \item{\code{filename}}{the target filename (without extension)}
 
@@ -2057,9 +2062,49 @@ the writen file name (with extension)
 \if{html}{\out{<a id="method-ZenodoRecord-exportAsDataCite"></a>}}
 \if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDataCite}{}}}
 \subsection{Method \code{exportAsDataCite()}}{
-Exports record as DataCite
+Exports record as DataCite (same as \code{exportAsDataCiteXML})
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDataCite(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the writen file name (with extension)
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsDataCiteXML"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDataCiteXML}{}}}
+\subsection{Method \code{exportAsDataCiteXML()}}{
+Exports record as DataCite XML
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDataCiteXML(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the writen file name (with extension)
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsDataCiteJSON"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDataCiteJSON}{}}}
+\subsection{Method \code{exportAsDataCiteJSON()}}{
+Exports record as DataCite JSON
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDataCiteJSON(filename)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -2177,6 +2222,66 @@ the writen file name (with extension)
 Exports record as MARCXML
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsMARCXML(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the writen file name (with extension)
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsCodeMeta"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsCodeMeta}{}}}
+\subsection{Method \code{exportAsCodeMeta()}}{
+Exports record as CodeMeta
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsCodeMeta(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the writen file name (with extension)
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsCFF"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsCFF}{}}}
+\subsection{Method \code{exportAsCFF()}}{
+Exports record as Citation File Format
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsCFF(filename)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{filename}}{the target filename (without extension)}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+the writen file name (with extension)
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRecord-exportAsDataPackage"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRecord-exportAsDataPackage}{}}}
+\subsection{Method \code{exportAsDataPackage()}}{
+Exports record as DataPackage
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRecord$exportAsDataPackage(filename)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

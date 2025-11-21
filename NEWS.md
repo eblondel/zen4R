@@ -12,6 +12,7 @@
 
 * [#179](https://github.com/eblondel/zen4R/issues/179) Support method to get a record citation
 * [#185](https://github.com/eblondel/zen4R/issues/185) Add citation format for bibtex
+* [#195](https://github.com/eblondel/zen4R/issues/185) Support additional export formats
 
 **Enhancements**
 

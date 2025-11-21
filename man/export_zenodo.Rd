@@ -18,8 +18,8 @@ export_zenodo(
 
 \item{filename}{a base file name (without file extension) to export to.}
 
-\item{format}{a valid Zenodo export format among the following: BibTeX, CSL, DataCite, DublinCore, 
-DCAT, JSON, JSON-LD, GeoJSON, MARCXML.}
+\item{format}{a valid Zenodo export format among the following: BibTeX, CSL, DataCite (or DataCiteXML), DublinCore, 
+DCAT, JSON, JSON-LD, GeoJSON, MARCXML, DataCiteJSON, CodeMeta, DataPackage, CFF.}
 
 \item{append_format}{wether format name has to be appended to the filename. Default is \code{TRUE} (for
 backward compatibility reasons). Set it to \code{FALSE} if you want to use only the \code{filename}.}

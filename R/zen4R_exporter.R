@@ -11,8 +11,8 @@
 #'                 
 #' @param doi a Zenodo DOI or concept DOI
 #' @param filename a base file name (without file extension) to export to.
-#' @param format a valid Zenodo export format among the following: BibTeX, CSL, DataCite, DublinCore, 
-#' DCAT, JSON, JSON-LD, GeoJSON, MARCXML.
+#' @param format a valid Zenodo export format among the following: BibTeX, CSL, DataCite (or DataCiteXML), DublinCore, 
+#' DCAT, JSON, JSON-LD, GeoJSON, MARCXML, DataCiteJSON, CodeMeta, DataPackage, CFF.
 #' @param append_format wether format name has to be appended to the filename. Default is \code{TRUE} (for
 #' backward compatibility reasons). Set it to \code{FALSE} if you want to use only the \code{filename}.
 #' @param sandbox Use the sandbox infrastructure. Default is \code{FALSE}

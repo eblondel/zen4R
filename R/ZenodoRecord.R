@@ -30,18 +30,24 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
                           "isidenticalto", "isalternateidentifier", "isreviewedby", "reviews", 
                           "isderivedfrom", "issourceof", "requires", "isrequiredby", "isobsoletedby", 
                           "obsoletes"),
-    export_formats = c("BibTeX","CSL","DataCite","DublinCore","DCAT","JSON","JSON-LD","GeoJSON","MARCXML"),
+    export_formats = c("BibTeX","CSL","DataCite","DataCiteXML", "DataCiteJSON", "DublinCore","DCAT",
+                       "JSON","JSON-LD","GeoJSON","MARCXML","CFF", "CodeMeta","DataPackage"),
     getExportFormatExtension = function(format){
       switch(format,
          "BibTeX" = "bib",
          "CSL" = "json",
          "DataCite" ="xml",
+         "DataCiteXML" = "xml",
+         "DataCiteJSON" = "json",
          "DublinCore" = "xml",
          "DCAT" = "rdf",
          "JSON" = "json",
          "JSON-LD" = "json",
          "GeoJSON" = "json",
-         "MARCXML" = "xml"           
+         "MARCXML" = "xml",
+         "CFF" = "yaml",
+         "CodeMeta" = "json",
+         "DataPackage" = "json"
       )
     },
     fromList = function(obj){
@@ -1273,8 +1279,8 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     },
     
     #' @description Exports record to a file by format.
-    #' @param format the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT, 
-    #'   JSON, JSON-LD, GeoJSON, MARCXML
+    #' @param format a valid Zenodo export format among the following: BibTeX, CSL, DataCite (or DataCiteXML), DublinCore, 
+    #' DCAT, JSON, JSON-LD, GeoJSON, MARCXML, DataCiteJSON, CodeMeta, DataPackage, CFF.
     #' @param filename the target filename (without extension)
     #' @param append_format wether format name has to be appended to the filename. Default is \code{TRUE} (for
     #' backward compatibility reasons). Set it to \code{FALSE} if you want to use only the \code{filename}.
@@ -1289,12 +1295,17 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
         "BibTeX" = paste0(zenodo_url,"/export/bibtex"),
         "CSL" =  paste0(zenodo_url,"/export/csl"),
         "DataCite" =  paste0(zenodo_url,"/export/datacite-xml"),
+        "DataCiteXML" = paste0(zenodo_url,"/export/datacite-xml"),
+        "DataCiteJSON" = paste0(zenodo_url,"/export/datacite-json"),
         "DublinCore" =  paste0(zenodo_url,"/export/dublincore"),
         "DCAT" =  paste0(zenodo_url,"/export/dcat-ap"),
         "JSON" =  paste0(zenodo_url,"/export/json"),
         "JSON-LD" =  paste0(zenodo_url,"/export/json-ld"),
         "GeoJSON" =  paste0(zenodo_url,"/export/geojson"),
         "MARCXML" =  paste0(zenodo_url,"/export/xm"),
+        "CodeMeta" = paste0(zenodo_url,"/export/codemeta"),
+        "CFF" = paste0(zenodo_url,"/export/cff"),
+        "DataPackage" = paste0(zenodo_url,"/export/datapackage"),
         NULL
       )
       if(is.null(metadata_export_url)){
@@ -1325,11 +1336,26 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$exportAs("CSL", filename)
     },
     
-    #' @description Exports record as DataCite
+    #' @description Exports record as DataCite (same as \code{exportAsDataCiteXML})
     #' @param filename the target filename (without extension)
     #' @return the writen file name (with extension)
     exportAsDataCite = function(filename){
       self$exportAs("DataCite", filename)
+    },
+    
+    #' @description Exports record as DataCite XML
+    #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
+    exportAsDataCiteXML = function(filename){
+      self$exportAs("DataCiteXML", filename)
+    },
+    
+    
+    #' @description Exports record as DataCite JSON
+    #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
+    exportAsDataCiteJSON = function(filename){
+      self$exportAs("DataCiteJSON", filename)
     },
     
     #' @description Exports record as DublinCore
@@ -1371,6 +1397,27 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @return the writen file name (with extension)
     exportAsMARCXML = function(filename){
       self$exportAs("MARCXML", filename)
+    },
+    
+    #' @description Exports record as CodeMeta
+    #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
+    exportAsCodeMeta = function(filename){
+      self$exportAs("CodeMeta", filename)
+    },
+    
+    #' @description Exports record as Citation File Format
+    #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
+    exportAsCFF = function(filename){
+      self$exportAs("CFF", filename)
+    },
+    
+    #' @description Exports record as DataPackage
+    #' @param filename the target filename (without extension)
+    #' @return the writen file name (with extension)
+    exportAsDataPackage = function(filename){
+      self$exportAs("DataPackage", filename)
     },
     
     #' @description Exports record in all Zenodo record export formats. This function will
