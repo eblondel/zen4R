@@ -241,12 +241,17 @@ ZenodoRecord"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
 <li><p><a href="#method-ZenodoRecord-exportAsBibTeX"><code>ZenodoRecord$exportAsBibTeX()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsCSL"><code>ZenodoRecord$exportAsCSL()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsDataCite"><code>ZenodoRecord$exportAsDataCite()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-exportAsDataCiteXML"><code>ZenodoRecord$exportAsDataCiteXML()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-exportAsDataCiteJSON"><code>ZenodoRecord$exportAsDataCiteJSON()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsDublinCore"><code>ZenodoRecord$exportAsDublinCore()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsDCAT"><code>ZenodoRecord$exportAsDCAT()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsJSON"><code>ZenodoRecord$exportAsJSON()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsJSONLD"><code>ZenodoRecord$exportAsJSONLD()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsGeoJSON"><code>ZenodoRecord$exportAsGeoJSON()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsMARCXML"><code>ZenodoRecord$exportAsMARCXML()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-exportAsCodeMeta"><code>ZenodoRecord$exportAsCodeMeta()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-exportAsCFF"><code>ZenodoRecord$exportAsCFF()</code></a></p></li>
+<li><p><a href="#method-ZenodoRecord-exportAsDataPackage"><code>ZenodoRecord$exportAsDataPackage()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-exportAsAllFormats"><code>ZenodoRecord$exportAsAllFormats()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-getCitation"><code>ZenodoRecord$getCitation()</code></a></p></li>
 <li><p><a href="#method-ZenodoRecord-listFiles"><code>ZenodoRecord$listFiles()</code></a></p></li>
@@ -2158,8 +2163,8 @@ the Zenodo id of the grant If not recognized by Zenodo, the function will raise 
 <div class="section">
 <h4 id="arguments-81">Arguments<a class="anchor" aria-label="anchor" href="#arguments-81"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>format</code></dt>
-<dd><p>the export format to use. Possibles values are: BibTeX, CSL, DataCite, DublinCore, DCAT,
-JSON, JSON-LD, GeoJSON, MARCXML</p></dd>
+<dd><p>a valid Zenodo export format among the following: BibTeX, CSL, DataCite (or DataCiteXML), DublinCore,
+DCAT, JSON, JSON-LD, GeoJSON, MARCXML, DataCiteJSON, CodeMeta, DataPackage, CFF.</p></dd>
 
 
 <dt><code>filename</code></dt>
@@ -2220,7 +2225,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 
 </div><p></p><hr><a id="method-ZenodoRecord-exportAsDataCite"></a><div class="section">
 <h3 id="method-exportasdatacite-">Method <code>exportAsDataCite()</code><a class="anchor" aria-label="anchor" href="#method-exportasdatacite-"></a></h3>
-<p>Exports record as DataCite</p><div class="section">
+<p>Exports record as DataCite (same as <code>exportAsDataCiteXML</code>)</p><div class="section">
 <h4 id="usage-90">Usage<a class="anchor" aria-label="anchor" href="#usage-90"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDataCite</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -2238,11 +2243,11 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <p>the writen file name (with extension)</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsDublinCore"></a><div class="section">
-<h3 id="method-exportasdublincore-">Method <code>exportAsDublinCore()</code><a class="anchor" aria-label="anchor" href="#method-exportasdublincore-"></a></h3>
-<p>Exports record as DublinCore</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsDataCiteXML"></a><div class="section">
+<h3 id="method-exportasdatacitexml-">Method <code>exportAsDataCiteXML()</code><a class="anchor" aria-label="anchor" href="#method-exportasdatacitexml-"></a></h3>
+<p>Exports record as DataCite XML</p><div class="section">
 <h4 id="usage-91">Usage<a class="anchor" aria-label="anchor" href="#usage-91"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDublinCore</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDataCiteXML</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -2258,11 +2263,11 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <p>the writen file name (with extension)</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsDCAT"></a><div class="section">
-<h3 id="method-exportasdcat-">Method <code>exportAsDCAT()</code><a class="anchor" aria-label="anchor" href="#method-exportasdcat-"></a></h3>
-<p>Exports record as DCAT</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsDataCiteJSON"></a><div class="section">
+<h3 id="method-exportasdatacitejson-">Method <code>exportAsDataCiteJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasdatacitejson-"></a></h3>
+<p>Exports record as DataCite JSON</p><div class="section">
 <h4 id="usage-92">Usage<a class="anchor" aria-label="anchor" href="#usage-92"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDCAT</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDataCiteJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -2278,11 +2283,11 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <p>the writen file name (with extension)</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsJSON"></a><div class="section">
-<h3 id="method-exportasjson-">Method <code>exportAsJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasjson-"></a></h3>
-<p>Exports record as JSON</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsDublinCore"></a><div class="section">
+<h3 id="method-exportasdublincore-">Method <code>exportAsDublinCore()</code><a class="anchor" aria-label="anchor" href="#method-exportasdublincore-"></a></h3>
+<p>Exports record as DublinCore</p><div class="section">
 <h4 id="usage-93">Usage<a class="anchor" aria-label="anchor" href="#usage-93"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDublinCore</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -2298,31 +2303,15 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <p>the writen file name (with extension)</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsJSONLD"></a><div class="section">
-<h3 id="method-exportasjsonld-">Method <code>exportAsJSONLD()</code><a class="anchor" aria-label="anchor" href="#method-exportasjsonld-"></a></h3>
-<p>Exports record as JSONLD</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsDCAT"></a><div class="section">
+<h3 id="method-exportasdcat-">Method <code>exportAsDCAT()</code><a class="anchor" aria-label="anchor" href="#method-exportasdcat-"></a></h3>
+<p>Exports record as DCAT</p><div class="section">
 <h4 id="usage-94">Usage<a class="anchor" aria-label="anchor" href="#usage-94"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsJSONLD</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDCAT</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-88">Arguments<a class="anchor" aria-label="anchor" href="#arguments-88"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
-<dd><p>the target filename (without extension)</p></dd>
-
-
-</dl><p></p></div>
-</div>
-
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsGeoJSON"></a><div class="section">
-<h3 id="method-exportasgeojson-">Method <code>exportAsGeoJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasgeojson-"></a></h3>
-<p>Exports record as GeoJSON</p><div class="section">
-<h4 id="usage-95">Usage<a class="anchor" aria-label="anchor" href="#usage-95"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsGeoJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-89">Arguments<a class="anchor" aria-label="anchor" href="#arguments-89"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2334,15 +2323,15 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <p>the writen file name (with extension)</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsMARCXML"></a><div class="section">
-<h3 id="method-exportasmarcxml-">Method <code>exportAsMARCXML()</code><a class="anchor" aria-label="anchor" href="#method-exportasmarcxml-"></a></h3>
-<p>Exports record as MARCXML</p><div class="section">
-<h4 id="usage-96">Usage<a class="anchor" aria-label="anchor" href="#usage-96"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsMARCXML</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsJSON"></a><div class="section">
+<h3 id="method-exportasjson-">Method <code>exportAsJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasjson-"></a></h3>
+<p>Exports record as JSON</p><div class="section">
+<h4 id="usage-95">Usage<a class="anchor" aria-label="anchor" href="#usage-95"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-90">Arguments<a class="anchor" aria-label="anchor" href="#arguments-90"></a></h4>
+<h4 id="arguments-89">Arguments<a class="anchor" aria-label="anchor" href="#arguments-89"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>filename</code></dt>
 <dd><p>the target filename (without extension)</p></dd>
 
@@ -2354,12 +2343,27 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 <p>the writen file name (with extension)</p>
 </div>
 
-</div><p></p><hr><a id="method-ZenodoRecord-exportAsAllFormats"></a><div class="section">
-<h3 id="method-exportasallformats-">Method <code>exportAsAllFormats()</code><a class="anchor" aria-label="anchor" href="#method-exportasallformats-"></a></h3>
-<p>Exports record in all Zenodo record export formats. This function will
-   create one file per Zenodo metadata formats.</p><div class="section">
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsJSONLD"></a><div class="section">
+<h3 id="method-exportasjsonld-">Method <code>exportAsJSONLD()</code><a class="anchor" aria-label="anchor" href="#method-exportasjsonld-"></a></h3>
+<p>Exports record as JSONLD</p><div class="section">
+<h4 id="usage-96">Usage<a class="anchor" aria-label="anchor" href="#usage-96"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsJSONLD</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-90">Arguments<a class="anchor" aria-label="anchor" href="#arguments-90"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
+<dd><p>the target filename (without extension)</p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsGeoJSON"></a><div class="section">
+<h3 id="method-exportasgeojson-">Method <code>exportAsGeoJSON()</code><a class="anchor" aria-label="anchor" href="#method-exportasgeojson-"></a></h3>
+<p>Exports record as GeoJSON</p><div class="section">
 <h4 id="usage-97">Usage<a class="anchor" aria-label="anchor" href="#usage-97"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsAllFormats</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsGeoJSON</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -2370,11 +2374,112 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 
 </dl><p></p></div>
 </div>
+<div class="section">
+<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
+<p>the writen file name (with extension)</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsMARCXML"></a><div class="section">
+<h3 id="method-exportasmarcxml-">Method <code>exportAsMARCXML()</code><a class="anchor" aria-label="anchor" href="#method-exportasmarcxml-"></a></h3>
+<p>Exports record as MARCXML</p><div class="section">
+<h4 id="usage-98">Usage<a class="anchor" aria-label="anchor" href="#usage-98"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsMARCXML</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-92">Arguments<a class="anchor" aria-label="anchor" href="#arguments-92"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
+<dd><p>the target filename (without extension)</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
+<p>the writen file name (with extension)</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsCodeMeta"></a><div class="section">
+<h3 id="method-exportascodemeta-">Method <code>exportAsCodeMeta()</code><a class="anchor" aria-label="anchor" href="#method-exportascodemeta-"></a></h3>
+<p>Exports record as CodeMeta</p><div class="section">
+<h4 id="usage-99">Usage<a class="anchor" aria-label="anchor" href="#usage-99"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsCodeMeta</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-93">Arguments<a class="anchor" aria-label="anchor" href="#arguments-93"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
+<dd><p>the target filename (without extension)</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
+<p>the writen file name (with extension)</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsCFF"></a><div class="section">
+<h3 id="method-exportascff-">Method <code>exportAsCFF()</code><a class="anchor" aria-label="anchor" href="#method-exportascff-"></a></h3>
+<p>Exports record as Citation File Format</p><div class="section">
+<h4 id="usage-100">Usage<a class="anchor" aria-label="anchor" href="#usage-100"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsCFF</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-94">Arguments<a class="anchor" aria-label="anchor" href="#arguments-94"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
+<dd><p>the target filename (without extension)</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
+<p>the writen file name (with extension)</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsDataPackage"></a><div class="section">
+<h3 id="method-exportasdatapackage-">Method <code>exportAsDataPackage()</code><a class="anchor" aria-label="anchor" href="#method-exportasdatapackage-"></a></h3>
+<p>Exports record as DataPackage</p><div class="section">
+<h4 id="usage-101">Usage<a class="anchor" aria-label="anchor" href="#usage-101"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsDataPackage</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-95">Arguments<a class="anchor" aria-label="anchor" href="#arguments-95"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
+<dd><p>the target filename (without extension)</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-57">Returns<a class="anchor" aria-label="anchor" href="#returns-57"></a></h4>
+<p>the writen file name (with extension)</p>
+</div>
+
+</div><p></p><hr><a id="method-ZenodoRecord-exportAsAllFormats"></a><div class="section">
+<h3 id="method-exportasallformats-">Method <code>exportAsAllFormats()</code><a class="anchor" aria-label="anchor" href="#method-exportasallformats-"></a></h3>
+<p>Exports record in all Zenodo record export formats. This function will
+   create one file per Zenodo metadata formats.</p><div class="section">
+<h4 id="usage-102">Usage<a class="anchor" aria-label="anchor" href="#usage-102"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">exportAsAllFormats</span><span class="op">(</span><span class="va">filename</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-96">Arguments<a class="anchor" aria-label="anchor" href="#arguments-96"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>filename</code></dt>
+<dd><p>the target filename (without extension)</p></dd>
+
+
+</dl><p></p></div>
+</div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-getCitation"></a><div class="section">
 <h3 id="method-getcitation-">Method <code>getCitation()</code><a class="anchor" aria-label="anchor" href="#method-getcitation-"></a></h3>
 <p>Get record citation</p><div class="section">
-<h4 id="usage-98">Usage<a class="anchor" aria-label="anchor" href="#usage-98"></a></h4>
+<h4 id="usage-103">Usage<a class="anchor" aria-label="anchor" href="#usage-103"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getCitation</span><span class="op">(</span></span>
 <span>  style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"havard-cite-them-right"</span>, <span class="st">"apa"</span>, <span class="st">"modern-language-association"</span>, <span class="st">"vancouver"</span>,</span>
 <span>    <span class="st">"chicago-fullnote-bibliography"</span>, <span class="st">"ieee"</span>, <span class="st">"bibtex"</span><span class="op">)</span></span>
@@ -2382,7 +2487,7 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </div>
 
 <div class="section">
-<h4 id="arguments-92">Arguments<a class="anchor" aria-label="anchor" href="#arguments-92"></a></h4>
+<h4 id="arguments-97">Arguments<a class="anchor" aria-label="anchor" href="#arguments-97"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>style</code></dt>
 <dd><p>the style character string among. Possible values "havard-cite-them-right", "apa",
 "modern-language-association","vancouver","chicago-fullnote-bibliography", "ieee", or "bibtex"</p></dd>
@@ -2391,19 +2496,19 @@ backward compatibility reasons). Set it to <code>FALSE</code> if you want to use
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
+<h4 id="returns-58">Returns<a class="anchor" aria-label="anchor" href="#returns-58"></a></h4>
 <p>the citation text</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-listFiles"></a><div class="section">
 <h3 id="method-listfiles-">Method <code>listFiles()</code><a class="anchor" aria-label="anchor" href="#method-listfiles-"></a></h3>
 <p>list files attached to the record</p><div class="section">
-<h4 id="usage-99">Usage<a class="anchor" aria-label="anchor" href="#usage-99"></a></h4>
+<h4 id="usage-104">Usage<a class="anchor" aria-label="anchor" href="#usage-104"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">listFiles</span><span class="op">(</span>pretty <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-93">Arguments<a class="anchor" aria-label="anchor" href="#arguments-93"></a></h4>
+<h4 id="arguments-98">Arguments<a class="anchor" aria-label="anchor" href="#arguments-98"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>pretty</code></dt>
 <dd><p>whether a pretty output (<code>data.frame</code>) should be returned (default <code>TRUE</code>), otherwise
 the raw list of files is returned.</p></dd>
@@ -2412,14 +2517,14 @@ the raw list of files is returned.</p></dd>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
+<h4 id="returns-59">Returns<a class="anchor" aria-label="anchor" href="#returns-59"></a></h4>
 <p>the files, as <code>data.frame</code> or <code>list</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-downloadFiles"></a><div class="section">
 <h3 id="method-downloadfiles-">Method <code>downloadFiles()</code><a class="anchor" aria-label="anchor" href="#method-downloadfiles-"></a></h3>
 <p>Downloads files attached to the record</p><div class="section">
-<h4 id="usage-100">Usage<a class="anchor" aria-label="anchor" href="#usage-100"></a></h4>
+<h4 id="usage-105">Usage<a class="anchor" aria-label="anchor" href="#usage-105"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">downloadFiles</span><span class="op">(</span></span>
 <span>  path <span class="op">=</span> <span class="st">"."</span>,</span>
 <span>  files <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -2434,7 +2539,7 @@ the raw list of files is returned.</p></dd>
 </div>
 
 <div class="section">
-<h4 id="arguments-94">Arguments<a class="anchor" aria-label="anchor" href="#arguments-94"></a></h4>
+<h4 id="arguments-99">Arguments<a class="anchor" aria-label="anchor" href="#arguments-99"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>path</code></dt>
 <dd><p>target download path (by default it will be the current working directory)</p></dd>
 
@@ -2481,12 +2586,12 @@ can be added (eg. <code>mc.cores</code> for <code>mclapply</code>)</p></dd>
 </div><p></p><hr><a id="method-ZenodoRecord-print"></a><div class="section">
 <h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 <p>Prints a ZenodoRecord</p><div class="section">
-<h4 id="usage-101">Usage<a class="anchor" aria-label="anchor" href="#usage-101"></a></h4>
+<h4 id="usage-106">Usage<a class="anchor" aria-label="anchor" href="#usage-106"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span>, format <span class="op">=</span> <span class="st">"internal"</span>, depth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-95">Arguments<a class="anchor" aria-label="anchor" href="#arguments-95"></a></h4>
+<h4 id="arguments-100">Arguments<a class="anchor" aria-label="anchor" href="#arguments-100"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>any other parameter. Not used</p></dd>
 
@@ -2508,36 +2613,36 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div><p></p><hr><a id="method-ZenodoRecord-toDCEntry"></a><div class="section">
 <h3 id="method-todcentry-">Method <code>toDCEntry()</code><a class="anchor" aria-label="anchor" href="#method-todcentry-"></a></h3>
 <p>Maps to an <span class="pkg">atom4R</span> <a href="https://rdrr.io/pkg/atom4R/man/DCEntry.html" class="external-link">DCEntry</a>. Note: applies only to published records.</p><div class="section">
-<h4 id="usage-102">Usage<a class="anchor" aria-label="anchor" href="#usage-102"></a></h4>
+<h4 id="usage-107">Usage<a class="anchor" aria-label="anchor" href="#usage-107"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">toDCEntry</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
+<h4 id="returns-60">Returns<a class="anchor" aria-label="anchor" href="#returns-60"></a></h4>
 <p>an object of class <code>DCEntry</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-getFirstDOI"></a><div class="section">
 <h3 id="method-getfirstdoi-">Method <code>getFirstDOI()</code><a class="anchor" aria-label="anchor" href="#method-getfirstdoi-"></a></h3>
 <p>Get DOI of the first record version.</p><div class="section">
-<h4 id="usage-103">Usage<a class="anchor" aria-label="anchor" href="#usage-103"></a></h4>
+<h4 id="usage-108">Usage<a class="anchor" aria-label="anchor" href="#usage-108"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getFirstDOI</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
+<h4 id="returns-61">Returns<a class="anchor" aria-label="anchor" href="#returns-61"></a></h4>
 <p>the first DOI, object of class <code>character</code></p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-getLastDOI"></a><div class="section">
 <h3 id="method-getlastdoi-">Method <code>getLastDOI()</code><a class="anchor" aria-label="anchor" href="#method-getlastdoi-"></a></h3>
 <p>Get DOI of the latest record version.</p><div class="section">
-<h4 id="usage-104">Usage<a class="anchor" aria-label="anchor" href="#usage-104"></a></h4>
+<h4 id="usage-109">Usage<a class="anchor" aria-label="anchor" href="#usage-109"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getLastDOI</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-57">Returns<a class="anchor" aria-label="anchor" href="#returns-57"></a></h4>
+<h4 id="returns-62">Returns<a class="anchor" aria-label="anchor" href="#returns-62"></a></h4>
 <p>the last DOI, object of class <code>character</code></p>
 </div>
 
@@ -2545,24 +2650,24 @@ for a record will raise a warning message and revert to "internal" format</p></d
 <h3 id="method-getversions-">Method <code>getVersions()</code><a class="anchor" aria-label="anchor" href="#method-getversions-"></a></h3>
 <p>Get record versions with creation/publication date,
   version (ordering number) and DOI.</p><div class="section">
-<h4 id="usage-105">Usage<a class="anchor" aria-label="anchor" href="#usage-105"></a></h4>
+<h4 id="usage-110">Usage<a class="anchor" aria-label="anchor" href="#usage-110"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">getVersions</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-58">Returns<a class="anchor" aria-label="anchor" href="#returns-58"></a></h4>
+<h4 id="returns-63">Returns<a class="anchor" aria-label="anchor" href="#returns-63"></a></h4>
 <p>a <code>data.frame</code> with the record versions</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoRecord-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-106">Usage<a class="anchor" aria-label="anchor" href="#usage-106"></a></h4>
+<h4 id="usage-111">Usage<a class="anchor" aria-label="anchor" href="#usage-111"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ZenodoRecord</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-96">Arguments<a class="anchor" aria-label="anchor" href="#arguments-96"></a></h4>
+<h4 id="arguments-101">Arguments<a class="anchor" aria-label="anchor" href="#arguments-101"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
@@ -2586,7 +2691,7 @@ for a record will raise a warning message and revert to "internal" format</p></d
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer></div>
