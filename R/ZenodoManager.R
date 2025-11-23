@@ -98,19 +98,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         private$keyring_backend <- keyring:::known_backends[[keyring_backend]]$new()
         private$keyring_service = paste0("zen4R@", url)
         private$keyring_backend$set_with_value(private$keyring_service, username = "zen4R", password = token)
-        deps <- self$getDepositions(size = 1, quiet = TRUE, exact = TRUE)
-        if(!is.null(deps$status)) {
-          if(deps$status == 401){
-            errMsg <- "Cannot connect to your Zenodo deposit: Invalid token"
-            cli::cli_alert_danger(errMsg)
-            self$ERROR(errMsg)
-            stop(errMsg)
-          }
-        }else{
-          infoMsg = "Successfully connected to Zenodo with user token"
-          cli::cli_alert_success(infoMsg)
-          self$INFO(infoMsg)
-        }
+        self$checkUserAuthentication()
       }else{
         infoMsg = "Successfully connected to Zenodo as anonymous user"
         cli::cli_alert_success(infoMsg)
@@ -127,6 +115,28 @@ ZenodoManager <-  R6Class("ZenodoManager",
         token <- suppressWarnings(private$keyring_backend$get(private$keyring_service, username = "zen4R"))
       }
       return(token)
+    },
+    
+    #' @description Check whether the user is authenticated
+    checkUserAuthentication = function(){
+      req <- "user/records?q=&size=1&page=1"
+      zenReq <- ZenodoRequest$new(private$url, "GET", req, 
+                                  token = self$getToken(),
+                                  logger = NULL)
+      zenReq$execute()
+      resp <- zenReq$getResponse()
+      if(!is.null(resp$status)) {
+        if(resp$status %in% c(401,403)){
+          errMsg <- sprintf("Cannot connect to your Zenodo deposit: %s", resp$message)
+          cli::cli_alert_danger(errMsg)
+          self$ERROR(errMsg)
+          stop(errMsg)
+        }
+      }else{
+        infoMsg = "Successfully connected to Zenodo with user token"
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }
     },
     
     #Vocabulary/Languages
@@ -1158,6 +1168,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                               quiet = FALSE){
       page <- 1
       baseUrl <- "user/records"
+      if(q == "") exact = FALSE
       
       #set in #72, now re-deactivated through #76 (due to Zenodo server-side changes)
       #if(!private$sandbox) baseUrl <- paste0(baseUrl, "/")
@@ -1942,6 +1953,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param quiet object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}
     #' @return a list of \code{ZenodoRecord}
     getRecords = function(q = "", size = 10, all_versions = FALSE, exact = TRUE){
+      if(q == "") exact = FALSE
       page <- 1
       req <- sprintf("records?q=%s&size=1&page=%s", URLencode(q), page)
       if(all_versions) req <- paste0(req, "&allversions=1")

@@ -91,6 +91,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \itemize{
 \item \href{#method-ZenodoManager-new}{\code{ZenodoManager$new()}}
 \item \href{#method-ZenodoManager-getToken}{\code{ZenodoManager$getToken()}}
+\item \href{#method-ZenodoManager-checkUserAuthentication}{\code{ZenodoManager$checkUserAuthentication()}}
 \item \href{#method-ZenodoManager-getLanguages}{\code{ZenodoManager$getLanguages()}}
 \item \href{#method-ZenodoManager-getLanguageById}{\code{ZenodoManager$getLanguageById()}}
 \item \href{#method-ZenodoManager-getLicenses}{\code{ZenodoManager$getLicenses()}}
@@ -212,6 +213,16 @@ Get user token
 \subsection{Returns}{
 the token, object of class \code{character}
 }
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoManager-checkUserAuthentication"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoManager-checkUserAuthentication}{}}}
+\subsection{Method \code{checkUserAuthentication()}}{
+Check whether the user is authenticated
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoManager$checkUserAuthentication()}\if{html}{\out{</div>}}
+}
+
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoManager-getLanguages"></a>}}
