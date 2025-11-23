@@ -1158,66 +1158,68 @@ ZenodoManager <-  R6Class("ZenodoManager",
                               quiet = FALSE){
       page <- 1
       baseUrl <- "user/records"
+      if(q == "") exact = FALSE
       
       #set in #72, now re-deactivated through #76 (due to Zenodo server-side changes)
       #if(!private$sandbox) baseUrl <- paste0(baseUrl, "/")
       
-      req <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, URLencode(q), size, page)
+      req <- sprintf("%s?q=%s&size=1&page=%s", baseUrl, URLencode(q), page)
       if(all_versions) req <- paste0(req, "&allversions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
                                   token = self$getToken(),
                                   logger = if(quiet) NULL else self$loggerType)
       zenReq$execute()
+      total = 0
+      hasRecords = FALSE
       out <- NULL
       if(zenReq$getStatus() == 200){
         resp <- zenReq$getResponse()
         records <- resp$hits$hits
         total <- resp$hits$total
+        print(total)
         if(total > 10000){
           warnMsg = sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)
           cli::cli_alert_warning(warnMsg)
           self$WARN(warnMsg) 
         }
         total_remaining <- total
-        hasRecords <- length(records)>0
+        hasRecords <- total > 0
+        
         while(hasRecords){
-          out <- c(out, lapply(records, ZenodoRecord$new))
-          if(!quiet){
-            infoMsg = sprintf("Successfully fetched list of depositions (user records) - page %s", page)
-            cli::cli_alert_success(infoMsg)
-            self$INFO(infoMsg)
-          }
-          total_remaining <- total_remaining-length(records)
-          if(total_remaining <= size) size = total_remaining
-          if(total_remaining == 0){
+          #next
+          nextreq <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, q, size, page)
+          if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
+          zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
+                                      token = self$getToken(),
+                                      logger = if(quiet) NULL else self$loggerType)
+          zenReq$execute()
+          resp <- zenReq$getResponse()
+          if(zenReq$getStatus() == 200){
+            resp <- zenReq$getResponse()
+            records <- resp$hits$hits
+            
+            out <- c(out, lapply(records, ZenodoRecord$new))
+            if(!quiet){
+              infoMsg = sprintf("Successfully fetched list of depositions (user records) - page %s (size = %s)", page, size)
+              cli::cli_alert_success(infoMsg)
+              self$INFO(infoMsg)
+            }
+            total_remaining <- total_remaining-length(records)
+            if(total_remaining <= size) size = total_remaining
+            hasRecords <- total_remaining > 0
+            if(total_remaining == 0) hasRecords <- FALSE
+            if(page == 1 & exact) break
+            page <- page+1
+            
+          }else{
+            if(!quiet){
+              warnMsg = sprintf("Maximum allowed size for list of depositions (user records) at page %s", page)
+              cli::cli_alert_warning(warnMsg)
+              self$WARN(warnMsg)
+            }
             break
           }
           
-          if(exact){
-            hasRecords <- FALSE
-          }else{
-            #next
-            page <- page+1
-            nextreq <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, q, size, page)
-            if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
-            zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
-                                        token = self$getToken(),
-                                        logger = if(quiet) NULL else self$loggerType)
-            zenReq$execute()
-            resp <- zenReq$getResponse()
-            if(zenReq$getStatus() == 200){
-              resp <- zenReq$getResponse()
-              records <- resp$hits$hits
-              hasRecords <- length(records) > 0
-            }else{
-              if(!quiet){
-                warnMsg = sprintf("Maximum allowed size for list of depositions (user records) at page %s", page)
-                cli::cli_alert_warning(warnMsg)
-                self$WARN(warnMsg)
-              }
-              break
-            }
-          }
         }
         if(!quiet){
           infoMsg = "Successfully fetched list of depositions (user records)!"
