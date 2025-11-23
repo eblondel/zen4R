@@ -98,7 +98,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         private$keyring_backend <- keyring:::known_backends[[keyring_backend]]$new()
         private$keyring_service = paste0("zen4R@", url)
         private$keyring_backend$set_with_value(private$keyring_service, username = "zen4R", password = token)
-        deps <- self$getDepositions(size = 1, quiet = TRUE)
+        deps <- self$getDepositions(size = 1, quiet = TRUE, exact = TRUE)
         if(!is.null(deps$status)) {
           if(deps$status == 401){
             errMsg <- "Cannot connect to your Zenodo deposit: Invalid token"
