@@ -1955,7 +1955,6 @@ ZenodoManager <-  R6Class("ZenodoManager",
         resp <- zenReq$getResponse()
         total <- resp$hits$total
         hasRecords <- total > 0
-        print(total)
         if(total > 10000){
           warnMsg = sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)
           cli::cli_alert_warning(warnMsg)
@@ -1966,6 +1965,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       total_remaining <- total
       out <- NULL
       while(hasRecords){
+        
         nextreq <- sprintf("records?q=%s&size=%s&page=%s", URLencode(q), size, page)
         if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
         zenReq <- ZenodoRequest$new(private$url, "GET_WITH_CURL", nextreq, 
@@ -1983,6 +1983,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           if(total_remaining <= size) size = total_remaining;
           hasRecords <- total_remaining > 0
           if(total_remaining == 0) hasRecords <- FALSE
+          if(page == 1 & exact) break
           page <- page+1
         }else{
           out <- zenReq$getResponse()
