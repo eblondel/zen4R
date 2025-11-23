@@ -1158,7 +1158,6 @@ ZenodoManager <-  R6Class("ZenodoManager",
                               quiet = FALSE){
       page <- 1
       baseUrl <- "user/records"
-      if(q == "") exact = FALSE
       
       #set in #72, now re-deactivated through #76 (due to Zenodo server-side changes)
       #if(!private$sandbox) baseUrl <- paste0(baseUrl, "/")
@@ -1943,7 +1942,6 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param quiet object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}
     #' @return a list of \code{ZenodoRecord}
     getRecords = function(q = "", size = 10, all_versions = FALSE, exact = TRUE){
-      if(q == "") exact = FALSE
       page <- 1
       req <- sprintf("records?q=%s&size=1&page=%s", URLencode(q), page)
       if(all_versions) req <- paste0(req, "&allversions=1")
