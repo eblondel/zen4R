@@ -7,8 +7,10 @@
 
 * [#181](https://github.com/eblondel/zen4R/issues/181) Fix file download behavior with `overwrite` argument
 * [#183](https://github.com/eblondel/zen4R/issues/183) URLs with spaces result in downstream failures
-* [#296](https://github.com/eblondel/zen4R/issues/296) Paginated `getRecords` doesn't work anymore
-* [#297](https://github.com/eblondel/zen4R/issues/297) Zenodo record `getVersions` doesn't work anymore
+* [#196](https://github.com/eblondel/zen4R/issues/196) Paginated `getRecords` doesn't work anymore
+* [#197](https://github.com/eblondel/zen4R/issues/197) Zenodo record `getVersions` doesn't work anymore
+* [#198](https://github.com/eblondel/zen4R/issues/198) Paginated `getDepositions` doesn't work anymore
+* [#199](https://github.com/eblondel/zen4R/issues/199) Paginated `getRequests` doesn't work anymore
 
 **New features**
 
