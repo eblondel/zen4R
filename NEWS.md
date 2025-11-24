@@ -28,8 +28,7 @@
 
 * [#171](https://github.com/eblondel/zen4R/issues/171) Improve download timeout management/log
 
-## [zen4R 0.10.1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz) |
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz)
+## [zen4R 0.10.1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz)
 
 **Bug fixes**
 
