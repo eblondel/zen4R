@@ -1,7 +1,7 @@
 # Change log
 
 ## [zen4R 0.10.3](https://github.com/eblondel/zen4R) |
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-red.svg)](https://cran.r-project.org/package=zen4R)
+[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Corrections**
 
@@ -30,8 +30,8 @@
 
 * [#171](https://github.com/eblondel/zen4R/issues/171) Improve download timeout management/log
 
-## [zen4R 0.10.1](https://github.com/eblondel/zen4R) |
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz) |
+[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz)
 
 **Bug fixes**
 
