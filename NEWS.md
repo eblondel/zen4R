@@ -12,8 +12,7 @@
 
 * [#204](https://github.com/eblondel/zen4R/issues/204) Set 'exact' search behavior less restrictive, and applies only when `recid` or `doi` is identified in query
 
-## [zen4R 0.10.3](https://github.com/eblondel/zen4R) |
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.3](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Corrections**
 
@@ -35,15 +34,13 @@
 * [#180](https://github.com/eblondel/zen4R/issues/180) Put `atom4R` as `Suggests` instead of `Imports` (only one R function)
 * [#200](https://github.com/eblondel/zen4R/issues/200) Improve method to check if user is authenticated
 
-## [zen4R 0.10.2](https://github.com/eblondel/zen4R) |
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.2](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
 
 * [#171](https://github.com/eblondel/zen4R/issues/171) Improve download timeout management/log
 
-## [zen4R 0.10.1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz) |
-[![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz)
+## [zen4R 0.10.1](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.1.tar.gz)
 
 **Bug fixes**
 
