@@ -1803,7 +1803,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     #' @return a \code{data.frame} with the record versions
     getVersions = function(){
       zenodo <- ZenodoManager$new(url = paste0(unlist(strsplit(self$links$self, "/api"))[1], "/api"))
-      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$getConceptId()), all_versions = T, size = 100, exact = FALSE)
+      records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$getConceptId()), all_versions = T, size = 25, exact = FALSE)
       
       versions <- data.frame(
         created = character(0),
