@@ -8,6 +8,10 @@
 * [#202](https://github.com/eblondel/zen4R/issues/202) getRecords / getRequests fails with GET / CURL method
 * [#203](https://github.com/eblondel/zen4R/issues/203) getVersions fails to change in API records max page size
 
+**Enhancements**
+
+* [#204](https://github.com/eblondel/zen4R/issues/204) Set 'exact' search behavior less restrictive, and applies only when `recid` or `doi` is identified in query
+
 ## [zen4R 0.10.3](https://github.com/eblondel/zen4R) |
 [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
