@@ -36,6 +36,7 @@ Emmanuel Blondel <emmanuel.blondel1@gmail.com>
 \item \href{#method-ZenodoRequest-getStatus}{\code{ZenodoRequest$getStatus()}}
 \item \href{#method-ZenodoRequest-getResponse}{\code{ZenodoRequest$getResponse()}}
 \item \href{#method-ZenodoRequest-getException}{\code{ZenodoRequest$getException()}}
+\item \href{#method-ZenodoRequest-hasException}{\code{ZenodoRequest$hasException()}}
 \item \href{#method-ZenodoRequest-getResult}{\code{ZenodoRequest$getResult()}}
 \item \href{#method-ZenodoRequest-setResult}{\code{ZenodoRequest$setResult()}}
 \item \href{#method-ZenodoRequest-clone}{\code{ZenodoRequest$clone()}}
@@ -158,6 +159,19 @@ Get request exception
 \if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$getException()}\if{html}{\out{</div>}}
 }
 
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-ZenodoRequest-hasException"></a>}}
+\if{latex}{\out{\hypertarget{method-ZenodoRequest-hasException}{}}}
+\subsection{Method \code{hasException()}}{
+has exception?
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{ZenodoRequest$hasException()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+\code{TRUE} if request has exception, \code{FALSE} otherwise
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoRequest-getResult"></a>}}

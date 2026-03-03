@@ -154,7 +154,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         out = out$hits$hits
         if(pretty){
           out = do.call("rbind", lapply(out,function(x){
@@ -175,6 +175,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching languages: %s", out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -189,7 +190,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched language '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -197,7 +198,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching language '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -217,7 +218,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         out = out$hits$hits
         if(pretty){
           out = do.call("rbind", lapply(out,function(x){
@@ -242,6 +243,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching licenses: %s", out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -256,7 +258,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched license '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -264,7 +266,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching license '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -284,7 +286,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         out = out$hits$hits
         if(pretty){
           out = do.call("rbind", lapply(out,function(x){
@@ -305,6 +307,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching resource types: %s", out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -319,7 +322,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched resourcetype '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -327,7 +330,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching resourcetype '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -352,7 +355,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         communities <- resp$hits$hits
         total <- resp$hits$total
@@ -381,7 +384,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
-          if(zenReq$getStatus() == 200){
+          if(!zenReq$hasException()){
             resp <- zenReq$getResponse()
             communities <- resp$hits$hits
             hasCommunities <- length(communities)>0
@@ -389,12 +392,35 @@ ZenodoManager <-  R6Class("ZenodoManager",
             warnMsg = sprintf("Maximum allowed size for list of communities at page %s", page)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMsg)
+            out = zenReq$getException()
             break
           }
         }
+        
         infoMsg = "Successfully fetched list of communities!"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
+        
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = data.frame(
+              id = x$id,
+              title = x$metadata$title,
+              description = if(!is.null(x$metadata$description)) x$metadata$description else NA,
+              website = if(!is.null(x$metadata$website)) x$metadata$website else NA,
+              visibility = x$access$visibility,
+              member_policy = x$access$member_policy,
+              record_submission_policy = x$access$record_submission_policy,
+              review_policy = x$access$review_policy,
+              url = x$links$self_html,
+              created = x$created,
+              updated = x$updated,
+              stringsAsFactors = FALSE
+            )
+            return(rec)
+          }))
+        }
+        
       }else{
         out <- zenReq$getResponse()
         errMsg = sprintf("Error while fetching communities: %s", out$message)
@@ -405,26 +431,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
         }
-      }
-      
-      if(pretty){
-        out = do.call("rbind", lapply(out,function(x){
-          rec = data.frame(
-            id = x$id,
-            title = x$metadata$title,
-            description = if(!is.null(x$metadata$description)) x$metadata$description else NA,
-            website = if(!is.null(x$metadata$website)) x$metadata$website else NA,
-            visibility = x$access$visibility,
-            member_policy = x$access$member_policy,
-            record_submission_policy = x$access$record_submission_policy,
-            review_policy = x$access$review_policy,
-            url = x$links$self_html,
-            created = x$created,
-            updated = x$updated,
-            stringsAsFactors = FALSE
-          )
-          return(rec)
-        }))
+        out = zenReq$getException()
       }
       
       return(out)
@@ -440,7 +447,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched community '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -448,7 +455,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching community '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -594,7 +601,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       out <- NULL
       zenReq$execute()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched communities for record '%s'",record$id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -604,6 +611,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching communities for record '%s':", record$id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -658,7 +666,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched request to review record %s", record$id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -765,7 +773,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         awards <- resp$hits$hits
         total <- resp$hits$total
@@ -791,7 +799,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
-          if(zenReq$getStatus() == 200){
+          if(!zenReq$hasException()){
             resp <- zenReq$getResponse()
             awards <- resp$hits$hits
             hasAwards <- length(awards)>0
@@ -799,12 +807,31 @@ ZenodoManager <-  R6Class("ZenodoManager",
             warnMsg = sprintf("Maximum allowed size for list of awards at page %s", page)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMsg)
+            out = zenReq$getException()
             break
           }
         }
         infoMsg = "Successfully fetched list of awards!"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
+        
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = data.frame(
+              id = x$id,
+              number = x$number,
+              title = x$title[[1]],
+              created = x$created,
+              updated = x$updated,
+              funder_id = x$funder$id,
+              funder_name = x$funder$name,
+              program = if(!is.null(x$program)) x$program else NA,
+              stringsAsFactors = FALSE
+            )
+            return(rec)
+          }))
+        }
+        
       }else{
         out <- zenReq$getResponse()
         errMsg = sprintf("Error while fetching awards: %s", out$message)
@@ -815,24 +842,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
         }
+        out = zenReq$getException()
       }
-      
-      if(pretty){
-        out = do.call("rbind", lapply(out,function(x){
-          rec = data.frame(
-            id = x$id,
-            number = x$number,
-            title = x$title[[1]],
-            created = x$created,
-            updated = x$updated,
-            funder_id = x$funder$id,
-            funder_name = x$funder$name,
-            program = if(!is.null(x$program)) x$program else NA,
-            stringsAsFactors = FALSE
-          )
-          return(rec)
-        }))
-      }
+
       return(out)
     },
     
@@ -880,7 +892,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched award '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -888,7 +900,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching award '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -913,7 +925,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         affiliations <- resp$hits$hits
         total <- resp$hits$total
@@ -939,7 +951,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
-          if(zenReq$getStatus() == 200){
+          if(!zenReq$hasException()){
             resp <- zenReq$getResponse()
             affiliations <- resp$hits$hits
             hasAwards <- length(affiliations)>0
@@ -947,12 +959,28 @@ ZenodoManager <-  R6Class("ZenodoManager",
             warnMsg = sprintf("Maximum allowed size for list of affiliations at page %s", page)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMsg)
+            out = zenReq$getException()
             break
           }
         }
         infoMsg = "Successfully fetched list of affiliations!"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
+        
+        if(pretty){
+          out = do.call("rbind", lapply(out,function(x){
+            rec = data.frame(
+              id = x$id,
+              acronym = if(!is.null(x$acronym)) x$acronym else NA,
+              name = if(!is.null(x$name)) x$name else NA,
+              title = x$title[[1]],
+              created = x$created,
+              updated = x$updated,
+              stringsAsFactors = FALSE
+            )
+            return(rec)
+          }))
+        }
       }else{
         out <- zenReq$getResponse()
         errMsg = sprintf("Error while fetching affiliations: %s", out$message)
@@ -963,22 +991,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
         }
+        out = zenReq$getException()
       }
       
-      if(pretty){
-        out = do.call("rbind", lapply(out,function(x){
-          rec = data.frame(
-            id = x$id,
-            acronym = if(!is.null(x$acronym)) x$acronym else NA,
-            name = if(!is.null(x$name)) x$name else NA,
-            title = x$title[[1]],
-            created = x$created,
-            updated = x$updated,
-            stringsAsFactors = FALSE
-          )
-          return(rec)
-        }))
-      }
       return(out)
     },
     
@@ -1003,7 +1018,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched affiliation '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -1011,7 +1026,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching affiliation '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -1036,7 +1051,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         funders <- resp$hits$hits
         total <- resp$hits$total
@@ -1063,7 +1078,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                       token = self$getToken(),
                                       logger = self$loggerType)
           zenReq$execute()
-          if(zenReq$getStatus() == 200){
+          if(!zenReq$hasException()){
             resp <- zenReq$getResponse()
             funders <- resp$hits$hits
             hasFunders <- length(funders)>0
@@ -1071,12 +1086,36 @@ ZenodoManager <-  R6Class("ZenodoManager",
             warnMsg = sprintf("Maximum allowed size for list of communities reached at page %s", page)
             cli::cli_alert_warning(warnMsg)
             self$WARN(warnMsg)
+            out = zenReq$getException()
             break
           }
         }
         infoMsg = "Successfully fetched list of funders!"
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
+        
+        if(pretty){
+          out = do.call("rbind.fill", lapply(out,function(x){
+            
+            identifiers = do.call("cbind", lapply(x$identifiers, function(identifier){
+              out_id = data.frame(scheme = identifier$identifier, stringsAsFactors = F)
+              names(out_id) = identifier$scheme
+              return(out_id)
+            }))
+            
+            rec = data.frame(
+              id = x$id,
+              country = x$country,
+              name = x$name,
+              identifiers,
+              created = x$created,
+              updated = x$updated,
+              stringsAsFactors = FALSE
+            )
+            return(rec)
+          }))
+        }
+        
       }else{
         out <- zenReq$getResponse()
         errMsg = sprintf("Error while fetching funders: %s", out$message)
@@ -1087,29 +1126,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
         }
+        out = zenReq$getException()
       }
       
-      if(pretty){
-        out = do.call("rbind.fill", lapply(out,function(x){
-          
-          identifiers = do.call("cbind", lapply(x$identifiers, function(identifier){
-            out_id = data.frame(scheme = identifier$identifier, stringsAsFactors = F)
-            names(out_id) = identifier$scheme
-            return(out_id)
-          }))
-          
-          rec = data.frame(
-            id = x$id,
-            country = x$country,
-            name = x$name,
-            identifiers,
-            created = x$created,
-            updated = x$updated,
-            stringsAsFactors = FALSE
-          )
-          return(rec)
-        }))
-      }
       return(out)
     },
     
@@ -1134,7 +1153,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfully fetched funder '%s'",id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -1142,7 +1161,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching funder '%s': %s", id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -1182,7 +1201,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       total = 0
       hasRecords = FALSE
       out <- NULL
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         records <- resp$hits$hits
         total <- resp$hits$total
@@ -1203,7 +1222,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                       logger = if(quiet) NULL else self$loggerType)
           zenReq$execute()
           resp <- zenReq$getResponse()
-          if(zenReq$getStatus() == 200){
+          if(!zenReq$hasException()){
             resp <- zenReq$getResponse()
             records <- resp$hits$hits
             
@@ -1226,6 +1245,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
               cli::cli_alert_warning(warnMsg)
               self$WARN(warnMsg)
             }
+            out = zenReq$getException()
             break
           }
           
@@ -1247,7 +1267,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
             self$ERROR(errMsg)
           }
         }
-        
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -1346,9 +1366,9 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   token = self$getToken(), 
                                   logger = self$loggerType)
       zenReq$execute()
-      result <- NULL
-      if(zenReq$getStatus() == 200){
-        result = ZenodoRecord$new(obj = zenReq$getResponse())
+      out <- NULL
+      if(!zenReq$hasException()){
+        out = ZenodoRecord$new(obj = zenReq$getResponse())
         infoMsg = sprintf("Successfuly fetched record for id %s", recid)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -1362,12 +1382,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_danger(errMsg)
           self$ERROR(errMsg)
         }
-      }
-      
-      if(is.null(result)){
-        warnMsg = sprintf("No record for id '%s'!",recid)
-        cli::cli_alert_warning(warnMsg)
-        self$WARN(warnMsg)
+        out = zenReq$getException()
       }
       return(result)
     },
@@ -1750,7 +1765,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- NULL
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         out <- resp$entries
         infoMsg = sprintf("Successful fetched file(s) for record '%s'", recordId)
@@ -1761,6 +1776,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching file(s) for record '%s': %s", recordId, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -1776,7 +1792,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successful fetched file metadata for record '%s' - filename '%s'", recordId, filename)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -1784,6 +1800,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching file(s) for record '%s': %s", recordId, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
+        out = zenReq$getException()
       }
       return(out)
     },
@@ -1953,30 +1970,41 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param quiet object of class \code{logical} indicating if logs have to skipped. Default is \code{FALSE}
     #' @return a list of \code{ZenodoRecord}
     getRecords = function(q = "", size = 10, all_versions = FALSE, exact = TRUE){
+      
+      out <- NULL
+      
       if(q == "" | (regexpr("doi", q)<0 & regexpr("recid", q)<0) ) exact = FALSE
       page <- 1
       req <- sprintf("records?q=%s&size=1&page=%s", URLencode(q), page)
       if(all_versions) req <- paste0(req, "&allversions=1")
       zenReq <- ZenodoRequest$new(private$url, "GET", req, 
                                   token = self$getToken(),
-                                  logger = NULL)
+                                  logger = self$loggerType)
       zenReq$execute()
       total = 0
       hasRecords = FALSE
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         total <- resp$hits$total
-        self$INFO(sprintf("Number of records: %s", total))
+        infoMsg = sprintf("Number of records: %s", total)
+        cli::cli_alert_info(infoMsg)
+        self$INFO(infoMsg)
         hasRecords <- total > 0
         if(total > 10000){
           warnMsg = sprintf("Total of %s records found: the Zenodo API limits to a maximum of 10,000 records!", total)
           cli::cli_alert_warning(warnMsg)
           self$WARN(warnMSg) 
         }
+      }else{
+        resp <- zenReq$getResponse()
+        errMsg = sprintf("Error while fetching records: %s", resp$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out = zenReq$getException()
+        return(out)
       }
       
       total_remaining <- total
-      out <- NULL
       while(hasRecords){
         nextreq <- sprintf("records?q=%s&size=%s&page=%s", URLencode(q), size, page)
         if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
@@ -1984,7 +2012,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                     token = self$getToken(),
                                     logger = self$loggerType)
         zenReq$execute()
-        if(zenReq$getStatus() == 200){
+        if(!zenReq$hasException()){
           resp <- zenReq$getResponse()
           records <- resp$hits$hits
           out <- c(out, lapply(records, ZenodoRecord$new))
@@ -2009,12 +2037,15 @@ ZenodoManager <-  R6Class("ZenodoManager",
             cli::cli_alert_danger(errMsg)
             self$ERROR(errMsg)
           }
+          out = zenReq$getException()
           break
         }
       }
-      infoMsg = "Successfully fetched list of published records!"
-      cli::cli_alert_success(infoMsg)
-      self$INFO(infoMsg)
+      if(!is.null(out) & !is(out, "ZenodoException")){
+        infoMsg = "Successfully fetched list of published records!"
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }
       return(out)
     },
     
@@ -2029,6 +2060,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       }
       query <- sprintf("conceptdoi:\"%s\"", conceptdoi)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(is(result, "ZenodoException")) return(result)
       if(length(result)>0){
         result = result[sapply(result, function(x){x$getConceptDOI() == conceptdoi})]
         result <- result[sapply(result, function(x){x$created == max(sapply(result, function(x){x$created}))})][[1]]
@@ -2051,8 +2083,10 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_info(infoMsg)
           self$INFO(infoMsg)
           conceptrec <- self$getRecordByConceptId(conceptrecid)
-          last_doi <- tail(conceptrec$getVersions(),1L)$doi
-          result <- self$getRecordByDOI(last_doi)
+          if(!is.null(conceptrec) & !is(conceptrec, "ZenodoException")){
+            last_doi <- tail(conceptrec$getVersions(),1L)$doi
+            result <- self$getRecordByDOI(last_doi)
+          }
         }
       }
       return(result)
@@ -2069,6 +2103,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
       }
       query <- sprintf("doi:\"%s\"", doi)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(is(result, "ZenodoException")) return(result)
       if(length(result)>0){
         result <- result[[1]]
         if(result$getDOI() == doi){
@@ -2105,6 +2140,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getRecordById = function(recid){
       query <- sprintf("recid:%s", recid)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(is(result, "ZenodoException")) return(result)
       if(length(result)>0){
         result <- result[[1]]
         if(result$id == recid){
@@ -2131,6 +2167,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     getRecordByConceptId = function(conceptrecid){
       query <- sprintf("conceptrecid:%s", conceptrecid)
       result <- self$getRecords(q = query, all_versions = TRUE, exact = TRUE)
+      if(is(result, "ZenodoException")) return(result)
       if(length(result)>0){
         result <- result[[1]]
         if(result$getConceptId() == conceptrecid){
@@ -2161,15 +2198,18 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' @param size number of records to be retrieved per request (paginated). Default is 10
     #' @return a list of \code{ZenodoRecord}
     getRequests = function(q = "", sort = "bestmatch", size = 10){
+      
+      out = NULL
+      
       page <- 1
       req <- sprintf("requests/?q=%s&size=1&page=%s&sort=%s", URLencode(q), page, sort)
       zenReq <- ZenodoRequest$new(private$url, "GET", req, accept = "application/json",
                                   token = self$getToken(),
-                                  logger = NULL)
+                                  logger = self$loggerType)
       zenReq$execute()
       total = 0
       hasRecords = FALSE
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         resp <- zenReq$getResponse()
         total <- resp$hits$total
         hasRecords <- total > 0
@@ -2178,10 +2218,16 @@ ZenodoManager <-  R6Class("ZenodoManager",
           cli::cli_alert_warning(warnMsg)
           self$WARN(warnMSg) 
         }
+      }else{
+        resp <- zenReq$getResponse()
+        errMsg = sprintf("Error while fetching requests: %s", resp$message)
+        cli::cli_alert_danger(errMsg)
+        self$ERROR(errMsg)
+        out = zenReq$getException()
+        return(out)
       }
       
       total_remaining <- total
-      out <- NULL
       while(hasRecords){
 
         nextreq <- sprintf("requests/?q=%s&size=%s&page=%s&sort=%s", URLencode(q), size, page, sort)
@@ -2189,7 +2235,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                     token = self$getToken(),
                                     logger = self$loggerType)
         zenReq$execute()
-        if(zenReq$getStatus() == 200){
+        if(!zenReq$hasException()){
           resp <- zenReq$getResponse()
           requests <- resp$hits$hits
           out <- c(out, requests)
@@ -2214,12 +2260,14 @@ ZenodoManager <-  R6Class("ZenodoManager",
             cli::cli_alert_danger(errMsg)
             self$ERROR(errMsg)
           }
+          out = zenReq$getException()
         }
       }
-      infoMsg = "Successfully fetched list of requests!"
-      cli::cli_alert_success(infoMsg)
-      self$INFO(infoMsg)
-      
+      if(!is.null(out) & !is(out, "ZenodoException")){
+        infoMsg = "Successfully fetched list of requests!"
+        cli::cli_alert_success(infoMsg)
+        self$INFO(infoMsg)
+      }
       return(out)
     },
     
@@ -2233,7 +2281,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
                                   logger = self$loggerType)
       zenReq$execute()
       out <- zenReq$getResponse()
-      if(zenReq$getStatus() == 200){
+      if(!zenReq$hasException()){
         infoMsg = sprintf("Successfuly fetched request with id '%s'", request_id)
         cli::cli_alert_success(infoMsg)
         self$INFO(infoMsg)
@@ -2241,7 +2289,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         errMsg = sprintf("Error while fetching request with id  '%s': %s", request_id, out$message)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
-        out <- NULL
+        out = zenReq$getException()
       }
       return(out)
     },

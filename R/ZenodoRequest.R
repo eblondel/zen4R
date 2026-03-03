@@ -23,7 +23,7 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     progress = FALSE,
     status = NA,
     response = NA,
-    exception = NA,
+    exception = NULL,
     result = NA,
     token = NULL,
     accept = "application/vnd.inveniordm.v1+json",
@@ -252,8 +252,17 @@ ZenodoRequest <- R6Class("ZenodoRequest",
       
       if(private$type == "GET"){
         if(private$status != 200){
-          private$exception <- sprintf("Error while executing request '%s'", req$request)
-          self$ERROR(private$exception)
+          errorMsg <- sprintf("Error while executing request '%s'", req$request)
+          cli::cli_alert_danger(errorMsg)
+          self$ERROR(errorMsg)
+          if(all(c("message", "status") %in% names(private$response))) {
+            exceptionMsg <- sprintf("Error: %s - Detail: %s", 
+                                         httr::http_condition(private$response$status, "message", task = NULL)$message, 
+                                         private$response$message)
+            cli::cli_alert_danger(exceptionMsg)
+            self$ERROR(exceptionMsg)
+            private$exception = ZenodoException$new(message = private$response$message, status = private$response$status)
+          }
         }
       }
     },
@@ -281,6 +290,12 @@ ZenodoRequest <- R6Class("ZenodoRequest",
     #'@description Get request exception
     getException = function(){
       return(private$exception)
+    },
+    
+    #'@description has exception?
+    #'@return \code{TRUE} if request has exception, \code{FALSE} otherwise
+    hasException = function(){
+      return(!is.null(self$getException()))
     },
     
     #'@description Get request result

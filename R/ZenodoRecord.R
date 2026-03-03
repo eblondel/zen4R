@@ -1804,7 +1804,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
     getVersions = function(){
       zenodo <- ZenodoManager$new(url = paste0(unlist(strsplit(self$links$self, "/api"))[1], "/api"))
       records <- zenodo$getRecords(q = sprintf("conceptrecid:%s", self$getConceptId()), all_versions = T, size = 25, exact = FALSE)
-      
+      if(is(records, "ZenodoException")) return(records)
       versions <- data.frame(
         created = character(0),
         updated = character(0),
