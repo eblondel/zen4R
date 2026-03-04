@@ -20,6 +20,7 @@
 get_versions = function(doi, sandbox = FALSE, logger = NULL){
   #get
   rec = get_zenodo(doi = doi, sandbox = sandbox, logger = logger)
+  if(is(rec, "ZenodoException")) return(rec)
   #versions
   versions <- rec$getVersions()
   return(versions)

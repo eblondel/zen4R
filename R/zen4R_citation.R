@@ -28,6 +28,7 @@ get_citation = function(doi, sandbox = FALSE,
                         logger = NULL){
   cit = NULL
   zenodo <- get_zenodo(doi = doi, sandbox = sandbox , logger = logger)
+  if(is(rec, "ZenodoException")) return(rec)
   if(!is.null(zenodo)) cit = zenodo$getCitation(style = style)
   return(cit)
 }

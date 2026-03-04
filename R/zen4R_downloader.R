@@ -35,6 +35,7 @@
 download_zenodo = function(doi, path = ".", files = list(), sandbox = FALSE, logger = NULL, quiet = FALSE, ...){
   #rec
   rec = get_zenodo(doi = doi, sandbox = sandbox, logger = logger)
+  if(is(rec, "ZenodoException")) return(rec)
   #download
   rec$downloadFiles(path = path, files = files, quiet = quiet, ...)
 }

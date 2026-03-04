@@ -24,6 +24,7 @@
 export_zenodo = function(doi, filename, format, append_format = TRUE, sandbox = FALSE, logger = NULL){
   #get
   rec = get_zenodo(doi = doi, sandbox = sandbox, logger = logger)
+  if(is(rec, "ZenodoException")) return(rec)
   #download
   rec$exportAs(filename = filename, format = format, append_format = append_format)
 }
