@@ -81,6 +81,12 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
       self$pids = obj$pids
       self$parent = obj$parent
       
+      #custom fields
+      custom_fields = obj$custom_fields
+      if(!is.null(custom_fields)){
+        self$metadata$custom = custom_fields
+      }
+      
       #zen4R specific fields
       if(!is.null(obj$stats)) self$stats = data.frame(obj$stats)
     }
