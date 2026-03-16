@@ -1384,7 +1384,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         }
         out = zenReq$getException()
       }
-      return(result)
+      return(out)
     },
     
     #' @description Get a Zenodo deposition record by concept ID.
