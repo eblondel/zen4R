@@ -1,11 +1,15 @@
 # Change log
 
-## [zen4R 0.10.5](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-unavailable-orange.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.5](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
 
 * [#205](https://github.com/eblondel/zen4R/issues/205) Support custom metadata elements in ZenodoRecord
 * [#206](https://github.com/eblondel/zen4R/issues/206) Support for Zenodo service exception management
+
+*Corrections**
+
+* [#207](https://github.com/eblondel/zen4R/issues/207) Missing URLencoding on query in getDepositions()
 
 
 ## [zen4R 0.10.4](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)

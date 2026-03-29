@@ -1215,7 +1215,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
         
         while(hasRecords){
           #next
-          nextreq <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, q, size, page)
+          nextreq <- sprintf("%s?q=%s&size=%s&page=%s", baseUrl, URLencode(q), size, page)
           if(all_versions) nextreq <- paste0(nextreq, "&allversions=1")
           zenReq <- ZenodoRequest$new(private$url, "GET", nextreq, 
                                       token = self$getToken(),
