@@ -7,7 +7,7 @@
 * [#205](https://github.com/eblondel/zen4R/issues/205) Support custom metadata elements in ZenodoRecord
 * [#206](https://github.com/eblondel/zen4R/issues/206) Support for Zenodo service exception management
 
-*Corrections**
+**Corrections**
 
 * [#207](https://github.com/eblondel/zen4R/issues/207) Missing URLencoding on query in getDepositions()
 
