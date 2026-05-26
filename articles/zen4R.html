@@ -71,7 +71,7 @@
       <h1 data-toc-skip>zen4R User Manual</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/v0.10.5/vignettes/zen4R.Rmd" class="external-link"><code>vignettes/zen4R.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/master/vignettes/zen4R.Rmd" class="external-link"><code>vignettes/zen4R.Rmd</code></a></small>
       <div class="hidden name"><code>zen4R.Rmd</code></div>
 
     </div>
@@ -367,7 +367,7 @@ API documentation can be consulted as well <a href="https://developers.zenodo.or
 <span><span class="va">myrec</span><span class="op">$</span><span class="fu">addContributor</span><span class="op">(</span>firstname <span class="op">=</span> <span class="st">"Peter"</span>, lastname <span class="op">=</span> <span class="st">"Lead"</span>, role <span class="op">=</span> <span class="st">"workpackageleader"</span><span class="op">)</span></span>
 <span><span class="va">myrec</span><span class="op">$</span><span class="fu">addContributor</span><span class="op">(</span>firstname <span class="op">=</span> <span class="st">"Frank"</span>, <span class="st">"Super"</span>, role <span class="op">=</span> <span class="st">"supervisor"</span><span class="op">)</span></span>
 <span><span class="va">myrec</span><span class="op">$</span><span class="fu">setLicense</span><span class="op">(</span><span class="st">"mit"</span>, sandbox <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">myrec</span><span class="op">$</span><span class="fu">setKeywords</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>,<span class="st">"package"</span>,<span class="st">"software"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">myrec</span><span class="op">$</span><span class="fu">setSubjects</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"R"</span>,<span class="st">"package"</span>,<span class="st">"software"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">myrec</span><span class="op">$</span><span class="fu">addReference</span><span class="op">(</span><span class="st">"Author et al., 2019. Title"</span><span class="op">)</span></span>
 <span><span class="va">myrec</span><span class="op">$</span><span class="fu">addReference</span><span class="op">(</span><span class="st">"Fulano et al., 2018. Título"</span><span class="op">)</span></span>
 <span><span class="va">myrec</span><span class="op">$</span><span class="fu">setPublisher</span><span class="op">(</span><span class="st">"CRAN"</span><span class="op">)</span></span>
@@ -540,14 +540,14 @@ to add to a community.</p>
 <h6 id="submit-a-published-record-to-communities">4.6.1 Submit a published record to communities<a class="anchor" aria-label="anchor" href="#submit-a-published-record-to-communities"></a>
 </h6>
 <p>For a record already published (with a DOI), it is very
-straighforward to submit it to communities (whether or not you are the
+straightforward to submit it to communities (whether or not you are the
 manager of these communities). To do so, run the following code over
 your <code>record</code>:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">communities</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"openfair"</span>, <span class="st">"test"</span><span class="op">)</span></span>
 <span><span class="va">zenodo</span><span class="op">$</span><span class="fu">submitRecordToCommunities</span><span class="op">(</span><span class="va">record</span>, <span class="va">communities</span><span class="op">)</span></span></code></pre></div>
 <p>In case a community name doesn’t match an existing community, some
-warning wil be raised without any blocking error.</p>
+warning will be raised without any blocking error.</p>
 <p>As submitter of a record to a community, you have privileges to
 <em>cancel</em> this request. As manager of a community, you have
 privileges either to <em>accept</em> or <em>decline</em> a request to
@@ -558,29 +558,30 @@ management, please see section 4.11.</p>
 <div class="section level6">
 <h6 id="submit-a-draft-record-to-a-community">4.6.2 Submit a draft record to a community<a class="anchor" aria-label="anchor" href="#submit-a-draft-record-to-a-community"></a>
 </h6>
-<p>Adding a draft record to a community is possible with the new Zenodo
-platform. This method is ‘kind of’ analog of what was possible with the
-legacy Zenodo and zen4R version &lt; 0.10. Before, the addition of a
-draft record to a community was part of the metadata elements. With the
-new Zenodo, thi action is done with 2 different methods:</p>
+<p>The new Zenodo platform makes it possible to add a draft record to a
+community. The process is equivalent to what was possible with the old
+version of Zenodo and zen4R &lt; 0.10, which was achieved using the
+metadata elements. With the new Zenodo, adding a draft record is part of
+a record review process and is carried out using 2 different
+methods:</p>
 <ul>
-<li>a first method that will “attach” the record the community:</li>
+<li>a first method creates a review request by “attaching” the draft
+record to a community:</li>
 </ul>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">my_community</span> <span class="op">=</span> <span class="st">"openfair"</span></span>
-<span><span class="va">ZENODO</span><span class="op">$</span><span class="fu">createReviewRequest</span><span class="op">(</span><span class="va">record</span>, <span class="va">my_community</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">zenodo</span><span class="op">$</span><span class="fu">createReviewRequest</span><span class="op">(</span><span class="va">record</span>, <span class="va">my_community</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>a second method that allows to <em>submit</em> the record for review
-by this community manager:</li>
+<li>a second method <em>submits</em> the review request to the community
+manager:</li>
 </ul>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ZENODO</span><span class="op">$</span><span class="fu">submitRecordForReview</span><span class="op">(</span><span class="va">record</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></code></pre></div>
-<p>Indeed, adding a draft deposit/record to a community means now that
-you are requesting a record to be <em>reviewed</em> for publication in a
-community. The latter <code>submitRecordForReview</code> adds a review
-step before the record publication. This is materialized by a request
-for addition to the community (as above), but with a review to be
-performed by the manager. This action has several implications:</p>
+<code class="sourceCode R"><span><span class="va">zenodo</span><span class="op">$</span><span class="fu">submitRecordForReview</span><span class="op">(</span><span class="va">record</span><span class="op">$</span><span class="va">id</span><span class="op">)</span></span></code></pre></div>
+<p>Indeed, adding a draft deposit/record to a community now means that
+you are requesting the record to be <em>reviewed</em> for publication in
+a community. The request for addition to the community similar that of a
+published record (as above), but the manager must first review the
+record. Consequently:</p>
 <ul>
 <li>you can’t anymore publish by yourself the record, this is delegated
 to the community manager.</li>
@@ -597,7 +598,7 @@ this only, you will be able to delete the community attachment by
 doing:</li>
 </ul>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ZENODO</span><span class="op">$</span><span class="fu">deleteReviewRequest</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">zenodo</span><span class="op">$</span><span class="fu">deleteReviewRequest</span><span class="op">(</span><span class="va">record</span><span class="op">)</span></span></code></pre></div>
 <p><a name="ZenodoDepositMetadata"></a></p>
 </div>
 </div>
@@ -657,8 +658,8 @@ extension that is managed by zen4R, depending on the format.</p>
 <h6 id="funders">4.8.3 Funders<a class="anchor" aria-label="anchor" href="#funders"></a>
 </h6>
 <pre><code><span><span class="va">funders</span> <span class="op">&lt;-</span> <span class="va">zenodo</span><span class="op">$</span><span class="fu">getFunders</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">some_funders</span> <span class="op">&lt;-</span> <span class="va">ZENODO</span><span class="op">$</span><span class="fu">getFundersByName</span><span class="op">(</span><span class="st">"EU"</span><span class="op">)</span></span>
-<span><span class="va">some_funder</span> <span class="op">&lt;-</span><span class="va">ZENODO</span><span class="op">$</span><span class="fu">getFunderById</span><span class="op">(</span><span class="st">"04facnr46"</span><span class="op">)</span></span></code></pre>
+<span><span class="va">some_funders</span> <span class="op">&lt;-</span> <span class="va">zenodo</span><span class="op">$</span><span class="fu">getFundersByName</span><span class="op">(</span><span class="st">"EU"</span><span class="op">)</span></span>
+<span><span class="va">some_funder</span> <span class="op">&lt;-</span><span class="va">zenodo</span><span class="op">$</span><span class="fu">getFunderById</span><span class="op">(</span><span class="st">"04facnr46"</span><span class="op">)</span></span></code></pre>
 <p><a name="ZenodoVocabularies-grants"></a></p>
 </div>
 <div class="section level6">
@@ -805,8 +806,8 @@ the requests:</li>
 <em>decline</em> the requests. The code below assumes we got 2 requests,
 let’s accept the first, and decline the second:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ZENODO</span><span class="op">$</span><span class="fu">acceptRequest</span><span class="op">(</span><span class="va">reqs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">id</span>, message <span class="op">=</span> <span class="st">"Thank you for your request, your record has been added to 'openfair' community"</span><span class="op">)</span></span>
-<span><span class="va">ZENODO</span><span class="op">$</span><span class="fu">deleteRequest</span><span class="op">(</span><span class="va">reqs</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">id</span>, message <span class="op">=</span> <span class="st">"Unfortunately your record doesn't fulfill our community standards"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">zenodo</span><span class="op">$</span><span class="fu">acceptRequest</span><span class="op">(</span><span class="va">reqs</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">id</span>, message <span class="op">=</span> <span class="st">"Thank you for your request, your record has been added to 'openfair' community"</span><span class="op">)</span></span>
+<span><span class="va">zenodo</span><span class="op">$</span><span class="fu">deleteRequest</span><span class="op">(</span><span class="va">reqs</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">id</span>, message <span class="op">=</span> <span class="st">"Unfortunately your record doesn't fulfill our community standards"</span><span class="op">)</span></span></code></pre></div>
 <p>In the case of a request to community made on a draft record (see
 section 4.6.2), if the community manager accepts the request, the record
 will be published. If the request is <em>declined</em> , you may want to
