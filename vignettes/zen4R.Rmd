@@ -451,14 +451,14 @@ With the move to Invenio, the addition of a record to a community is not anymore
 
 ##### 4.6.1 Submit a published record to communities
 
-For a record already published (with a DOI), it is very straighforward to submit it to communities (whether or not you are the manager of these communities). To do so, run the following code over your `record`:
+For a record already published (with a DOI), it is very straightforward to submit it to communities (whether or not you are the manager of these communities). To do so, run the following code over your `record`:
 
 ```r
 communities = c("openfair", "test")
 zenodo$submitRecordToCommunities(record, communities)
 ```
 
-In case a community name doesn't match an existing community, some warning wil be raised without any blocking error.
+In case a community name doesn't match an existing community, some warning will be raised without any blocking error.
 
 As submitter of a record to a community, you have privileges to _cancel_ this request. As manager of a community, you have privileges either to _accept_ or _decline_ a request to add a record to a community. If you want to learn about requests management, please see section 4.11.
 
@@ -466,19 +466,19 @@ As submitter of a record to a community, you have privileges to _cancel_ this re
 
 ##### 4.6.2 Submit a draft record to a community
 
-Adding a draft record to a community is possible with the new Zenodo platform. This method is 'kind of' analog of what was possible with the legacy Zenodo and zen4R version < 0.10. Before, the addition of a draft record to a community was part of the metadata elements. With the new Zenodo, thi action is done with 2 different methods:
+Adding a draft record to a community is possible with the new Zenodo platform. This method is 'kind of' analog of what was possible with the legacy Zenodo and zen4R version < 0.10. Before, the addition of a draft record to a community was part of the metadata elements. With the new Zenodo, this action is done with 2 different methods:
 
 * a first method that will "attach" the record the community: 
 
 ```r
 my_community = "openfair"
-ZENODO$createReviewRequest(record, my_community)
+zenodo$createReviewRequest(record, my_community)
 ```
 
 * a second method that allows to *submit* the record for review by this community manager: 
 
 ```r
-ZENODO$submitRecordForReview(record$id)
+zenodo$submitRecordForReview(record$id)
 ```
 
 Indeed, adding a draft deposit/record to a community means now that you are requesting a record to be *reviewed* for publication in a community. The latter `submitRecordForReview` adds a review step before the record publication. This is materialized by a request for addition to the community (as above), but with a review to be performed by the manager. This action has several implications:
@@ -492,7 +492,7 @@ Note that:
 - in case you want to cancel the review, you have to search for the community requests (see section 4.11), and cancel you request. After this only, you will be able to delete the community attachment by doing:
 
 ```r
-ZENODO$deleteReviewRequest(record)
+zenodo$deleteReviewRequest(record)
 ```
 
 <a name="ZenodoDepositMetadata"/>
@@ -561,8 +561,8 @@ lic <- zenodo$getLicenseById("mit")
 
 ```
 funders <- zenodo$getFunders()
-some_funders <- ZENODO$getFundersByName("EU")
-some_funder <-ZENODO$getFunderById("04facnr46")
+some_funders <- zenodo$getFundersByName("EU")
+some_funder <-zenodo$getFunderById("04facnr46")
 ```
 
 <a name="ZenodoVocabularies-grants"/>
@@ -715,8 +715,8 @@ reqs = zenodo$getRequests(q = sprintf("status:submitted AND receiver.community:%
 and then decided whether you want to _accept_ or _decline_ the requests. The code below assumes we got 2 requests, let's accept the first, and decline the second:
 
 ```r
-ZENODO$acceptRequest(reqs[[1]]$id, message = "Thank you for your request, your record has been added to 'openfair' community")
-ZENODO$deleteRequest(reqs[[2]]$id, message = "Unfortunately your record doesn't fulfill our community standards")
+zenodo$acceptRequest(reqs[[1]]$id, message = "Thank you for your request, your record has been added to 'openfair' community")
+zenodo$deleteRequest(reqs[[2]]$id, message = "Unfortunately your record doesn't fulfill our community standards")
 
 ```
 
