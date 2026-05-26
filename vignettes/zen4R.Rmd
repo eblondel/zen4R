@@ -466,22 +466,22 @@ As submitter of a record to a community, you have privileges to _cancel_ this re
 
 ##### 4.6.2 Submit a draft record to a community
 
-Adding a draft record to a community is possible with the new Zenodo platform. This method is 'kind of' analog of what was possible with the legacy Zenodo and zen4R version < 0.10. Before, the addition of a draft record to a community was part of the metadata elements. With the new Zenodo, this action is done with 2 different methods:
+The new Zenodo platform makes it possible to add a draft record to a community. The process is equivalent to what was possible with the old version of Zenodo and zen4R < 0.10, which was achieved using the metadata elements. With the new Zenodo, adding a draft record is part of a record review process and is carried out using 2 different methods:
 
-* a first method that will "attach" the record the community: 
+* a first method creates a review request by "attaching" the draft record to a community:
 
 ```r
 my_community = "openfair"
 zenodo$createReviewRequest(record, my_community)
 ```
 
-* a second method that allows to *submit* the record for review by this community manager: 
+* a second method *submits* the review request to the community manager:
 
 ```r
 zenodo$submitRecordForReview(record$id)
 ```
 
-Indeed, adding a draft deposit/record to a community means now that you are requesting a record to be *reviewed* for publication in a community. The latter `submitRecordForReview` adds a review step before the record publication. This is materialized by a request for addition to the community (as above), but with a review to be performed by the manager. This action has several implications:
+Indeed, adding a draft deposit/record to a community now means that you are requesting the record to be *reviewed* for publication in a community. The request for addition to the community similar that of a published record (as above), but the manager must first review the record. Consequently:
 
 * you can't anymore publish by yourself the record, this is delegated to the community manager.
 * the community manager has editing rights over your draft deposit
