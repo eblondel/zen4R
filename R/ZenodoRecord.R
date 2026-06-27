@@ -1824,7 +1824,7 @@ ZenodoRecord <-  R6Class("ZenodoRecord",
           return(data.frame(
             created = as.POSIXct(version$created, format = "%Y-%m-%dT%H:%M:%OS"),
             updated = as.POSIXct(version$updated, format = "%Y-%m-%dT%H:%M:%OS"),
-            date = as.Date(version$metadata$publication_date),
+            date = if(nchar(version$metadata$publication_date)==10) as.Date(version$metadata$publication_date) else version$metadata$publication_date,
             version = if(!is.null(version$metadata$version)) version$metadata$version else NA,
             doi = version$pids$doi$identifier,
             stringsAsFactors = FALSE
