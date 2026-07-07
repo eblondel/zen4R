@@ -1,5 +1,11 @@
 # Change log
 
+## [zen4R 0.10.6](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+
+**Corrections**
+
+* [#210](https://github.com/eblondel/zen4R/issues/210) Compatibility issue between getVersions() and available date formats
+
 ## [zen4R 0.10.5](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
 
 **Enhancements**
@@ -12,7 +18,7 @@
 * [#207](https://github.com/eblondel/zen4R/issues/207) Missing URLencoding on query in getDepositions()
 
 
-## [zen4R 0.10.4](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.4](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.4.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.4.tar.gz)
 
 **Corrections**
 
@@ -23,7 +29,7 @@
 
 * [#204](https://github.com/eblondel/zen4R/issues/204) Set 'exact' search behavior less restrictive, and applies only when `recid` or `doi` is identified in query
 
-## [zen4R 0.10.3](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.3](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.3.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.3.tar.gz)
 
 **Corrections**
 
@@ -45,7 +51,7 @@
 * [#180](https://github.com/eblondel/zen4R/issues/180) Put `atom4R` as `Suggests` instead of `Imports` (only one R function)
 * [#200](https://github.com/eblondel/zen4R/issues/200) Improve method to check if user is authenticated
 
-## [zen4R 0.10.2](https://github.com/eblondel/zen4R) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/package=zen4R)
+## [zen4R 0.10.2](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.2.tar.gz) | [![CRAN_Status_Badge](https://img.shields.io/badge/CRAN-published-blue.svg)](https://cran.r-project.org/src/contrib/Archive/zen4R/zen4R_0.10.2.tar.gz)
 
 **Enhancements**
 
