@@ -18,7 +18,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">zen4R</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.10.7</span>
       </span>
     </div>
 
@@ -48,7 +48,7 @@ ZenodoManager"><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>ZenodoManager</h1>
-    <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/v0.10.6/R/ZenodoManager.R" class="external-link"><code>R/ZenodoManager.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/eblondel/zen4R/blob/master/R/ZenodoManager.R" class="external-link"><code>R/ZenodoManager.R</code></a></small>
     <div class="hidden name"><code>ZenodoManager.Rd</code></div>
     </div>
 
@@ -1334,6 +1334,10 @@ for user convenience and for backward compatibility with the legacy Zenodo API.<
 
 </dl><p></p></div>
 </div>
+<div class="section">
+<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
+<p><code>TRUE</code> if file upload is started, <code>FALSE</code> otherwise</p>
+</div>
 
 </div><p></p><hr><a id="method-ZenodoManager-completeFileUpload"></a><div class="section">
 <h3 id="method-completefileupload-">Method <code>completeFileUpload()</code><a class="anchor" aria-label="anchor" href="#method-completefileupload-"></a></h3>
@@ -1355,6 +1359,10 @@ for user convenience and for backward compatibility with the legacy Zenodo API.<
 
 
 </dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
+<p><code>TRUE</code> if file upload is completed, <code>FALSE</code> otherwise</p>
 </div>
 
 </div><p></p><hr><a id="method-ZenodoManager-uploadFile"></a><div class="section">
@@ -1442,7 +1450,7 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-46">Returns<a class="anchor" aria-label="anchor" href="#returns-46"></a></h4>
+<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
 <p>a list of <code>ZenodoRecord</code></p>
 </div>
 
@@ -1462,7 +1470,7 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-47">Returns<a class="anchor" aria-label="anchor" href="#returns-47"></a></h4>
+<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
@@ -1482,7 +1490,7 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-48">Returns<a class="anchor" aria-label="anchor" href="#returns-48"></a></h4>
+<h4 id="returns-50">Returns<a class="anchor" aria-label="anchor" href="#returns-50"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
@@ -1502,7 +1510,7 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-49">Returns<a class="anchor" aria-label="anchor" href="#returns-49"></a></h4>
+<h4 id="returns-51">Returns<a class="anchor" aria-label="anchor" href="#returns-51"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
@@ -1522,7 +1530,7 @@ the file record is deleted.</p><div class="section">
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-50">Returns<a class="anchor" aria-label="anchor" href="#returns-50"></a></h4>
+<h4 id="returns-52">Returns<a class="anchor" aria-label="anchor" href="#returns-52"></a></h4>
 <p>a object of class <code>ZenodoRecord</code></p>
 </div>
 
@@ -1551,7 +1559,7 @@ e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-q
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-51">Returns<a class="anchor" aria-label="anchor" href="#returns-51"></a></h4>
+<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
 <p>a list of <code>ZenodoRecord</code></p>
 </div>
 
@@ -1571,7 +1579,7 @@ e.g. https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-q
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-52">Returns<a class="anchor" aria-label="anchor" href="#returns-52"></a></h4>
+<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
 <p>the request <code>list</code> object, NULL otherwise</p>
 </div>
 
@@ -1592,7 +1600,7 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-53">Returns<a class="anchor" aria-label="anchor" href="#returns-53"></a></h4>
+<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
 <p><code>TRUE</code> if</p>
 </div>
 
@@ -1616,7 +1624,7 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-54">Returns<a class="anchor" aria-label="anchor" href="#returns-54"></a></h4>
+<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
 <p><code>TRUE</code> if accepted, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1640,7 +1648,7 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-55">Returns<a class="anchor" aria-label="anchor" href="#returns-55"></a></h4>
+<h4 id="returns-57">Returns<a class="anchor" aria-label="anchor" href="#returns-57"></a></h4>
 <p><code>TRUE</code> if declined, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1664,7 +1672,7 @@ depending on its status. To be subject to an operation, a request should not be 
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-56">Returns<a class="anchor" aria-label="anchor" href="#returns-56"></a></h4>
+<h4 id="returns-58">Returns<a class="anchor" aria-label="anchor" href="#returns-58"></a></h4>
 <p><code>TRUE</code> if canceled, <code>FALSE</code> otherwise</p>
 </div>
 
@@ -1773,7 +1781,7 @@ depending on its status. To be subject to an operation, a request should not be 
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer></div>
