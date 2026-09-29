@@ -1270,6 +1270,9 @@ for user convenience and for backward compatibility with the legacy Zenodo API.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+\code{TRUE} if file upload is started, \code{FALSE} otherwise
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-ZenodoManager-completeFileUpload"></a>}}
@@ -1290,6 +1293,9 @@ for user convenience and for backward compatibility with the legacy Zenodo API.
 \item{\code{recordId}}{ID of the record}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+\code{TRUE} if file upload is completed, \code{FALSE} otherwise
 }
 }
 \if{html}{\out{<hr>}}

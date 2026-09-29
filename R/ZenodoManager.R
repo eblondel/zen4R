@@ -1810,6 +1810,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' for user convenience and for backward compatibility with the legacy Zenodo API.
     #' @param path Local path of the file
     #' @param recordId ID of the record
+    #' @return \code{TRUE} if file upload is started, \code{FALSE} otherwise
     startFileUpload = function(path, recordId){
       self$INFO(sprintf("Start upload procedure for file '%s'", path))
       fileparts <- unlist(strsplit(path,"/"))
@@ -1827,8 +1828,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(infoMsg)
         out <- TRUE
       }else{
-        errMsg = sprintf("Error while starting upload procedure for file '%s' in record %s: %s", 
-                         path, recordId, out$message)
+        errMsg = sprintf("Error while starting upload procedure for file '%s' in record %s", 
+                         path, recordId)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
       }
@@ -1840,6 +1841,7 @@ ZenodoManager <-  R6Class("ZenodoManager",
     #' for user convenience and for backward compatibility with the legacy Zenodo API.
     #' @param path Local path of the file
     #' @param recordId ID of the record
+    #' @return \code{TRUE} if file upload is completed, \code{FALSE} otherwise
     completeFileUpload = function(path, recordId){
       infoMsg = sprintf("Complete upload procedure for file '%s'", path)
       cli::cli_alert_info(infoMsg)
@@ -1858,8 +1860,8 @@ ZenodoManager <-  R6Class("ZenodoManager",
         self$INFO(infoMsg)
         out <- TRUE
       }else{
-        errMsg = sprintf("Error while completing upload procedure for file '%s' in record %s: %s", 
-                         path, recordId, out$message)
+        errMsg = sprintf("Error while completing upload procedure for file '%s' in record %s", 
+                         path, recordId)
         cli::cli_alert_danger(errMsg)
         self$ERROR(errMsg)
       }
